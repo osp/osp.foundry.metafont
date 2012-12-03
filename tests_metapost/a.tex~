@@ -1,0 +1,27 @@
+\starttext
+\stopuseMPgraphic
+\startuseMPgraphic{name_a}
+beginfig(1)
+w = 3cm;			% width
+h = w*1.2;			% height
+xheight = 1/1.5;	% hauteur de x
+eheight = 1/3;		% hauteur de barre (1=top, 0=bottom)
+slant = 0;			% slanted (-1 > backward > 0 > italic > 1)
+	y1 = y2 = 0;
+	x1 = x2-w = 0;
+	y1+y3 = h;
+	x3 - 1*slant = (x2+x1)/2;
+	y4 = y5 = y3*eheight;
+	z4=whatever[z1,z3];
+	z5=whatever[z2,z3];
+
+	pickup pencircle xscaled 15 rotated 30;
+	draw z1--z3--z2;
+	draw z4{dir 30}..{dir 30}z5;
+	%labels(range 1 thru 5);
+endfig;
+\stopuseMPgraphic
+
+\useMPgraphic{name_a}
+
+\stoptext

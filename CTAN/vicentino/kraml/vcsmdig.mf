@@ -1,0 +1,99 @@
+% VCSMDIG - "small" (mediaeval style) digits for vicentino font
+% w. kraml, 1991
+
+% the figures start here
+% small (nautic or old-style) figures
+dig_w := 3/2sw#;
+slant := upperslant;
+currenttransform := identity slanted slant;
+
+beginchar("1", dig_w, digh#, 0); "the figure 1";
+pickup lower_pen;
+top.lft.z1=(w/2,h); bot.lft.z2=(w/2,0);
+lft.x1'=2s; z1-z1'=whatever*dir45;
+draw z1'{dir35}..z1 &
+     z1{dir267}..tension7..{dir10}z2;
+end_char;
+
+beginchar("2", dig_w, digh#, 0); "the figure 2";
+pickup lower_pen;
+x1=w-x3=tw; x2=w/2; x4=w-x5=.5tw;
+top.y2=h; bot.y4=bot.y5=0;
+y1=y3=.625h;
+path stem;
+stem = z1..z2{right}..z3..{z4-z3}z4 &
+     z4{dir40}..if modern: tension2.. fi z5{dir40};
+draw stem;
+end_char;
+
+beginchar("3", dig_w, digh#, digd#); "the figure 3";
+pickup lower_pen;
+x1=x4-.5s=w-x3=tw; x2=x6=w/2;
+lft.x7=.5s; rt.x5=w-.5tw;
+top.y2=h; bot.y6=-digd;
+y1-th=y3=.7[-digd,h]; y4=.52[-digd,h]; y5=.5[y6,y4]; y7=-digd+1.25th;
+draw z1{z1-z5}..z2{right}..z3..{dir205}z4 &
+     z4{dir20}..z5{down}..z6{left}..z7;
+end_char;
+
+beginchar("4", dig_w, digh#, digd#); "the figure 4";
+pickup lower_pen;
+lft.x2=w-rt.x1=.33s; x3=x4=w-1.12tw;
+top.y3=h; bot.y4=-digd; y2=y1=1/3[-digd,h];
+draw z1{dir160}..tension3..z2 &
+     z2{up}..tension1.5..{z3-z2}z3 &
+     z3{dir267}..tension7..{dir10}z4;
+end_char;
+
+beginchar("5", dig_w, digh#, digd#); "the figure 5";
+pickup lower_pen;
+rt.x1=w-.25s; rt.x4=w-.5tw; x2=2/3tw; lft.x3=lft.x5=.5s;
+y1=top.y2=h; y3=.65[-digd,h]; bot.y5=-digd; y4=.55[y5,y3];
+draw z1{dir215}...z2{left} ---z3 &
+     z3{dir35}..z4{down}..tension1.5..{dir120}z5;
+end_char;
+
+beginchar("6", dig_w, diga#, 0); "the figure 6";
+pickup lower_pen;
+rt.x4=rt.x1=w-.5s;
+lft.x2=.5s; x3=w/2; x5=.7[x2,x3];
+y1=h; bot.y3=0;
+y2=y4=1/3h; y5=.6h;
+draw z1{dir215}..z2{down}..z3{right}..z4..z5{dir190};
+end_char;
+
+beginchar("7", dig_w, digh#, digd#); "the figure 7";
+pickup lower_pen;
+lft.x1=w-rt.x3=.5s;
+x4=1.5tw;
+top.y3=h; y4=-digd; bot.y1=h;
+path stem;
+stem=z1{dir260}..tension1.1..{right}z3 &
+     z3{curl0}..{dir-80}z4;
+draw if modern: subpath(0.2,2) of fi stem;
+end_char;
+
+beginchar("8", dig_w, diga#, 0); "the figure 8";
+pickup lower_pen;
+x1=x2=x3=w/2; top.y1=h; bot.y3=0; y2=.55h;
+lft.x4=w-rt.x5=.5s; y4=y5=.52[y3,y2];
+lft.x6=w-rt.x7=.6tw; y6=y7=.52[y2,y1];
+draw z1{right}..z7..z2..z4..z3{right}..z5..z6..cycle;
+end_char;
+
+beginchar("9", dig_w, digh#, digd#); "the figure 9";
+pickup lower_pen;
+lft.x4-.25s=lft.x1=.5s;
+rt.x2=w-.75s; x3=w/2; x5=.7[x2,x3];
+y1=-digd; top.y3=h;
+y2=y4=2/3[-digd,h]; y5=.4[-digd,h];
+draw z1{dir35}..z2{up}..z3{left}..z4..z5{dir10};
+end_char;
+
+beginchar("0", dig_w, digh#, 0); "the figure 0";
+pickup lower_pen;
+rt x1=w-.85s; lft x3=.85s; y1=y3=.54h;
+x2=x4=w/2; top.y2=h; bot.y4=0;
+draw superellipse(z1,z2,z3,z4,0.685);
+end_char;
+

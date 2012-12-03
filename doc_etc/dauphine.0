@@ -1,0 +1,48 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%BoundingBox: -3 -8 7 9 
+%%HiResBoundingBox: -2.19177 -7.37238 6.74716 8.73969 
+%%Creator: MetaPost 1.504
+%%CreationDate: 2012.11.15:0001
+%%Pages: 1
+%%DocumentResources: procset mpost-minimal
+%%DocumentSuppliedResources: procset mpost-minimal
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset mpost-minimal
+/bd{bind def}bind def/fshow {exch findfont exch scalefont setfont show}bd
+/fcp{findfont dup length dict begin{1 index/FID ne{def}{pop pop}ifelse}forall}bd
+/fmc{FontMatrix dup length array copy dup dup}bd/fmd{/FontMatrix exch def}bd
+/Amul{4 -1 roll exch mul 1000 div}bd/ExtendFont{fmc 0 get Amul 0 exch put fmd}bd
+/ScaleFont{dup fmc 0 get Amul 0 exch put dup dup 3 get Amul 3 exch put fmd}bd
+/SlantFont{fmc 2 get dup 0 eq{pop 1}if Amul FontMatrix 0 get mul 2 exch put fmd}bd
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+%%Page: 1 1
+ 0 0 0 setrgbcolor
+newpath 0.34982 8.73969 moveto
+-0.76959 8.31992 lineto
+-0.34982 7.2005 lineto
+2.63896 -0.76959 lineto
+3.75838 -0.34982 lineto
+3.33861 0.76959 lineto
+ closepath fill
+newpath 2.63896 0.76959 moveto
+2.2192 -0.34982 lineto
+3.33861 -0.76959 lineto
+6.3274 7.2005 lineto
+6.74716 8.31992 lineto
+5.62775 8.73969 lineto
+ closepath fill
+newpath 3.58653 0 moveto
+3.58653 -3.98505 lineto
+3.58653 -5.76318 2.425 -7.37044 0.7472 -7.37238 curveto
+-0.96396 -7.37238 -2.19177 -5.77963 -2.19177 -3.98505 curveto
+-0.79701 -3.98505 lineto
+-0.79701 -5.09369 -0.24922 -6.17686 0.7472 -6.17686 curveto
+1.76263 -6.05139 2.39102 -5.05283 2.39102 -3.98505 curveto
+2.39102 0 lineto
+ closepath fill
+showpage
+%%EOF

@@ -1,0 +1,139 @@
+% 3d.mp, poly.mp : changes
+% ----------------------------------------------------------------------------
+% D. Roegel, 12/2/1997: tetrahedron animation
+%            17/2/1997: cleaning, introduction of local vectors
+%                       dodecahedron animation
+%            18/2/1997: correction of a bug in |set_point|
+%                       hidden faces implemented
+%            19/2/1997: icosahedron animation
+%            20/2/1997: cube and octahedron animation
+%                       code cleaned and simplified
+%                       |rotate_vect| made more general
+%                       rotation and translation of an object
+%                       addition of figures for the polyhedra
+%            21/2/1997: addition of figures explaining the computations
+%            23/2/1997: cleaning and corrections
+%            24/2/1997: additionnal figures
+%                       |rotate_vect| renamed in |vect_rotate|
+%                       |pnt| can now only be used locally.
+%                       several variables made private
+%                       computation of the bounding box of an animation
+%                       |beginview| and |endview|
+%                       |set_points| renamed |project_object|
+%                       |set_point| renamed |project_point|
+%                       parameters for PS translation and pnmcut
+%                       |mult_object| added
+%                       The standard convex polyhedra are now centered
+%                       and normalized.
+%                       Automatic generation of a shell script
+%            25/2/1997: |normalize_object| corrected to take into
+%                       account a set of points, and not all the points
+%                       of an object.
+%                       Introduction of |hexcolor|.
+%                       Code splitted in three files: 3d.mp, poly.mp 
+%                       and driver.
+%                       Additional figures for the dodecahedron
+%            26/2/1997: list of object points removed and replaced
+%                       by the last number.
+%                       |errmessage| added
+%                       |vtmp| changed in |v_|
+%                       |write_script| slightly simplified
+%                       Code and documentation cleaned.
+%            27/2/1997: |write_script| made more general
+%                       new figure for the observer's orientation
+%                       Euler angles are now no longer mentioned.
+%                       Angle parameters added to |compute_reference|
+%                       |compute_perspective| added
+%                       |draw_point| added
+%                       |draw_axes| added
+%  v 0.96    28/2/1997: sign of theta in |compute_perspective| changed
+%  v 0.97               correction to |write_script|
+%                       addition of |pnt_obj|
+%                       addition of |def_object|
+%                       |rotate_object| renamed in |rotate_object_p_v|
+%                       addition of |rotate_object_p_p|
+%                       addition of |animate_two_objects|
+%                       generation of dodecahedron+icosahedron animation
+%  v 0.972  3-4/3/1997: objects have now been elevated to classes;
+%                       poly.mp contains parameterized definitions
+%                       of classes of polyhedra.
+%                       Many macros have been adapted. It is now possible
+%                       to use several instances of the same class of
+%                       objects.
+%  v 0.973    5/3/1997: faces are now declared in arrays, which makes
+%                       their manipulation easier. Also, color arrays.
+%                       Introduction of |set_face| and |draw_faces|
+%  v 0.974   10/3/1997: faces and color arrays have been extended to keep
+%                       the informations of all faces of all objects
+%  v 0.975   11/3/1997: various simplifications, addition of |obj_name|
+%                       computing an object name from an index.
+%                       Addition of |obs_distance|
+%                       |draw_...| functions removed in poly.mp
+%  v 0.976   12/3/1997: an example with three objects
+%  v 0.977   14/3/1997: ppmquant, pnmcut and ppmtogif replaced by mogrify
+%  v 0.978   17/3/1997: |reset_object|, |put_object|,
+%                       and |rotate_object_abs_p_v| introduced
+%                       |def_object| merged in |assign_object|
+%                       drawing of points separated in the polyhedra,
+%                       in order to be able to reset the positions.
+%  v 0.979   20/3/1997: overflow handling added, 
+%                       introduction of field of view parameters (|h_field| and
+%                       |v_field|)
+%  v 0.98    21/3/1997: new figure and some slight corrections
+%  v 0.981   25/4/1997: when |filled_faces| is false, hidden edges are
+%                       drawn dashed.
+%  v 0.982   25/4/1997: |drawhidden| parameter added to |draw_face|
+%  v 0.983   28/4/1997: |set_face| uses now local points
+%                       |set_obj_point| for local points
+%                       |rotate_in_plane| uses now local points
+%                       |get_next_face_point| renamed in |next_face_point|
+%                       |next_face_point| uses now local points
+%                       |pnt| and |face| removed from poly.mp
+%                       |set_face| renamed |set_obj_face| to be consistent
+%                       with |set_obj_point|
+%  v 0.984    1/5/1997: |rotate_object_abs_p_v| renamed |rotate_object_abs_pv|
+%                       |rotate_object_p_v| renamed |rotate_object_pv|
+%                       (reason: avoid overfull hboxes in paper)
+%                       All |_inst| macros removed since they were not
+%                       necessary.
+%                       |next_face_point| renamed in |new_face_point|
+%  v 0.985    2/5/1997: |three_d_loaded| renamed |three_d_version|
+%                       and holds the version number.
+%  v 0.986    2/5/1997: code cleaned.
+%  v 0.987   12/5/1997: various small improvements suggested by Ulrik Vieth
+%  v 0.988   13/5/1997: introduction of 10 ancillary points in the dodecahedron
+%                       only 21 points are now available (20 vertices + center)
+%                       |free_point| introduced, as well as variants
+%                       of |new_face_point| and |rotate_in_plane| to cope
+%                       with the ancillary points.
+%  v 0.989   16/5/1997: |new_tmp_points|, |free_tmp_points|
+%                       |new_face_point_abs| renamed into |new_abs_face_point|
+%                       |rotate_in_plane| removed
+%                       |rotate_in_plane_abs| renamed into |rotate_in_plane|
+%                       paper.tex brought up to date.
+%  v 0.990   17/5/1997: |new_points| renamed |new_obj_points|
+%                       |new_faces| renamed |new_obj_faces|
+%                       |new_tmp_points| renamed |new_points|
+%                       |free_tmp_points| renamed |free_points|
+%                       paper.tex brought up to date.
+%  v 0.991   18/5/1997: the following changes were done to for formatting
+%                         reasons in the TUGboat paper.
+%                         |middle_point| renamed |mid_point|
+%                         |rotate_object...| renamed |rotate_obj...|
+%                         |assign_object| renamed |assign_obj|
+%                         |reset_object| renamed |reset_obj|
+%                         |put_object| renamed |put_obj|
+%                         |scale_object| renamed |scale_obj|
+%                         |translate_object| renamed |translate_obj|
+%                       syntax of |obs_distance| changed to take a first
+%                        `text' parameter.
+%  v 0.992   23/5/1997: some cosmetic changes by Ulrik Vieth, 
+%                       for better formatting with mft.
+%                       |def_object| renamed |def_obj|.
+%                       Code formatted with the meta-mode.el emacs package.
+%                       
+%  v 0.993   29/5/1997: several "object" renamed "obj"; corrected in the paper.
+%                       slight changes in the paper.
+%  v 0.994  30/10/1997: |draw_contours| added after suggestion by Denis Barbier
+%  v 1.0     8/ 4/1998: final spit for TUGboat article
+% ----------------------------------------------------------------------------

@@ -1,0 +1,101 @@
+%%
+%% inslrmaj.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{inslrmaj.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{inslrmaj.drv}{t}{\from{inslrmaj.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{imaj7.mf}{t}{\from{inslrmaj.dtx}{base7}}
+\generateFile{imaj10.mf}{t}{\from{inslrmaj.dtx}{base10}}
+\generateFile{imaj17.mf}{t}{\from{inslrmaj.dtx}{base17}}
+\generateFile{imajb7.mf}{t}{\from{inslrmaj.dtx}{base7b}}
+\generateFile{imajb10.mf}{t}{\from{inslrmaj.dtx}{base10b}}
+\generateFile{imajb17.mf}{t}{\from{inslrmaj.dtx}{base17b}}
+\generateFile{imajl.mf}{t}{\from{inslrmaj.dtx}{min}}
+\generateFile{imaju.mf}{t}{\from{inslrmaj.dtx}{maj}}
+\generateFile{imajtitle.mf}{t}{\from{inslrmaj.dtx}{mfd}}
+\generateFile{imajpunct.mf}{t}{\from{inslrmaj.dtx}{punct}}
+\generateFile{imajlig.mf}{t}{\from{inslrmaj.dtx}{lig}}
+\generateFile{imajdig.mf}{t}{\from{inslrmaj.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1imaj.fd}{t}{\from{inslrmaj.dtx}{fdot1}}
+\generateFile{t1imaj.fd}{t}{\from{inslrmaj.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{inslrmaj.sty}{t}{\from{inslrmaj.dtx}{usc}}
+\generateFile{allimaj.sty}{t}{\from{inslrmaj.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space imaj7.mf}
+\Msg{* \space\space imaj10.mf}
+\Msg{* \space\space imaj17.mf}
+\Msg{* \space\space imajb7.mf}
+\Msg{* \space\space imajb10.mf}
+\Msg{* \space\space imajb17.mf}
+\Msg{* \space\space imajl.mf}
+\Msg{* \space\space imaju.mf}
+\Msg{* \space\space imajtitle.mf}
+\Msg{* \space\space imajpunct.mf}
+\Msg{* \space\space imajlig.mf}
+\Msg{* \space\space imajdig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1imaj.fd}
+\Msg{* \space\space t1imaj.fd}
+\Msg{* \space\space inslrmaj.sty}
+\Msg{* \space\space allimaj.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

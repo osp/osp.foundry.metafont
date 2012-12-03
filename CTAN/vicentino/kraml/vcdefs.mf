@@ -1,0 +1,136 @@
+% VCDEFS - definitions & macros for vicentino fonts
+% w. kraml, 1991
+
+% some metrics
+
+ah# + dh# = size#;          % = height of ascenders + depth of descenders
+xh#= 7/16 size#;            % x-height
+ah#= xh# + 5/16 size#;      % ascender height
+ch#= xh# + 4/16 size#;      % caps height
+th# = 1/8 xh#;              % terminal height
+
+digh# = xh#;                % lower case digits height
+diga# = xh# + 3/16 size#;   % small digits ascenders
+digd# = 3/16 size#;         % small digits descenders
+
+% (almost all the time) horizontal:
+
+s# := 1/20 size#;            % (orig. sidebar, now ) a small distance % normal!
+tw# := 2/20 size#;           % terminal width
+sw# := 4/18 size#;           % stem to stem width 
+halfser#:=.6tw#;             % width of 'half' serif
+
+if bold:
+    s#:= 1.08s# ;
+    tw#:=1.08tw#;
+    sw#:=1.09sw#;
+    halfser#:=1.10halfser#;
+fi
+% pixels:
+define_pixels(size,ah,xh,ch,digh,diga,digd,dh,th,s,tw,sw,halfser);
+
+% pen(s):
+
+xfactor := if bold: 1.37 else: 1 fi;
+yfactor := if bold: 1.30 else: 1 fi;
+
+pen myoddpen;
+capsule_def(myoddpen) 
+        makepen((-40,15)--
+                    (-35.5,0)--
+                (-30,-15)--
+                  (-20,-16.5)--
+                  (-10,-17)--
+                  (10,-17)--
+                  (20, -16.5)--
+                (35,-15)--
+                    (38,0)--
+                (40,15)--
+                  (34, 16.5)--
+                  (25,17.5)--
+                  (17.5,18)--
+                  (5,18.5)--
+                  (-5,18.5)--
+                  (-17.5,18)--
+                  (-25,17.5)--
+                  (-34,16.5)--
+                  cycle);
+if modern:
+pickup  pencircle xscaled (.0645 size*xfactor)
+                  yscaled (.046 size*yfactor) rotated 15;
+else:
+pickup myoddpen xscaled (.00095 size*xfactor) 
+              yscaled (.00054 size*yfactor) rotated 35; % normal!
+fi
+lower_pen := savepen;
+
+pickup myoddpen xscaled (.0009size*xfactor)
+              yscaled (.00055size*yfactor) rotated 6; %!
+cap_serif_pen := savepen;
+
+if twisted:
+  pickup pencircle xscaled (.074 size*xfactor) 
+                   yscaled (.02625 size*yfactor) rotated 130;
+  lower_pen := savepen;
+fi
+
+% font slants:
+upperslant := if modern: 1/6 else: 11/60 fi;      % 1/5
+lowerslant := if modern: 1/6 else: 7/30 fi;       % 1/4
+if twisted: upperslant := lowerslant := -2/60; fi
+
+% TFMs:
+font_size size#;
+font_quad  10/15 size#;
+font_normal_space := 2tw#+.6s#;
+font_normal_stretch := 3/50 size#;
+font_normal_shrink := 2/50 size#;
+font_x_height := xh#;
+
+% macros:
+
+def ltopserif(expr startpoint,endpoint,stempoint) =
+          draw startpoint--endpoint;
+          draw startpoint{endpoint-startpoint}..tension2..
+                       {stempoint-endpoint}stempoint
+          enddef;
+
+def cap_top_serif(expr startx, rwidth) =
+    pair outer_left_z_, left_zz_, z_, right_z_;
+    outer_left_z_ = (startx-1.43tw, h-.7th);
+    left_zz_ - outer_left_z_ =whatever*dir29;
+    left_zz_= (whatever, h-.15s);
+    top.z_ = (startx, h);
+    top.right_z_ = (startx+rwidth, h);
+    draw outer_left_z_{dir42} ... left_zz_..tension1.25..z_ 
+          ..tension1.25..{dir35}right_z_ ;
+    enddef;
+def cap_bot_serif(expr startx) =
+    pair left_z_, z_, right_z_;
+    pickup cap_serif_pen;
+    bot.left_z_ = (startx-.8tw,0);
+    bot.z_ = (startx, 0);
+    bot.right_z_ = (startx+.9tw, 0);
+    draw left_z_ ... z_{right} ... {dir70}right_z_
+    enddef;
+        
+def horintersection expr height =
+     intersectionpoint ((-w,height)--(2w,height)) enddef;
+
+def end_char = italcorr (charht*slant - .25tw#);
+               labels(range 1 thru 15); endchar enddef;
+
+def dot expr z = pair upper_z_;
+                 upper_z_ := z + (0,1.1s);
+                 draw upper_z_{right}..tension4..{left}z enddef;
+
+def comma expr z = pair upper_z_, lower_z_;
+                 upper_z_ := z + (-1/32size,1s);
+                 lower_z_ := z - (1/12size, 2s);
+                 draw upper_z_{right}..tension4..z..tension2..lower_z_ enddef;
+
+def revcomma expr z = pair upper_z_, lower_z_;
+                 upper_z_ := z + (1/12size, 2s);
+                 lower_z_ := z - (-1/32size,1s);
+                 draw lower_z_{left}..tension4..z..tension2..upper_z_ enddef;
+

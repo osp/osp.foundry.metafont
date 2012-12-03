@@ -1,0 +1,150 @@
+%!PS
+%%BoundingBox: -110 -56 122 116 
+%%Creator: MetaPost
+%%CreationDate: 1997.04.22:2242
+%%Pages: 1
+%*Font: cmmi10 9.96265 9.96265 12:800a000000000004000080005f8
+%*Font: cmmi7 6.97385 6.97385 78:e
+%%EndProlog
+%%Page: 1 1
+ 0 0.5 dtransform truncate idtransform setlinewidth pop [] 0 setdash
+ 1 setlinecap 1 setlinejoin 10 setmiterlimit
+newpath 0 0 moveto
+-106.54832 -38.78087 lineto stroke
+newpath -103.08418 -36.78084 moveto
+-106.54832 -38.78087 lineto
+-102.60905 -38.08626 lineto
+ closepath
+gsave fill grestore stroke
+newpath 0 0 moveto
+113.3858 0 lineto stroke
+newpath 109.44652 -0.6946 moveto
+113.3858 0 lineto
+109.44652 0.6946 lineto
+ closepath
+gsave fill grestore stroke
+ 0.5 0 dtransform exch truncate exch idtransform pop setlinewidth
+newpath 0 0 moveto
+0 113.3858 lineto stroke
+ 0 0.5 dtransform truncate idtransform setlinewidth pop
+newpath 0.6946 109.44652 moveto
+0 113.3858 lineto
+-0.6946 109.44652 lineto
+ closepath
+gsave fill grestore stroke
+newpath 0 0 moveto
+82.14182 -22.00984 lineto stroke
+newpath 78.15659 -21.66115 moveto
+82.14182 -22.00984 lineto
+78.51617 -20.31917 lineto
+ closepath
+gsave fill grestore stroke
+newpath 0 0 moveto
+80.17596 80.17596 lineto stroke
+newpath 77.88162 76.89932 moveto
+80.17596 80.17596 lineto
+76.89932 77.88162 lineto
+ closepath
+gsave fill grestore stroke
+newpath 0 0 moveto
+-80.17596 80.17596 lineto stroke
+newpath -76.89932 77.88162 moveto
+-80.17596 80.17596 lineto
+-77.88162 76.89932 lineto
+ closepath
+gsave fill grestore stroke
+ [3 3 ] 0 setdash
+newpath 0 0 moveto
+83.46436 -48.18889 lineto stroke
+ [] 0 setdash
+newpath 79.70563 -46.82079 moveto
+83.46436 -48.18889 lineto
+80.4002 -45.61775 lineto
+ closepath
+gsave fill grestore stroke
+ [3 3 ] 0 setdash
+newpath 0 0 moveto
+106.54832 38.78087 lineto stroke
+ [] 0 setdash
+newpath 103.08418 36.78084 moveto
+106.54832 38.78087 lineto
+102.60905 38.08626 lineto
+ closepath
+gsave fill grestore stroke
+ [3 3 ] 0 setdash
+newpath 0 0 moveto
+-29.34647 109.52243 lineto stroke
+ [] 0 setdash
+newpath -27.65599 105.89716 moveto
+-29.34647 109.52243 lineto
+-28.99785 105.53763 lineto
+ closepath
+gsave fill grestore stroke
+-109.39528 -46.07037 moveto
+(x) cmmi10 9.96265 fshow
+80.61275 -55.4784 moveto
+(u) cmmi10 9.96265 fshow
+71.22307 -31.92834 moveto
+(O) cmmi10 9.96265 fshow
+79.09908 -31.92834 moveto
+(bs) cmmi10 9.96265 fshow
+88.04466 -33.42274 moveto
+(x) cmmi7 6.97385 fshow
+116.3858 -1.17616 moveto
+(y) cmmi10 9.96265 fshow
+83.17596 78.1419 moveto
+(O) cmmi10 9.96265 fshow
+91.05197 78.1419 moveto
+(bs) cmmi10 9.96265 fshow
+99.99756 76.6475 moveto
+(y) cmmi7 6.97385 fshow
+-8.0713 111.24104 moveto
+(z) cmmi10 9.96265 fshow
+-104.58806 77.4639 moveto
+(O) cmmi10 9.96265 fshow
+-96.71205 77.4639 moveto
+(bs) cmmi10 9.96265 fshow
+-87.76646 75.9695 moveto
+(z) cmmi7 6.97385 fshow
+109.54832 36.63611 moveto
+(v) cmmi10 9.96265 fshow
+-39.74696 107.37767 moveto
+(w) cmmi10 9.96265 fshow
+newpath -21.30934 -7.75606 moveto
+-9.00943 -12.23291 4.40096 -14.11148 16.69261 -9.63763 curveto stroke
+newpath 13.13445 -11.46506 moveto
+14.3417 -10.9175 15.52881 -10.30956 16.69261 -9.63763 curveto
+15.36917 -9.87099 14.04575 -10.03627 12.72401 -10.13791 curveto
+ closepath
+gsave fill grestore stroke
+newpath 41.73218 -24.09445 moveto
+42.8361 -19.97456 43.169 -15.68611 42.7141 -11.4452 curveto stroke
+newpath 43.60097 -15.34569 moveto
+43.38118 -14.0319 43.08534 -12.72954 42.7141 -11.4452 curveto
+42.6237 -12.77907 42.45625 -14.10408 42.21346 -15.4138 curveto
+ closepath
+gsave fill grestore stroke
+newpath 21.30934 7.75606 moveto
+20.17679 10.86769 18.3764 13.69347 16.03494 16.03494 curveto stroke
+newpath 19.09639 13.46066 moveto
+18.1564 14.40456 17.1324 15.26648 16.03494 16.03494 curveto
+16.80339 14.93747 17.47086 13.7773 18.03133 12.56885 curveto
+ closepath
+gsave fill grestore stroke
+newpath 0 34.01608 moveto
+-2.97272 34.01608 -5.93262 33.62646 -8.80403 32.85707 curveto stroke
+newpath -5.08572 34.33142 moveto
+-6.35167 33.91377 -7.5933 33.42163 -8.80403 32.85707 curveto
+-7.47322 32.97351 -6.13814 33.0113 -4.8057 32.9708 curveto
+ closepath
+gsave fill grestore stroke
+-8.34605 47.58096 moveto
+(\022) cmmi10 9.96265 fshow
+-8.04022 -27.3122 moveto
+( ) cmmi10 9.96265 fshow
+52.68236 -24.51909 moveto
+(\022) cmmi10 9.96265 fshow
+30.10892 21.88089 moveto
+(\036) cmmi10 9.96265 fshow
+showpage
+%%EOF

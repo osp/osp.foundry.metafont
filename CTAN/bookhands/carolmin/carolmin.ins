@@ -1,0 +1,101 @@
+%%
+%% carolmin.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{carolmin.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{carolmin.drv}{t}{\from{carolmin.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{cmin7.mf}{t}{\from{carolmin.dtx}{base7}}
+\generateFile{cmin10.mf}{t}{\from{carolmin.dtx}{base10}}
+\generateFile{cmin17.mf}{t}{\from{carolmin.dtx}{base17}}
+\generateFile{cminb7.mf}{t}{\from{carolmin.dtx}{base7b}}
+\generateFile{cminb10.mf}{t}{\from{carolmin.dtx}{base10b}}
+\generateFile{cminb17.mf}{t}{\from{carolmin.dtx}{base17b}}
+\generateFile{cminl.mf}{t}{\from{carolmin.dtx}{min}}
+\generateFile{cminu.mf}{t}{\from{carolmin.dtx}{maj}}
+\generateFile{cmintitle.mf}{t}{\from{carolmin.dtx}{mfd}}
+\generateFile{cminpunct.mf}{t}{\from{carolmin.dtx}{punct}}
+\generateFile{cminlig.mf}{t}{\from{carolmin.dtx}{lig}}
+\generateFile{cmindig.mf}{t}{\from{carolmin.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1cmin.fd}{t}{\from{carolmin.dtx}{fdot1}}
+\generateFile{t1cmin.fd}{t}{\from{carolmin.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{carolmin.sty}{t}{\from{carolmin.dtx}{usc}}
+\generateFile{allcmin.sty}{t}{\from{carolmin.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space cmin7.mf}
+\Msg{* \space\space cmin10.mf}
+\Msg{* \space\space cmin17.mf}
+\Msg{* \space\space cminb7.mf}
+\Msg{* \space\space cminb10.mf}
+\Msg{* \space\space cminb17.mf}
+\Msg{* \space\space cminl.mf}
+\Msg{* \space\space cminu.mf}
+\Msg{* \space\space cmintitle.mf}
+\Msg{* \space\space cminpunct.mf}
+\Msg{* \space\space cminlig.mf}
+\Msg{* \space\space cmindig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1cmin.fd}
+\Msg{* \space\space t1cmin.fd}
+\Msg{* \space\space carolmin.sty}
+\Msg{* \space\space allcmin.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

@@ -1,0 +1,78 @@
+This is METAFONT, Version 2.718281 (TeX Live 2012/Debian) (base=mf 2012.11.2)  13 NOV 2012 17:44
+**aaa.mf
+(aaa.mf
+testfonction
+! Inconsistent equation (off by -1240).
+<to be read again> 
+                   ;
+l.10 	w=200;
+            
+? s
+OK, entering scrollmode...
+! Inconsistent equation (off by 0.33).
+<to be read again> 
+                   ;
+l.11 	var=1.33;
+               
+The equation I just read contradicts what was said before.
+But don't worry; continue and I'll just ignore it.
+
+>> (x1,y1)
+>> 0
+! Equation cannot be performed (pair=numeric).
+<to be read again> 
+                   ;
+l.13 	z1=0u;
+            
+I'm sorry, but I don't know how to make such things equal.
+(See the two expressions just above the error message.)
+
+>> (x1,y1,1,0,0,1)
+! Transform components aren't all known.
+<to be read again> 
+                   withpen
+drawdot->...rentpen_path.shifted((EXPR0)t_)withpen
+                                                  .penspeck
+<to be read again> 
+                   ;
+l.19 	drawdot z1;
+                  drawdot z2; drawdot z3;
+I'm unable to apply a partially specified transformation
+except to a fully known pair or transform.
+Proceed, and I'll omit the transformation.
+
+>> (x2,y1,1,0,0,1)
+! Transform components aren't all known.
+<to be read again> 
+                   withpen
+drawdot->...rentpen_path.shifted((EXPR0)t_)withpen
+                                                  .penspeck
+<to be read again> 
+                   ;
+l.19 	drawdot z1; drawdot z2;
+                              drawdot z3;
+I'm unable to apply a partially specified transformation
+except to a fully known pair or transform.
+Proceed, and I'll omit the transformation.
+
+>> (0.5x2+0.5x1,y1+1440,1,0,0,1)
+! Transform components aren't all known.
+<to be read again> 
+                   withpen
+drawdot->...rentpen_path.shifted((EXPR0)t_)withpen
+                                                  .penspeck
+<to be read again> 
+                   ;
+l.19 	drawdot z1; drawdot z2; drawdot z3;
+                                         
+I'm unable to apply a partially specified transformation
+except to a fully known pair or transform.
+Proceed, and I'll omit the transformation.
+
+[116]
+huit [104]
+spirale [115]
+test [116]
+Letter A [65]
+Letter B [66] )
+Output written on aaa.2602gf (6 characters, 73748 bytes).

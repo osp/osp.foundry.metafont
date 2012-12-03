@@ -1,0 +1,1257 @@
+\input mftmac
+\def\9{$\futurelet\next\doit}
+\let\[=\relax
+\def\doit{\ifx\next\[\def\next{\hfill{\rm\%}}%
+     \else\ifx\next\ \def\next{\qquad{\rm\%}}%
+     \else\def\next{{\rm\%}}\fi\fi\next}
+\input epsf
+\def\newpage{\vfill\eject}
+\advance\vsize1in
+\let\ora\overrightarrow
+\def\title#1{\hrule\vskip1mm#1\par\vskip1mm\hrule\vskip5mm}
+\def\figure#1{\par\centerline{\epsfbox{#1}}}
+\title{{\bf 3D.MP : 3-DIMENSIONAL REPRESENTATIONS
+                    AND ANIMATIONS IN METAPOST}}
+\BL
+ version 1.0, 8 April 1998
+ {\bf Denis Roegel} ({\tt roegel@loria.fr})
+\BL
+ This package provides definitions enabling the manipulation
+ and animation of 3-dimensional objects.
+ Such objects can be included in a \TeX{} file or used on web pages
+ for instance. See the documentation enclosed in the distribution for
+ more details.
+\BL
+ Thanks to John Hobby and Ulrik Vieth for helpful hints.
+\BL
+ LIMITATIONS:
+\BL
+   $-$ an object can not include \TeX{} labels; to overcome this limitation
+     would need to wrap the metapost output with dvips so that the
+     necessary fonts are loaded (easy to do, but not done here)
+\BL
+ PROJECTS FOR THE FUTURE:
+\BL
+   $-$ take light sources into account and show shadows and darker faces
+\BL
+   $-$ handle overlapping of objects ({\it obj\_name\/} can be used when
+     going through all faces)
+\BL
+$\2{if}\1{known}\\{three\_d\_version}\?:$\par
+\quad\quad$\2{expandafter}\5{endinput}\9 avoids loading this package twice\par
+$\2{fi};$\par
+\BL
+$\2{message}\7"*** 3d, version 1.0 (c) D. Roegel, 8 April 1998 ***";$\par
+$\2{numeric}\\{three\_d\_version};$\par
+$\\{three\_d\_version}=1.0;$\par
+\BL
+\newpage
+\title{Vector operations}
+\BL
+$\9 definition of vector $i$ by its coordinates\par
+$\2{def}\\{vect\_def}(\2{expr}i,\\{xi},\\{yi},\\{zi})=\\{vect}[i]x:=\\{xi};\ %
+\\{vect}[i]y:=\\{yi};\ \\{vect}[i]z:=\\{zi};\3{enddef};$\par
+\BL
+$\9 a point is stored as a vector\par
+$\2{let}\\{set\_point}=\\{vect\_def};$\par
+\BL
+$\9 $\\{set\_obj\_point}$ is like $\\{set\_point}$, but the first parameter\par
+$\9 is a local point number\par
+$\2{def}\\{set\_obj\_point}(\2{expr}i,\\{xi},\\{yi},\\{zi})=\\{set\_point}(%
+\\{pnt}(i),\\{xi},\\{yi},\\{zi})\3{enddef};$\par
+\BL
+$\9 definition of a vector by an other vector\par
+$\2{def}\\{vect\_def\_vect}(\2{expr}i,j)=$\par
+\quad\quad$\\{vect}[i]x:=\\{vect}[j]x;\ \\{vect}[i]y:=\\{vect}[j]y;\ %
+\\{vect}[i]z:=\\{vect}[j]z;$\par
+$\!\3{enddef};$\par
+\BL
+$\9 vector sum: $\\{vect}[k]$ $\leftarrow$ $\\{vect}[i]$$+$$\\{vect}[j]$\par
+$\2{def}\\{vect\_sum}(\2{expr}k,i,j)=$\par
+\quad\quad$\\{vect}[k]x:=\\{vect}[i]x+\\{vect}[j]x;$\par
+\quad\quad$\\{vect}[k]y:=\\{vect}[i]y+\\{vect}[j]y;$\par
+\quad\quad$\\{vect}[k]z:=\\{vect}[i]z+\\{vect}[j]z;$\par
+$\!\3{enddef};$\par
+\BL
+$\9 vector translation: $\\{vect}[i]$ $\leftarrow$ $\\{vect}[i]$$+$$%
+\\{vect}[v]$\par
+$\2{def}\\{vect\_translate}(\2{expr}i,v)=\\{vect\_sum}(i,i,v)\3{enddef};$\par
+\BL
+$\9 vector difference: $\\{vect}[k]$ $\leftarrow$ $\\{vect}[i]$$-$$\\{vect}[j]$%
+\par
+$\2{def}\\{vect\_diff}(\2{expr}k,i,j)=$\par
+\quad\quad$\\{vect}[k]x:=\\{vect}[i]x-\\{vect}[j]x;$\par
+\quad\quad$\\{vect}[k]y:=\\{vect}[i]y-\\{vect}[j]y;$\par
+\quad\quad$\\{vect}[k]z:=\\{vect}[i]z-\\{vect}[j]z;$\par
+$\!\3{enddef};$\par
+\BL
+$\9 dot product of $\\{vect}[i]$ and $\\{vect}[j]$\par
+$\2{vardef}\\{vect\_dprod}(\2{expr}i,j)=$\par
+\quad\quad$(\\{vect}[i]x\ast \\{vect}[j]x+\\{vect}[i]y\ast \\{vect}[j]y+%
+\\{vect}[i]z\ast \\{vect}[j]z)$\par
+$\!\3{enddef};$\par
+\BL
+$\9 modulus of $\\{vect}[i]$\par
+$\2{vardef}\\{vect\_mod}(\2{expr}i)=\1{sqrt}(\\{vect\_dprod}(i,i))\3{enddef};$%
+\par
+\BL
+$\9 vector product: $\\{vect}[k]$ $\leftarrow$ $\\{vect}[i]$ $\land$ $%
+\\{vect}[j]$\par
+$\2{def}\\{vect\_prod}(\2{expr}k,i,j)=$\par
+\quad\quad$\\{vect}[k]x:=\\{vect}[i]y\ast \\{vect}[j]z-\\{vect}[i]z\ast %
+\\{vect}[j]y;$\par
+\quad\quad$\\{vect}[k]y:=\\{vect}[i]z\ast \\{vect}[j]x-\\{vect}[i]x\ast %
+\\{vect}[j]z;$\par
+\quad\quad$\\{vect}[k]z:=\\{vect}[i]x\ast \\{vect}[j]y-\\{vect}[i]y\ast %
+\\{vect}[j]x;$\par
+$\!\3{enddef};$\par
+\BL
+$\9 scalar multiplication: $\\{vect}[j]$ $\leftarrow$ $\\{vect}[i]\ast v$\par
+$\2{def}\\{vect\_mult}(\2{expr}j,i,v)=$\par
+\quad\quad$\\{vect}[j]x:=v\ast \\{vect}[i]x;\ \\{vect}[j]y:=v\ast \\{vect}[i]y;%
+\ \\{vect}[j]z:=v\ast \\{vect}[i]z;$\par
+$\!\3{enddef};$\par
+\BL
+$\9 middle of two points\par
+$\2{def}\\{mid\_point}(\2{expr}k,i,j)=\\{vect\_sum}(k,i,j);\ \\{vect%
+\_mult}(k,k,.5);\3{enddef};$\par
+\BL
+\newpage
+\title{Vector rotation}
+$\9 Rotation of $\\{vect}[v]$ around $\\{vect}[\\{axis}]$ by an angle $%
+\\{alpha}$\par
+\BL
+ The vector $\vec{v}$ is first projected on the axis
+ giving vectors $\vec{a}$ and $\vec{h}$:
+\figure{vect-fig.9}
+ If we set
+ $\vec{b}={\ora{axis}\over \left\Vert\vcenter{\ora{axis}}\right\Vert}$,
+ the rotated vector $\vec{v'}$ is equal to $\vec{h}+\vec{f}$
+ where $\vec{f}=\cos\alpha \cdot \vec{a} + \sin\alpha\cdot \vec{c}$.
+ and $\vec{h}=(\vec{v}\cdot\vec{b})\vec{b}$
+\figure{vect-fig.10}
+\BL
+$\9 The rotation is independent of $\\{vect}[\\{axis}]$'s module.\par
+$\9 $v$ = old and new vector\par
+$\9 $\\{axis}$ = rotation axis\par
+$\9 $\\{alpha}$ = rotation angle\par
+$\9\par
+$\2{vardef}\\{vect\_rotate}(\2{expr}v,\\{axis},\\{alpha})=$\par
+\quad\quad$\2{save}\\{v\_a},\\{v\_b},\\{v\_c},\\{v\_d},\\{v\_e},\\{v\_f};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};\ \\{v\_b}:=\\{new\_vect};\ \\{v\_c}:=\\{new%
+\_vect};$\par
+\quad\quad$\\{v\_d}:=\\{new\_vect};\ \\{v\_e}:=\\{new\_vect};\ \\{v\_f}:=\\{new%
+\_vect};$\par
+\quad\quad$\\{v\_g}:=\\{new\_vect};\ \\{v\_h}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_mult}(\\{v\_b},\\{axis},1/\\{vect\_mod}(\\{axis}));$\par
+\quad\quad$\\{vect\_mult}(\\{v\_h},\\{v\_b},\\{vect\_dprod}(\\{v\_b},v));\ \9
+projection of $v$ on $\\{axis}$\par
+\quad\quad$\\{vect\_diff}(\\{v\_a},v,\\{v\_h});$\par
+\quad\quad$\\{vect\_prod}(\\{v\_c},\\{v\_b},\\{v\_a});$\par
+\quad\quad$\\{vect\_mult}(\\{v\_d},\\{v\_a},\1{cosd}(\\{alpha}));$\par
+\quad\quad$\\{vect\_mult}(\\{v\_e},\\{v\_c},\1{sind}(\\{alpha}));$\par
+\quad\quad$\\{vect\_sum}(\\{v\_f},\\{v\_d},\\{v\_e});$\par
+\quad\quad$\\{vect\_sum}(v,\\{v\_f},\\{v\_h});$\par
+\quad\quad$\\{free\_vect}(\\{v\_h});\ \\{free\_vect}(\\{v\_g});$\par
+\quad\quad$\\{free\_vect}(\\{v\_f});\ \\{free\_vect}(\\{v\_e});\ \\{free%
+\_vect}(\\{v\_d});$\par
+\quad\quad$\\{free\_vect}(\\{v\_c});\ \\{free\_vect}(\\{v\_b});\ \\{free%
+\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Operations on objects}
+$\9 $\\{iname}$ is the handler for an instance of an object of class $\\{name}$%
+\par
+$\9 $\\{iname}$ must be a letter string\par
+$\2{vardef}\\{assign\_obj}(\2{expr}\\{iname},\\{name})=$\par
+\quad\quad$\2{save}\\{tmpdef};$\par
+\quad\quad$\2{string}\\{tmpdef};\ \9 we need to add double quotes (char 34)\par
+\quad\quad$\\{tmpdef}=\7"def "\AM \\{iname}\AM \7"_class="\AM \\{ditto}\AM %
+\\{name}\AM \\{ditto}\AM \7" enddef";$\par
+\quad\quad$\2{scantokens}\\{tmpdef};$\par
+\quad\quad$\\{def\_obj}(\\{iname});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 $\\{name}$ is the the name of an object instance\par
+$\9 It must be made only of letters (or underscores), but no digits.\par
+$\2{def}\\{def\_obj}(\2{expr}\\{name})=$\par
+\quad\quad$\2{scantokens}\2{begingroup}$\par
+\quad\quad\quad\quad$\2{save}\\{tmpdef};\ \2{string}\\{tmpdef};$\par
+\quad\quad\quad\quad$\\{tmpdef}=\7"def_"\AM \\{obj\_class\_}(\\{name})\AM \7"("%
+\AM \\{ditto}\AM \\{name}\AM \\{ditto}\AM \7")";$\par
+\quad\quad\quad\quad$\\{tmpdef}$\par
+\quad\quad$\!\3{endgroup}$\par
+$\!\3{enddef};$\par
+\BL
+$\9 This macro puts an object back where it was right at the beginning.\par
+$\9 $\\{iname}$ is the name of an object instance.\par
+$\2{vardef}\\{reset\_obj}(\2{expr}\\{iname})=$\par
+\quad\quad$\2{save}\\{tmpdef};$\par
+\quad\quad$\2{string}\\{tmpdef};$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{iname});$\par
+\quad\quad$\\{tmpdef}=\7"set_"\AM \\{obj\_class\_}(\\{iname})\AM \7"_points";$%
+\par
+\quad\quad$\2{scantokens}\\{tmpdef}(\\{iname});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Put an object at position given by $\\{pos}$ (a vector) and\par
+$\9 with orientations given by angles $\\{psi}$, $\\{theta}$, $\\{phi}$.\par
+$\9 The object is scaled by $\\{scale}$.\par
+$\9 $\\{iname}$ is the name of an object instance.\par
+$\2{vardef}\\{put\_obj}(\2{expr}\\{iname},\\{pos},\\{scale},\\{psi},\\{theta},%
+\\{phi})=$\par
+\quad\quad$\\{reset\_obj}(\\{iname});\ \\{scale\_obj}(\\{iname},\\{scale});$\par
+\quad\quad$\\{v\_x}:=\\{new\_vect};\ \\{v\_y}:=\\{new\_vect};\ \\{v\_z}:=\\{new%
+\_vect};$\par
+\quad\quad$\\{vect\_def\_vect}(\\{v\_x},\\{vect\_I});$\par
+\quad\quad$\\{vect\_def\_vect}(\\{v\_y},\\{vect\_J});$\par
+\quad\quad$\\{vect\_def\_vect}(\\{v\_z},\\{vect\_K});$\par
+\quad\quad$\\{rotate\_obj\_abs\_pv}(\\{iname},\\{point\_null},\\{v\_z},%
+\\{psi});$\par
+\quad\quad$\\{vect\_rotate}(\\{v\_x},\\{v\_z},\\{psi});\ \\{vect\_rotate}(\\{v%
+\_y},\\{v\_z},\\{psi});$\par
+\quad\quad$\\{rotate\_obj\_abs\_pv}(\\{iname},\\{point\_null},\\{v\_y},%
+\\{theta});$\par
+\quad\quad$\\{vect\_rotate}(\\{v\_x},\\{v\_y},\\{theta});\ \\{vect\_rotate}(%
+\\{v\_z},\\{v\_y},\\{theta});$\par
+\quad\quad$\\{rotate\_obj\_abs\_pv}(\\{iname},\\{point\_null},\\{v\_x},%
+\\{phi});$\par
+\quad\quad$\\{vect\_rotate}(\\{v\_y},\\{v\_x},\\{phi});\ \\{vect\_rotate}(\\{v%
+\_z},\\{v\_x},\\{phi});$\par
+\quad\quad$\\{free\_vect}(\\{v\_z});\ \\{free\_vect}(\\{v\_y});\ \\{free%
+\_vect}(\\{v\_x});$\par
+\quad\quad$\\{translate\_obj}(\\{iname},\\{pos});$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Rotation, translation and scaling of objects}
+$\9 Rotation of an object instance $\\{name}$  around an axis\par
+$\9 going through a point $p$ (local to the object)\par
+$\9 and directed by vector $\\{vect}[v]$. The angle of rotation is $a$.\par
+$\2{vardef}\\{rotate\_obj\_pv}(\2{expr}\\{name},p,v,a)=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\\{rotate\_obj\_abs\_pv}(\\{name},\\{pnt}(p),v,a);$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{rotate\_obj\_abs\_pv}(\2{expr}\\{name},p,v,a)=$\par
+\quad\quad$\2{save}\\{v\_a};$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{vect\_diff}(\\{v\_a},\\{pnt}(i),p);$\par
+\quad\quad\quad\quad$\\{vect\_rotate}(\\{v\_a},v,a);$\par
+\quad\quad\quad\quad$\\{vect\_sum}(\\{pnt}(i),\\{v\_a},p);$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Rotation of an object instance $\\{name}$ around an axis\par
+$\9 going through a point $p$ (local to the object)\par
+$\9 and directed by vector $\ora{pq}$. The angle of rotation is $a$.\par
+$\2{vardef}\\{rotate\_obj\_pp}(\2{expr}\\{name},p,q,a)=$\par
+\quad\quad$\2{save}\\{v\_a},\\{axis};$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};\ \\{axis}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_diff}(\\{axis},\\{pnt}(q),\\{pnt}(p));$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{vect\_diff}(\\{v\_a},\\{pnt}(i),\\{pnt}(p));$\par
+\quad\quad\quad\quad$\\{vect\_rotate}(\\{v\_a},\\{axis},a);$\par
+\quad\quad\quad\quad$\\{vect\_sum}(\\{pnt}(i),\\{v\_a},\\{pnt}(p));$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{free\_vect}(\\{axis});\ \\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Translation of an object instance $\\{name}$ by a vector $\\{vect}[v]$.\par
+$\2{vardef}\\{translate\_obj}(\2{expr}\\{name},v)=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{vect\_sum}(\\{pnt}(i),\\{pnt}(i),v);$\par
+\quad\quad$\!\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Scalar multiplication of an object instance $\\{name}$ by a scalar $v$.\par
+$\2{vardef}\\{scale\_obj}(\2{expr}\\{name},v)=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{vect\_mult}(\\{pnt}(i),\\{pnt}(i),v);$\par
+\quad\quad$\!\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+\title{Functions to build new points in space}
+$\9 Rotation in a plane: this is useful to define a regular polygon.\par
+$\9 $k$ is a new point obtained from point $j$ by rotation around $o$\par
+$\9 by a angle $\alpha$ equal to the angle from $i$ to $j$.\par
+\figure{vect-fig.11}
+$\2{vardef}\\{rotate\_in\_plane\_}(\2{expr}k,o,i,j)=$\par
+\quad\quad$\2{save}\\{cosalpha},\\{sinalpha},\\{alpha},\\{v\_a},\\{v\_b},\\{v%
+\_c};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};\ \\{v\_b}:=\\{new\_vect};\ \\{v\_c}:=\\{new%
+\_vect};$\par
+\quad\quad$\\{vect\_diff}(\\{v\_a},i,o);\ \\{vect\_diff}(\\{v\_b},j,o);\ %
+\\{vect\_prod}(\\{v\_c},\\{v\_a},\\{v\_b});$\par
+\quad\quad$\\{cosalpha}=\\{vect\_dprod}(\\{v\_a},\\{v\_b})/\\{vect\_mod}(\\{v%
+\_a})/\\{vect\_mod}(\\{v\_b});$\par
+\quad\quad$\\{sinalpha}=\1{sqrt}(1-\\{cosalpha}\6{\ast \ast }2);$\par
+\quad\quad$\\{alpha}=\1{angle}((\\{cosalpha},\\{sinalpha}));$\par
+\quad\quad$\\{vect\_rotate}(\\{v\_b},\\{v\_c},\\{alpha});$\par
+\quad\quad$\\{vect\_sum}(k,o,\\{v\_b});$\par
+\quad\quad$\\{free\_vect}(\\{v\_c});\ \\{free\_vect}(\\{v\_b});\ \\{free%
+\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{rotate\_in\_plane}(\2{expr}k,o,i,j)=$\par
+\quad\quad$\\{rotate\_in\_plane\_}(\\{pnt}(k),o,\\{pnt}(i),\\{pnt}(j))$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Build a point on a adjacent face.\par
+ The middle $m$ of points $i$ and $j$ is such that
+ $\widehat{(\ora{om},\ora{mc})}=\alpha$
+ This is useful to define regular polyhedra
+\figure{vect-fig.7}
+$\2{vardef}\\{new\_face\_point\_}(\2{expr}c,o,i,j,\\{alpha})=$\par
+\quad\quad$\2{save}\\{v\_a},\\{v\_b},\\{v\_c},\\{v\_d},\\{v\_e};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};\ \\{v\_b}:=\\{new\_vect};\ \\{v\_c}:=\\{new%
+\_vect};\ \\{v\_d}:=\\{new\_vect};\ \\{v\_e}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_diff}(\\{v\_a},i,o);\ \\{vect\_diff}(\\{v\_b},j,o);$\par
+\quad\quad$\\{vect\_sum}(\\{v\_c},\\{v\_a},\\{v\_b});$\par
+\quad\quad$\\{vect\_mult}(\\{v\_d},\\{v\_c},.5);$\par
+\quad\quad$\\{vect\_diff}(\\{v\_e},i,j);$\par
+\quad\quad$\\{vect\_sum}(c,\\{v\_d},o);$\par
+\quad\quad$\\{vect\_rotate}(\\{v\_d},\\{v\_e},\\{alpha});$\par
+\quad\quad$\\{vect\_sum}(c,\\{v\_d},c);$\par
+\quad\quad$\\{free\_vect}(\\{v\_e});\ \\{free\_vect}(\\{v\_d});\ \\{free%
+\_vect}(\\{v\_c});\ \\{free\_vect}(\\{v\_b});\ \\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+$\2{vardef}\\{new\_face\_point}(\2{expr}c,o,i,j,\\{alpha})=$\par
+\quad\quad$\\{new\_face\_point\_}(\\{pnt}(c),\\{pnt}(o),\\{pnt}(i),\\{pnt}(j),%
+\\{alpha})$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{new\_abs\_face\_point}(\2{expr}c,o,i,j,\\{alpha})=$\par
+\quad\quad$\\{new\_face\_point\_}(c,o,\\{pnt}(i),\\{pnt}(j),\\{alpha})$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Computation of the projection of a point on the ``screen''}
+$\9 $p$ is the projection of $m$\par
+$\9 $m$ = point in space (3 coordinates)\par
+$\9 $p$ = point of the intersection plane\par
+\figure{vect-fig.8}
+$\2{vardef}\\{project\_point}(\2{expr}p,m)=$\par
+\quad\quad$\2{save}\\{tmpalpha},\\{v\_a},\\{v\_b};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};\ \\{v\_b}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_diff}(\\{v\_b},m,\\{Obs});\ \9 vector $\\{Obs}$-$m$\par
+\quad\quad\quad\quad$\9 $\\{vect}[\\{v\_a}]$ is $\\{vect}[\\{v\_b}]$ expressed
+in ($\\{ObsI}$,$\\{ObsJ}$,$\\{ObsK}$)\par
+\quad\quad\quad\quad$\9 coordinates.\par
+\quad\quad$\\{vect}[\\{v\_a}]x:=\\{vect}[\\{IObsI\_}]x\ast \\{vect}[\\{v\_b}]x$%
+\par
+\quad\quad${}+\\{vect}[\\{IObsJ\_}]x\ast \\{vect}[\\{v\_b}]y+\\{vect}[\\{IObsK%
+\_}]x\ast \\{vect}[\\{v\_b}]z;$\par
+\quad\quad$\\{vect}[\\{v\_a}]y:=\\{vect}[\\{IObsI\_}]y\ast \\{vect}[\\{v\_b}]x$%
+\par
+\quad\quad${}+\\{vect}[\\{IObsJ\_}]y\ast \\{vect}[\\{v\_b}]y+\\{vect}[\\{IObsK%
+\_}]y\ast \\{vect}[\\{v\_b}]z;$\par
+\quad\quad$\\{vect}[\\{v\_a}]z:=\\{vect}[\\{IObsI\_}]z\ast \\{vect}[\\{v\_b}]x$%
+\par
+\quad\quad${}+\\{vect}[\\{IObsJ\_}]z\ast \\{vect}[\\{v\_b}]y+\\{vect}[\\{IObsK%
+\_}]z\ast \\{vect}[\\{v\_b}]z;$\par
+\quad\quad$\2{if}\\{vect}[\\{v\_a}]x<\\{Obs\_dist}\?:\9 then, point $m$ is too
+close\par
+\quad\quad\quad\quad$\2{message}\7"Point "\AM \1{decimal}m\AM \7" too close ->
+not drawn";$\par
+\quad\quad\quad\quad$x[p]:=\\{too\_big\_};\ y[p]=\\{too\_big\_};$\par
+\quad\quad$\2{else}\?:$\par
+\quad\quad\quad\quad$\2{if}(\1{angle}(\\{vect}[\\{v\_a}]x,\\{vect}[\\{v\_a}]z)>%
+\\{h\_field}/2)$\par
+\quad\quad\quad\quad\quad\quad${}\6{or}(\1{angle}(\\{vect}[\\{v\_a}]x,\\{vect}[%
+\\{v\_a}]y)>\\{v\_field}/2)\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{message}\7"Point "\AM \1{decimal}m\AM \7" out
+of screen -> not drawn";$\par
+\quad\quad\quad\quad\quad\quad$x[p]:=\\{too\_big\_};\ y[p]=\\{too\_big\_};$\par
+\quad\quad\quad\quad$\2{else}\?:$\par
+\quad\quad\quad\quad\quad\quad$\\{tmpalpha}:=\\{Obs\_dist}/\\{vect}[\\{v%
+\_a}]x;$\par
+\quad\quad\quad\quad\quad\quad$y[p]:=\\{drawing\_scale}\ast \\{tmpalpha}\ast %
+\\{vect}[\\{v\_a}]y;$\par
+\quad\quad\quad\quad\quad\quad$x[p]:=\\{drawing\_scale}\ast \\{tmpalpha}\ast %
+\\{vect}[\\{v\_a}]z;$\par
+\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad$\2{fi};$\par
+\quad\quad$\\{free\_vect}(\\{v\_b});\ \\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Object projection\par
+$\9 This is a mere iteration on $\\{project\_point}$\par
+$\2{def}\\{project\_obj}(\2{expr}\\{name})=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:\\{project\_point}(%
+\\{ipnt\_}(i),\\{pnt}(i));\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Draw one face, hiding it if it is hidden}
+$\9 The order of the vertices determines what is the visible side\par
+$\9 of the face. The order must be clockwise when the face is seen.\par
+$\9 $\\{drawhidden}$ is a boolean; if $\5{true}$ only hidden faces are drawn;
+if $\5{false}$,\par
+$\9 only visible faces are drawn. Therefore, $\\{draw\_face}$ is called twice%
+\par
+$\9 by $\\{draw\_faces}$.\par
+$\2{vardef}\\{draw\_face}(\2{text}\\{vertices})(\2{expr}\\{col},%
+\\{drawhidden})=$\par
+\quad\quad$\2{save}p,\\{num},\\{normal\_vect},\\{v\_a},\\{v\_b},\\{v\_c},%
+\\{overflow};$\par
+\quad\quad$\2{path}p;\ \2{boolean}\\{overflow};$\par
+\quad\quad$\\{overflow}=\5{false};$\par
+\quad\quad$\2{forsuffixes}\$=\\{vertices}\?:$\par
+\quad\quad\quad\quad$\2{if}z[\\{ipnt\_}(\$)]=(\\{too\_big\_},\\{too\_big\_})\?:%
+\\{overflow}:=\5{true};\ \2{fi};$\par
+\quad\quad\quad\quad$\2{exitif}\\{overflow};$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\2{if}\\{overflow}\?:\2{message}\7"Face can not be drawn, due to
+overflow";$\par
+\quad\quad$\2{else}\?:$\par
+\quad\quad\quad\quad$p=\2{forsuffixes}\$=\\{vertices}\?:z[\\{ipnt\_}(\$)]\8{--}%
+\3{endfor}\1{cycle};$\par
+\quad\quad\quad\quad$\\{num}_{0}:=0;\ \\{num}_{1}:=0;\ \\{num}_{2}:=0;$\par
+\quad\quad\quad\quad\quad\quad$\9 get the three last suffixes:\par
+\quad\quad\quad\quad$\2{forsuffixes}\$=\\{vertices}\?:\\{num}_{0}:=\\{num}_{1};%
+\ \\{num}_{1}:=\\{num}_{2};\ \\{num}_{2}:=\$;\3{endfor};$\par
+\quad\quad\quad\quad$\\{normal\_vect}:=\\{new\_vect};\ \\{v\_a}:=\\{new\_vect};%
+\ \\{v\_b}:=\\{new\_vect};$\par
+\quad\quad\quad\quad$\\{v\_c}:=\\{new\_vect};$\par
+\quad\quad\quad\quad$\\{vect\_diff}(\\{v\_a},\\{pnt}(\\{num}_{1}),\\{pnt}(%
+\\{num}_{0}));$\par
+\quad\quad\quad\quad$\\{vect\_diff}(\\{v\_b},\\{pnt}(\\{num}_{2}),\\{pnt}(%
+\\{num}_{1}));$\par
+\quad\quad\quad\quad$\\{vect\_prod}(\\{normal\_vect},\\{v\_a},\\{v\_b});$\par
+\quad\quad\quad\quad$\\{vect\_diff}(\\{v\_c},\\{pnt}(\\{num}_{1}),\\{Obs});$\par
+\quad\quad\quad\quad$\2{if}\\{filled\_faces}\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{if}\\{vect\_dprod}(\\{normal\_vect},\\{v%
+\_c})<0\?:$\par
+\quad\quad\quad\quad\quad\quad\quad\quad$\2{fill}p\2{withcolor}\\{col};\ \2{if}%
+\\{draw\_contours}\?:\\{drawcontour}(p,\\{contourwidth});\ \2{fi};$\par
+\quad\quad\quad\quad\quad\quad$\2{else}\?:\9 $\2{draw}p\2{dashed}\\{evenly};$
+if this is done, you must ensure\par
+\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$\9 that
+hidden faces are (re)drawn at the end\par
+\quad\quad\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad$\2{else}\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{if}\\{vect\_dprod}(\\{normal\_vect},\\{v%
+\_c})<0\?:\9visible\par
+\quad\quad\quad\quad\quad\quad\quad\quad$\2{if}\1{not}\\{drawhidden}\?:%
+\2{draw}p;\ \2{fi};$\par
+\quad\quad\quad\quad\quad\quad$\2{else}\?:\9 hidden\par
+\quad\quad\quad\quad\quad\quad\quad\quad$\2{if}\\{drawhidden}\?:$\par
+\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$\2{draw}p\2{withcolor}%
+\\{background};\ \9 avoid strange overlapping dashes\par
+\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$\2{draw}p\2{dashed}%
+\\{evenly};$\par
+\quad\quad\quad\quad\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad$\\{free\_vect}(\\{v\_c});\ \\{free\_vect}(\\{v\_b});\ %
+\\{free\_vect}(\\{v\_a});\ \\{free\_vect}(\\{normal\_vect});$\par
+\quad\quad$\2{fi};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 $p$ is the path to draw (a face contour) and $\\{thickness}$ is the pen
+width\par
+$\2{def}\\{drawcontour}(\2{expr}p,\\{thickness})=$\par
+\quad\quad$\2{pickup}\5{pencircle}\6{scaled}\\{thickness};$\par
+\quad\quad$\2{draw}p;$\par
+\quad\quad$\2{pickup}\5{pencircle}\6{scaled}.4\\{pt};$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+$\9 Variables for face handling. First, we have an array for lists of vertices%
+\par
+$\9 corresponding to faces.\par
+$\2{string}\\{face\_points\_}[];\ \9 analogous to $\\{vect}$ arrays\par
+\BL
+$\9 Then, we have an array of colors. A color needs to be a string\par
+$\9 representing an hexadecimal RGB coding of a color.\par
+$\2{string}\\{face\_color\_}[];$\par
+\BL
+$\9 $\\{name}$ is the name of an object instance\par
+$\2{vardef}\\{draw\_faces}(\2{expr}\\{name})=$\par
+\quad\quad$\2{save}\\{tmpdef};\ \2{string}\\{tmpdef};$\par
+\quad\quad$\\{define\_current\_face\_offset\_}(\\{name});$\par
+\quad\quad\quad\quad$\9 first the hidden faces (dashes must be drawn first):\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_faces\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{tmpdef}:=\7"draw_face("\AM \\{face\_points\_}[%
+\\{face}(i)]$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7")(hexcolor("\AM \\{ditto}\AM \\{face%
+\_color\_}[\\{face}(i)]\AM \\{ditto}$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7"),true)";\ \2{scantokens}\\{tmpdef};$%
+\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad\quad\quad$\9 then, the visible faces:\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_faces\_}(\\{name})\?:$\par
+\quad\quad\quad\quad$\\{tmpdef}:=\7"draw_face("\AM \\{face\_points\_}[%
+\\{face}(i)]$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7")(hexcolor("\AM \\{ditto}\AM \\{face%
+\_color\_}[\\{face}(i)]\AM \\{ditto}$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7"),false)";\ \2{scantokens}\\{tmpdef};$%
+\par
+\quad\quad$\!\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Draw point $n$ of object instance $\\{name}$\par
+$\2{vardef}\\{draw\_point}(\2{expr}\\{name},n)=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\\{project\_point}(\\{ipnt\_}(n),\\{pnt}(n));$\par
+\quad\quad$\2{if}z[\\{ipnt\_}(n)]\ne (\\{too\_big\_},\\{too\_big\_})\?:$\par
+\quad\quad\quad\quad$\2{pickup}\5{pencircle}\6{scaled}5\\{pt};$\par
+\quad\quad\quad\quad$\2{drawdot}(z[\\{ipnt\_}(n)]);$\par
+\quad\quad\quad\quad$\2{pickup}\5{pencircle}\6{scaled}.4\\{pt};$\par
+\quad\quad$\2{fi};$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{draw\_axes}(\2{expr}r,g,b)=$\par
+\quad\quad$\\{project\_point}(1,\\{vect\_null});$\par
+\quad\quad$\\{project\_point}(2,\\{vect\_I});$\par
+\quad\quad$\\{project\_point}(3,\\{vect\_J});$\par
+\quad\quad$\\{project\_point}(4,\\{vect\_K});$\par
+\quad\quad$\2{if}(z_{1}\ne (\\{too\_big\_},\\{too\_big\_}))\?:$\par
+\quad\quad\quad\quad$\2{if}(z_{2}\ne (\\{too\_big\_},\\{too\_big\_}))\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{drawarrow}z_{1}\8{--}z_{2}\2{dashed}%
+\\{evenly}\2{withcolor}r;$\par
+\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad$\2{if}(z_{3}\ne (\\{too\_big\_},\\{too\_big\_}))\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{drawarrow}z_{1}\8{--}z_{3}\2{dashed}%
+\\{evenly}\2{withcolor}g;$\par
+\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad\quad\quad$\2{if}(z_{4}\ne (\\{too\_big\_},\\{too\_big\_}))\?:$\par
+\quad\quad\quad\quad\quad\quad$\2{drawarrow}z_{1}\8{--}z_{4}\2{dashed}%
+\\{evenly}\2{withcolor}b;$\par
+\quad\quad\quad\quad$\2{fi};$\par
+\quad\quad$\2{fi};$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+$\9 Definition of a macro $\\{obj\_name}$ returning an object name\par
+$\9 when given an absolute\par
+$\9 face number. This definition is built incrementally through a string,\par
+$\9 everytime a new object is defined.\par
+$\9 $\\{obj\_name}$ is defined by $\\{redefine\_obj\_name\_}$.\par
+\BL
+$\9 Initial definition\par
+$\2{string}\\{index\_to\_name\_};$\par
+$\\{index\_to\_name\_}=\7"def obj_name(expr i)=if i<1:";$\par
+\BL
+$\9 $\\{name}$ is the name of an object instance\par
+$\9 $n$ is the absolute index of its last face\par
+$\2{def}\\{redefine\_obj\_name\_}(\2{expr}\\{name},n)=$\par
+\quad\quad$\\{index\_to\_name\_}:=\\{index\_to\_name\_}\AM \7"elseif i<="\AM %
+\1{decimal}n\AM \7":"\AM \\{ditto}$\par
+\quad\quad\quad\quad\quad\quad${}\AM \\{name}\AM \\{ditto};$\par
+\quad\quad$\2{scantokens}\2{begingroup}\\{index\_to\_name\_}\AM \7"fi;enddef;"%
+\3{endgroup};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 $i$ is an absolute face number\par
+$\9 $\\{vertices}$ is a string representing a list of vertices\par
+$\9 $\\{rgbcolor}$ is a string representing a color in rgb hexadecimal\par
+$\2{def}\\{set\_face}(\2{expr}i,\\{vertices},\\{rgbcolor})=$\par
+\quad\quad$\\{face\_points\_}[i]:=\\{vertices};\ \\{face\_color\_}[i]:=%
+\\{rgbcolor};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 $i$ is a local face number\par
+$\9$\\{vertices}$ is a string representing a list of vertices\par
+$\9$\\{rgbcolor}$ is a string representing a color in rgb hexadecimal\par
+$\2{def}\\{set\_obj\_face}(\2{expr}i,\\{vertices},\\{rgbcolor})=\\{set\_face}(%
+\\{face}(i),\\{vertices},\\{rgbcolor})$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Compute the vectors corresponding to the observer's viewpoint}
+$\9 (vectors $\\{ObsI\_}$,$\\{ObsJ\_}$ and $\\{ObsK\_}$ in the $\\{vect\_I}$,$%
+\\{vect\_J}$,\par
+$\9 $\\{vect\_K}$ reference; and vectors $\\{IObsI\_}$,$\\{IObsJ\_}$ and $%
+\\{IObsK\_}$\par
+$\9 which are $\\{vect\_I}$,$\\{vect\_J}$,$\\{vect\_K}$\par
+$\9 in the $\\{ObsI\_}$,$\\{ObsJ\_}$,$\\{ObsK\_}$ reference)\par
+\figure{vect-fig.16}
+ (here, $\psi>0$, $\theta<0$ and $\phi>0$; moreover,
+ $\vert\theta\vert \leq 90^\circ$)
+\BL
+$\2{def}\\{compute\_reference}(\2{expr}\\{psi},\\{theta},\\{phi})=$\par
+\quad\quad\quad$\9 $\\{ObsI\_}$ defines the direction of observation;\par
+\quad\quad\quad$\9 $\\{ObsJ\_}$ and $\\{ObsK\_}$ the orientation\par
+\quad\quad\quad$\9 (but one of these two vectors is enough,\par
+\quad\quad\quad$\9 since $\\{ObsK\_}$ = $\\{ObsI\_}$ $\land$ $\\{ObsJ\_}$)\par
+\quad\quad\quad$\9 The vectors are found by rotations of $\\{vect\_I}$,$\\{vect%
+\_J}$,$\\{vect\_K}$.\par
+\quad\quad$\\{vect\_def\_vect}(\\{ObsI\_},\\{vect\_I});\ \\{vect\_def\_vect}(%
+\\{ObsJ\_},\\{vect\_J});$\par
+\quad\quad$\\{vect\_def\_vect}(\\{ObsK\_},\\{vect\_K});$\par
+\quad\quad$\\{vect\_rotate}(\\{ObsI\_},\\{ObsK\_},\\{psi});$\par
+\quad\quad$\\{vect\_rotate}(\\{ObsJ\_},\\{ObsK\_},\\{psi});\ \9 gives
+($u$,$v$,$z$)\par
+\quad\quad$\\{vect\_rotate}(\\{ObsI\_},\\{ObsJ\_},\\{theta});$\par
+\quad\quad$\\{vect\_rotate}(\\{ObsK\_},\\{ObsJ\_},\\{theta});\ \9 gives
+($Obs_x$,$v$,$w$)\par
+\quad\quad$\\{vect\_rotate}(\\{ObsJ\_},\\{ObsI\_},\\{phi});$\par
+\quad\quad$\\{vect\_rotate}(\\{ObsK\_},\\{ObsI\_},\\{phi});\ \9 gives
+($Obs_x$,$Obs_y$,$Obs_z$)\par
+\quad\quad\quad$\9 The passage matrix $P$ from $\\{vect\_I}$,$\\{vect\_J}$,$%
+\\{vect\_K}$\par
+\quad\quad\quad$\9 to $\\{ObsI\_}$,$\\{ObsJ\_}$,$\\{ObsK\_}$ is the matrix\par
+\quad\quad\quad$\9 composed of the vectors $\\{ObsI\_}$,$\\{ObsJ\_}$ and $%
+\\{ObsK\_}$ expressed\par
+\quad\quad\quad$\9 in the base $\\{vect\_I}$,$\\{vect\_J}$,$\\{vect\_K}$.\par
+\quad\quad\quad$\9 We have $X=P X'$ where $X$ are the coordinates of a point\par
+\quad\quad\quad$\9 in $\\{vect\_I}$,$\\{vect\_J}$,$\\{vect\_K}$\par
+\quad\quad\quad$\9 and $X'$ the coordinates of the same point in $\\{ObsI\_}$,$%
+\\{ObsJ\_}$,$\\{ObsK\_}$.\par
+\quad\quad\quad$\9 In order to get $P^{-1}$, it suffices to build vectors using%
+\par
+\quad\quad\quad$\9 the previous rotations in the inverse order.\par
+\quad\quad$\\{vect\_def\_vect}(\\{IObsI\_},\\{vect\_I});\ \\{vect\_def\_vect}(%
+\\{IObsJ\_},\\{vect\_J});$\par
+\quad\quad$\\{vect\_def\_vect}(\\{IObsK\_},\\{vect\_K});$\par
+\quad\quad$\\{vect\_rotate}(\\{IObsK\_},\\{IObsI\_},-\\{phi});\ \\{vect%
+\_rotate}(\\{IObsJ\_},\\{IObsI\_},-\\{phi});$\par
+\quad\quad$\\{vect\_rotate}(\\{IObsK\_},\\{IObsJ\_},-\\{theta});\ \\{vect%
+\_rotate}(\\{IObsI\_},\\{IObsJ\_},-\\{theta});$\par
+\quad\quad$\\{vect\_rotate}(\\{IObsJ\_},\\{IObsK\_},-\\{psi});\ \\{vect%
+\_rotate}(\\{IObsI\_},\\{IObsK\_},-\\{psi});$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Point of view}
+$\9 This macro computes the three angles necessary for $\\{compute\_reference}$%
+\par
+$\9 $\\{name}$ =  name of an instance of an object\par
+$\9 $\\{target}$ = target point (local to object $\\{name}$)\par
+$\9 $\\{phi}$ = angle\par
+$\2{vardef}\\{point\_of\_view\_obj}(\2{expr}\\{name},\\{target},\\{phi})=$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});\ \9 enables $%
+\\{pnt}$\par
+\quad\quad$\\{point\_of\_view\_abs}(\\{pnt}(\\{target}),\\{phi});$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Compute absolute perspective. $\\{target}$ is an absolute point number\par
+$\2{vardef}\\{point\_of\_view\_abs}(\2{expr}\\{target},\\{phi})=$\par
+\quad\quad$\2{save}\\{v\_a},\\{psi},\\{theta};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_diff}(\\{v\_a},\\{target},\\{Obs});$\par
+\quad\quad$\\{vect\_mult}(\\{v\_a},\\{v\_a},1/\\{vect\_mod}(\\{v\_a}));$\par
+\quad\quad$\\{psi}=\1{angle}((\\{vect}[\\{v\_a}]x,\\{vect}[\\{v\_a}]y));$\par
+\quad\quad$\\{theta}=-\1{angle}((\\{vect}[\\{v\_a}]x\6{++}\\{vect}[\\{v\_a}]y,%
+\\{vect}[\\{v\_a}]z));$\par
+\quad\quad$\\{compute\_reference}(\\{psi},\\{theta},\\{phi});$\par
+\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\BL
+$\9 Distance between the observer and point $n$ of object $\\{name}$\par
+$\9 Result is put in $\\{dist}$\par
+$\2{vardef}\\{obs\_distance}(\2{text}\\{dist})(\2{expr}\\{name},n)=$\par
+\quad\quad$\2{save}\\{v\_a};$\par
+\quad\quad$\\{v\_a}:=\\{new\_vect};$\par
+\quad\quad$\\{define\_current\_point\_offset\_}(\\{name});\ \9 enables $%
+\\{pnt}$\par
+\quad\quad$\\{dist}:=\\{vect\_mod}(\\{v\_a},\\{pnt}(n),\\{Obs});$\par
+\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Vector and point allocation}
+$\9 Allocation is done through a stack of vectors\par
+$\2{numeric}\\{last\_vect\_};$\par
+$\\{last\_vect\_}=0;$\par
+\BL
+$\9 vector allocation\par
+$\2{def}\\{new\_vect}=\2{incr}(\\{last\_vect\_})$\par
+\quad\quad\quad\quad\quad\quad\quad$\9 $\2{message}\7"Vector "\AM \1{decimal}%
+\\{last\_vect\_}\AM \7" allocated";$\par
+$\!\3{enddef};$\par
+\BL
+$\2{let}\\{new\_point}=\\{new\_vect};$\par
+\BL
+$\2{def}\\{new\_points}(\2{text}p)(\2{expr}n)=$\par
+\quad\quad$\2{save}p;$\par
+\quad\quad$\2{numeric}p[];$\par
+\quad\quad$\2{for}i:=1\4{upto}n\?:p[i]:=\\{new\_point};\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Free a vector\par
+$\9 A vector can only be freed safely when it was the last vector created.\par
+$\2{def}\\{free\_vect}(\2{expr}i)=$\par
+\quad\quad$\2{if}i=\\{last\_vect\_}\?:\\{last\_vect\_}:=\\{last\_vect\_}-1;$\par
+\quad\quad$\2{else}\?:\2{errmessage}(\7"Vector "\AM \1{decimal}i\AM \7" can't
+be freed!");$\par
+\quad\quad$\2{fi};$\par
+$\!\3{enddef};$\par
+\BL
+$\2{let}\\{free\_point}=\\{free\_vect};$\par
+\BL
+$\2{def}\\{free\_points}(\2{text}p)(\2{expr}n)=$\par
+\quad\quad$\2{for}i:=10\2{step}-1\4{until}1\?:\\{free\_point}(p[i]);%
+\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+\title{Debugging}
+\BL
+$\2{def}\\{show\_vect}(\2{expr}t,i)=$\par
+\quad\quad$\2{message}\7"Vector "\AM t\AM \7"="$\par
+\quad\quad${}\AM \7"("\AM \1{decimal}\\{vect}[i]x\AM \7","\AM \1{decimal}%
+\\{vect}[i]y\AM \7","$\par
+\quad\quad\quad\quad${}\AM \1{decimal}\\{vect}[i]z\AM \7")";$\par
+$\!\3{enddef};$\par
+\BL
+$\2{let}\\{show\_point}=\\{show\_vect};$\par
+\BL
+$\2{def}\\{show\_pair}(\2{expr}t,\\{zz})=$\par
+\quad\quad$\2{message}t\AM \7"=("\AM \1{decimal}\1{xpart}(\\{zz})\AM \7","\AM %
+\1{decimal}\1{ypart}(\\{zz})\AM \7")";$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+\title{Access to object features}
+$\9 $a$ must be a string representing an class name, such as $%
+\7"dodecahedron"$.\par
+$\9 $b$ is the tail of a macro name.\par
+\BL
+$\2{def}\\{obj\_}(\2{expr}a,b,i)=$\par
+\quad\quad$\2{scantokens}$\par
+\quad\quad$\2{begingroup}\2{save}n;\ \2{string}n;\ n=a\AM b\AM i;\ n$\par
+\quad\quad$\!\3{endgroup}$\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{obj\_points\_}(\2{expr}\\{name})=$\par
+\quad\quad$\\{obj\_}(\\{obj\_class\_}(\\{name}),\7"_points",\\{name})$\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{obj\_faces\_}(\2{expr}\\{name})=$\par
+\quad\quad$\\{obj\_}(\\{obj\_class\_}(\\{name}),\7"_faces",\\{name})$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{obj\_point\_offset\_}(\2{expr}\\{name})=$\par
+\quad\quad$\\{obj\_}(\\{obj\_class\_}(\\{name}),\7"_point_offset",\\{name})$\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{obj\_face\_offset\_}(\2{expr}\\{name})=$\par
+\quad\quad$\\{obj\_}(\\{obj\_class\_}(\\{name}),\7"_face_offset",\\{name})$\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{obj\_class\_}(\2{expr}\\{name})=\\{obj\_}(\\{name},\7"_class",\7"")%
+\3{enddef};$\par
+\BL
+\newpage
+$\2{def}\\{define\_point\_offset\_}(\2{expr}\\{name},o)=$\par
+\quad\quad$\2{begingroup}\2{save}n,\\{tmpdef};$\par
+\quad\quad\quad\quad$\2{string}n,\\{tmpdef};$\par
+\quad\quad\quad\quad$n=\\{obj\_class\_}(\\{name})\AM \7"_point_offset"\AM %
+\\{name};$\par
+\quad\quad\quad\quad$\2{expandafter}\1{numeric}\2{scantokens}n;$\par
+\quad\quad\quad\quad$\2{scantokens}n:=\\{last\_point\_offset\_};$\par
+\quad\quad\quad\quad$\\{last\_point\_offset\_}:=\\{last\_point\_offset\_}+o;$%
+\par
+\quad\quad\quad\quad$\\{tmpdef}=\7"def "\AM \\{obj\_class\_}(\\{name})\AM %
+\7"_points"\AM \\{name}\AM $\par
+\quad\quad\quad\quad\quad\quad$\7"="\AM \1{decimal}o\AM \7" enddef";$\par
+\quad\quad\quad\quad$\2{scantokens}\\{tmpdef};$\par
+\quad\quad$\!\3{endgroup}$\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{define\_face\_offset\_}(\2{expr}\\{name},o)=$\par
+\quad\quad$\2{begingroup}\2{save}n,\\{tmpdef};$\par
+\quad\quad\quad\quad$\2{string}n,\\{tmpdef};$\par
+\quad\quad\quad\quad$n=\\{obj\_class\_}(\\{name})\AM \7"_face_offset"\AM %
+\\{name};$\par
+\quad\quad\quad\quad$\2{expandafter}\1{numeric}\2{scantokens}n;$\par
+\quad\quad\quad\quad$\2{scantokens}n:=\\{last\_face\_offset\_};$\par
+\quad\quad\quad\quad$\\{last\_face\_offset\_}:=\\{last\_face\_offset\_}+o;$\par
+\quad\quad\quad\quad$\\{tmpdef}=\7"def "\AM \\{obj\_class\_}(\\{name})\AM %
+\7"_faces"\AM \\{name}\AM $\par
+\quad\quad\quad\quad\quad\quad$\7"="\AM \1{decimal}o\AM \7" enddef";$\par
+\quad\quad\quad\quad$\2{scantokens}\\{tmpdef};$\par
+\quad\quad$\!\3{endgroup}$\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{define\_current\_point\_offset\_}(\2{expr}\\{name})=$\par
+\quad\quad$\2{save}\\{current\_point\_offset\_};$\par
+\quad\quad$\2{numeric}\\{current\_point\_offset\_};$\par
+\quad\quad$\\{current\_point\_offset\_}:=\\{obj\_point\_offset\_}(\\{name});$%
+\par
+$\!\3{enddef};$\par
+\BL
+$\2{def}\\{define\_current\_face\_offset\_}(\2{expr}\\{name})=$\par
+\quad\quad$\2{save}\\{current\_face\_offset\_};$\par
+\quad\quad$\2{numeric}\\{current\_face\_offset\_};$\par
+\quad\quad$\\{current\_face\_offset\_}:=\\{obj\_face\_offset\_}(\\{name});$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+\title{Drawing an object}
+$\9 $\\{name}$ is an object instance\par
+$\2{def}\\{draw\_obj}(\2{expr}\\{name})=\\{project\_obj}(\\{name});\ \\{draw%
+\_faces}(\\{name});\3{enddef};$\par
+\BL
+\title{Normalization of an object}
+$\9 This macro translates an object so that a list of vertices is centered\par
+$\9 on the origin, and the last vertex is put on a sphere whose radius is 1.\par
+$\9 $\\{name}$ is the name of the object and $\\{vertices}$ is a list\par
+$\9 of points whose barycenter will define the center of the object.\par
+$\9 ($\\{vertices}$ need not be the list of all vertices)\par
+$\2{vardef}\\{normalize\_obj}(\2{expr}\\{name})(\2{text}\\{vertices})=$\par
+\quad\quad$\2{save}\\{v\_a},\\{nvertices},\\{last};$\par
+\quad\quad$\2{numeric}\\{v\_a},\\{last};$\par
+\quad\quad$\\{nvertices}=0;$\par
+\quad\quad$\\{v\_a}=\\{new\_vect};\ \\{vect\_def}(\\{v\_a},0,0,0)$\par
+\quad\quad$\2{forsuffixes}\$=\\{vertices}\?:$\par
+\quad\quad\quad\quad$\\{vect\_sum}(\\{v\_a},\\{v\_a},\\{pnt}(\$));$\par
+\quad\quad\quad\quad$\\{nvertices}:=\\{nvertices}+1;$\par
+\quad\quad\quad\quad$\\{last}:=\$;$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{vect\_mult}(\\{v\_a},\\{v\_a},-1/\\{nvertices});$\par
+\quad\quad$\\{translate\_obj}(\\{name},\\{v\_a});\ \9 object centered on the
+origin\par
+\quad\quad$\\{scale\_obj}(\\{name},1/\\{vect\_mod}(\\{pnt}(\\{last})));$\par
+\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+\title{General definitions}
+$\9 Vector arrays\par
+$\2{numeric}\\{vect}[]x,\\{vect}[]y,\\{vect}[]z;$\par
+\BL
+$\9 Observer\par
+$\2{numeric}\\{Obs};$\par
+$\\{Obs}=\\{new\_point};$\par
+$\9 default value:\par
+$\\{set\_point}(\\{Obs},0,0,20);$\par
+\BL
+$\9 Observer's vectors\par
+$\\{ObsI\_}=\\{new\_vect};\ \\{ObsJ\_}=\\{new\_vect};\ \\{ObsK\_}=\\{new%
+\_vect};$\par
+$\\{IObsI\_}=\\{new\_vect};\ \\{IObsJ\_}=\\{new\_vect};\ \\{IObsK\_}=\\{new%
+\_vect};$\par
+\BL
+$\9 distance observer/plane (must be $>0$)\par
+$\2{numeric}\\{Obs\_dist};\ \9 represents $\\{Obs\_dist}$ $\times$ $\\{drawing%
+\_scale}$\par
+$\9 default value:\par
+$\\{Obs\_dist}=2;\ \9 means $\\{Obs\_dist}$ $\times$ $\\{drawing\_scale}$\par
+\BL
+$\9 Screen Size\par
+$\9 The screen size is defined through two angles: the horizontal field\par
+$\9 and the vertical field\par
+$\2{numeric}\\{h\_field},\\{v\_field};$\par
+$\\{h\_field}=100;\ \9 degrees\par
+$\\{v\_field}=70;\ \9 degrees\par
+\BL
+$\9 Reference vectors $\vec{0}$, $\vec{\imath}$, $\vec{\jmath}$ and $\vec{k}$%
+\par
+$\9 and their definition\par
+$\2{numeric}\\{vect\_null},\\{vect\_I},\\{vect\_J},\\{vect\_K};$\par
+$\\{vect\_null}=\\{new\_vect};\ \\{vect\_I}=\\{new\_vect};\ \\{vect\_J}=\\{new%
+\_vect};\ \\{vect\_K}=\\{new\_vect};$\par
+$\\{vect\_def}(\\{vect\_null},0,0,0);$\par
+$\\{vect\_def}(\\{vect\_I},1,0,0);\ \\{vect\_def}(\\{vect\_J},0,1,0);\ \\{vect%
+\_def}(\\{vect\_K},0,0,1);$\par
+$\2{numeric}\\{point\_null};$\par
+$\\{point\_null}=\\{vect\_null};$\par
+\BL
+$\9 Observer's orientation, defined by three angles\par
+$\2{numeric}\\{Obs\_psi},\\{Obs\_theta},\\{Obs\_phi};$\par
+$\9 default value:\par
+$\\{Obs\_psi}=0;\ \\{Obs\_theta}=90;\ \\{Obs\_phi}=0;$\par
+\BL
+$\9 Points for the figures\par
+$\2{numeric}\\{points\_}[];$\par
+\BL
+$\9 $\\{name}$ is the name of an object instance\par
+$\9 $\\{npoints}$ is its number of defining points\par
+$\2{def}\\{new\_obj\_points}(\2{expr}\\{name},\\{npoints})=$\par
+\quad\quad$\\{define\_point\_offset\_}(\\{name},\\{npoints});\ \\{define%
+\_current\_point\_offset\_}(\\{name});$\par
+\quad\quad$\2{for}i:=1\4{upto}\\{obj\_points\_}(\\{name})\?:\\{pnt}(i):=\\{new%
+\_point};\3{endfor};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 $\\{name}$ is the name of an object instance\par
+$\9 $\\{nfaces}$ is its number of defining faces\par
+$\2{def}\\{new\_obj\_faces}(\2{expr}\\{name},\\{nfaces})=$\par
+\quad\quad$\\{define\_face\_offset\_}(\\{name},\\{nfaces});\ \\{define\_current%
+\_face\_offset\_}(\\{name});$\par
+\quad\quad$\\{redefine\_obj\_name\_}(\\{name},\\{current\_face\_offset\_}+%
+\\{nfaces});$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+$\9 Absolute point number corresponding to object point number $i$\par
+$\9 This macro must only be used within the function defining an object\par
+$\9 (such as $\\{def\_cube}$) or the function drawing an object (such as\par
+$\9 $\\{draw\_cube}$).\par
+$\2{def}\\{ipnt\_}(\2{expr}i)=i+\\{current\_point\_offset\_}\3{enddef};$\par
+$\2{def}\\{pnt}(\2{expr}i)=\\{points\_}[\\{ipnt\_}(i)]\3{enddef};$\par
+\BL
+$\2{def}\\{face}(\2{expr}i)=(i+\\{current\_face\_offset\_})\3{enddef};$\par
+\BL
+$\9 Absolute point number corresponding to local point $n$\par
+$\9 in object instance $\\{name}$\par
+$\2{vardef}\\{pnt\_obj}(\2{expr}\\{name},n)=$\par
+\quad\quad$\\{hide}(\\{define\_current\_point\_offset\_}(\\{name});\ )%
+\\{pnt}(n)$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Absolute face number corresponding to local face $n$\par
+$\9 in object instance $\\{name}$\par
+$\2{vardef}\\{face\_obj}(\2{expr}\\{name},n)=$\par
+\quad\quad$\\{hide}(\\{define\_current\_face\_offset\_}(\\{name});\ )%
+\\{face}(n)$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+$\9 Scale\par
+$\2{numeric}\\{drawing\_scale};$\par
+$\\{drawing\_scale}=2\\{cm};$\par
+\BL
+$\9 Color\par
+$\9 This function is useful when a color is expressed in hexadecimal.\par
+$\2{def}\\{hexcolor}(\2{expr}s)=$\par
+\quad\quad$(\1{hex}(\2{substring}(0,2)\2{of}s)/255,\1{hex}(\2{substring}(2,4)%
+\2{of}s)/255,$\par
+\quad\quad\quad\quad$\1{hex}(\2{substring}(4,6)\2{of}s)/255)$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Filling and contours\par
+$\2{boolean}\\{filled\_faces},\\{draw\_contours};$\par
+$\\{filled\_faces}=\5{true};$\par
+$\\{draw\_contours}=\5{true};$\par
+$\2{numeric}\\{contourwidth};\ \9 thickness of contours\par
+$\\{contourwidth}=1\\{pt};$\par
+\BL
+$\9 Overflow control\par
+$\9 An overflow can occur when an object is too close from the observer\par
+$\9 or if an object is out of sight. We use a special value to mark\par
+$\9 coordinates which would lead to an overflow.\par
+$\2{numeric}\\{too\_big\_};$\par
+$\\{too\_big\_}=4000;$\par
+\BL
+\BL
+$\9 Object offset (the points defining an object are arranged\par
+$\9 in a single array, and the objects are easier to manipulate\par
+$\9 if the point numbers are divided into a number and an offset).\par
+$\2{numeric}\\{last\_point\_offset\_},\\{last\_face\_offset\_};$\par
+$\\{last\_point\_offset\_}=0;\ \\{last\_face\_offset\_}=0;$\par
+\BL
+\BL
+\newpage
+\title{Computation of field parameters of an animation}
+$\2{numeric}\\{xmin\_},\\{ymin\_},\\{xmax\_},\\{ymax\_};$\par
+\BL
+$\2{def}\\{compute\_bbox}=$\par
+\quad\quad$\2{if}\1{known}\\{xmin\_}\?:$\par
+\quad\quad\quad\quad$\\{xmin\_}:=\1{min}(\\{xmin\_},\1{xpart}(\1{llcorner}(%
+\\{currentpicture})));$\par
+\quad\quad\quad\quad$\\{ymin\_}:=\1{min}(\\{ymin\_},\1{ypart}(\1{llcorner}(%
+\\{currentpicture})));$\par
+\quad\quad\quad\quad$\\{xmax\_}:=\1{max}(\\{xmax\_},\1{xpart}(\1{urcorner}(%
+\\{currentpicture})));$\par
+\quad\quad\quad\quad$\\{ymax\_}:=\1{max}(\\{ymax\_},\1{ypart}(\1{urcorner}(%
+\\{currentpicture})));$\par
+\quad\quad$\2{else}\?:$\par
+\quad\quad\quad\quad$\\{xmin\_}=\1{xpart}(\1{llcorner}(\\{currentpicture}));$%
+\par
+\quad\quad\quad\quad$\\{ymin\_}=\1{ypart}(\1{llcorner}(\\{currentpicture}));$%
+\par
+\quad\quad\quad\quad$\\{xmax\_}=\1{xpart}(\1{urcorner}(\\{currentpicture}));$%
+\par
+\quad\quad\quad\quad$\\{ymax\_}=\1{ypart}(\1{urcorner}(\\{currentpicture}));$%
+\par
+\quad\quad$\2{fi};$\par
+$\!\3{enddef};$\par
+\BL
+$\2{boolean}\\{show\_animation\_parameters};$\par
+$\\{show\_animation\_parameters}=\5{false};$\par
+$\2{numeric}\\{paper\_height};$\par
+$\\{paper\_height}=29.7;\ \9 paper height in cm\par
+\BL
+$\9 show bounding box of an animation, in PostScript points\par
+$\9 and parameters for animation script\par
+$\2{vardef}\\{show\_animation\_bbox}=$\par
+\quad\quad$\2{save}\\{trx},\\{try},h,w,\\{delta},\\{pnmx},\\{pnmy},\\{pnmw},%
+\\{pnmh},\\{res};$\par
+\quad\quad$\\{res}=36;\ \9 36 dots per inch in bitmap\par
+\quad\quad$w=\\{xmax\_}-\\{xmin\_};\ h=\\{ymax\_}-\\{ymin\_};$\par
+\quad\quad$\2{if}\\{show\_animation\_parameters}\?:$\par
+\quad\quad\quad\quad$\2{message}\7"animation bbox: (llx="\AM \1{decimal}%
+\1{round}(\\{xmin\_})$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7",lly="\AM \1{decimal}\1{round}(\\{ymin%
+\_})$\par
+\quad\quad\quad\quad\quad\quad${}\AM \7",w="\AM \1{decimal}\1{round}(w)\AM %
+\7",h="\AM \1{decimal}\1{round}(h)\AM \7")";$\par
+\quad\quad$\2{fi};$\par
+\quad\quad$\2{if}\\{xmin\_}\le 20\?:\\{trx}=50-\\{xmin\_};\ \2{else}\?:%
+\\{trx}=0;\ \2{fi};$\par
+\quad\quad$\2{if}\\{ymin\_}\le 20\?:\\{try}=50-\\{ymin\_};\ \2{else}\?:%
+\\{try}=0;\ \2{fi};$\par
+\quad\quad$\2{if}\\{show\_animation\_parameters}\?:$\par
+\quad\quad\quad\quad$\2{message}\7"translate parameters: "$\par
+\quad\quad\quad\quad${}\AM \1{decimal}\1{round}(\\{trx})\AM \7" "\AM %
+\1{decimal}\1{round}(\\{try});$\par
+\quad\quad$\2{fi};$\par
+\quad\quad$\\{xmin\_}:=\\{xmin\_}+\\{trx};\ \\{ymin\_}:=\\{ymin\_}+\\{try};$\par
+\quad\quad$\\{delta}=10;$\par
+\quad\quad$\\{pnmx}=\1{round}(\\{xmin\_}\ast (\\{res}/72)-\\{delta});$\par
+\quad\quad$\\{pnmy}=\1{round}((\\{paper\_height}/2.54\ast 72-\\{ymin\_}-h)\ast
+(\\{res}/72)-\\{delta});$\par
+\quad\quad$\\{pnmw}=\1{round}(w\ast (\\{res}/72)+2\ast \\{delta});$\par
+\quad\quad$\\{pnmh}=\1{round}(h\ast (\\{res}/72)+2\ast \\{delta});$\par
+\quad\quad$\2{if}\\{show\_animation\_parameters}\?:$\par
+\quad\quad\quad\quad$\2{message}\7"pnmcut parameters (with -r36): "$\par
+\quad\quad\quad\quad${}\AM \1{decimal}\\{pnmx}\AM \7" "\AM \1{decimal}\\{pnmy}%
+\AM \7" "$\par
+\quad\quad\quad\quad${}\AM \1{decimal}\\{pnmw}\AM \7" "\AM \1{decimal}%
+\\{pnmh};$\par
+\quad\quad$\2{fi};$\par
+\quad\quad$\\{write\_script}(\1{round}(\\{trx}),\1{round}(\\{try}),$\par
+\quad\quad\quad\quad$\\{pnmx},\\{pnmy},\\{pnmw},\\{pnmh},\\{res},\5{jobname},%
+\7"create_animation.sh");$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Creation of a shell script to automate the animation}
+$\9 This is UNIX targetted and may need to be customized.\par
+\BL
+$\2{vardef}\\{write\_script}(\2{expr}\\{trx},\\{try},\\{xmin},\\{ymin},w,h,%
+\\{res},\\{output},\\{file})=$\par
+\quad\quad$\2{save}s;$\par
+\quad\quad$\2{string}s;$\par
+\quad\quad$\2{def}\\{write\_to\_file}(\2{text}\\{arg})=\2{write}\\{arg}\4{to}%
+\\{file};\3{enddef};$\par
+\quad\quad$\\{write\_to\_file}(\7"#! /bin/sh");$\par
+\quad\quad$\\{write\_to\_file}(\7"");$\par
+\quad\quad$\\{write\_to\_file}(\7"/bin/rm -f "\AM \\{output}\AM \7".log");$\par
+\quad\quad$\\{write\_to\_file}(\7"for i in `ls "\AM \\{output}\AM \7".*| grep
+'"\AM \\{output}\AM \7".[0-9]'`;do");$\par
+\quad\quad\quad\quad$\2{if}\5{false}\?:\7"endfor"\2{fi}\9 indentation hack for
+meta-mode.el\par
+\quad\quad$\\{write\_to\_file}(\7"echo $i");$\par
+\quad\quad$\\{write\_to\_file}(\7"echo '=============='");$\par
+\quad\quad$s:=\7"awk  < $i '{print} /^%%Page: /{print "\AM \\{ditto};$\par
+\quad\quad$s:=s\AM \1{decimal}\\{trx}\AM \7" "\AM \1{decimal}\\{try}\AM \7"
+translate\n"\AM \\{ditto}\AM \7"}' > $i.ps";$\par
+\quad\quad$\\{write\_to\_file}(s);$\par
+\quad\quad\quad\quad$\9 ghostscript PostScript into ppm\par
+\quad\quad$s:=\7"gs -sDEVICE=ppmraw -sPAPERSIZE=a4 -dNOPAUSE ";$\par
+\quad\quad$s:=s\AM \7"-r"\AM \1{decimal}\\{res}\AM \7" -sOutputFile=$i.ppm -q
+-- $i.ps";$\par
+\quad\quad$\\{write\_to\_file}(s);$\par
+\quad\quad$\\{write\_to\_file}(\7"/bin/rm -f $i.ps");$\par
+\quad\quad\quad\quad$\9 possible alternative:\par
+\quad\quad\quad\quad$\9    $s:=\7"mogrify -compress -crop "\AM \1{decimal}(w)%
+\AM \7"x"\AM \1{decimal}(h);$\par
+\quad\quad\quad\quad$\9    $s:=s\AM \7"+"\AM \1{decimal}(\\{xmin})\AM \7"+"\AM %
+\1{decimal}(\\{ymin});$\par
+\quad\quad\quad\quad$\9    $s:=s\AM \7" -colors 32 -format gif $i.ppm";$\par
+\quad\quad$s:=\7"ppmquant 32 $i.ppm | pnmcut "\AM \1{decimal}(\\{xmin})\AM \7"
+"\AM \1{decimal}(\\{ymin});$\par
+\quad\quad$s:=s\AM \7" "\AM \1{decimal}(w)\AM \7" "\AM \1{decimal}(h)\AM \7" |
+";$\par
+\quad\quad$s:=s\AM \7"ppmtogif > `expr $i.ppm : '\(.*\)ppm'`gif";$\par
+\quad\quad$\\{write\_to\_file}(s);$\par
+\quad\quad$\\{write\_to\_file}(\7"/bin/rm -f $i.ppm");$\par
+\quad\quad$\\{write\_to\_file}(\7"done");$\par
+\quad\quad$\\{write\_to\_file}(\7"/bin/rm -f "\AM \\{output}\AM \7".gif");$\par
+\quad\quad$s:=\7"gifmerge -10 -l1000 ";$\par
+\quad\quad$s:=s\AM \\{output}\AM \7".*.gif > "\AM \\{output}\AM \7".gif";$\par
+\quad\quad$\\{write\_to\_file}(s);$\par
+\quad\quad$\\{write\_to\_file}(\7"/bin/rm -f "\AM \\{output}\AM \7".*.gif");$%
+\par
+\quad\quad$\\{write\_to\_file}(\\{EOF});\ \9 end of file\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+\title{Standard animation definitions}
+$\9 These definitions produce {\it one\/} image of some kind.\par
+\BL
+$\\{extra\_endfig}:=\7"compute_bbox";$\par
+\BL
+$\9 In the standard animations, the observer follows a circle, shown below:\par
+\figure{vect-fig.17}
+\BL
+$\9 Standard image 1: this is an example and may be adapted.\par
+$\9 $\\{name}$ is an object instance\par
+$\2{def}\\{one\_image}(\2{expr}\\{name},i,a,\\{rd},\\{ang})=$\par
+\quad\quad$\2{beginfig}(i);$\par
+\quad\quad\quad\quad$\\{set\_point}(\\{Obs},-\\{rd}\ast \1{cosd}(a\ast %
+\\{ang}),-\\{rd}\ast \1{sind}(a\ast \\{ang}),1);$\par
+\quad\quad\quad\quad$\\{Obs\_phi}:=90;\ \\{Obs\_dist}:=2;$\par
+\quad\quad\quad\quad$\\{point\_of\_view\_obj}(\\{name},1,\\{Obs\_phi});\ \9 fix
+point 1 of object $\\{name}$\par
+\quad\quad\quad\quad$\\{draw\_obj}(\\{name});$\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name},1,\\{vect\_I},\\{ang});$\par
+\quad\quad\quad\quad$\\{draw\_point}(\\{name},1);\ \9 show the rotation point%
+\par
+\quad\quad\quad\quad$\\{draw\_axes}(\\{red},\\{green},\\{blue});$\par
+\quad\quad$\!\3{endfig};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Standard image 2: this is an example and may be adapted.\par
+$\9 $\\{name\_a}$ and $\\{name\_b}$ are object instances.\par
+$\2{def}\\{one\_image\_two\_objects}(\2{expr}\\{name\_a},\\{name\_b},i,a,%
+\\{rd},\\{ang})=$\par
+\quad\quad$\2{beginfig}(i);$\par
+\quad\quad\quad\quad$\\{set\_point}(\\{Obs},-\\{rd}\ast \1{cosd}(a\ast %
+\\{ang}),-\\{rd}\ast \1{sind}(a\ast \\{ang}),1);$\par
+\quad\quad\quad\quad$\\{Obs\_phi}:=90;\ \\{Obs\_dist}:=2;$\par
+\quad\quad\quad\quad$\\{point\_of\_view\_obj}(\\{name\_a},1,\\{Obs\_phi});\ \9
+fix point 1 of object $\\{name\_a}$\par
+\quad\quad\quad\quad$\\{draw\_obj}(\\{name\_a});\ \\{draw\_obj}(\\{name\_b});$%
+\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_a},1,\\{vect\_I},\\{ang});$%
+\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_b},13,\\{vect\_J},-\\{ang});$%
+\par
+\quad\quad\quad\quad\quad\quad$\9$\\{rotate\_obj\_pp}(\\{name\_b},13,7,-%
+\\{ang});$\par
+\quad\quad\quad\quad$\\{draw\_point}(\\{name\_a},1);\ \9 show the rotation
+point\par
+\quad\quad\quad\quad$\\{draw\_axes}(\\{red},\\{green},\\{blue});$\par
+\quad\quad$\!\3{endfig};$\par
+$\!\3{enddef};$\par
+\BL
+\newpage
+$\9 Standard image 3: this is an example and may be adapted.\par
+$\9 $\\{name\_a}$, $\\{name\_b}$ and $\\{name\_c}$ are object instances.\par
+$\2{def}\\{one\_image\_three\_objects}(\2{expr}\\{name\_a},\\{name\_b},\\{name%
+\_c},i,a,\\{rd},\\{ang})=$\par
+\quad\quad$\2{beginfig}(i);$\par
+\quad\quad\quad\quad$\\{set\_point}(\\{Obs},-\\{rd}\ast \1{cosd}(a\ast %
+\\{ang}),-\\{rd}\ast \1{sind}(a\ast \\{ang}),1);$\par
+\quad\quad\quad\quad$\\{Obs\_phi}:=90;\ \\{Obs\_dist}:=2;\ \\{h\_field}:=100;\ %
+\\{v\_field}:=150;$\par
+\quad\quad\quad\quad$\\{point\_of\_view\_obj}(\\{name\_a},1,\\{Obs\_phi});\ \9
+fix point 1 of object $\\{name\_a}$\par
+\quad\quad\quad\quad$\\{draw\_obj}(\\{name\_a});\ \\{draw\_obj}(\\{name\_b});\ %
+\\{draw\_obj}(\\{name\_c});$\par
+\quad\quad\quad\quad$\\{v\_a}:=\\{new\_vect};$\par
+\quad\quad\quad\quad$\\{vect\_def}(\\{v\_a},.03\ast \1{cosd}(-a\ast %
+\\{ang}+90),.03\ast \1{sind}(-a\ast \\{ang}+90),0);$\par
+\quad\quad\quad\quad$\\{translate\_obj}(\\{name\_c},\\{v\_a});$\par
+\quad\quad\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_a},1,\\{vect\_I},\\{ang});$%
+\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_b},13,\\{vect\_J},-\\{ang});$%
+\par
+\quad\quad\quad\quad\quad\quad$\9$\\{rotate\_obj\_pp}(\\{name\_b},13,7,-%
+\\{ang});$\par
+\quad\quad\quad\quad$\\{draw\_point}(\\{name\_a},1);\ \9 show the rotation
+point\par
+\quad\quad\quad\quad$\\{draw\_axes}(\\{red},\\{green},\\{blue});$\par
+\quad\quad$\!\3{endfig};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Standard image 4: this is an example and may be adapted.\par
+$\9 $\\{name\_a}$ and $\\{name\_b}$ are object instances.\par
+$\2{def}\\{one\_image\_two\_identical\_objects}(\2{expr}\\{name\_a},\\{name%
+\_b},i,a,\\{rd},\\{ang})=$\par
+\quad\quad$\2{beginfig}(i);$\par
+\quad\quad\quad\quad$\\{set\_point}(\\{Obs},-\\{rd}\ast \1{cosd}(a\ast %
+\\{ang}),-\\{rd}\ast \1{sind}(a\ast \\{ang}),2);$\par
+\quad\quad\quad\quad$\\{Obs\_phi}:=90;\ \\{Obs\_dist}:=2;$\par
+\quad\quad\quad\quad$\\{point\_of\_view\_obj}(\\{name\_a},1,\\{Obs\_phi});\ \9
+fix point 1 of object $\\{name\_a}$\par
+\quad\quad\quad\quad$\\{draw\_obj}(\\{name\_a});\ \\{draw\_obj}(\\{name\_b});$%
+\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_a},1,\\{vect\_I},\\{ang});$%
+\par
+\quad\quad\quad\quad$\\{rotate\_obj\_pv}(\\{name\_b},13,\\{vect\_J},-\\{ang});$%
+\par
+\quad\quad\quad\quad\quad\quad$\9$\\{rotate\_obj\_pp}(\\{name\_a},13,7,-%
+\\{ang});$\par
+\quad\quad\quad\quad$\\{draw\_point}(\\{name\_a},1);\ \9 show the rotation
+point\par
+\quad\quad\quad\quad$\\{draw\_axes}(\\{red},\\{green},\\{blue});$\par
+\quad\quad$\!\3{endfig};$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage
+$\9 An animation is a series of images, and these series are produced here.\par
+\BL
+$\9 Standard animation 1\par
+$\9 $\\{name}$ is a class name\par
+$\2{def}\\{animate\_object}(\2{expr}\\{name},\\{imin},\\{imax},\\{index})=$\par
+\quad\quad$\2{numeric}\\{ang};\ \\{ang}=360/(\\{imax}-\\{imin}+1);$\par
+\quad\quad$\\{assign\_obj}(\7"obj",\\{name});$\par
+\quad\quad$\2{for}i:=\\{imin}\4{upto}\\{imax}\?:\\{one\_image}(\7"obj",i+%
+\\{index},i,5,\\{ang});\3{endfor};$\par
+\quad\quad$\\{show\_animation\_bbox};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Standard animation 2\par
+$\9 $\\{name\_a}$ and $\\{name\_b}$ are class names\par
+$\2{def}\\{animate\_two\_objects}(\2{expr}\\{name\_a},\\{name\_b},\\{imin},%
+\\{imax},\\{index})=$\par
+\quad\quad$\2{numeric}\\{ang};\ \\{ang}=360/(\\{imax}-\\{imin}+1);$\par
+\quad\quad$\\{assign\_obj}(\7"obja",\\{name\_a});\ \\{assign\_obj}(\7"objb",%
+\\{name\_b});$\par
+\quad\quad$\\{translate\_obj}(\7"objb",\\{vect\_K});\ \\{translate\_obj}(%
+\7"objb",\\{vect\_K});$\par
+\quad\quad$\2{for}i:=\\{imin}\4{upto}\\{imax}\?:$\par
+\quad\quad\quad\quad$\\{one\_image\_two\_objects}(\7"obja",\7"objb",i+%
+\\{index},i,5,\\{ang});$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{show\_animation\_bbox};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Standard animation 3\par
+$\9 $\\{name\_a}$, $\\{name\_b}$ and $\\{name\_c}$ are class names\par
+$\2{vardef}\\{animate\_three\_objects}(\2{expr}\\{name\_a},\\{name\_b},\\{name%
+\_c},\\{imin},\\{imax},\\{index})=$\par
+\quad\quad$\2{numeric}\\{ang};\ \\{ang}=360/(\\{imax}-\\{imin}+1);$\par
+\quad\quad$\\{assign\_obj}(\7"obja",\\{name\_a});\ \\{assign\_obj}(\7"objb",%
+\\{name\_b});$\par
+\quad\quad$\\{assign\_obj}(\7"objc",\\{name\_c});$\par
+\quad\quad$\\{scale\_obj}(\7"objb",.7);$\par
+\quad\quad$\2{numeric}\\{v\_a};\ \\{v\_a}:=\\{new\_vect};$\par
+\quad\quad$\\{vect\_def\_vect}(\\{v\_a},\\{vect\_K});\ \\{vect\_mult}(\\{v\_a},%
+\\{v\_a},4);\ \\{put\_obj}(\7"objb",\\{v\_a},1,0,0,0);$\par
+\quad\quad$\\{free\_vect}(\\{v\_a});$\par
+\quad\quad$\\{scale\_obj}(\7"objc",.5);$\par
+\quad\quad$\\{translate\_obj}(\7"objc",\\{vect\_K});\ \\{translate\_obj}(%
+\7"objc",\\{vect\_K});$\par
+\quad\quad$\2{for}i:=\\{imin}\4{upto}\\{imax}\?:$\par
+\quad\quad\quad\quad$\\{one\_image\_three\_objects}(\7"obja",\7"objb",%
+\7"objc",i+\\{index},i,7,\\{ang});$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{show\_animation\_bbox};$\par
+$\!\3{enddef};$\par
+\BL
+$\9 Standard animation 4\par
+$\9 $\\{name}$ is a class name\par
+$\2{def}\\{animate\_two\_identical\_objects}(\2{expr}\\{name},\\{imin},%
+\\{imax},\\{index})=$\par
+\quad\quad$\2{numeric}\\{ang};\ \\{ang}=360/(\\{imax}-\\{imin}+1);$\par
+\quad\quad$\\{assign\_obj}(\7"obja",\\{name});\ \\{assign\_obj}(\7"objb",%
+\\{name});$\par
+\quad\quad$\\{translate\_obj}(\7"objb",\\{vect\_K});\ \\{translate\_obj}(%
+\7"objb",\\{vect\_K});$\par
+\quad\quad$\2{for}i:=\\{imin}\4{upto}\\{imax}\?:$\par
+\quad\quad\quad\quad$\\{one\_image\_two\_identical\_objects}(\7"obja",%
+\7"objb",i+\\{index},i,10,\\{ang});$\par
+\quad\quad$\!\3{endfor};$\par
+\quad\quad$\\{show\_animation\_bbox};$\par
+$\!\3{enddef};$\par
+\BL
+$\5{endinput}$\par
+\BL

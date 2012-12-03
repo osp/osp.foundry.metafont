@@ -1,0 +1,15 @@
+% VCC - Vicentino Corsiva (humanistische cursive)
+% w. kraml, 1991-2
+
+mode_setup;
+
+boolean modern, twisted, bold;
+  modern := false;
+  twisted := false;
+  bold := true;
+
+% metrics
+size#:=10pt#;               % design size
+
+input vcdriver;
+end;

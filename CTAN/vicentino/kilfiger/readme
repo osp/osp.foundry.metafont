@@ -1,0 +1,42 @@
+These fonts provide three script fonts. A `cursive' shape, which is a
+slanted shape written with a wide-nibbed pen. A `twist' shape: a slanted
+shape with constant width. And a `modern script' shape: an upright shape
+with a forward sloping stress axis.  They would mainly be suitable for
+display text.
+
+See the readme file in the kraml directory for details of the fonts. 
+In this directory there are support files:
+	ot1vc.fd		A font definition file
+	vicent.sty		A package to help use of these fonts
+	testvic.{tex,ps}	An example file.
+Comments about these files should be directed to James Kilfiger
+<mapdn@csv.warwick.ac.uk>
+
+Installation:
+The ot1vc.fd and vicent.sty should be put somewhere where TeX can find
+them.  On a TDS distribution, such as teTeX or MiKTeX, an appropriate
+place might be .../texmf/tex/latex/mfnfss/ . Willibald Kraml's .mf files
+should be placed where metafont can find them.  For example in
+.../texmf/fonts/source/public/vc/ . You will probably now need to
+refresh your texmf database, by issuing the command `texhash' on teTeX
+or from the MikTeX menu in the start menu. You may need to run metafont
+by hand, but this is not necessary on modern TeX distributions.
+
+Use:
+The fonts may be used with both plain TeX and LaTeX. Plain users should
+load the fonts with the \font primitive command. LaTeX users should
+give the command \usepackage{vicent} in the preamble of their document. 
+This package provides three font changing declarations: \cursiveshape,
+\twistshape, and \modernscriptshape; and corresponding text font
+commands: \textcursive, etc.  
+
+Note for Latex hackers:  
+This family can be chosen with \fontfamily{vc}, then the cursive shape
+with \fontshape{it}, the modern script shape by \fontshape{sl} and the
+twist shape by \fontshape{ui}. 
+
+The fonts also provide lowercase swash characters, these can only be
+selected by \fontshape commands, with shapes `its', `uis', and `sls'. 
+
+
+

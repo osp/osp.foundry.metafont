@@ -1,0 +1,101 @@
+%%
+%% inslrmin.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{inslrmin.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{inslrmin.drv}{t}{\from{inslrmin.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{imin7.mf}{t}{\from{inslrmin.dtx}{base7}}
+\generateFile{imin10.mf}{t}{\from{inslrmin.dtx}{base10}}
+\generateFile{imin17.mf}{t}{\from{inslrmin.dtx}{base17}}
+\generateFile{iminb7.mf}{t}{\from{inslrmin.dtx}{base7b}}
+\generateFile{iminb10.mf}{t}{\from{inslrmin.dtx}{base10b}}
+\generateFile{iminb17.mf}{t}{\from{inslrmin.dtx}{base17b}}
+\generateFile{iminl.mf}{t}{\from{inslrmin.dtx}{min}}
+\generateFile{iminu.mf}{t}{\from{inslrmin.dtx}{maj}}
+\generateFile{imintitle.mf}{t}{\from{inslrmin.dtx}{mfd}}
+\generateFile{iminpunct.mf}{t}{\from{inslrmin.dtx}{punct}}
+\generateFile{iminlig.mf}{t}{\from{inslrmin.dtx}{lig}}
+\generateFile{imindig.mf}{t}{\from{inslrmin.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1imin.fd}{t}{\from{inslrmin.dtx}{fdot1}}
+\generateFile{t1imin.fd}{t}{\from{inslrmin.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{inslrmin.sty}{t}{\from{inslrmin.dtx}{usc}}
+\generateFile{allimin.sty}{t}{\from{inslrmin.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space imin7.mf}
+\Msg{* \space\space imin10.mf}
+\Msg{* \space\space imin17.mf}
+\Msg{* \space\space iminb7.mf}
+\Msg{* \space\space iminb10.mf}
+\Msg{* \space\space iminb17.mf}
+\Msg{* \space\space iminl.mf}
+\Msg{* \space\space iminu.mf}
+\Msg{* \space\space imintitle.mf}
+\Msg{* \space\space iminpunct.mf}
+\Msg{* \space\space iminlig.mf}
+\Msg{* \space\space imindig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1imin.fd}
+\Msg{* \space\space t1imin.fd}
+\Msg{* \space\space inslrmin.sty}
+\Msg{* \space\space allimin.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

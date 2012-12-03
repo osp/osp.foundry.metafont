@@ -1,0 +1,103 @@
+(/home/elise/context/tex/texmf-context/tex/context/base/cont-yes.mkiv
+
+ConTeXt  ver: 2012.11.08 12:14 MKIV  fmt: 2012.11.9  int: english/english
+
+system          > cont-new.mkiv loaded
+(/home/elise/context/tex/texmf-context/tex/context/base/cont-new.mkiv
+system          > beware: some patches loaded from cont-new.mkiv
+)
+system          > files > jobname: a_in_use, input: a_in_use, result: a_in_use
+fonts           > latin modern fonts are not preloaded
+languages       > language en is active
+(a_in_use.tex
+fonts           > bodyfont 72pt is defined (can better be done global)
+fonts           > bodyfont 86.4pt is defined (can better be done global)
+fonts           > bodyfont 57.6pt is defined (can better be done global)
+fonts           > typescripts > unknown: library 'loc'
+fonts           > typescripts > unknown: library 'a'
+fonts           > preloading latin modern fonts (third stage)
+{/home/elise/context/tex/texmf/fonts/map/dvips/lm/lm-math.map}{/home/elise/context/tex/texmf/fonts/map/dvips/lm/lm-rm.map}{/home/elise/context/tex/texmf-context/fonts/map/pdftex/context/mkiv-base.map}
+fonts           > virtual math > unable to resolve name mapsfromchar
+fonts           > fallback modern rm 72pt is loaded
+
+% begin of command line arguments
+%
+% script               = true
+% fulljobname          = ./a_in_use.tex
+% input                = ./a_in_use.tex
+% no-parse-first-line  = true
+% kindofrun            = 2
+% currentrun           = 3
+%
+% end of command line arguments
+
+% begin of command line files
+%
+% 1  ./a_in_use.tex
+%
+% end of command line files
+
+backend         > xmp > using file '/home/elise/context/tex/texmf-context/tex/context/base/lpdf-pdx.xml'
+pages           > flushing realpage 1, userpage 1
+ ) )</home/elise/context/tex/texmf/fonts/opentype/public/lm/lmroman10-regular.otf>
+
+system          > files > start used files
+
+used files      >    1: filename=cont-yes.mkiv | filetype=tex | foundname=/home/elise/context/tex/texmf-context/tex/context/base/cont-yes.mkiv | usedmethod=database
+used files      >    2: filename=cont-new.mkiv | filetype=tex | foundname=/home/elise/context/tex/texmf-context/tex/context/base/cont-new.mkiv | usedmethod=database
+used files      >    3: filename=lang-us.lua | filetype=lua | foundname=/home/elise/context/tex/texmf-context/tex/context/patterns/lang-us.lua | usedmethod=database
+used files      >    4: filename=a_in_use.tex | foundname=a_in_use.tex | usedmethod=direct
+used files      >    5: filename=lm.lfg | filetype=tex | foundname=/home/elise/context/tex/texmf-context/tex/context/fonts/lm.lfg | usedmethod=database
+used files      >    6: filename=lm-math.lfg | filetype=tex | foundname=/home/elise/context/tex/texmf-context/tex/context/fonts/lm-math.lfg | usedmethod=database
+used files      >    7: filename=lm-math.map | filetype=map | format=map | foundname=/home/elise/context/tex/texmf/fonts/map/dvips/lm/lm-math.map | usedmethod=database
+used files      >    8: filename=lm-rm.map | filetype=map | format=map | foundname=/home/elise/context/tex/texmf/fonts/map/dvips/lm/lm-rm.map | usedmethod=database
+used files      >    9: filename=mkiv-base.map | filetype=map | format=map | foundname=/home/elise/context/tex/texmf-context/fonts/map/pdftex/context/mkiv-base.map | usedmethod=database
+used files      >   10: filename=lmroman10-regular | filetype=otf | format=otf | foundname=/home/elise/context/tex/texmf/fonts/opentype/public/lm/lmroman10-regular.otf | usedmethod=database
+used files      >   11: filename=lmroman10-regular.otf | filetype=otf | format=otf | foundname=/home/elise/context/tex/texmf/fonts/opentype/public/lm/lmroman10-regular.otf | usedmethod=database
+used files      >   12: filename=rm-lmr10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/lm/rm-lmr10.tfm | usedmethod=database
+used files      >   13: filename=lmmi10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/lm/lmmi10.tfm | usedmethod=database
+used files      >   14: filename=lmsy10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/lm/lmsy10.tfm | usedmethod=database
+used files      >   15: filename=lmex10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/lm/lmex10.tfm | usedmethod=database
+used files      >   16: filename=msam10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/amsfonts/symbols/msam10.tfm | usedmethod=database
+used files      >   17: filename=msbm10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/amsfonts/symbols/msbm10.tfm | usedmethod=database
+used files      >   18: filename=stmary10.afm | filetype=afm | format=afm | foundname=/home/elise/context/tex/texmf/fonts/afm/public/stmaryrd/stmary10.afm | usedmethod=database
+used files      >   19: filename=stmary10.pfb | filetype=pfb | format=pfb | foundname=/home/elise/context/tex/texmf/fonts/type1/public/stmaryrd/stmary10.pfb | usedmethod=database
+used files      >   20: filename=lmroman10-bold.otf | filetype=otf | format=otf | foundname=/home/elise/context/tex/texmf/fonts/opentype/public/lm/lmroman10-bold.otf | usedmethod=database
+used files      >   21: filename=lmmib10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/lm/lmmib10.tfm | usedmethod=database
+used files      >   22: filename=lmsans10-regular.otf | filetype=otf | format=otf | foundname=/home/elise/context/tex/texmf/fonts/opentype/public/lm/lmsans10-regular.otf | usedmethod=database
+used files      >   23: filename=lmmono10-regular.otf | filetype=otf | format=otf | foundname=/home/elise/context/tex/texmf/fonts/opentype/public/lm/lmmono10-regular.otf | usedmethod=database
+used files      >   24: filename=eufm10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/amsfonts/euler/eufm10.tfm | usedmethod=database
+used files      >   25: filename=eufb10.tfm | filetype=tfm | format=tfm | foundname=/home/elise/context/tex/texmf/fonts/tfm/public/amsfonts/euler/eufb10.tfm | usedmethod=database
+used files      >   26: filename=lpdf-pdx.xml | filetype=tex | foundname=/home/elise/context/tex/texmf-context/tex/context/base/lpdf-pdx.xml | usedmethod=database
+
+system          > files > stop used files
+
+
+system          > structure > start used structure
+
+used structure  > text: a_in_use
+
+system          > structure > stop used structure
+
+
+mkiv lua stats  > used config file          - selfautoparent:/texmf/web2c/texmfcnf.lua
+mkiv lua stats  > used cache path           - /home/elise/context/tex/texmf-cache/luatex-cache/context/5fe67e0bfe781ce0dde776fb1556f32e
+mkiv lua stats  > resource resolver         - loadtime 0.023 seconds, 0 scans with scantime 0.000 seconds, 0 shared scans, 26 found files, scanned paths: 
+mkiv lua stats  > stored bytecode data      - 313 modules (0.210 sec), 66 tables (0.010 sec), 379 chunks (0.220 sec)
+mkiv lua stats  > cleaned up reserved nodes - 41 nodes, 9 lists of 441
+mkiv lua stats  > node memory usage         - 2 glue, 2 penalty, 9 attribute, 30 glue_spec, 3 attribute_list
+mkiv lua stats  > node list callback tasks  - 6 unique task lists, 5 instances (re)created, 39 calls
+mkiv lua stats  > used backend              - pdf (backend for directly generating pdf output)
+mkiv lua stats  > loaded patterns           - en::2
+mkiv lua stats  > jobdata time              - 0.001 seconds saving, 0.001 seconds loading
+mkiv lua stats  > callbacks                 - 187 direct, 157 indirect, 344 total
+mkiv lua stats  > randomizer                - resumed with value 0.74915351194756
+mkiv lua stats  > lxml preparation time     - 0.000 seconds, 0 nodes, 15 lpath calls, 0 cached calls
+mkiv lua stats  > result saved in file      - a_in_use.pdf, compresslevel 3, objectcompreslevel 3
+mkiv lua stats  > loaded fonts              - 14 files: stmary10.afm lmmono10-regular.otf lmroman10-bold.otf lmroman10-regular.otf lmsans10-regular.otf eufb10.tfm eufm10.tfm msam10.tfm msbm10.tfm lmex10.tfm lmmi10.tfm lmmib10.tfm lmsy10.tfm rm-lmr10.tfm
+mkiv lua stats  > fonts load time           - 0.295 seconds 
+mkiv lua stats  > luatex banner             - this is luatex, version beta-0.70.1-2012052416 (rev 4277)
+mkiv lua stats  > control sequences         - 36407 of 65536 + 100000
+mkiv lua stats  > current memory usage      - 23 MB (ctx: 24 MB)
+mkiv lua stats  > runtime                   - 1.025 seconds, 1 processed pages, 1 shipped pages, 0.976 pages/second
+

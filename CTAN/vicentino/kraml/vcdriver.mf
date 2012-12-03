@@ -1,0 +1,12 @@
+% driver file for vicentino fonts: input all character sources
+
+input vcdefs;
+input vcupper;
+input vclower;
+input vcsmdig;
+input vcpunct;
+% ligatures & kerning
+input vclig;
+input vcligtbl;
+%that's it!
+

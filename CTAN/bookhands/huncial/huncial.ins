@@ -1,0 +1,101 @@
+%%
+%% huncial.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{huncial.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{huncial.drv}{t}{\from{huncial.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{huncl7.mf}{t}{\from{huncial.dtx}{base7}}
+\generateFile{huncl10.mf}{t}{\from{huncial.dtx}{base10}}
+\generateFile{huncl17.mf}{t}{\from{huncial.dtx}{base17}}
+\generateFile{hunclb7.mf}{t}{\from{huncial.dtx}{base7b}}
+\generateFile{hunclb10.mf}{t}{\from{huncial.dtx}{base10b}}
+\generateFile{hunclb17.mf}{t}{\from{huncial.dtx}{base17b}}
+\generateFile{huncll.mf}{t}{\from{huncial.dtx}{min}}
+\generateFile{hunclu.mf}{t}{\from{huncial.dtx}{maj}}
+\generateFile{huncltitle.mf}{t}{\from{huncial.dtx}{mfd}}
+\generateFile{hunclpunct.mf}{t}{\from{huncial.dtx}{punct}}
+\generateFile{huncllig.mf}{t}{\from{huncial.dtx}{lig}}
+\generateFile{huncldig.mf}{t}{\from{huncial.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1huncl.fd}{t}{\from{huncial.dtx}{fdot1}}
+\generateFile{t1huncl.fd}{t}{\from{huncial.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{huncial.sty}{t}{\from{huncial.dtx}{usc}}
+\generateFile{allhuncl.sty}{t}{\from{huncial.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space huncl7.mf}
+\Msg{* \space\space huncl10.mf}
+\Msg{* \space\space huncl17.mf}
+\Msg{* \space\space hunclb7.mf}
+\Msg{* \space\space hunclb10.mf}
+\Msg{* \space\space hunclb17.mf}
+\Msg{* \space\space huncll.mf}
+\Msg{* \space\space hunclu.mf}
+\Msg{* \space\space huncltitle.mf}
+\Msg{* \space\space hunclpunct.mf}
+\Msg{* \space\space huncllig.mf}
+\Msg{* \space\space huncldig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1huncl.fd}
+\Msg{* \space\space t1huncl.fd}
+\Msg{* \space\space huncial.sty}
+\Msg{* \space\space allhuncl.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

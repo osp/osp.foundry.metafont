@@ -1,0 +1,16 @@
+% VCMLATB - Vicentino Modern (moderne cursive)
+% w. kraml, 1991-2
+
+mode_setup;
+
+boolean modern, twisted, bold;
+  modern := true;
+  twisted := false;
+  bold := true;
+
+% metrics
+size#:=14pt#;              % design size
+
+input vcaltdri;
+end;
+

@@ -1,0 +1,31 @@
+\starttext
+\startuseMPgraphic{name}
+  fill fullcircle scaled 5cm withcolor red;
+\stopuseMPgraphic
+
+\startuseMPgraphic{name2}
+beginfig(5)
+    Phi=(1+sqrt5)/2;
+    w=100;
+    h=Phi*w;
+    y1=y6=0;
+    y3=y4=h;
+    y2=y5;
+    x1=x2=x3=0;
+    x4=Phi*x5=x6=w;
+    (y3-y2)=Phi*(y2-y1);
+
+    pickup pensquare xscaled 30 yscaled 4 rotated 30; 
+    draw z1..z6..z2 withcolor .8white;
+    draw z3..z4 withcolor .6white;
+    draw z2..z3 withcolor .4white;
+    %labels(range 1 thru 6);
+endfig;
+
+draw (0, 0)--(350, 275);
+\stopuseMPgraphic
+
+\useMPgraphic{name}
+\useMPgraphic{name2}
+
+\stoptext

@@ -1,0 +1,287 @@
+\input mftmac
+\def\9{$\futurelet\next\doit}
+\let\[=\relax
+\def\doit{\ifx\next\[\def\next{\hfill{\rm\%}}%
+     \else\ifx\next\ \def\next{\qquad{\rm\%}}%
+     \else\def\next{{\rm\%}}\fi\fi\next}
+\input epsf
+\def\newpage{\vfill\eject}
+\def\vc#1{$\vcenter{#1}$}
+\def\title#1{\hrule\vskip1mm#1\par\vskip1mm\hrule\vskip5mm}
+\def\figure#1{\par\centerline{\epsfbox{#1}}}
+\title{{\bf POLY.MP: DEFINITION OF REGULAR CONVEX POLYHEDRA IN METAPOST}}
+\BL
+ version 1.0, 8 April 1998
+ {\bf Denis Roegel} ({\tt roegel@loria.fr})
+
+This package defines the five regular convex polyhedra classes and
+must be used with the {\bf 3d} package.
+\BL
+Each object definition is parameterized by
+an instance identification.
+\BL
+All polyhedra are normalized (centered on the origin and inscriptible
+in a sphere of radius 1).
+\BL
+The polyhedra are defined with a certain number of points and faces.
+The points comprise both the vertices and the center of the object.
+\BL
+It might be useful to remind the Euler formula linking
+the number of faces $f$,
+vertices $v$ and edges $e$ in polyhedra with no hole in dimension 3:
+$f+v-e=2$. This can be verified in the following table:
+\BL
+\centerline{\vbox{\halign{\quad#\hfil\quad&&\quad\hfil#\quad\cr
+ \omit \hfil type\hfil&\omit\hfil faces\hfil
+                      &\omit\hfil vertices\hfil&\omit\hfil edges\hfil\cr
+ tetrahedron&4&4&6\cr
+ cube&6&8&12\cr
+ octahedron&8&6&12\cr
+ dodecahedron&12&20&30\cr
+ icosahedron&20&12&30\cr}}}
+\BL
+For more details, see the documentation enclosed in the distribution.
+\BL
+$\2{message}\7"*** poly, version 1.0 (c) D. Roegel, 8 April 1998 ***";$\par
+\BL
+\newpage\title{TETRAHEDRON (4 faces)\kern1cm\epsfbox{tetra.ps}}
+\BL
+ Construction of a tetrahedron:
+\BL
+ One face is \vc{\epsfbox{vect-fig.1}} with $h=c\sqrt{3}/2$
+\BL
+ The angle $\alpha$ between two faces is given by
+ $\sin(\alpha/2)={\displaystyle c/2\over \displaystyle c\sqrt{3}/2}=1/\sqrt3$
+\BL
+ \figure{vect-fig.2}
+\BL
+$\2{def}\\{set\_tetrahedron\_points}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{set\_obj\_point}(1,0,0,0);\ \\{set\_obj\_point}(2,1,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(3,\1{cosd}(60),\1{sind}(60),0);\ \9 $60=360/6$%
+\par
+\quad\quad$\\{sinan}=1/\1{sqrt}(3);\ \\{cosan}=\1{sqrt}(1-\\{sinan}\6{\ast \ast
+}2);$\par
+\quad\quad$\\{an}=180-2\ast \1{angle}((\\{cosan},\\{sinan}));$\par
+\quad\quad$\\{new\_face\_point}(4,1,2,3,\\{an});$\par
+\quad\quad$\\{normalize\_obj}(\\{inst})(1,2,3,4);$\par
+\quad\quad$\\{set\_obj\_point}(5,0,0,0);\ \9 center of tetrahedron\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{def\_tetrahedron}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{new\_obj\_points}(\\{inst},5);\ \9 4 vertices and the center\par
+\quad\quad$\\{new\_obj\_faces}(\\{inst},4);\ \9 4 faces in the definition\par
+\quad\quad$\\{set\_tetrahedron\_points}(\\{inst});$\par
+\quad\quad$\\{set\_obj\_face}(1,\7"1,2,4",\7"b4fefe");$\par
+\quad\quad$\\{set\_obj\_face}(2,\7"2,3,4",\7"b49bc0");$\par
+\quad\quad$\\{set\_obj\_face}(3,\7"1,4,3",\7"b4c8fe");$\par
+\quad\quad$\\{set\_obj\_face}(4,\7"1,3,2",\7"b4fe40");$\par
+$\!\3{enddef};$\par
+\BL
+\newpage\title{CUBE (HEXAHEDRON) (6 faces)\kern1cm\epsfbox{cube.ps}}
+\BL
+The definition of a cube is straightforward.
+\BL
+$\2{def}\\{set\_cube\_points}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{set\_obj\_point}(1,0,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(2,1,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(3,1,1,0);$\par
+\quad\quad$\\{set\_obj\_point}(4,0,1,0);$\par
+\quad\quad$\\{set\_obj\_point}(5,0,0,1);$\par
+\quad\quad$\\{set\_obj\_point}(6,1,0,1);$\par
+\quad\quad$\\{set\_obj\_point}(7,1,1,1);$\par
+\quad\quad$\\{set\_obj\_point}(8,0,1,1);$\par
+\quad\quad$\\{normalize\_obj}(\\{inst})(1,7);\ \9 1 and 7 are opposite vertices%
+\par
+\quad\quad$\\{set\_obj\_point}(9,0,0,0);\ \9 center of cube\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{def\_cube}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{new\_obj\_points}(\\{inst},9);\ \9 8 vertices and the center\par
+\quad\quad$\\{new\_obj\_faces}(\\{inst},6);\ \9 6 faces in the definition\par
+\quad\quad$\\{set\_cube\_points}(\\{inst});$\par
+\quad\quad$\\{set\_obj\_face}(1,\7"1,2,6,5",\7"b4fe40");$\par
+\quad\quad$\\{set\_obj\_face}(2,\7"2,3,7,6",\7"45d040");$\par
+\quad\quad$\\{set\_obj\_face}(3,\7"4,8,7,3",\7"45a114");$\par
+\quad\quad$\\{set\_obj\_face}(4,\7"1,5,8,4",\7"45a1d4");$\par
+\quad\quad$\\{set\_obj\_face}(5,\7"5,6,7,8",\7"4569d4");$\par
+\quad\quad$\\{set\_obj\_face}(6,\7"4,3,2,1",\7"112da1");$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage\title{OCTAHEDRON (8 faces)\kern1cm\epsfbox{octa.ps}}
+\BL
+ A section of a pyramid is: \vc{\epsfbox{vect-fig.3}}
+\BL
+ The height of this pyramid is given
+ by $H^2={(c\sqrt3/2)}^2-{(c/2)}^2=c^2/2$, hence $H=c/\sqrt2$
+\BL
+$\2{def}\\{set\_octahedron\_points}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{set\_obj\_point}(1,0,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(2,1,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(3,1,1,0);$\par
+\quad\quad$\\{set\_obj\_point}(4,0,1,0);$\par
+\quad\quad$\\{set\_obj\_point}(5,.5,.5,1/\1{sqrt}(2));$\par
+\quad\quad$\\{set\_obj\_point}(6,.5,.5,-1/\1{sqrt}(2));$\par
+\quad\quad$\\{normalize\_obj}(\\{inst})(5,6);\ \9 5 and 6 are opposite vertices%
+\par
+\quad\quad$\\{set\_obj\_point}(7,0,0,0);\ \9 center of octahedron\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{def\_octahedron}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{new\_obj\_points}(\\{inst},7);\ \9 6 vertices and the center\par
+\quad\quad$\\{new\_obj\_faces}(\\{inst},8);\ \9 8 faces in the definition\par
+\quad\quad$\\{set\_octahedron\_points}(\\{inst});$\par
+\quad\quad$\\{set\_obj\_face}(1,\7"1,2,5",\7"b4fefe");$\par
+\quad\quad$\\{set\_obj\_face}(2,\7"2,3,5",\7"45d040");$\par
+\quad\quad$\\{set\_obj\_face}(3,\7"3,4,5",\7"4569d4");$\par
+\quad\quad$\\{set\_obj\_face}(4,\7"4,1,5",\7"b49bc0");$\par
+\quad\quad$\\{set\_obj\_face}(5,\7"6,1,4",\7"45a1d4");$\par
+\quad\quad$\\{set\_obj\_face}(6,\7"6,2,1",\7"b4c8fe");$\par
+\quad\quad$\\{set\_obj\_face}(7,\7"6,3,2",\7"b49b49");$\par
+\quad\quad$\\{set\_obj\_face}(8,\7"6,4,3",\7"112da1");$\par
+$\!\3{enddef};$\par
+\BL
+\BL
+\newpage\title{DODECAHEDRON (12 faces)\kern1cm\epsfbox{dodeca.ps}}
+\BL
+ Two adjacent faces (pentagons) of the dodecahedron are as follows:
+\figure{vect-fig.13}
+ The angle between the faces is the angle between $\overrightarrow{OA}$
+ and $\overrightarrow{OB}$.
+ $OA=OB=d_3$ as defined in \figure{vect-fig.14}
+ $d_1=2r\sin(\pi/5)$, $d_2=2r\sin(2\pi/5)$
+ and $d_3=d_1\sin(2\pi/5)=2r\sin(\pi/5)\sin(2\pi/5)$
+
+ The angle $\alpha$ is defined by the following conditions:
+ \figure{vect-fig.15}
+ Thus $d_2^2=d_3^2+d_3^2-2d_3^2\cos\alpha$, which leads to
+ $\cos\alpha=1-{\displaystyle d_2^2\over\displaystyle2d_3^2}
+      =-{\displaystyle\cos(2\pi/5)\over\displaystyle2\sin^2(\pi/5)}$
+\newpage
+\BL
+$\2{def}\\{set\_dodecahedron\_points}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{new\_points}(\\{fc})(10);\ \9 face centers\par
+\quad\quad$\\{set\_point}(\\{fc}_{1},0,0,0);\ \\{set\_obj\_point}(1,1,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(2,\1{cosd}(72),\1{sind}(72),0);\ \9 72=360/5\par
+\quad\quad$\\{rotate\_in\_plane}(3,\\{fc}_{1},1,2);$\par
+\quad\quad$\\{rotate\_in\_plane}(4,\\{fc}_{1},2,3);$\par
+\quad\quad$\\{rotate\_in\_plane}(5,\\{fc}_{1},3,4);$\par
+\quad\quad$\\{cosan}=-\1{cosd}(72)/(2\ast \1{sind}(36)\ast \1{sind}(36));\ %
+\\{sinan}=\1{sqrt}(1-\\{cosan}\6{\ast \ast }2);$\par
+\quad\quad$\\{an}=180-\1{angle}((\\{cosan},\\{sinan}));$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{2},\\{fc}_{1},1,2,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{3},\\{fc}_{1},2,3,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{4},\\{fc}_{1},3,4,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{5},\\{fc}_{1},4,5,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{6},\\{fc}_{1},5,1,\\{an});$\par
+\quad\quad$\\{rotate\_in\_plane}(6,\\{fc}_{2},2,1);$\par
+\quad\quad$\\{rotate\_in\_plane}(7,\\{fc}_{2},1,6);$\par
+\quad\quad$\\{rotate\_in\_plane}(8,\\{fc}_{2},6,7);$\par
+\quad\quad$\\{rotate\_in\_plane}(9,\\{fc}_{3},2,8);$\par
+\quad\quad$\\{rotate\_in\_plane}(10,\\{fc}_{3},8,9);$\par
+\quad\quad$\\{rotate\_in\_plane}(11,\\{fc}_{4},3,10);$\par
+\quad\quad$\\{rotate\_in\_plane}(12,\\{fc}_{4},10,11);$\par
+\quad\quad$\\{rotate\_in\_plane}(13,\\{fc}_{5},4,12);$\par
+\quad\quad$\\{rotate\_in\_plane}(14,\\{fc}_{5},12,13);$\par
+\quad\quad$\\{rotate\_in\_plane}(15,\\{fc}_{6},5,14);$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{7},\\{fc}_{2},6,7,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{8},\\{fc}_{3},8,9,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{9},\\{fc}_{4},10,11,\\{an});$\par
+\quad\quad$\\{new\_abs\_face\_point}(\\{fc}_{10},\\{fc}_{5},12,13,\\{an});$\par
+\quad\quad$\\{rotate\_in\_plane}(16,\\{fc}_{7},6,15);$\par
+\quad\quad$\\{rotate\_in\_plane}(17,\\{fc}_{7},15,16);$\par
+\quad\quad$\\{rotate\_in\_plane}(18,\\{fc}_{8},7,17);$\par
+\quad\quad$\\{rotate\_in\_plane}(19,\\{fc}_{9},9,18);$\par
+\quad\quad$\\{rotate\_in\_plane}(20,\\{fc}_{10},11,19);$\par
+\quad\quad$\\{normalize\_obj}(\\{inst})(2,20);\ \9 opposite vertices\par
+\quad\quad$\\{set\_obj\_point}(21,0,0,0);\ \9 center of dodecahedron\par
+\quad\quad$\\{free\_points}(\\{fc})(10);$\par
+$\!\3{enddef};$\par
+\newpage
+$\2{vardef}\\{def\_dodecahedron}(\2{expr}\\{inst})=$\par
+\quad\quad$\2{save}\\{cosan},\\{sinan},\\{an};$\par
+\quad\quad$\\{new\_obj\_points}(\\{inst},21);\ \9 21 points in the definition%
+\par
+\quad\quad$\\{new\_obj\_faces}(\\{inst},12);\ \9 12 faces in the definition\par
+\quad\quad$\\{set\_dodecahedron\_points}(\\{inst});$\par
+\quad\quad$\\{set\_obj\_face}(1,\7"5,4,3,2,1",\7"ff0fa1");$\par
+\quad\quad$\\{set\_obj\_face}(2,\7"8,7,6,1,2",\7"b40000");$\par
+\quad\quad$\\{set\_obj\_face}(3,\7"10,9,8,2,3",\7"b49b49");$\par
+\quad\quad$\\{set\_obj\_face}(4,\7"12,11,10,3,4",\7"b49bc0");$\par
+\quad\quad$\\{set\_obj\_face}(5,\7"14,13,12,4,5",\7"b4c8fe");$\par
+\quad\quad$\\{set\_obj\_face}(6,\7"6,15,14,5,1",\7"b4fefe");$\par
+\quad\quad$\\{set\_obj\_face}(7,\7"6,7,17,16,15",\7"b4fe40");$\par
+\quad\quad$\\{set\_obj\_face}(8,\7"8,9,18,17,7",\7"45d040");$\par
+\quad\quad$\\{set\_obj\_face}(9,\7"10,11,19,18,9",\7"45a114");$\par
+\quad\quad$\\{set\_obj\_face}(10,\7"11,12,13,20,19",\7"45a1d4");$\par
+\quad\quad$\\{set\_obj\_face}(11,\7"14,15,16,20,13",\7"4569d4");$\par
+\quad\quad$\\{set\_obj\_face}(12,\7"16,17,18,19,20",\7"112da1");$\par
+$\!\3{enddef};$\par
+\BL
+\newpage\title{ICOSAHEDRON (20 faces)\kern1cm\epsfbox{icosa.ps}}
+\BL
+Two faces of an icosahedron are linked in the following way:
+\BL
+ \vc{\epsfbox{vect-fig.4}} where $h=c\sqrt3/2$
+\BL
+ $d$ is also a diagonal in a pentagon: \vc{\epsfbox{vect-fig.5}}
+\BL
+ $c=2r\sin(\pi/5)$,
+ $d=2r\sin(2\pi/5)=2c\cos(\pi/5)$
+\BL
+ The angle between two faces is computed as follows:
+ \vc{\epsfbox{vect-fig.6}}
+\BL
+ We have ${(2\cos(\pi/5))}^2=2{(\sqrt3/2)}^2-2{(\sqrt3/2)}^2\cos\alpha$
+\BL
+ Thus $cos\alpha=1-{8\over3}\cos^2(\pi/5)$
+\newpage
+\BL
+$\2{def}\\{set\_icosahedron\_points}(\2{expr}\\{inst})=$\par
+\quad\quad$\\{set\_obj\_point}(1,0,0,0);\ \\{set\_obj\_point}(2,1,0,0);$\par
+\quad\quad$\\{set\_obj\_point}(3,\1{cosd}(60),\1{sind}(60),0);\ \9 60=360/6\par
+\quad\quad$\\{cosan}=1-\frac8/{3}\ast \1{cosd}(36)\ast \1{cosd}(36);\ %
+\\{sinan}=\1{sqrt}(1-\\{cosan}\6{\ast \ast }2);$\par
+\quad\quad$\\{an}=180-\1{angle}((\\{cosan},\\{sinan}));$\par
+\quad\quad$\\{new\_face\_point}(4,1,2,3,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(5,2,3,1,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(6,3,1,2,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(7,2,4,3,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(8,3,5,1,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(9,1,6,2,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(10,3,4,7,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(11,3,7,5,\\{an});$\par
+\quad\quad$\\{new\_face\_point}(12,1,8,6,\\{an});$\par
+\quad\quad$\\{normalize\_obj}(\\{inst})(1,10);\ \9 opposite vertices\par
+\quad\quad$\\{set\_obj\_point}(13,0,0,0);\ \9 center of icosahedron\par
+$\!\3{enddef};$\par
+\BL
+$\2{vardef}\\{def\_icosahedron}(\2{expr}\\{inst})=$\par
+\quad\quad$\2{save}\\{cosan},\\{sinan},\\{an};$\par
+\quad\quad$\\{new\_obj\_points}(\\{inst},13);\ \9 12 vertices and the center\par
+\quad\quad$\\{new\_obj\_faces}(\\{inst},20);\ \9 20 faces in the definition\par
+\quad\quad$\\{set\_icosahedron\_points}(\\{inst});$\par
+\quad\quad$\\{set\_obj\_face}(1,\7"3,2,1",\7"b40000");$\par
+\quad\quad$\\{set\_obj\_face}(2,\7"2,3,4",\7"ff0fa1");$\par
+\quad\quad$\\{set\_obj\_face}(3,\7"3,7,4",\7"b49b49");$\par
+\quad\quad$\\{set\_obj\_face}(4,\7"3,5,7",\7"b49bc0");$\par
+\quad\quad$\\{set\_obj\_face}(5,\7"3,1,5",\7"b4c8fe");$\par
+\quad\quad$\\{set\_obj\_face}(6,\7"1,8,5",\7"b4fefe");$\par
+\quad\quad$\\{set\_obj\_face}(7,\7"1,6,8",\7"b4fe40");$\par
+\quad\quad$\\{set\_obj\_face}(8,\7"1,2,6",\7"45d040");$\par
+\quad\quad$\\{set\_obj\_face}(9,\7"2,9,6",\7"45a114");$\par
+\quad\quad$\\{set\_obj\_face}(10,\7"2,4,9",\7"45a1d4");$\par
+\quad\quad$\\{set\_obj\_face}(11,\7"9,4,10",\7"4569d4");$\par
+\quad\quad$\\{set\_obj\_face}(12,\7"4,7,10",\7"112da1");$\par
+\quad\quad$\\{set\_obj\_face}(13,\7"7,5,11",\7"b4fefe");$\par
+\quad\quad$\\{set\_obj\_face}(14,\7"5,8,11",\7"b49bc0");$\par
+\quad\quad$\\{set\_obj\_face}(15,\7"8,6,12",\7"45a114");$\par
+\quad\quad$\\{set\_obj\_face}(16,\7"6,9,12",\7"b49b49");$\par
+\quad\quad$\\{set\_obj\_face}(17,\7"8,12,11",\7"b40000");$\par
+\quad\quad$\\{set\_obj\_face}(18,\7"7,11,10",\7"45a1d4");$\par
+\quad\quad$\\{set\_obj\_face}(19,\7"12,10,11",\7"b4c8fe");$\par
+\quad\quad$\\{set\_obj\_face}(20,\7"9,10,12",\7"ff0fa1");$\par
+$\!\3{enddef};$\par
+\BL
+$\5{endinput}$\par
+\BL

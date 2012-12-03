@@ -1,0 +1,76 @@
+% tryfont.tex    Test Artificial Uncial fonts
+\documentclass[12pt]{article}
+\usepackage{auncial}
+
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrstuvwxyz}
+\newcommand{\punct}{.,;:!?`' \&{} () []}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\sentence}{%
+this is an example of the artificial uncial font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\Sentence}{%
+This is an example of the Artificial Uncial font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+
+\title{Try Artificial Uncial Fonts}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+    This provides a short test of the characters in the Artificial Uncial fonts
+--- the \verb|auncl| font family.
+
+
+
+\begin{center}
+The Artificial Uncial Huge normal font. \\ \par
+{\aunclfamily\Huge \ABC\\ \abc\\ \punct{} \dashes\\ \figs\\ \par }
+\end{center}
+
+\begin{center}
+The Artificial Uncial font in its normal size \\
+\textauncl{\ABC{} \abc{} \punct{} \dashes{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold minuscule font, the normal minuscule font, and the bold Computer Modern
+Roman, all in the normal size \\
+\textauncl{\textbf{\abc{} \figs}} \\
+\textauncl{\abc{} \figs} \\
+\textbf{\abc{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\aunclfamily\bfseries
+\Huge \abc{} \figs \par
+\tiny \abc{} \figs \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\aunclfamily\tiny \ABC{} \\ \abc\\ \figs\\ \par } 
+\end{center}
+
+\begin{center}
+    Some ligatures in the normal font \\
+\textauncl{``the lazy \& brown dog --- but quick \& red fox?''}
+\end{center}
+
+{
+\aunclfamily 
+\sentence{}
+
+\Sentence{}
+}
+    
+    This is the end of the test file.
+
+\end{document}

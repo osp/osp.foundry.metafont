@@ -1,0 +1,15 @@
+%This was written by James Kilfiger, to support the Vicentino fonts of
+%Willibald Kraml
+\ProvidesFile{vicent.sty}[1999/09/24 Vicentino Font Package]
+\newcommand\cursiveshape{\fontencoding{OT1}\fontfamily{vc}\fontshape{it}\selectfont}
+\newcommand\modernscriptshape{\fontencoding{OT1}\fontfamily{vc}\fontshape{sl}\selectfont}
+\newcommand\twistshape{\fontencoding{OT1}\fontfamily{vc}\fontshape{ui}\selectfont}
+\newcommand\vicentinofamily{\fontencoding{OT1}\fontfamily{vc}\selectfont}
+
+\DeclareTextFontCommand{\textcursive}{\cursiveshape}
+\DeclareTextFontCommand{\textmodernscript}{\modernscriptshape}
+\DeclareTextFontCommand{\texttwist}{\twistshape}
+\DeclareTextFontCommand{\textvicentino}{\vicentinofamily}
+
+
+

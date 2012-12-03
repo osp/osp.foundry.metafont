@@ -1,0 +1,42 @@
+Qapla'
+
+this is the announcement for the Metafont version of the Klingon font.
+It will follow in the next two messages. Save them into a file and
+unpack them by running them through the bourne shell. Then you will get
+two files called "klinz.mf" and "kligs.mf". You then should run
+  mf "\mode:=localfont;" input klinz
+  gftopk klinz.*gf 
+
+(or for MS-DOS, where xxx is a number (300 for example for normal 
+laserprinters))
+  mf "\mode:=localfont;" input klinz
+  gftopk klinz.xxx klinz.pk
+
+Copy the now existing klinz.tfm and klinz.*pk to a place TeX knows 
+about (ask your local TeXnician, if you're not certain) and your ready
+to go.
+ 
+(Metafont is a font description language used for the TeX-fonts, so if
+you're not familiar with it, go get it, it's great!  But before asking
+me, where you can do so, read comp.text.tex --- there you will find all
+the answers.)
+
+Over the past weeks I spent my evenings defining the characters and
+testing them.  It has a full set of upper and lower case characters (in
+some sort of small capitals) plus numerals plus some additional
+characters (punctuation, etc) designed by a colleague of mine.  The
+character @ represents the Klingon imperial symbol.
+
+You may freely distribute this font under the limitations that you leave
+the commentary part at the beginning of each file intact (including the
+copyright notice) and that you send me any changes you made, so that I
+can continue improving the font.  (This font is far from being perfect,
+so any comment is welcome.)
+
+                     Khoros sutai-Makpai 
+                     c/o Karl Guenter Wuensch
+                     hz225wu@unidui.uni-duisburg.de
+                     (this account is shared with Micaela "Stayka" Pantke,
+                     so don't be alarmed if the mailer inserts her address)
+
+		     May your dishes always be served alive...

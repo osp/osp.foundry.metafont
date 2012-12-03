@@ -1,0 +1,101 @@
+%%
+%% auncial.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{auncial.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{auncial.drv}{t}{\from{auncial.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{auncl7.mf}{t}{\from{auncial.dtx}{base7}}
+\generateFile{auncl10.mf}{t}{\from{auncial.dtx}{base10}}
+\generateFile{auncl17.mf}{t}{\from{auncial.dtx}{base17}}
+\generateFile{aunclb7.mf}{t}{\from{auncial.dtx}{base7b}}
+\generateFile{aunclb10.mf}{t}{\from{auncial.dtx}{base10b}}
+\generateFile{aunclb17.mf}{t}{\from{auncial.dtx}{base17b}}
+\generateFile{auncll.mf}{t}{\from{auncial.dtx}{min}}
+\generateFile{aunclu.mf}{t}{\from{auncial.dtx}{maj}}
+\generateFile{auncltitle.mf}{t}{\from{auncial.dtx}{mfd}}
+\generateFile{aunclpunct.mf}{t}{\from{auncial.dtx}{punct}}
+\generateFile{auncllig.mf}{t}{\from{auncial.dtx}{lig}}
+\generateFile{auncldig.mf}{t}{\from{auncial.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1auncl.fd}{t}{\from{auncial.dtx}{fdot1}}
+\generateFile{t1auncl.fd}{t}{\from{auncial.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{auncial.sty}{t}{\from{auncial.dtx}{usc}}
+\generateFile{allauncl.sty}{t}{\from{auncial.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space auncl7.mf}
+\Msg{* \space\space auncl10.mf}
+\Msg{* \space\space auncl17.mf}
+\Msg{* \space\space aunclb7.mf}
+\Msg{* \space\space aunclb10.mf}
+\Msg{* \space\space aunclb17.mf}
+\Msg{* \space\space auncll.mf}
+\Msg{* \space\space aunclu.mf}
+\Msg{* \space\space auncltitle.mf}
+\Msg{* \space\space aunclpunct.mf}
+\Msg{* \space\space auncllig.mf}
+\Msg{* \space\space auncldig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1auncl.fd}
+\Msg{* \space\space t1auncl.fd}
+\Msg{* \space\space auncial.sty}
+\Msg{* \space\space allauncl.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

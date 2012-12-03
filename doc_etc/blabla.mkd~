@@ -1,0 +1,34 @@
+METAFONT
+========
+
+# Le language
+
+ce n'est pas un langage « descriptif »;
+On n'assigne pas une valeur à des variables de la même manière
+que dans les autres langages, où on peut réassigner les variables.
+On lui indique les données suffisantes pour qu'il puisse calculer
+lui même les coordonnées de chaque point.
+
+Donc, définir au début une série de variables qui seront utilisées
+tout au long du document.
+Puis décrire les points les uns par rapport aux autres et par
+rapport aux variables.
+Mieux de définir les valeurs au départ, puis de les adapter à ce
+que l’on veut en faire.
+
+> exemples carré :
+>
+> largeur = 10;
+> hauteur = largeur * 1.5;
+> 
+> x1 = x2 = 0;
+> x3 = x4 = hauteur;
+	ou x1 = x2 = x3-hauteur = x4-hauteur = 0;
+> y1 = y3 = 0;
+> y2 = y4 = largeur;
+	ou y1 = y3 = y2-hauteur = y4-hauteur = 0;
+
+
+
+
+

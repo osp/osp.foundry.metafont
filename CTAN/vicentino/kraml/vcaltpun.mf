@@ -1,0 +1,22 @@
+% VCALTPUNCT - punctuation characters for vicentino fonts - alternative forms
+% w. kraml, 1991
+
+%% punctuation marks follow here:
+slant:= lowerslant;
+currenttransform := identity slanted slant;
+
+beginchar(char38, 2.5sw#+2.5tw#, ch#, 0); "the ampersand \&";
+pickup lower_pen;
+x2=1/4w; x1=x2+tw; x3=w-1.33tw; rt.x4=w-.3s;
+top.y2=h; y1=h-th; bot.y3=0; y4=1.1th;
+path p,q,r;
+p = z1..tension1.2..{dir230}z2..tension1.94..z3{right}..{dir40}z4;
+z5=p horintersection .85xh; z9=p horintersection .45xh;
+lft.x6=.5s; x7=.45w; x8=2/3w;
+bot.y7=0; y6=.75[y7,y5]; top.y8=xh;
+q = z5{z2-z4}..{down}z6..{right}z7..{dir160}z8..{z3-z1}z9;
+rt.x10=w-.5s; y10=xh+th;
+r = z8{dir-20}..{dir126}z10;
+draw p; draw q; draw r;
+end_char;
+

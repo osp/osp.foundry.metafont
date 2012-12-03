@@ -1,0 +1,119 @@
+% tryfont.tex    Test Insular Majuscule fonts
+\documentclass[12pt]{article}
+\usepackage{inslrmaj}
+
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrstuvwxyz}
+\newcommand{\punct}{.,;:!?`' \&{} () []}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\sentence}{%
+this is an example of the insular majuscule font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\Sentence}{%
+This is an example of the Insular Majuscule font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\esses}{sa sb sc sd se sf sg sh si sj sk sl sm 
+                    sn so sp sq sr ss st su sv sw sx sy sz}
+
+\newcommand{\exes}{xa xb xc xd xe xf xg xh xi xj xk xl xm 
+                  xn xo xp xq xr xs xt xu xv xw xx xy xz}
+          
+\newcommand{\jays}{aj bj cj dj ej fj gj hj ij jj kj lj mj 
+                   nj oj pj qj rj sj tj uj vj wj xj yj zj}
+
+\newcommand{\dees}{ad bd cd dd ed fd gd hd id jd kd ld md 
+                   nd od pd qd rd sd td ud vd wd xd yd zd}
+
+\newcommand{\ares}{ra rb rc rd re rf rg rh ri rj rk rl rm 
+                   rn ro rp rq rr rs rt ru rv rw rx ry rz}
+
+\newcommand{\Esses}{SA SB SC SD SE SF SG SH SI SJ SK SL SM 
+                    SN SO SP SQ SR SS ST SU SV SW SX SY SZ}
+
+\newcommand{\Exes}{XA XB XC XD XE XF XG XH XI XJ XK XL XM 
+                  XN XO XP XQ XR XS XT XU XV XW XX XY XZ}
+          
+\newcommand{\Jays}{AJ BJ CJ DJ EJ FJ GJ HJ IJ JJ KJ LJ MJ 
+                   NJ OJ PJ QJ RJ SJ TJ UJ VJ WJ XJ YJ ZJ}
+
+\newcommand{\Dees}{AD BD CD DD ED FD GD HD ID JD KD LD MD 
+                   ND OD PD QD RD SD TD UD VD WD XD YD ZD}
+
+\newcommand{\Ares}{RA RB RC RD RE RF RG RH RI RJ RK RL RM 
+                   RN RO RP RQ RR RS RT RU RV RW RX RY RZ}
+
+\title{Try Insular Majuscule Fonts}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+    This provides a short test of the characters in the Insular Majuscule fonts
+--- the \verb|imaj| font family.
+
+
+
+\begin{center}
+The Insular Majuscule Huge normal font. \\ \par
+{\imajfamily\Huge \ABC\\ \abc\\ \punct{} \dashes\\ \figs\\ \par }
+\end{center}
+
+\begin{center}
+The Insular Majuscule font in its normal size \\
+\textimaj{\ABC{} \abc{} \punct{} \dashes{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold minuscule font, the normal minuscule font, and the bold Computer Modern
+Roman, all in the normal size \\
+\textimaj{\textbf{\abc{} \figs}} \\
+\textimaj{\abc{} \figs} \\
+\textbf{\abc{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\imajfamily\bfseries
+\Huge \abc{} \figs \par
+\tiny \abc{} \figs \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\imajfamily\tiny \ABC{} \\ \abc\\ \figs\\ \par } 
+\end{center}
+
+\begin{center}
+    Some built-in ligatures in the normal font \\
+\textimaj{``first active brown dog --- but quick \& red fox?''}
+\end{center}
+
+%\begin{center}
+%    Individual ligatures in the normal font \\
+% \textimaj{\esses} \\
+% \textimaj{\exes} \\
+% \textimaj{\jays} \\
+% \textimaj{\dees} \\
+% \textimaj{\ares} \\
+% \textimaj{\Esses} \\
+% \textimaj{\Exes} \\
+% \textimaj{\Jays} \\
+% \textimaj{\Dees} \\
+% \textimaj{\Ares} \\
+%\end{center}
+
+{
+\imajfamily 
+\sentence{}
+
+\Sentence{}
+}
+    
+    This is the end of the test file.
+
+\end{document}

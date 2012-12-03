@@ -1,0 +1,39 @@
+%% Figures 4.#
+a = 100;	b=2a;
+top lft z1 = (0,b);		top z2 = (a,b);		top rt z3=(2a,b);
+bot lft z4 = (0,0);		bot z5 = (a,0);		bot rt z6=(2a,0);
+fill z5..z4..z1..z3..z6..cycle;
+labels(range 1 thru 6);
+
+%% Figures 3.#
+%a = 100;	b=2a;
+%top lft z1 = (0,b);		top z2 = (a,b);		top rt z3=(2a,b);
+%bot lft z4 = (0,0);		bot z5 = (a,0);		bot rt z6=(2a,0);
+%%for d=0 step 40 until 120:
+%%for d=0 step -30 until -90:
+%	%draw z4{dir 60}...{dir -d}z6;endfor;
+%draw z4..controls z1 and z3..z6;
+%labels(range 1 thru 6);
+
+%% Figure 2e
+%a = 100;	b=2a;	s=10;	alpha=(3-sqrt(5))/2;
+%bot z1 = (s,0);
+%z5 = z1 + (a,0);
+%z3 = (1/2[x1,x5],b);
+%% exercise 2.11
+%z4 - z2 = whatever * dir 20;
+%1/2[y2,y4] = 2/3[y3,y1];
+%z2 = whatever[z1,z3];
+%z4 = whatever[z3,z5];
+%%z2 = alpha[z1,z3];
+%%z4 = alpha[z5,z3];
+%draw z1..z3; draw z3..z5; draw z2..z4;
+%labels(range 1 thru 6);
+
+
+% Figures 1.#
+%a = 100;	b=2a;
+%top lft z1 = (0,b);		top z2 = (a,b);		top rt z3=(2a,b);
+%bot lft z4 = (0,0);		bot z5 = (a,0);		bot rt z6=(2a,0);
+%labels(range 1 thru 6);
+showit;shipit;end

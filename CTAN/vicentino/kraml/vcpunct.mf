@@ -1,0 +1,324 @@
+% VCPUNCT - punctuation characters for vicentino fonts
+% w. kraml, 1991
+
+%% punctuation marks follow here:
+slant:= upperslant;
+currenttransform := identity slanted slant;
+
+beginchar(char 0, 2sw#+s#, ch#, dh#); "the paragraph (or alinea) sign";
+pickup lower_pen;
+x2=x4=.66w; top.y2=h; y6=-dh+th;
+bot.y4=-dh+2th; lft.x6=.25s;
+path stem;
+stem = z2{dir-30}..tension11..
+      z4{dir255}..tension1.1..z6;
+rt.x1=w-.33s; top.y1=h; lft.x3=.1s;
+z5=stem horintersection 2th; y3=.5[y2,y5];
+x7=x3+tw; y7=y3; z9=z5+(tw,0);
+path p; p=z2{left}..{down}z3..{right}z5 & z5{dir170}..{up}z7..{dir10}z2..cycle;
+draw  stem; filldraw p; draw z1--z2; draw z5--z9;
+end_char;
+
+beginchar(char 1, 2sw#-1.25s#, ch#, dh#); "the section sign";
+pickup lower_pen;
+x2=x7=w/2; x3=x8=w-x1=w-x6=tw; lft.x5=w-rt.x4=.4s;
+top.y2=h; bot.y7=-dh; y5=y4=.5[y2,y7]; y1=y3=6/7[y7,y2];
+y6=y8=1/7[y7,y2];
+path tra, trb, upp, lop;
+tra= z1{up}..{left}z2..{down}z3..{down}z4;
+trb= z8{down}..{right}z7..{up}z6..{up}z5;
+z5'=tra horintersection 5/7[y7,y2];
+z4'=trb horintersection 2/7[y7,y2];
+upp= z1{dir60}..{left}z2..z3..z5'..z4...z4';
+lop= z8{dir240}..{right}z7..z6..z4'..z5...z5';
+draw upp; draw lop;
+end_char;
+
+beginchar(".", 2tw#+s#, th#, 0); "dot";
+pickup lower_pen;
+bot.z1 = (w/2,0);
+dot.z1;
+end_char;
+
+beginchar(",", 2tw#+1.5s#, th#, th#); "comma";
+pickup lower_pen;
+bot.z1 = (w/2+.5s,0);
+comma z1;
+end_char;
+
+beginchar(":", 2tw#+s#, xh#, 0); "colon";
+pickup lower_pen;
+bot.z1 = (w/2,0); z2=(w/2, 3/4xh);
+dot z1; dot z2;
+end_char;
+
+beginchar(";", 2tw#+1.5s#, xh#, 0); "semicolon";
+pickup lower_pen;
+bot.z1 = (w/2+.5s,0); z2=(w/2, 3/4xh);
+comma z1; dot z2;
+end_char;
+
+beginchar(char 38, 2sw#+2tw#, ch#, 0); "the ampersand \&";
+pickup lower_pen;
+x1-.66s=x2+s=x3=x5=.42w; x4=w-2.9tw; rt.x6=w-.5s;
+top.y1=h-.75s; y2=.6h; y4=.525h; y6=.7[y4,h]; bot.y3=0;
+y4-y5+1.33th=y6-y4;
+draw z1{dir130}..{right}z2 &
+     z2{left}..{right}z3..tension1.25..{dir215}z4;
+path tpart;
+tpart=z5 if modern: else: {dir105} fi
+      ..z4{dir32}..tension1.25.. if modern: {dir100} else: {dir145}fi z6;
+draw if modern: subpath(.2,1.92) of fi tpart;
+end_char;
+
+beginchar("$", 2tw#+sw#, ch#, 0); "the  $ (dollar sign)";
+pickup lower_pen;
+x1=w-1.5s; x3=w-s; x2=tw; x4=.5s;
+top.y1=h-th; bot.y4=s;
+y2=2/3h; y3=1/3h;
+y1'=y1-s; x1'=x1-.25s;
+x1''=x4''=w/2; top.y1''=h; bot.y4''=0;
+path sstem;
+sstem=z1'{dir10}..{up}z1&z1..z1''{left}..z2..tension.8..z3..z4''{left}..z4;
+x5=x6=w/2+.5s; bot.y5=h+s; top.y6=-s; draw z5{dir267}..z6;
+draw if modern: subpath(.8,6) of fi sstem;
+labels(1',1'',4'');
+end_char;
+
+beginchar("!", 2tw#+s#, ch#, 0); "exclamation !";
+pickup lower_pen;
+top.y1=top.y1'=top.y2=h; x1=x3=w/2; lft.x2=x1; y3=1/2xh; x1'=.5[x1,x2];
+bot.z4=(w/2,0);
+draw z1{dir268}..z3; draw z1---z1'{dir263}..z3;
+dot z4;
+end_char;
+
+beginchar("?", 3tw#+s#, ch#, 0); "question mark?";
+pickup lower_pen;
+x1+tw=x2=x3=x4=1.5tw; bot.y4=0;
+y3=1/2xh; y2=y3+2th; y1=h-th;
+draw z1{dir40}..tension.84..{dir215}z2...z3;
+dot z4;
+end_char;
+
+beginchar("(", 2tw#+s#, ah#, dh#); "opening parentheses (";
+pickup lower_pen;
+top.rt.z1=(w-.5s,h); bot.rt.z3=(w-.5s,-dh);
+lft.z2=(s,.53[y1,y3]);
+draw z1{curl6}..z2..{curl6}z3;
+end_char;
+
+beginchar(")", 2tw#+s#, ah#, dh#); "closing parentheses )";
+pickup lower_pen;
+top.lft.z1=(.5s,h); bot.lft.z3=(.5s,-dh);
+rt.z2=(w-s,.53[y1,y3]);
+draw z1{curl6}..z2..{curl6}z3;
+end_char;
+
+beginchar("[", 2tw#+s#, ah#, dh#); "opening bracket [";
+pickup lower_pen;
+top.rt.z1=(w-.5s,h); bot.rt.z3=(w-.5s,-dh);
+top.lft.z1'=(s,h); bot.lft.z3'=(s,-dh);
+draw z1---z1'{dir-80}..tension1.5..{dir-100}z3'---z3;
+end_char;
+
+beginchar("]", 2tw#+s#, ah#, dh#); "closing bracket ]";
+pickup lower_pen;
+top.lft.z1=(.5s,h); bot.lft.z3=(.5s,-dh);
+top.rt.z1'=(w-s,h); bot.rt.z3'=(w-s,-dh);
+draw z1---z1'{dir-100}..tension1.5..{dir-80}z3'---z3;
+end_char;
+
+beginchar("/", 2tw#, ah#, dh#); "the virgule (/)";
+pickup lower_pen;
+top.rt.z1=(w-.5s,h); bot.lft.z2=(.5s,-dh);
+draw z1{dir-40}..tension8..{dir-40}z2;
+end_char;
+
+beginchar(char 35, 2sw#+.75s#, ch#, 0); "number sign";
+pickup lower_pen;
+top.lft.z1=(2tw,h);
+bot.lft.z2=(.5tw,0);
+top.rt.z3=(w-.5tw,h);
+bot.rt.z4=(w-2tw,0);
+draw z1--z2; draw z3--z4;
+lft.x5=lft.x7=0; rt.x6=rt.x8=w;
+y5=y6=.62h; y7=y8=.38h;
+draw z5--z6; draw z7--z8;
+end_char;
+
+beginchar(char 37, 2sw#+.25s#, ch#, 0); "percent sign";
+pickup lower_pen;
+top.z1=(1.3tw,h-.7th); bot.z2=(1.3tw,h-4.6th);
+draw z1{left}..z2{right}..cycle;
+top.z3=(w-1.3tw,3.9th); bot.z4=(w-1.3tw,0);
+draw z3{left}..z4{right}..cycle;
+top.rt.z5=(w-.5s,h); bot.lft.z6=(.5s,-1.5th);
+draw z2{right}..{z5-z6}z5 & z5--z6;
+end_char;
+
+beginchar("+", 1/3size#, xh#, 0); "plus";
+pickup lower_pen;
+numeric axis;
+axis=.5[-dh,ah];
+z1 = (s,axis); z2 = (w-s,axis);
+draw z1--z2;
+z3=(w/2,axis+(x2-x1)/2); z4=(w/2,axis-(x2-x1)/2);
+draw z3--z4;
+end_char;
+
+beginchar(char 123, 1/3size#, xh#, 0); "minus";
+pickup lower_pen;
+numeric axis;
+axis=.5[-dh,ah];
+z1 = (s,axis); z2 = (w-s,axis);
+draw z1..z2;
+end_char;
+
+beginchar(char 42, .4size#, xh#, 0); "asterisk";
+pickup lower_pen;
+%pickup cap_serif_pen; 
+z0=(w/2,xh);
+z1 = (s,xh); z2 = (w-s,xh);
+draw z1..z2;
+z3 = z1 rotatedaround (z0, 60);
+z5 = z1 rotatedaround (z0, 120);
+z4 = z2 rotatedaround (z0, 60);
+z6 = z2 rotatedaround (z0, 120);
+draw z3..z4; draw z5..z6;
+end_char;
+
+beginchar("-", 2tw#+s#, xh#, 0); "hyphen";
+pickup lower_pen;
+z1 = (.75s,.4h); z2 = (w-.75s,.6h);
+draw z1{dir55}.. {dir-5}.5[z1,z2]{curl0}..z2{dir55};
+end_char;
+
+beginchar(char 124, 8/10size#, xh#, 0); "em rule";
+pickup lower_pen;
+numeric axis;
+axis=.5[-dh,ah];
+z1 = (2.75s,axis); z2 = (w-2.75s,axis);
+z1'= (s,axis-s);  z2'= (w-s, axis+s);
+draw z1'{dir35}..z1{right}..{right}z2..{dir35}z2';
+end_char;
+
+
+% quote characters and trema have lowercase slant
+% some others as well
+slant:=lowerslant;
+currenttransform := identity slanted slant;
+
+
+beginchar(char 39, 3.5tw#, ch#, 0); "punctuation ' ";
+pickup lower_pen;
+z1=(1.75tw,h);
+comma z1;
+end_char;
+
+beginchar(char 34, 5tw#, ch#, 0); "punctuation '' ";
+pickup lower_pen;
+z1=(1.75tw,h); z2=(w-1.75tw,h);
+comma z1; comma z2;
+end_char;
+
+beginchar(char96, 3.5tw#, ch#, 0); "punctuation ` ";
+pickup lower_pen;
+z1=(1.75tw,h-s);
+revcomma z1;
+end_char;
+
+beginchar(char 92, 5tw#, ch#, 0); "punctuation `` ";
+pickup lower_pen;
+z1=(1.75tw,h-s); z2=(w-1.5tw,h-s);
+revcomma z1; revcomma z2;
+end_char;
+
+beginchar(char 127, 5/18size#, 17/30 size#, 0); "trema (umlaut)";
+pickup lower_pen;
+top.lft.z1 = (s,h-s); top.rt.z2=(w,h-s); 
+dot z1; dot z2;
+end_char;
+
+beginchar(char 95, 3/18size#, 17/30 size#, 0); "dot accent";
+pickup lower_pen;
+top.z1 = (w/2,h-.2s);
+dot z1;
+end_char;
+
+beginchar(char 16, 2tw#+.5s#, xh#, 0); "dotless i";
+pickup lower_pen;
+x2=x3=w/2; lft.x1=.1s; rt.x4=w-.1s; y1=h-th; top.y2=h; bot y3=0; y4=th;
+path stem;
+stem = z1{dir40}..tension2..z2..tension5..z3..tension2..
+      {dir40}z4;
+draw if modern: subpath(0.8,2.2) of fi stem;
+end_char;
+
+beginchar(char 17, 2tw#+.5s#, xh#, dh#); "dotless j";
+pickup lower_pen;
+x2=w/2; lft x1=0; x4=w/2-.1s; y1=h-th; top.y2=h; bot.y6=-dh+.33th;
+bot.y4=-dh+1.1th; x6=.1s;
+path stem;
+stem = z1{dir40}..tension2..z2..tension4.5..
+      z4..tension.825..{dir133.5}z6;
+draw if modern: subpath(0.8, 2.72) of fi stem;
+end_char;
+
+beginchar(char 64, 4tw#+sw#, ch#, 0); "the at-sign";
+pickup lower_pen;
+x1=x2=w-2tw; y1=y5=xh;
+rt. x3=w-tw; y3=3th; bot.y6=bot.y2=2th;
+lft x5=2.5tw; lft x6=2.25tw;
+x7=x9=w/2; y7=xh+2.9th; y9=0; lft.x8=.33s; y8=h/2; rt.x10=w-.25s; y10=1.3th;
+path rightstem; rightstem =  z1..tension6.7 ..z2..tension2..{dir35}z3
+      ..{left}z7..{down}z8..{right}z9..{dir36}z10;
+z4 = rightstem horintersection .7xh;
+draw if modern: subpath(0,5.92) of fi rightstem;
+draw z4..tension3..z5..tension2.5..z6{right}..tension1.75..{up}z4;
+end_char;
+
+beginchar(char 20, 6/18size#, 17/30size#, 0); "hatchek";
+pickup lower_pen;
+lft.z1=(.5s,h+1.25s); rt.z3=(w-.25s,h+1.25s); z2=(.55[x1,x3],h-.5s);
+draw z1{right}..tension1.5..z2 & z2..tension1.5..{right}z3;
+end_char;
+
+beginchar(char 21, 6/18size#, 17/30size#, 0); "breve accent";
+pickup lower_pen;
+lft.z1=(.5s,h+1.25s); rt.z3=(w-.25s,h+1.25s); 
+draw z1{down}..{up}z3;
+end_char;
+
+beginchar(char 22, 6/18size#, 17/30size#, 0); "macron";
+pickup lower_pen;
+lft.z1=(.5s,h); rt.z3=(w-.25s,h); 
+draw z1--z3;
+end_char;
+
+beginchar(char 23, 1.5sw#, 17/30size#, 0); "circle accent";
+pickup lower_pen;
+rt.z1=(2.5s,h+s); lft.z3=(w-2.4s,h+s); 
+draw z1{down}..{up}z3..cycle;
+end_char;
+
+beginchar(char 24, 5/18size#, 0, 2/3dh#); "cedilla";
+pickup lower_pen;
+z1=(w/2, 0); z2=(w/2, -1/4dh); z3=(w/3, -2/3dh);
+draw z1---z2{right}..tension.8..{left}z3;
+end_char;
+
+beginchar("^", 6/18size#, 17/30size#, 0); "circumflex";
+pickup lower_pen;
+top.lft.z1=(.5s,h); top.rt.z3=(w-.25s,h); z2=(.55[x1,x3],h+1.35s);
+draw z1{right}..tension1.5..z2 & z2..tension1.5..{right}z3;
+end_char;
+
+beginchar("~", 6/18size#, 17/30size#, 0); "tilde";
+pickup lower_pen;
+top.lft.z1=(.33s,h); top.rt.z4=(w,h+.85s); 
+x2=1/3[x1,x4]; x3=2/3[x1,x4];
+y2=y4; y1=y3;
+draw z1{dir36}..z2..z3..{dir36}z4;
+end_char;
+

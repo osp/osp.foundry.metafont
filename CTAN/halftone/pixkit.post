@@ -1,0 +1,1817 @@
+$! Archive name: DRA1:[TEX.PIX]PIXKIT.POST;
+$!
+$! This file is a ``DCL archive``, a VAX/VMS DCL command procedure, analogous
+$! to a ``shell archive`` on UNIX systems. It is intended primarily for
+$! sending a set of files across a network in a format which allows them
+$! to be restored. On VMS systems, the archive is restored simply by typing:
+$!
+$!        $ @archive-name
+$!
+$! The format of the archive is as follows:
+$!
+$!  1. As you start reading the file, lines which start with a dollar ($)
+$!     are DCL commands.
+$!  2. On DCL commands, an exclaimation mark (!) marks the beginning of
+$!     a comment. In the DCL archive, this only occurs as the second character
+$!     on a line.
+$!  3. Each file to be created is preceded by a ``CREATE`` command. The
+$!     text following the word `CREATE' is the name of the file to be created.
+$!     If your system allows it, you should create a new version of the file.
+$!  4. Filenames consist of two parts, the name itself and the extension.
+$!     Either part may contain zero to 39 characters, which must be dollar,
+$!     underscore (_), hyphen (-) or alphanumeric; a hyphen may not be the
+$!     first character of a name.
+$!  5. The `CREATE' command is followed by a line containing `$DECK' only.
+$!     Lines of text following the `$DECK' should be copied verbatim to
+$!     the output file.
+$!  6. The end of the output file is delimited by a line containing only
+$!     `$EOD'.
+$!
+$! Note that lines starting with a dollar may occur within `$DECK'..`$EOD'.
+$!
+$! The following two lines contain the ASCII character sequence from
+$! exclaination mark to the end of the upper case letters, followed by
+$! the remaining characters up to #126:
+$! !"#$%^&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ
+$! [\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+$!
+$! This archive was created using DCLAR version 0.00--0
+$!                          on 15-JAN-1988 14:52:26.56.
+$!                          under VAX/VMS V4.5    
+$! DCLAR was written by Dr. Adrian F. Clark (``Alien``), Essex University.
+$!
+$WRITE SYS$OUTPUT "creating BLURB.TXT" 
+$CREATE BLURB.TXT
+$DECK
+This DCL archive contains all the required bits and pieces for preparing
+pictures for plotting by TeX. When executed, the archive creates
+the following files:
+
+   o BLURB.TXT     this file
+   o HALFTONE.TEX  user-level documentation (for LaTeX)
+   o PICTURE.TEX   picture from TeXPIC used by HALFTONE.TEX
+   o TEXPIC.FOR    the software. Note that there are two versions
+                   of TEXPIC in this file, one for VMS and another
+                   which is a little more portable.
+   o HALFTONE.MF   Don Knuth's halftone font
+
+If you intend to produce pictures of size >= 256 x 256, you'll need to
+expand TeX's memory (see my article in TUGboat vol 8 no 3 for more
+details). I can supply a TeX change file for VAX/VMS which effects this
+change (and provides an editor interface) either by e-MAIL or on tape.
+Contact me for more details. 
+
+If you want to use this software, but you're not a TeX guru...find
+someone who is!  He/she will be able to generate convert the Metafont
+source for the halftone font (HALFTONE.MF) to a form acceptible to
+TeX, and put it in the right directories for you to use.  I can supply
+outline help, but the font generation process tends to be horribly
+site-dependent.  Sorry.
+
+If you have any trouble with the software, please let me know (it's not
+quite the same as the version I use myself). I'm particularly keen
+to receive feedback from non-VMS sites.
+
+                           `Alien'   (ALIEN @UK.AC.ESSEX.ESE on JANET)
+$EOD
+$WRITE SYS$OUTPUT "creating HALFTONE.TEX" 
+$CREATE HALFTONE.TEX
+$DECK
+% --- ------------------------------------------------------------------
+% --- halftone.tex
+% --- Format me with LaTeX, print me with an inch of top and left margin
+% --- ------------------------------------------------------------------
+
+\font\halftone=halftone
+
+\def\|#1|{{\tt#1}}
+\def\mmax{M_{\hbox{\scriptsize max}}}
+\def\SYSDEP#1{\marginpar{\scriptsize site\\ specific}}
+\def\TL{{\tt\TeX lase}}
+\def\TV{{\tt\TeX view}}
+\def\VAX{\leavevmode\hbox{V\kern-.12em A\kern-.1em X}}
+\def\VMS{\leavevmode\hbox{V\kern-.06em MS}}
+
+\def\mc{\small}
+\def\FORTRAN{{\mc FORTRAN}}
+
+\nofiles
+\documentstyle[11pt]{article}
+\advance\textheight by 21mm
+
+\title{Halftone Output From \TeX\footnote{Taken from the {\sl \VAX/\VMS\ \TeX\
+       User's Guide}}}
+\author{Dr. Adrian F. Clark\\
+        Department of Electronic Systems Engineering\\
+        University of Essex}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+This note describes how image data can be converted to a form suitable
+for \TeX\ and then typeset in documents. Pictures are prepared for \TeX\
+in a somewhat different way to normal text---the hard work is done outside
+the \TeX\ input file; incorporating the image into the \TeX\ document is
+then quite straightforward.
+
+The image data must be converted from the binary representation used in Image
+Processing and Pattern Recognition work to a series of characters which \TeX\
+can map into pseudo grey-levels via a special font. A user-callable \FORTRAN\
+\|SUBROUTINE| called \|TEXPIC| is available for this purpose. \|TEXPIC|
+converts a picture held in memory to a text file containing \TeX\ input. (You
+can look at this file if you like, but it is unlikely to make much sense.)
+There are a few additional routines which can be used with \|TEXPIC| to produce
+particular effects: for example, the picture may be plotted as a positive or
+negative image. 
+
+The special font for setting pictures is
+defined to have some 65~grey levels. This does not necessarily imply that all
+the grey levels are distinguishable, nor even that they are strictly monotonic
+on laser printers. However, the quality of the output is certainly adequate for
+run-of-the-mill technical reports. 
+
+An example of an image typeset with \|TEXPIC| and \TeX\ is shown in
+Figure~1. This is the ``girl'' picture from the image database
+distributed by the Signal and Image Processing Institute of the University of
+Southern California, which is widely used to demonstrate image processing
+techniques. This representation is some $64 \times 64$~pixels. 
+
+\begin{figure}
+   \centering
+   \fbox{\input picture\relax}
+   \caption{Example of an Image Typeset using \|TEXPIC| and \TeX}
+\end{figure}
+
+\section{The \|TEXPIC| Routine}
+
+To generate a file containing the image data in a form suitable for input to
+\TeX, you simply invoke \|TEXPIC| from a program. \|TEXPIC| is called as
+follows:
+
+\begin{verbatim}
+    CALL TEXPIC( ARRAY, M, N, FILE )
+\end{verbatim}
+
+\noindent where \|ARRAY| is a \|M| $\times$ \|N| \|REAL| array containing the
+picture to be plotted and \|FILE| is a quoted string or \|CHARACTER| variable
+containing the name of the file to receive the data. If you omit a filetype
+(``extension'') from \|FILE|, \|TEXPIC| will use \|.TEX|. You can call
+\|TEXPIC| as many times as you want from a program; a separate output file will
+be generated for each picture.
+
+Due to problems with the controlling micro-processor in the standard \|LN03|
+printer, pictures with $\|N| > \approx 64$ will come out with white bands
+across them, rendering them effectively useless. However, this problem has been
+overcome on the \|LN03+| device, which can print images up to a full \|A4|
+page in size. 
+
+
+\section{Associated Routines}
+
+\|TEXPIC| normally maximises the contrast of pictures by determining the range
+of grey levels in the image and scaling the output to make use of them. This
+behaviour can be overridden by invoking the routine \|ZRANGE| before \|TEXPIC|.
+\|ZRANGE| requires two \|REAL| arguments, the minimum and maximum grey level
+values to be output: 
+
+\begin{verbatim}
+   CALL ZRANGE( ZMIN, ZMAX )
+   CALL TEXPIC( ARRAY, M, N, FILE )
+\end{verbatim}
+
+\noindent where \|ZMIN| $\le$ \|ZMAX|.
+\|TEXPIC| then uses the supplied extrema, rather than values
+determined from the image, for scaling the data. Values which lie {\em
+outside\/} these extrema are clipped. Hence, if \|ZRANGE| is used with values
+which are outside the values of the pixels in \|ARRAY|, the contrast of the
+data generated by \|TEXPIC| is {\em reduced.\/} The converse is also true. The
+extrema set up by \|ZRANGE| remain in effect until another call is made to
+\|ZRANGE|, superseding the previous limits, or \|ZAUTO| is invoked, which
+restores the default behaviour. 
+
+\|TEXPIC| normally plots positive pictures---i.e.,\ pixels which contain
+low values come out darker than pixels with high values. It can also produce
+negatives, however; you do this by invoking the routine \|DONEG| before
+\|TEXPIC|. Normal, positive picture-plotting is restored by calling \|DOPOS|.
+As with \|ZRANGE| and \|ZAUTO|, \|DOPOS| and \|DONEG| remain in effect until
+explicitly cancelled.
+You can, of course, use the routines in conjunction to produce any
+required effect.
+
+There is a limit, $\mmax$, to the number of pixels that \|TEXPIC| can fit
+across a page of output. For
+pictures with $\|M| \le \mmax$, the data are written out exactly as supplied.
+However, when pictures have $\|M| > \mmax$, the image is interpolated so
+that the data written out form a $\mmax$-pixel image.
+The same interpolation factor is used in both dimensions so that the aspect
+ratio of the picture remains correct. The interpolation technique used is
+a context-sensitive three-point bilinear method due to {\sc
+Smith}.\footnote{There is also a version which uses standard four-point
+bilinear interpolation.} This produces marginally better results in the
+vicinity of edges in the picture.
+
+The default value of $\mmax$ is~256. You can alter this (for example, when
+producing pictures for a document with the text set in narrow columns) by
+invoking \|TEXMAX| before \|TEXPIC|, as follows:
+
+\begin{verbatim}
+   CALL TEXMAX( MV )
+\end{verbatim}
+
+\noindent This sets $\mmax$ to \|MV|. Obviously, $\|MV| \ge 2$.
+
+\|TEXPIC| and the support routines are all to be found in the algorithm
+library, \verb|ESE$LIB:ALG|. \SYSDEP{Location of \\TEXPIC| and utility.}
+There is also a stand-alone program which you can use for images stored in the
+standard formats on disc. This program is \verb"ESE$PROGRAMS:V159". 
+
+
+\section{Inserting the Picture into Your \TeX\ Document}
+
+This is quite easy, although there are a few steps in the process.
+The procedure you follow depends on which macro package you are using with
+\TeX. Most people use ``plain \TeX,'' the default macro package, but \LaTeX\
+is also in widespread use. If you use a customised \TeX\ but don't know exactly
+what is different about it, try the plain \TeX\ procedure.
+
+Whichever version of \TeX\ you use, there are a few things you should know.
+\TeX\ must hold the whole image in memory, so the maximum image size is
+obviously limited to \TeX's memory capacity. Since \TeX\ was designed for
+typesetting rather than image hard-copy, its memory capacity isn't
+large enough to hold dozens of pictures, although it should be adequate
+for reasonable use.
+
+\|TEXPIC| tells \TeX\ to use a special font, a {\em halftone\/} font, for
+setting the picture. You have to tell \TeX\ to load this font. To do this,
+you type the following command at the top of your document:
+
+\begin{verbatim}                                          
+   \font\halftone=halftone
+\end{verbatim}
+
+\noindent This works with both plain \TeX\ and \LaTeX.
+
+We shall now consider the procedure for telling \TeX\ to typeset your picture.
+In the examples that follow, it is assumed that the picture produced by
+\|TEXPIC| is in the file \|PICTURE.TEX|.
+
+\subsection{Procedure for Use with Plain \TeX}
+The first thing you must do is to create an input file for \TeX\ which contains
+the document to be typeset. At the point where you want the picture to
+appear, you type:
+
+\begin{verbatim}
+   \centerline{\input picture}
+\end{verbatim}
+
+\noindent For \TeX{}perts, the image is set as a single \verb|\hbox|.
+  
+The picture can be put into a ``floating'' insert, which will cause the
+picture to be held in \TeX's memory until there is enough free space on
+the page to hold it. For example, to set the picture in a \verb"\midinsert",
+the relevant \TeX\ input would be:
+
+\begin{verbatim}
+   \midinsert
+      \centerline{\input picture}
+   \endinsert
+\end{verbatim}
+
+\noindent This command sequence should be typed between paragraphs,
+when \TeX\ is in `vertical mode.' Typing \verb"\goodbreak" immediately
+before the \verb"\midinsert" may help \TeX's page-breaking mechanism. (In
+practise, you'll probably want to add a title to the picture, too.)
+
+There is one other thing you might want to do and that is to draw a border
+around the picture. You would do this by defining a \TeX\ macro, \|border|,
+as follows:
+
+\begin{verbatim}
+   \def\border#1{\vbox{\hrule\hbox{\vrule\kern3pt
+      \vbox{\kern3pt#1\kern3pt}\kern3pt\vrule}\hrule}}
+\end{verbatim}
+
+\noindent You would then set the picture with
+
+\begin{verbatim}
+   \centerline{\border{\input picture}}
+\end{verbatim}
+
+\noindent instead of simply \verb"\centerline{\input picture}".
+
+\subsection{Procedure for Use with \LaTeX}
+The most sensible way to plot pictures with \LaTeX\ is in the \|figure|
+environment ({\em not\/} the \|picture| environment). This generates
+a ``floating'' figure, which usually surfaces at the top of the following
+page of output. The \verb|\centering| declaration causes the picture to
+be centred in the page.
+
+\begin{verbatim}
+   \begin{figure}
+      \centering
+      \mbox{\input picture\relax}
+      \caption{Figure Title}
+   \end{figure}
+\end{verbatim}
+
+\noindent The \verb|\relax| following the filename in the \verb|\mbox| command
+is required for \LaTeX\ to know where the filename ends. To draw a border
+around your picture, you simply replace the \verb|\mbox| command with
+\verb|\fbox|. 
+
+\section{Producing the Output}
+
+Having inserted the appropriate commands into your document, you run \TeX\ in
+the normal way. If it exits with a ``memory capacity exceeded'' error message,
+you've either tried to set images which are too big or you're holding too
+many in memory at once.  The only solution to this problem is to re-format your
+document. \LaTeX\ users may be able to cure the problem by strategically
+inserting \verb"\clearpage" commands into the manuscript.
+
+You run \TV\ or \TL\ on the \TeX\ output file as normal, although the \TV\
+display bears little relationship to the grey levels produced by \TL. Note that
+you must use \TL\ version~10 to send output to the \|LN03|, since earlier
+versions cannot read the halftone font file. (When you invoke \TL\, it outputs
+a short introductory message which includes its version number.) 
+
+The current version of \TeX\ 2.0 has a larger-than-usual memory capacity,
+\SYSDEP{Size of \TeX's memory.}
+large enough for four $256 \times 256$ images to be held in memory.
+
+\end{document}
+$EOD
+$WRITE SYS$OUTPUT "creating PICTURE.TEX" 
+$CREATE PICTURE.TEX
+$DECK
+ \hbox{\vbox{\halftone\offinterlineskip % machine-generated by TEXPIC.
+ \def\BHT{\hbox\bgroup\ignorespaces}
+ \catcode`\^=12 \catcode`\_=12 \catcode`\.=\active \let.=\egroup
+ \catcode`\,=\active \let,=\BHT \catcode`\/=0 \catcode`\\=12
+ ,ccdggfcbabbcfeeddeccehhlmkkklljdejceggiagjfgbecbbadiiXNQLEHDGHJL.
+ ,dcdggfbbbaadeddcddbdfghkmkkkklljjicfhiiaiiggbddac`fkcQLQLEGGGHKL.
+ ,ecbfffcbbabdeedecddfgfglmkkkjkllmgc`ghgcjhfdbebaaahk\NLQLGGHGKMN.
+ ,cccfgfdaaaadddddceffdcekmkkkj_PI?GME;FNckfgfbbb`_djgVLLQMGIIGJNM.
+ ,dddggfbbbbbeedcdcedcccdjmkkk\GHEMHEJH><86Fcfdcc`_glaQOMPLHIHFJNL.
+ ,ddcggfcbaabdedddcdbbbbdjmkfHH?GQLQNLNNLB<@=NedbaaikZMLMQKGJHGJNM.
+ ,dbdffebaabbddeddddccabbjlgWSLLFKIRQLJMTKMHKDKda_dkhUILNQJIKJILPN.
+ ,dbeggfdbbbbdfddddcccbbchdJFGISKTMPWRQLWYVOKGDBaahlaTRQUWOKMRNQUT.
+ ,ebdggecbaabdddcedccbcbaUHAIKNPTUNROORQYXYUWVPIOdij[TWWYZTSSWWY\\.
+ ,edegfebabbadeedddccbbbRRVOJLHCJOOPSVT^WY]XTTTLDakbQKONNRMOST[\^\.
+ ,dcdfgeabcbaceddcdbccbZ[VWYJJMWMTRLS]]bZ_a`Z^QTQ9l^HHMNONJRYYYZ\\.
+ ,ecdgffcaaabdecdcdccb_d\YVQUWQ^a_Yf`^^lkha^_^SLWB\YHHLNONGPXXVWZ[.
+ ,ebdgfebaabbdeddccbcd^bYZQ[W]VZbjaijgdgonhhiiWJJEWOJJLNOLHQXVVTY\.
+ ,ebegffcbabbdecdbcbba^X`a\WC`hjdbekleknnopjkifXGRRMHIMLPNIQVVWUX\.
+ ,ecdgffbaaabdedcdbba^_ef_`iegcfglnneihlnonmlii\KQULGHKJOONUTVUTY[.
+ ,fcdggebbaacdddcddbb^_gbhllfiknhnoinlmlllmmlih`Q]SKILJLPQTXTUVTVZ.
+ ,ecdgfecbbabdedddddba\ehjljiklmlmnnmilkghcjgicb\YUJJJMRYTQYXUVWWZ.
+ ,dcdgfeab`bbedddcdcb\a]flmjijldecnommjf]jcTf\bdbbELLNSU^TPWYWWWWX.
+ ,fcfggeababbedddcdbc]^g`gm_fa]hgaemkgjhgj_UhIb^f^SMJQXY]TQYXZYVYZ.
+ ,fbeffebabbbdecdcdcbb`ZSbg]b\Ya_b^gjijgjibajWdY]ZLNJRXZ]SNY][YWW[.
+ ,fbeffdcbaabdddddcbabhgi_b`]^bbhdb`dgfdjaagjjbV[ZLMLWXV\QR[^^\XY[.
+ ,ebdffdcabbbededdccc`mlnmjecfihhijjikkdj^efije_]_NNPWXYZRU^]^[WUZ.
+ ,fcegfdbbbbcdddddccbbinonnjhgkinkmnlnmiidegfkggjZVWVYY\\UW]^\ZVU\.
+ ,ebdffecbacceeeddcccbginnijjjkkkjklnnnijjiihmjjfdRUV^^^aY\_^]]][^.
+ ,gdeggdbbbbcdededddbcggYNVWX\]ii_`b_cmljlkkhkibi\NKQYY\_SW_ZZ^[^].
+ ,fdegfebabbceeeeddddcdh]diZYZYYfjgacllihnkmjbifhSNKNTY_^RV^^^^]^].
+ ,fbfggeccdceeddddeddcceghggaZ\be_fefjljhjjmnkjegQKKIOY^_RT_^^^\\\.
+ ,fcegffdbcbdeddedeecbchnZm]dNVgggjmpohfeeiglljkZNJHFPW^^RT^\^YY[^.
+ ,fcfhfdbccbcfeeeddddcdcZgibUO[]RcWelifcegijigflLLJIIOU\_VT_]\ZY\^.
+ ,edfgfebccddeeeedeeedcbTYXRUP^\XTbdd\`a_ggekebPQLLJHMOX^VW][]\YY\.
+ ,edfgfedcdcdfeeffeededdTQOOVU_\WOQTW[_afkflhaSOQJLMKNRZ^UY[[_^YV].
+ ,fdfgfeddccdeefeeeeefbeTOKYSY`aWJQVY]afeklihbSNMJJKLMT\^UY]\_b\Z^.
+ ,fdgfgfdccddfeffdfffeedTTTaQZbd^TSUW]bg`_fgfQUPLLLJKOQX]UX]\\]Z[^.
+ ,fdgggedccdcfefeefededc\Zaa_jij^^XY\`de^[X\VPRORPLKJLNU\VX^[\[VY^.
+ ,fdfgffcdcbdfedefefeeee_bg\W^Z[[_ab_ciadXUNVVYWWUQLJMOW\TY\YZZYZ_.
+ ,fdfggfdcecdeeefeeefedfebaidVY\]abbdfidaZXNWTWVVTQJKNOXXTZ[Z\]ZY\.
+ ,fdfggedddddffeefeedeejj_[Y`KHYlok`degfa]`QYWYWVTSNORW\\T]]]a^WVZ.
+ ,fcgggfddddeffeeffeeeegie^YaYV]ecZ]bfgda_`PZ[ZZ[WUQNRV^[Z_bb`]ZZ^.
+ ,fdghgfededffffffeeedc[jh`\]]_acaa_fggcfhaXURTVYUMLKMR\_Y_cba]Z]a.
+ ,ffhhhgedddfggffffgfee_cil]UTQWX]^bfhhjhi`XRSRPURKHJKQ[\UZ]]_\[\\.
+ ,gfgjihfeffgiggfgggfegnlimo[VUY\abdhjkiiiaMQTUPTSJILPRVWRTVUWVSRR.
+ ,ggjjjiggfgfhhhggggffjljjmojbabdgjllljhjj_GRUVQURLJPURXWRQSRQQPPQ.
+ ,fikjjjhgfgfghghghhfhmnjgjnfgZlnnmlkjiiiiaRGPWQSRKKVWV[ZRTVSURSRQ.
+ ,chkjjjggggffghghhgfjnnmlmdliiY^lljjjjiiib`d[^_TQKNWWV][RWVVVUTSS.
+ ,]`gkkjihghhhjjjjjjijmnoldfijhkXY\gijid_]fjihffe`QMWUV[ZQUVTSTTRT.
+ ,\^]ejllkkjjjllmmlmlllnfcdfghijk\]][\\[gkmhjhhgfda]`^X_]TYWVYYUUW.
+ ,ab[\cegihgffhjjkkkkibecddfhfljjofgfhikiiiljigfiijkklg\[UZYY]]ZYZ.
+ ,d```a``cfeffijjjj`^edegdfgjfkijnogfhhhgiihijjjklmnoobnYQWYY\[ZYV.
+ ,hifiie__egggijj]cbfeecegfflgfnjinofggiiihhhfgiljjndhdhbRXZZ][XXX.
+ ,hklllic]ageeffNYcfgfgffggfkifijihmjhhhiiiijjjijlmmmiZQESY\^][[[[.
+ ,hghlmkib^cdeYY^dchhffgeggfhmhiiignjihihhijijjkllnoni`YXFDYZ\WWYZ.
+ ,a]bkmkigdjmc^`bbdigfggfhgggoiijjkhljjhijijjjklmnonheddaXRHK]YUXY.
+ ,c^`knihighl[__adgjhffghiiiiimjjikkjjiikikkkllmooihhgfgec[XOHc_ac.
+ ,gbbjnllmkjk[^_baiiggehiijiiholnomlklknmikklmmoohgghgfiifea_[W^^_.
+ ,kghllnooona^___gcliijkddfhiijommihnnmnhipomnoniggghhhhhijjced]ZZ.
+ ,nonmlmopppd``a`lgakifhghijjjjjllmjlklkkjanlkiggihiiiiiihlkiZha]Z.
+ ,pponlloppo`a`bdllkgfddgijgebblkmilimmkUACG8@iiihghiiihhnmiifWg\W.
+ ,pponllmopmabacdlllkkkkjie^bcbfajominXlk`=L=3BEbfgiihhgjnjijj`W[U.
+ ,ponmlllnolbbbadkmllkklkfdhbhdghimmkiaO?HO>G8?CELhjihghkoiklje[YY.
+ ,onnmlmmmocdcbacjlmmlmmlcgiijgefkjopooonNA>7=BBDC<jhghlooillki`QX.
+ ,nmnmnmmmobcbbbbjlmmmmjjkljlgiielilio\[IZWPRS?D4BDWghilokilllkg\[.
+ ,mmlkllklneddbbbjmmmllfhjkillkgjjb\TYpKTVO;JJ<7I;3FkRmoohlnnnlkcT.
+ ,lllllllnnc`dbcbblmmmmlgijiggfhhkR@TCYI[HghUWS?@DCFBBEA?mnoonmkf\.
+ ,pponmmnnjb\kjfdekklkkijkjijhiigiILAP<LIL^VNSHGKLBABJ>BGbooonnmia.
+ }}%
+$EOD
+$WRITE SYS$OUTPUT "creating TEXPIC.FOR" 
+$CREATE TEXPIC.FOR
+$DECK
+C --- -----------------------------------------------------------------
+C ---                          T e X P I C
+C --- -----------------------------------------------------------------
+C
+C --- These routines are used to generate an input file to TeX which,
+C --- when processed, gives a halftone representation of the grey-level
+C --- image. TEXPIC is the main picture-plotting routine: it requires a
+C --- M x N pixel array ARRAY. The TeX commands are written to the file
+C --- FN. These routines are taken from a general-purpose library of
+C --- image processing software developed by the author, which explains
+C --- why most of the variables in the COMMON blocks are not used. The
+C --- Fortran is also machine-generated, which may account for some odd
+C --- line breaks in the code. (No line, even in comments, has more
+C --- than 72 characters in it.)
+C
+C --- The image representation used here conforms to the one adopted by
+C --- the Numerical Algorithms Group (NAG) for their ``Image Processing
+C --- Algorithm Library'' IPAL, although the coding does not  (it  does
+C --- not allow a sub-region to be plotted).
+C
+C --- There are two versions of TEXPIC in this file: the first is VAX-
+C --- specific, while the second should be fairly portable. Note that
+C --- both routines declare the BLOCK DATA module ALGINI as EXTERNAL;
+C --- this usually forces the linker to build it into executable files.
+C
+C --- TEXPIC's support routines are:
+C
+C ---    TEXMAX  set the maximum pixel width across the page
+C ---    ZRANGE  fix the contrast for subsequent TEXPIC calls
+C ---    ZAUTO   subsequent pictures have their contrast determined
+C ---            from the data
+C ---    ZSAME   subsequent pictures are plotted with the same
+C ---            contrast as the previous one
+C ---    DOPOS   subsequent pix have low pixel values plotted black
+C ---    DONEG   subsequent pix have low pixel values plotted white
+C ---    MINMAX  determines the range of the data
+C ---    ALGERR  outputs error messages
+C ---    ABANDN  VAX-specific ^C trap routine
+C ---    ALGINI  block data module
+C
+C --- Details of the invocations are given in the comments associated
+C --- with each routine. There is also a separate document which gives
+C --- user-level documentation and examples. This is available as part
+C --- of the ``VAX/VMS TeX User's Guide'', written by the author, or as
+C --- a separate document.
+C
+C --- As supplied, TEXPIC uses a three-point contextual bilinear method
+C --- to interpolate between pixels. The results it produces should be
+C --- marginally better than using standard four-point interpolation;
+C --- however, the author can detect no difference. If you'd prefer to
+C --- use four-point interpolation, the line to change is marked in the
+C --- TEXPIC source code.
+C
+C --- Since you get TEXPIC free of charge, there is no formal guarantee
+C --- given by Essex University OR the author that the software works
+C --- or that the documentation agrees with the code. Nevertheless, the
+C --- author would be pleased to hear of any problems.
+C
+C --- TEXPIC and associated routines were written by:
+C
+C ---    Dr. Adrian F. Clark  (``Alien'')
+C --- of Department of Electronic Systems Engineering
+C ---    University of Essex
+C ---    Wivenhoe Park
+C ---    Colchester
+C ---    Essex C04 3SQ
+C ---    United Kingdom
+C ---    Tel: Colchester (0206) 872432 (direct)
+C ---    JANET: user ALIEN @UK.AC.ESSEX.ESE
+C
+C --- If you write, please mark the envelope with ``TeX''.
+C
+C --- Acknowledgements in any published work that uses TEXPIC would be
+C --- appreciated.
+C
+C --- ENJOY!
+C
+C --- -----------------------------------------------------------------
+      SUBROUTINE TEXPIC( ARRAY, M, N, FN )
+C --- -----------------------------------------------------------------
+C
+C --- TEXPIC version 0.1 was written by Alien in Fortran-77.
+C
+C --- This  routine  writes out the M x N image ARRAY into the file FN
+C --- in a form which is suitable for insertion into a  TeX  document.
+C --- If FN has no filetype (``extension''), .TEX is used.
+C
+C ---    By  default,  the range of the data is determined and used to
+C --- maximise  the  contrast  of  the  output  image.  This  can   be
+C --- overridden  by  pre-setting the range of data values with a call
+C --- to ZRANGE. ZAUTO  restores  the  default  behaviour.  Similarly,
+C --- TEXPIC  will  produce  negated  images  on  output  if DONEG has
+C --- previously been invoked.  DOPOS  sets  it  to  produce  positive
+C --- pictures again.
+C
+C --- USAGE:    CALL TEXPIC( ARRAY, M, N, FN )
+C
+C --- PARAMETERS
+C ---     ARRAY  REAL           image to be output to the file
+C ---     M      INTEGER        first dimension of ARRAY
+C ---     N      INTEGER        second dimension of ARRAY
+C ---     FN     CHARACTER*(*)  name  of  file  to  which ARRAY will
+C ---                           be written
+C
+C --- RESTRICTIONS
+C --- If N is greater than MMAX, the image will be sub-sampled in both
+C --- directions  to  make  the result  MMAX x MMAX. The interpolation
+C --- technique used is due to P.R. Smith (Ultramicroscopy vol  6,  pp
+C --- 201--204, 1981).
+C
+C --- COMMONS
+C --- /ALG/, /ALGTEX/
+C
+C --- SUBPROGRAMS INVOKED
+C --- MINMAX, LIB$GET_LUN, LIB$FREE_LUN
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER LEVELS, MINIDX, CMAX
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      PARAMETER( LEVELS=65, MINIDX=48, CMAX=132 )
+C
+      CHARACTER*(*) FN
+      INTEGER M, N
+      REAL ARRAY(M,N)
+C
+      CHARACTER*(CMAX) C
+      CHARACTER*6 RUTNAM
+      INTEGER NMAX, I, J, IC, IV, LUN, IOS, ILO, JLO, IHI, JHI
+      INTEGER LIB$GET_LUN, LIB$FREE_LUN
+      LOGICAL POS
+      REAL RANGE, INC
+      REAL X, Y, DX, DY, DX1, DY1, VAL
+C
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+      INTEGER MMAX
+C
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+      COMMON/ALGTEX/ MMAX
+      SAVE /ALGTEX/
+      EXTERNAL ALGINI
+      DATA RUTNAM/'TEXPIC'/
+C
+C --- Find the range of the data if we're in auto mode; otherwise,
+C --- use the specified ranges.
+C
+      IF( .NOT. ZFIX ) THEN
+         CALL MINMAX( ARRAY, M, N, ZMIN, ZMAX )
+         IF( ZMIN .EQ. ZMAX ) ZMAX = ZMIN + 1
+      END IF
+C
+C --- We can't print more than MMAX columns across the TeX output.
+C --- If the user passes an array bigger than this, we'll interpolate
+C --- it down to MMAX.
+C
+      IF( M .GT. MMAX ) THEN
+         INC = FLOAT(M) / FLOAT(MMAX)
+         NMAX = NINT( FLOAT(N) / INC )
+      ELSE
+         INC = 0
+      END IF
+C
+C --- Get a free channel number and open the output file.
+C
+      IOS = LIB$GET_LUN( LUN )
+      IF( .NOT. IOS ) CALL EXIT( IOS )
+C
+      OPEN( UNIT=LUN, FILE=FN, STATUS='NEW', RECL=CMAX+1, IOSTAT=IOS,
+     & DEFAULTFILE='.TEX', CARRIAGECONTROL='LIST' )
+      IF( IOS .EQ. 0 ) THEN
+C
+C --- Calculate the scaling factor.
+C
+         POS = .NOT. NEG
+         RANGE = FLOAT(LEVELS-1) / (ZMAX-ZMIN)
+C
+C --- Output the introduction.
+C
+         WRITE( LUN, 100 )
+C
+C --- Output the image without interpolation if INC is zero.
+C
+         IF( ABS(INC) .LT. TOL ) THEN
+            DO 2 J = 1, N
+      IF( ABFLAG ) GO TO 5
+               IC = 1
+               C(1:1) = ','
+               DO 1 I = 1, M
+                  VAL = ARRAY(I,J)
+               IF( VAL .LT. ZMIN ) VAL = ZMIN
+               IF( VAL .GT. ZMAX ) VAL = ZMAX
+               IV = NINT((VAL-ZMIN) * RANGE)
+               IF( POS ) IV = (LEVELS-1) - IV
+               IC = IC + 1
+               C(IC:IC) = CHAR( IV + MINIDX )
+               IF( IC .GE. CMAX-1 ) THEN
+                  WRITE( LUN, 200 ) C(1:IC)
+                  IC = 1
+                  C(1:1) = ' '
+               END IF
+    1          CONTINUE
+               IF( IC .GT. 0 ) WRITE(LUN, 300) C(1:IC)
+    2       CONTINUE
+         ELSE
+C
+C --- Interpolate the output.
+C
+            Y = 1
+            DO 4 J = 1, NMAX
+      IF( ABFLAG ) GO TO 5
+               DY = Y - INT(Y)
+               DY1 = 1 - DY
+               JLO = MOD( INT(Y-1), N ) + 1
+               JHI = MOD( JLO, N ) + 1
+               X = 1
+               IC = 1
+               C(1:1) = ','
+               DO 3 I = 1, MMAX
+                  DX = X - INT(X)
+                  DX1 = 1 - DX
+                  ILO = MOD( INT(X)-1, M ) + 1
+                  IHI = MOD( ILO, M ) + 1
+C
+C --- Smith's three-point contextual bilinear interpolation.
+C
+                  IF( ABS(ARRAY(ILO,JLO)-ARRAY(IHI,JHI)) .GT.
+     &               ABS(ARRAY(IHI,JLO)-ARRAY(ILO,JHI)) ) THEN
+                     VAL = (DX-DY)*ARRAY(IHI,JLO) + DX1*ARRAY(ILO,JLO) +
+     &                  DY*ARRAY(IHI,JHI)
+                  ELSE
+                     VAL = (DX1-DY)*ARRAY(ILO,JLO) + DX*ARRAY(IHI,JLO) +
+     &                  DY*ARRAY(ILO,JHI)
+                  END IF
+                  X = X + INC
+               IF( VAL .LT. ZMIN ) VAL = ZMIN
+               IF( VAL .GT. ZMAX ) VAL = ZMAX
+               IV = NINT((VAL-ZMIN) * RANGE)
+               IF( POS ) IV = (LEVELS-1) - IV
+               IC = IC + 1
+               C(IC:IC) = CHAR( IV + MINIDX )
+               IF( IC .GE. CMAX-1 ) THEN
+                  WRITE( LUN, 200 ) C(1:IC)
+                  IC = 1
+                  C(1:1) = ' '
+               END IF
+    3          CONTINUE
+               IF( IC .GT. 0 ) WRITE(LUN, 300) C(1:IC)
+C
+               Y = Y + INC
+    4       CONTINUE
+         END IF
+C
+C --- Close off the file.
+C
+    5    CONTINUE
+         WRITE( LUN, 400 )
+         CLOSE( UNIT=LUN )
+      ELSE
+         CALL ALGERR( RUTNAM, 'Cannot open specified output file:',
+     &    FN )
+      END IF
+C
+C --- Release the channel.
+C
+      IOS = LIB$FREE_LUN( LUN )
+      IF( .NOT. IOS ) CALL EXIT( IOS )
+C
+      RETURN
+  100 FORMAT(' \hbox{\vbox{\halftone\offinterlineskip ',
+     & '% machine-generated by TEXPIC.'/
+     &  ' \def\BHT{\hbox\bgroup\ignorespaces}'/
+     &  ' \catcode`\^=12 \catcode`\_=12 \catcode`\.=\active',
+     &  ' \let.=\egroup'/ ' \catcode`\,=\active \let,=\BHT',
+     &  ' \catcode`\/=0 \catcode`\\=12')
+  200 FORMAT(1X,A,'%')
+  300 FORMAT(1X,A,'.')
+  400 FORMAT(' }}%')
+      END
+C --- -----------------------------------------------------------------
+      SUBROUTINE TEXPIC( ARRAY, M, N, FN )
+C --- -----------------------------------------------------------------
+C
+C --- TEXPIC version 0.1 was written by Alien in Fortran-77.
+C
+C --- This  routine  writes out the M x N image ARRAY into the file FN
+C --- in a form which is suitable for insertion into a  TeX  document.
+C
+C ---    By  default,  the range of the data is determined and used to
+C --- maximise  the  contrast  of  the  output  image.  This  can   be
+C --- overridden  by  pre-setting the range of data values with a call
+C --- to ZRANGE. ZAUTO  restores  the  default  behaviour.  Similarly,
+C --- TEXPIC  will  produce  negated  images  on  output  if DONEG has
+C --- previously been invoked.  DOPOS  sets  it  to  produce  positive
+C --- pictures again.
+C
+C --- USAGE:    CALL TEXPIC( ARRAY, M, N, FN )
+C
+C --- PARAMETERS
+C ---     ARRAY  REAL           image to be output to the file
+C ---     M      INTEGER        first dimension of ARRAY
+C ---     N      INTEGER        second dimension of ARRAY
+C ---     FN     CHARACTER*(*)  name  of  file  to  which ARRAY will
+C ---                           be written
+C
+C --- RESTRICTIONS
+C --- If N is greater than MMAX, the image will be sub-sampled in both
+C --- directions  to  make  the  result MMAX x MMAX. The interpolation
+C --- technique used is due to P.R. Smith (Ultramicroscopy vol  6,  pp
+C --- 201--204, 1981).
+C
+C --- COMMONS
+C --- /ALG/, /ALGTEX/
+C
+C --- SUBPROGRAMS INVOKED
+C --- MINMAX
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT CHARACTER*1 (A-Z)
+C
+      INTEGER LEVELS, MINIDX, CMAX
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      PARAMETER( LEVELS=65, MINIDX=48, CMAX=132 )
+C
+      CHARACTER*(*) FN
+      INTEGER M, N
+      REAL ARRAY(M,N)
+C
+      CHARACTER*(CMAX) C
+      CHARACTER*6 RUTNAM
+      INTEGER NMAX, I, J, IC, IV, LUN, IOS, ILO, JLO, IHI, JHI
+      LOGICAL POS
+      REAL RANGE, INC
+      REAL X, Y, DX, DY, DX1, DY1, VAL
+C
+      LOGICAL ABANDN
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+      INTEGER MMAX
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+      COMMON/ALGTEX/ MMAX
+      SAVE /ALGTEX/
+      EXTERNAL ALGINI
+      DATA RUTNAM/'TEXPIC'/
+C
+C --- Find the range of the data if we're in auto mode; otherwise,
+C --- use the specified ranges.
+C
+      IF( .NOT. ZFIX ) THEN
+         CALL MINMAX( ARRAY, M, N, ZMIN, ZMAX )
+         IF( ZMIN .EQ. ZMAX ) ZMAX = ZMIN + 1
+      END IF
+C
+C --- We can't print more than MMAX columns across the TeX output.
+C --- If the user passes an array bigger than this, we'll interpolate
+C --- it down to MMAX.
+C
+      IF( M .GT. MMAX ) THEN
+         INC = FLOAT(M) / FLOAT(MMAX)
+         NMAX = NINT( FLOAT(N) / INC )
+      ELSE
+         INC = 0
+      END IF
+C
+C --- We always open the output file on channel 7 (fix me!).
+C
+      LUN = 7
+      OPEN( UNIT=LUN, FILE=FN, STATUS='NEW', RECL=CMAX+1, IOSTAT=IOS )
+      IF( IOS .EQ. 0 ) THEN
+C
+C --- Calculate the scaling factor.
+C
+         POS = .NOT. NEG
+         RANGE = FLOAT(LEVELS-1) / (ZMAX-ZMIN)
+C
+C --- Output the introduction.
+C
+         WRITE( LUN, 100 )
+C
+C --- Output the image without interpolation if INC is zero.
+C
+         IF( ABS(INC) .LT. TOL ) THEN
+            DO 2 J = 1, N
+      IF( ABANDN(0) ) GO TO 5
+               IC = 1
+               C(1:1) = ','
+               DO 1 I = 1, M
+                  VAL = ARRAY(I,J)
+               IF( VAL .LT. ZMIN ) VAL = ZMIN
+               IF( VAL .GT. ZMAX ) VAL = ZMAX
+               IV = NINT((VAL-ZMIN) * RANGE)
+               IF( POS ) IV = (LEVELS-1) - IV
+               IC = IC + 1
+               C(IC:IC) = CHAR( IV + MINIDX )
+               IF( IC .GE. CMAX-1 ) THEN
+                  WRITE( LUN, 200 ) C(1:IC)
+                  IC = 1
+                  C(1:1) = ' '
+               END IF
+    1          CONTINUE
+               IF( IC .GT. 0 ) WRITE(LUN, 300) C(1:IC)
+    2       CONTINUE
+         ELSE
+C
+C --- Interpolate the output.
+C
+            Y = 1
+            DO 4 J = 1, NMAX
+      IF( ABANDN(0) ) GO TO 5
+               DY = Y - INT(Y)
+               DY1 = 1 - DY
+               JLO = MOD( INT(Y-1), N ) + 1
+               JHI = MOD( JLO, N ) + 1
+               X = 1
+               IC = 1
+               C(1:1) = ','
+               DO 3 I = 1, MMAX
+                  DX = X - INT(X)
+                  DX1 = 1 - DX
+                  ILO = MOD( INT(X)-1, M ) + 1
+                  IHI = MOD( ILO, M ) + 1
+C
+C --- Smith's three-point contextual bilinear interpolation.
+C
+                  IF( ABS(ARRAY(ILO,JLO)-ARRAY(IHI,JHI)) .GT.
+     &               ABS(ARRAY(IHI,JLO)-ARRAY(ILO,JHI)) ) THEN
+                     VAL = (DX-DY)*ARRAY(IHI,JLO) + DX1*ARRAY(ILO,JLO) +
+     &                  DY*ARRAY(IHI,JHI)
+                  ELSE
+                     VAL = (DX1-DY)*ARRAY(ILO,JLO) + DX*ARRAY(IHI,JLO) +
+     &                  DY*ARRAY(ILO,JHI)
+                  END IF
+                  X = X + INC
+               IF( VAL .LT. ZMIN ) VAL = ZMIN
+               IF( VAL .GT. ZMAX ) VAL = ZMAX
+               IV = NINT((VAL-ZMIN) * RANGE)
+               IF( POS ) IV = (LEVELS-1) - IV
+               IC = IC + 1
+               C(IC:IC) = CHAR( IV + MINIDX )
+               IF( IC .GE. CMAX-1 ) THEN
+                  WRITE( LUN, 200 ) C(1:IC)
+                  IC = 1
+                  C(1:1) = ' '
+               END IF
+    3          CONTINUE
+               IF( IC .GT. 0 ) WRITE(LUN, 300) C(1:IC)
+C
+               Y = Y + INC
+    4       CONTINUE
+         END IF
+C
+C --- Close off the file.
+C
+    5    CONTINUE
+         WRITE( LUN, 400 )
+         CLOSE( UNIT=LUN )
+      ELSE
+         CALL ALGERR( RUTNAM, 'Cannot open specified output file:',
+     &    FN )
+      END IF
+C
+C
+      RETURN
+  100 FORMAT(' \hbox{\vbox{\halftone\offinterlineskip ',
+     & '% machine-generated by TEXPIC.'/
+     &  ' \def\BHT{\hbox\bgroup\ignorespaces}'/
+     &  ' \catcode`\^=12 \catcode`\_=12 \catcode`\.=\active',
+     &  ' \let.=\egroup'/ ' \catcode`\,=\active \let,=\BHT',
+     &  ' \catcode`\/=0 \catcode`\\=12')
+  200 FORMAT(1X,A,'%')
+  300 FORMAT(1X,A,'.')
+  400 FORMAT(' }}%')
+      END
+C --- -----------------------------------------------------------------
+      SUBROUTINE TEXMAX( MV )
+C --- -----------------------------------------------------------------
+C
+C --- TEXMAX version 0.0 was written by Alien in Fortran-77.
+C
+C --- This  routine sets the maximum number of pixels across a picture
+C --- which TEXPIC will output to a file. Pictures  which  have  their
+C --- first  dimension greater than MMAX are interpolated down to MMAX
+C --- pixels.
+C
+C --- USAGE:  CALL TEXMAX( MMAX )
+C
+C --- PARAMETERS
+C ---     MMAX  INTEGER  maximum number of pixels  to  be  plotted  by
+C ---                    TEXPIC
+C
+C --- RESTRICTIONS
+C --- none
+C
+C --- COMMONS
+C --- /ALGTEX/
+C
+C --- SUBPROGRAMS INVOKED
+C --- none
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+C
+      INTEGER MV
+C
+      CHARACTER*(MAXICH) BUF
+C
+      INTEGER MMAX
+C
+      COMMON/ALGTEX/ MMAX
+      SAVE /ALGTEX/
+C
+      IF( MV .GE. 2 ) THEN
+         MMAX = MV
+      ELSE
+         WRITE( BUF, 100 ) MV
+         CALL ALGERR( 'TEXMAX',
+     &    'Too few pixels selected across page:'//BUF,
+     &    'You must have two or more pixels across the page' )
+      END IF
+C
+      RETURN
+  100 FORMAT(I11)
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ZRANGE( ZVMIN, ZVMAX )
+C --- ------------------------------------------------------------------
+C
+C --- ZRANGE version 0.0 was written by Alien in Fortran-77.
+C
+C --- This  routine  fixes  the  range  of  the  Z-axis for subsequent
+C --- graphical plots.
+C
+C --- USAGE:  CALL ZRANGE( ZMIN, ZMAX )
+C
+C --- PARAMETERS
+C ---     ZMIN  REAL  minimum value to appear on the Z-axis
+C ---     ZMAX  REAL  maximum value to appear on the Z-axis
+C
+C --- RESTRICTIONS
+C --- ZMIN must be smaller than ZMAX.
+C --- Note that the range of values actually produced on graphs may be
+C --- slightly greater than those specified.
+C
+C --- SUBPROGRAMS INVOKED
+C --- ALGERR
+C
+C --- COMMONS
+C --- ZFIX, ZMIN, ZMAX in /ALG/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+C
+      REAL ZVMIN, ZVMAX
+C
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+C
+      IF( ZVMIN .LT. ZVMAX ) THEN
+         ZMIN = ZVMIN
+         ZMAX = ZVMAX
+         ZFIX = .TRUE.
+      ELSE
+         CALL ALGERR('ZRANGE','Zmin was not smaller than Zmax.',' ')
+      END IF
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ZAUTO
+C --- ------------------------------------------------------------------
+C
+C --- ZAUTO version 0.0 was written by Alien in Fortran-77.
+C
+C --- This routine causes  the  Z-axis  of  subsequent  graphical plots
+C --- to be scaled according to the data being plotted.
+C
+C --- USAGE:  CALL ZAUTO
+C
+C --- PARAMETERS
+C --- none
+C
+C --- RESTRICTIONS
+C --- none
+C
+C --- SUBPROGRAMS INVOKED
+C --- none
+C
+C --- COMMONS
+C --- ZFIX in /ALG/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+C
+      ZFIX = .FALSE.
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ZSAME
+C --- ------------------------------------------------------------------
+C ---                         ZSAME version 0.0
+C
+C ---  Written by Alien in Fortran-77. 
+C
+C ---  This  routine  causes  the  range  of  the  Z-axis on subsequent
+C ---  graphical plots to be the same as those  used  on  the  previous
+C ---  invocation. 
+C
+C ---  USAGE: CALL ZSAME 
+C
+C ---  PARAMETERS 
+C ---  none 
+C
+C ---  RESTRICTIONS 
+C ---  none 
+C
+C ---  SUBPROGRAMS INVOKED 
+C ---  |ALGERR| 
+C
+C ---  COMMONS 
+C ---  |ZFIX|, |ZMIN|, |ZMAX| in |/ALG/| 
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+C
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+C
+      IF( ZMIN .LT. ZMAX ) THEN
+         ZFIX = .TRUE.
+      ELSE
+         CALL ALGERR('ZSAME','Zmin was not smaller than Zmax.',
+     &    'Call ignored.' )
+      END IF
+C
+      RETURN
+      END
+C --- -----------------------------------------------------------------
+      SUBROUTINE DONEG
+C --- -----------------------------------------------------------------
+C
+C --- DONEG version 0.0 was written by Alien in Fortran-77.
+C
+C --- This routine causes subsequent grey-level pictures to  be  drawn
+C --- with negative contrast.
+C
+C --- USAGE:  CALL DONEG
+C
+C --- PARAMETERS
+C --- none
+C
+C --- RESTRICTIONS
+C --- none
+C
+C --- SUBPROGRAMS INVOKED
+C --- none
+C
+C --- COMMONS
+C --- NEG in /ALG/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+C
+C
+      NEG = .TRUE.
+C
+      RETURN
+      END
+C --- -----------------------------------------------------------------
+      SUBROUTINE DOPOS
+C --- -----------------------------------------------------------------
+C
+C --- DOPOS version 0.0 was written by Alien in Fortran-77.
+C
+C --- This routine causes subsequent grey-level pictures to  be  drawn
+C --- with negative contrast.
+C
+C --- USAGE:  CALL DOPOS
+C
+C --- PARAMETERS
+C --- none
+C
+C --- RESTRICTIONS
+C --- none
+C
+C --- SUBPROGRAMS INVOKED
+C --- none
+C
+C --- COMMONS
+C --- NEG in /ALG/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+C
+C
+      NEG = .FALSE.
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE MINMAX( ARRAY, M, N, LOWEST, HIEST )
+C --- ------------------------------------------------------------------
+C
+C --- MINMAX version 0.0 was written by Alien in Fortran-77.
+C
+C --- This  routine  determines  the smallest and largest values of an
+C --- array. If an interrupt is detected during the estimation of  the
+C --- limits of the data, the currently-detected limits are returned.
+C
+C --- USAGE: CALL MINMAX( ARRAY, M, N, MIN, MAX )
+C
+C --- PARAMETERS
+C ---     ARRAY  REAL     array of which the limits are to be
+C ---                     determined
+C ---     M      INTEGER  first dimension of ARRAY
+C ---     N      INTEGER  second dimension of ARRAY
+C ---     MIN    REAL     minimum value found in ARRAY (returned)
+C ---     MAX    REAL     maximum value found in ARRAY (returned)
+C
+C --- RESTRICTIONS
+C --- If  interrupts are to be detected, interrupt detection must have
+C --- been enabled  by  the  calling  program---see  ABANDN  for  more
+C --- details.
+C
+C --- SUBPROGRAMS INVOKED
+C --- ABANDN
+C
+C --- COMMONS
+C --- none
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+C
+      INTEGER M, N
+      REAL ARRAY(M*N), LOWEST, HIEST
+C
+      INTEGER I, J, JM
+      REAL VAL, LO, HI
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+C
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+      EXTERNAL ALGINI
+C
+C --- We have declared ARRAY as a 1-D array, but will still access
+C --- it via two DO-loops. This is so that ABANDN is only invoked once
+C --- per "row" of ARRAY.
+C
+      LO = ARRAY(1)
+      HI = LO
+C
+      DO 1 J = 1, N
+         JM = (J-1) * M
+      IF( ABFLAG ) GO TO 2
+         DO 1 I = 1, M
+            VAL = ARRAY(I+JM)
+            IF( VAL .LT. LO ) LO = VAL
+            IF( VAL .GT. HI ) HI = VAL
+    1 CONTINUE
+C
+    2 CONTINUE
+      LOWEST = LO
+      HIEST = HI
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ALGERR( NAME, MESS, EXTRA )
+C --- ------------------------------------------------------------------
+C
+C --- ALGERR version 0.0 was written by Alien in Fortran-77.
+C
+C --- This routine reports errors generated by other routines. NAME is
+C --- the  name  of the invoking routine while MESS and EXTRA form the
+C --- message to be reported to the user. MESS  is  the  text  of  the
+C --- message.  EXTRA,  if non-blank, contains extra information about
+C --- the error; leading and trailing blanks are  removed  from  EXTRA
+C --- before  it is output. The current version of this routine simply
+C --- outputs the message text on the error output channel  --  future
+C --- versions will be more sophisticated.
+C
+C --- USAGE: CALL ALGERR( NAME, MESS, EXTRA )
+C
+C --- PARAMETERS
+C ---     NAME  CHARACTER*(*)  name of the invoking routine
+C ---     MESS  CHARACTER*(*)  message to be output
+C ---     EXTRA CHARACTER*(*)  additional text for the message
+C
+C --- RESTRICTIONS
+C --- The  total  length  of  the message must be less than the output
+C --- line length (usually 132 characters)  --  this  means  that  the
+C --- lengths of NAME and MESS, when added together, must come to less
+C --- then 110 characters.
+C
+C --- SUBPROGRAMS INVOKED
+C --- none
+C
+C --- COMMONS
+C --- /ALG/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      CHARACTER*1 BLANK
+      PARAMETER( BLANK=' ' )
+C
+      CHARACTER*(*) NAME, MESS, EXTRA
+C
+      INTEGER NEXTRA, FC, LC, NMESS, LM
+C
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+      EXTERNAL ALGINI
+C
+      NMESS = LEN( MESS )
+      DO 1 LM = NMESS, 1, -1
+         IF( MESS(LM:LM) .NE. BLANK ) GO TO 2
+    1 CONTINUE
+      LM = 1
+    2 CONTINUE
+C
+      IF( EXTRA .EQ. BLANK ) THEN
+         WRITE( ELUN, 100 ) NAME, MESS(1:LM)
+      ELSE
+         NEXTRA = LEN( EXTRA )
+         DO 3 FC = 1, NEXTRA
+            IF( EXTRA(FC:FC) .NE. BLANK ) GO TO 4
+    3    CONTINUE
+    4    CONTINUE
+         DO 5 LC = NEXTRA, FC, -1
+            IF( EXTRA(LC:LC) .NE. BLANK ) GO TO 6
+    5    CONTINUE
+    6    CONTINUE
+         WRITE( ELUN, 100 ) NAME, MESS(1:LM)
+         WRITE( ELUN, 101 ) EXTRA(FC:LC)
+      END IF
+C
+      RETURN
+  100 FORMAT(1X,A,': error -- ',A)
+  101 FORMAT(10X,A)
+      END
+C --- ------------------------------------------------------------------
+      LOGICAL FUNCTION ABANDN( OP )
+C --- ------------------------------------------------------------------
+C
+C --- ABANDN version 0.1 was written by Alien in Fortran-77.
+C
+C --- This  LOGICAL  function  is  used to detect whether the user has
+C --- tried to interrupt execution.
+C
+C ---    The method of specifying an interrupt varies from  system  to
+C --- system,   but   is  typically  by  typing  a  control  character
+C --- (control-C on the VAX). ABANDN is used  with  OP  =  0  to  TEST
+C --- whether the user has signalled an interrupt -- the value TRUE is
+C --- returned  as  the  value  of  the  function if this is the case.
+C --- ABANDN is used with OP = 1 to SET or CLEAR the  interrupt  trap;
+C --- this  must  be  done  by  the  calling program. Note that ABANDN
+C --- returns the value TRUE if an error  occurred  while  setting  or
+C --- clearing the interrupt trap.
+C
+C --- USAGE:   <logical variable> = ABANDN( OP )
+C
+C --- PARAMETERS
+C ---     OP  INTEGER  operation 0 ==> test, 1 ==> set
+C
+C --- RESTRICTIONS
+C --- Interrupts  will  not  be trapped before the first invocation of
+C --- ABANDN(1).
+C --- After  the  user  has   signalled   an   interrupt,   subsequent
+C --- invocations  of  ABANDN(0)  will  return TRUE until ABANDN(1) is
+C --- used to clear it.
+C --- If the user generates interrupts very quickly (for  example,  by
+C --- letting  the  ^C  auto-repeat), they may be delivered so quickly
+C --- that ABANDN does not manage to reset its trap in time;  in  this
+C --- case, it will actually interrupt program execution.
+C --- This version of ABANDN requires VAX/VMS 3.0 or later.
+C
+C --- SUBPROGRAMS INVOKED
+C --- ALG_ABANDN_AST (condition handler)
+C
+C --- COMMONS
+C --- /ALG_ABANDN/
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+      INCLUDE '($IODEF)'
+C
+      INTEGER ABSET, ABTEST
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      PARAMETER( ABSET=1, ABTEST=0 )
+C
+      INTEGER OP
+C
+      CHARACTER*(MAXICH) CODE
+      INTEGER F
+      INTEGER IOS, VAL, SYS$GETDVI, SYS$ASSIGN, SYS$QIOW, SYS$DASSGN
+      INTEGER DVIBLK(4)/ '40004'X, 0, 0, 0/
+      INTEGER*2 IOSB(4)
+      LOGICAL FIRST/.TRUE./
+      EXTERNAL ALG_ABANDN_AST
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+C
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+C
+C --- Branch according to the value of OP.
+C
+      IF( OP .EQ. ABTEST ) THEN
+         ABANDN = ABFLAG
+      ELSE IF( OP .EQ. ABSET ) THEN
+         ABANDN = .FALSE.
+         IF( FIRST ) THEN
+C
+C --- Check that we're using a terminal.
+C
+            DVIBLK(2) = %LOC( VAL )
+            IOS = SYS$GETDVI( ,, 'TT', DVIBLK, ,,, )
+            IF( .NOT. IOS ) CALL EXIT( IOS )
+            IF( VAL .EQ. '42'X ) THEN
+C
+C --- If we're using a terminal, assign a channel to the device and set
+C --- the trap; failure from any of the system services is taken as a
+C --- fatal error. We will only return a failure code to the user if
+C --- IOSB(1) indicates an error.
+C
+               IOS = SYS$ASSIGN( 'TT', CHAN,, )
+               IF( .NOT. IOS ) CALL EXIT( IOS )
+               IOS = SYS$QIOW(, %VAL(CHAN), %VAL(IO$_SETMODE.OR.IO$M_CTR
+     &LCAST),
+     &            IOSB, ,,   ALG_ABANDN_AST, ,,,, )
+               IF( .NOT. IOS ) CALL EXIT( IOS )
+               IF( IOSB(1) ) THEN
+                  FIRST = .FALSE.
+               ELSE
+C
+C --- We didn't succeed in setting the interrupt trap, heaven knows why!
+C --- Set the function to return an error code, then close the channel
+C --- we
+C --- have so carefully opened.
+C
+                  ABANDN = .TRUE.
+                  IOS = SYS$DASSGN( %VAL(CHAN) )
+                  IF( .NOT. IOS ) CALL EXIT( IOS )
+               END IF
+            END IF
+         END IF
+         ABFLAG = .FALSE.
+      ELSE
+         STOP 'ABANDN: Illegal argument value.'
+      END IF
+C
+      RETURN
+  100 FORMAT(I11)
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ALG_ABANDN_AST
+C --- ------------------------------------------------------------------
+C
+C --- This routine is the condition handler which is used in the
+C --- implementation of ABANDN for VAX/VMS. It is called by the system
+C --- when the user types ^C at his terminal; its main purpose is to set
+C --- ABFLAG in common /ALG_ABANDN/, to be tested by ABANDN(ABTEST).
+C --- However, because VMS ^C condition handlers are one-shot affairs,
+C --- we must also re-impose the trap. This is done by invoking the
+C --- simple routine ALG_ABANDN_RESET_TRAP.
+C
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+C
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+C
+C --- Set ABFLAG.
+C
+      ABFLAG = .TRUE.
+C
+C --- And reset the trap.
+C
+      CALL ALG_ABANDN_RESET_TRAP
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+      SUBROUTINE ALG_ABANDN_RESET_TRAP
+C --- ------------------------------------------------------------------
+C
+C --- This routine resets the ^C trap for ALG_ABANDN_AST, because the
+C --- Fortran compiler will not allow ALG_ABANDN_AST to be used in the
+C --- $QIOW call inside its own code.
+C
+      INCLUDE '($IODEF)'
+      INTEGER*2 IOSB(4)
+      INTEGER IOS, SYS$QIOW
+      EXTERNAL ALG_ABANDN_AST
+C
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+C
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+C
+      IOS = SYS$QIOW(, %VAL(CHAN), %VAL(IO$_SETMODE.OR.IO$M_CTRLCAST),
+     &   IOSB, ,,   ALG_ABANDN_AST, ,,,, )
+      IF( .NOT. IOS ) CALL EXIT( IOS )
+C
+      RETURN
+      END
+C --- ------------------------------------------------------------------
+           B L O C K    D A T A    A L G I N I
+C --- ------------------------------------------------------------------
+C
+C --- Copyright (C) Alien 1987 -- All rights reserved.
+C
+      IMPLICIT NONE
+C
+C --- The following definitions are used to allow expressions to be
+C --- typed for the initial values of variables.
+C
+      INTEGER GRFGRF, GRFHIS, GRFPOL
+      INTEGER MAXICH, MAXRCH
+      INTEGER MINLUN, MAXLUN
+      INTEGER MAXOUT, MAXARR, MAXAFT, MAXCH
+      INTEGER MAXSTV, NOUSEM
+      REAL PI
+      INTEGER ORDRED, RNDOM, STRAIT
+C
+      PARAMETER( GRFGRF=0, GRFHIS=1, GRFPOL=2 )
+      PARAMETER( MAXICH=11, MAXRCH=11 )
+      PARAMETER( MINLUN=1, MAXLUN=99 )
+      PARAMETER( MAXOUT=133, MAXARR=512, MAXAFT=(9*MAXARR)/4+1 )
+      PARAMETER( MAXCH=16 )
+      PARAMETER( MAXSTV=3, NOUSEM=-1 )
+      PARAMETER( PI=3.1415926535897932384626433 )
+      PARAMETER( ORDRED=1, RNDOM=2, STRAIT=0 )
+      INTEGER MOUT1, MSTAT
+      PARAMETER (MOUT1=MAXOUT-1, MSTAT=MAXSTV+1)
+C
+C --- Include all the common variables and blocks.
+C
+      INTEGER GLUN, PLUN, ELUN, POLHIS
+      LOGICAL XFIX, YFIX, ZFIX, RFIX, TFIX, LOGX, LOGY, LOGZ, LOGR
+      LOGICAL VRBOSE, NEG, MIDORG, FTNRML
+      REAL XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX, TMIN, TMAX,
+     & FTFWD, FTREV
+      REAL TOL
+      INTEGER*2 CHAN
+      LOGICAL ABFLAG
+      CHARACTER*1 BLANK, VMARK, HMARK, TICK
+      CHARACTER*(MAXOUT) LPBUF
+      INTEGER LPHT, LPWID
+      LOGICAL FF
+      REAL ASPECT
+      LOGICAL USEM, EXACT, KNOWEM(0:MAXSTV)
+      REAL MINS(0:MAXSTV), MAXS(0:MAXSTV), MEANS(0:MAXSTV),
+     &   SDS(0:MAXSTV)
+      INTEGER MMAX
+      INTEGER METHOD
+C
+      COMMON /ALG/ XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX, RMIN, RMAX,
+     & TMIN, TMAX, TOL, FTFWD, FTREV, XFIX, YFIX, ZFIX, RFIX, TFIX,
+     & LOGX, LOGY, LOGZ, LOGR, NEG, GLUN, PLUN, ELUN, POLHIS, MIDORG,
+     & FTNRML, VRBOSE
+      SAVE /ALG/
+      COMMON /ALG_ABANDN/ ABFLAG, CHAN
+      SAVE /ALG_ABANDN/
+      COMMON /LPC/ LPBUF, BLANK, VMARK, HMARK, TICK
+      COMMON /LPN/ ASPECT, LPHT, LPWID, FF
+      SAVE /LPC/, /LPN/
+      COMMON /STAT/ MINS, MAXS, MEANS, SDS, USEM, KNOWEM, EXACT
+      SAVE /STAT/
+      COMMON/ALGTEX/ MMAX
+      SAVE /ALGTEX/
+      COMMON /V80/ METHOD
+C
+C --- / A L G /
+C
+      DATA LOGX/.FALSE./, LOGY/.FALSE./, LOGZ/.FALSE./, LOGR/.FALSE./
+      DATA XMIN/0.0/, XMAX/0.0/, YMIN/0.0/, YMAX/0.0/, ZMIN/0.0/,
+     & ZMAX/0.0/, RMIN/0.0/, RMAX/0.0/, TMIN/0.0/, TMAX/0.0/
+      DATA XFIX/.FALSE./, YFIX/.FALSE./, ZFIX/.FALSE./
+      DATA RFIX/.FALSE./, TFIX/.FALSE./
+      DATA VRBOSE/.FALSE./, NEG/.FALSE./
+      DATA MIDORG/.TRUE./, FTNRML/.FALSE./
+      DATA GLUN/6/, PLUN/6/, ELUN/6/, POLHIS/GRFGRF/
+      DATA TOL/1.0E-8/
+      DATA FTFWD/0.0/, FTREV/0.0/
+C
+C --- / A B A N D N /
+C
+      DATA ABFLAG/.FALSE./
+C
+C --- / A L G T E X /
+C
+      DATA MMAX/256/
+C
+C --- / L P C /
+C
+      DATA BLANK/' '/, VMARK/'|'/, HMARK/'-'/, TICK/'+'/
+C
+C --- / L P N /
+C
+      DATA FF/.TRUE./
+      DATA LPHT/62/, LPWID/MOUT1/
+      DATA ASPECT/ 0.604 /
+C
+C --- / S T A T /
+C
+      DATA USEM/NOUSEM/, KNOWEM/MSTAT*.FALSE./, EXACT/.FALSE./
+      DATA MEANS/MSTAT*0.0/, SDS/MSTAT*0.0/
+      DATA MINS/MSTAT*0.0/, MAXS/MSTAT*0.0/
+C
+C --- / V 8 0 /
+C
+      DATA METHOD/STRAIT/
+C
+      END
+$EOD
+$WRITE SYS$OUTPUT "creating HALFTONE.MF" 
+$CREATE HALFTONE.MF
+$DECK
+% halftone font with 65 levels of gray, characters "0" (white) to "p" (black)
+
+pair p[]; % the pixels in order (first p0 becomes black, then p1, etc)
+p0=(1,1);
+p8=(2,0);
+p16=(1,0);
+p24=(0,0);
+p32=(3,-1);
+p40=(2,-1);
+p48=(1,-1);
+p56=(2,-2);
+transform r; r=identity rotatedaround ((1.5,1.5),90);
+
+for i=0 step 8 until 56:
+ p[i+2]=p[i] transformed r;
+ p[i+6]=p[i+2] transformed r;
+ p[i+5]=p[i+6] transformed r;
+ p[i+1]=p[i] shifted (4,4);
+ p[i+3]=p[i+2] shifted (4,4);
+ p[i+7]=p[i+6] shifted (4,4);
+ p[i+4]=p[i+5] shifted (4,4);
+ endfor
+
+for i=32 step 1 until 63:
+ p[i] := (xpart p[i] mod 8, ypart p[i] mod 8);
+endfor
+
+mode_setup;
+designsize:=64/pt; % that's 64 pixels
+
+def makebox(text t)= enddef; % shut off boxes
+
+picture prevchar;
+
+prevchar=nullpicture;
+for i=0 upto 64:
+ beginchar(i+ASCII"0",designsize/8,designsize/8,0);
+ currentpicture:=prevchar;
+ if i>0: fill unitsquare shifted p[i-1]; fi
+ prevchar:=currentpicture;
+ endchar;
+ endfor
+
+font_quad=designsize/8;
+end
+$EOD

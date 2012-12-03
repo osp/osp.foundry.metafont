@@ -1,0 +1,5 @@
+a = b = 100;
+z1 = (0,b);		z2 = (a,b);		x3=(2a,b);
+z4 = (0,0);		z5 = (a,0);		x6=(2a,0);
+labels(range 1 thru 6);
+showit;shipit;end

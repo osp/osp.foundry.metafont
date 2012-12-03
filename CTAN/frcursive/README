@@ -1,0 +1,71 @@
+This is the French Cursive font, a cursive hand-writing font family in the
+style of the French academic running-hand, written with Metafont.
+
+This package is dated November 9, 2011.
+
+
+Installation
+------------
+
+To install frcursive, you need to copy the files in appropriate places so that
+TeX and Metafont can find them.
+
+Installation by hand goes like this, assuming TEXMF is the base directory of
+you TeX installation (that would be /usr/share/texmf, C:\localtexmf, or
+something like that):
+- copy the files from the "latex" directory into TEXMF/tex/latex/frcursive/
+- copy the files from the "mf" directory into TEXMF/fonts/source/public/frcursive/
+To use the Adobe Type 1 versions,
+- copy the files from the "type1" directory into TEXMF/fonts/type1/public/frcursive/
+- copy the files from the "tfm" directory into TEXMF/fonts/tfm/public/frcursive/
+- copy "frcursive.map" into TEXMF/fonts/map/dvips/frcursive/
+- make sure the TEXMF/web2c/updmap.cfg contains the line
+  MixedMap frcursive.map
+You may have to update TeX's databases by running "texhash" or "mktexlsr".
+
+
+Usage
+-----
+
+The file "frcursive.pdf" contains the documentation of the LaTeX package.
+
+
+Feedback
+--------
+
+Any comments and suggestions are welcome, as I consider this work to be in
+continuous (but slow) developement. Check out the home page at
+
+	http://beffara.org/stuff/frcursive/
+
+Enjoy !
+
+© Emmanuel Beffara <manu@beffara.org>, 2001--2011
+For those interested in legal stuff, this work is covered by the LPPL license.
+
+
+ChangeLog
+---------
+
+2011/11/09:
+ - various packaging updates
+ - Type 1 version included in the distribution
+
+2005/04/16:
+ - changed the codes of link glyphs to the range 0--32
+ - added all accented letters of the T1 encoding
+ - less design sizes
+
+2004/02/02:
+ - added the square brackets and the slash
+ - added some hinting information
+ - fixed the NFSS description files to make them agree with standard drivers
+ - updated the LaTeX package to give access to all variants
+
+2003/06/19:
+ - added the Spanish opening exclamation and interrogation marks
+ - changed the driver names from "fc*" to "frc*" to avoid clashes with Jorg
+   Knappen's FC series
+
+2003/04/29:
+ - first release on CTAN

@@ -1,0 +1,137 @@
+New arrow heads for chemical reaction schemes            4 February 2001
+---------------------------------------------
+
+1) What's the name of the game?
+
+LaTeX can be used to typeset many kinds of different documents, but 
+typesetting chemical reactions is esthetically not very pleasing because 
+LaTeX's own arrows \rightarrow, \leftarrow and \rightleftharpoons which 
+you might use for this purpose are too short and the arrow heads are not 
+like the "standard" ones you will find in books or journals on chemistry.
+
+The macro chemarrow.sty in conjunction with the font arrow.mf is supposed 
+to make the typesetting of chemical reaction schemes in LaTeX easier and 
+especially nicer looking.
+
+2) Dateien
+
+arrow.mf                   MetaFont source code of the arrow font
+arrow.tfm                  .tfm Datei of arrow for the use with TeX
+chemarrow.sty              macro for the typesetting of arrows in chemical reaction schemes
+Readme.txt                 English Readme
+testchem.tex               test file for chemarrow.sty and arrow.mf
+Liesmich.txt               German Readme
+Type 1/arrow Mac.sit.hqx   type 1 version of arrow for Macintosh
+Type 1/arrow PC.zip        type 1 version of arrow for PC/Unix
+Type 1/arrow.mp            MetaPost source code of arrow
+
+There is no need to copy the FontLab file arrow.vfb included in both of the 
+type 1 archives, I just put it there in case you want to enhance my designs :-)
+
+
+3) Usage
+
+The examples in the file testchem.tex should be sufficient for the
+understanding of how chemarrow.sty works, and there's also a short 
+description in chemarrow.sty of all the newly defined commands. To use the 
+package, arrow.tfm must be copied to a directory where LaTeX will be 
+searching for .tfm files, arrow.mf must be copied to a directory where 
+MetaFont will be searching for MetaFont sources. The required .pk files 
+should be produced automatically by a dvi previewer or a printer driver.
+
+There are also type 1 fonts of arrow.mf in Mac and PC/Unix format so that 
+you can produce PDF documents easily. To use the type 1 font it must be 
+copied to a directory where TeX and friends will be searching for type 1 
+fonts, the best place would of course be where the Computer Modern type 1 
+fonts reside.
+
+If dvips is supposed to use the type 1 font instead of the .pk font you 
+must add this line to psfonts.map:
+
+- for Macintosh:
+
+arrow arrow <arrow
+
+- for PC/Unix:
+
+arrow arrow <arrow.pfb
+
+If you use pdfTeX instead of dvips and Acrobat Distiller you must also add 
+this line to pdftex.map:
+
+arrow <arrow.pfb
+
+4) Disclaimer
+
+The macro chemarrow.sty and the font arrow.mf are quick hacks for my own 
+needs, I cannot guarantee that they will work an other systems than my own. 
+In exchange I am publishing this package as free software which means you 
+can do whatever you like with it and it comes for free. I would just like 
+to ask that in case you do make changes und publish the package or any parts of 
+it to add your own name or replace it with mine. Thank you.
+
+Any hints and suggestions will be accepted gratefully.
+
+5) History
+
+As I was looking for new arrows I found a quite new font named cryst.mf by 
+Ulrich Mueller which I rather liked. After a few modifications the new font 
+arrow.mf was born.
+
+I received a macro by Andreas Hertwig with which you can typeset arrows 
+that will change in size. I modified this macro to my needs and replaced the 
+original arrows with the arrows from arrow.mf. The original macro was apparently 
+posted in a TeX mailing list, but its author is unfortunately unknown. So, if 
+you are the original author and read this I'd like to thank you for your work!
+
+The most time consuming and complicated part was to produce a type 1 font 
+from my MetaFont sources. Unfortunately there is no free software to do 
+this :-(
+Also, if you include .pk fonts into PDF documents you won' get nice results 
+because Acrobat Reader renders them very poorly. Therefore it is vital to 
+include type 1 fonts into a PDF document :-(
+
+Using arrow.mp which is a slightly modified arrow.mf in combination with 
+MetaPost and mfplain I was able to produce graphics in the EPS format which I 
+imported into a demo of FontLab 3.0. After a few steps and reducing the 
+size to 79% I was able to save the font in type 1 format.
+
+6) Problems
+
+Unfortunately I am no expert on creating fonts. This is probably why the 
+arrows will show on some platforms only at 125% or larger. Below 125% there 
+will only be some strokes :-(
+
+I think if someone did a manual hinting of the font then this problem 
+would be remedied, but this will probably not be me because this is out of 
+my league and beyond the time limit of the demo of FontLab :-)
+
+So if there is somebody out there who is able to help me with this problem 
+I'd be grateful.
+
+7) Future versions
+
+To tell you the truth, I don't really know if there will be future versions 
+because as far as I'm concerned the package works as it is supposed to. 
+The direct linking of the arrow font in chemarrow.sty is maybe not so nice, 
+so this might be something I will change in the future. The rendering 
+problem of PDF documents on some platforms is also not very nice so if 
+some sort of solution pops up I will publish it.
+
+8) Thank-Yous
+
+- D. E. Knuth for TeX
+- L. Lamport for LaTeX
+- to the LaTeX3 team for LaTeX2e
+- A. Hertwig for being so nice to give me the original macro
+- to the unknown author of the original macro
+- U. Mueller for cryst.mf
+
+9) Author 
+
+Thomas Schroeder
+
+schroeder@ictw.chemie.uni-karlsruhe.de
+
+PS: Sorry for any misspellings and such, English is not my native 
+language :-)

@@ -1,0 +1,54 @@
+========
+METAFONT
+========
+
+labels(range 1 thru 5);
+
+# instructions pour (interpréter?) (voir) la fonte
+	mf serif.mf; gftodvi serif.2602gf
+		
+# instruction pour (compiler?) la fonte :
+	mf '\mode=ljfour; input _.mf'
+ou
+	mf '\mode=ljfour; mode_setup; input _.mf'
+	gftopk _.600gf _.pk
+<!--	mv _.pk context/tex/texmf/fonts/pk/ljfour/public/misc/dpi600/-->
+<!--	mv _.tfm context/tex/texmf/fonts/tfm/public/misc/-->
+	
+# mftrace
+when running :
+	mftrace a.mf
+error:
+	Unknown encoding `'; assuming tex256.
+	error: can't find file `tex256.enc'
+but it's here :
+	/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/tex256.enc
+-> ok - résolu en ln -s & `mftrace -e tex256.enc a.mf`
+
+Fichier de police /tmp/tmp***/-usage n'a pas été trouvé
+-> en fermant font forge, le fichier pfa se génère dans dossier.
+ou -> le fichier a.pfa n'existe pas (~/context/fonts/a.pfa)
+
+
+-> générer un fichier ttf
+# pour latex
+-> le placer dans le dossier context/fonts
+-> reloader les fontes `mtxrun --script fonts --reload`
+-> tester dans un doc tex.
+
+# fontforge
+Découverte : fontforge ouvre et interprète les fichiers .mf.
+Les approches sont correctes (déterminées par le cadre).
+Plus qu’à exporter en .otf/.ttf.
+
+
+
+# language specification
+../../usr/share/gtksourceview-3.0/language-specs/metafont.lang
+
+
+# website
+http://www.ctan.org/keyword/metafont
+--> répertorie des fonts / dingbats / symboles maths, 
+en metafont, metapost, tex.
+

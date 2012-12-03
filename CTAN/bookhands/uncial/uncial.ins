@@ -1,0 +1,103 @@
+%%
+%% uncial.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{uncial.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{uncial.drv}{t}{\from{uncial.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{uncl7.mf}{t}{\from{uncial.dtx}{base7}}
+\generateFile{uncl10.mf}{t}{\from{uncial.dtx}{base10}}
+\generateFile{uncl17.mf}{t}{\from{uncial.dtx}{base17}}
+\generateFile{unclb7.mf}{t}{\from{uncial.dtx}{base7b}}
+\generateFile{unclb10.mf}{t}{\from{uncial.dtx}{base10b}}
+\generateFile{unclb17.mf}{t}{\from{uncial.dtx}{base17b}}
+\generateFile{uncll.mf}{t}{\from{uncial.dtx}{min}}
+\generateFile{unclu.mf}{t}{\from{uncial.dtx}{maj}}
+\generateFile{uncltitle.mf}{t}{\from{uncial.dtx}{mfd}}
+\generateFile{unclpunct.mf}{t}{\from{uncial.dtx}{punct}}
+\generateFile{uncllig.mf}{t}{\from{uncial.dtx}{lig}}
+\generateFile{uncldig.mf}{t}{\from{uncial.dtx}{dig}}
+%%% \generateFile{unclp.mf}{t}{\from{uncial.dtx}{xp}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1uncl.fd}{t}{\from{uncial.dtx}{fdot1}}
+\generateFile{t1uncl.fd}{t}{\from{uncial.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{uncial.sty}{t}{\from{uncial.dtx}{usc}}
+\generateFile{alluncl.sty}{t}{\from{uncial.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space uncl7.mf}
+\Msg{* \space\space uncl10.mf}
+\Msg{* \space\space uncl17.mf}
+\Msg{* \space\space unclb7.mf}
+\Msg{* \space\space unclb10.mf}
+\Msg{* \space\space unclb17.mf}
+\Msg{* \space\space uncll.mf}
+\Msg{* \space\space unclu.mf}
+\Msg{* \space\space uncltitle.mf}
+\Msg{* \space\space unclpunct.mf}
+\Msg{* \space\space uncllig.mf}
+\Msg{* \space\space uncldig.mf}
+%%% \Msg{* \space\space unclp.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1uncl.fd}
+\Msg{* \space\space t1uncl.fd}
+\Msg{* \space\space uncial.sty}
+\Msg{* \space\space alluncl.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

@@ -1,0 +1,38 @@
+% VCLIGTBL - ligature tables & kerning for vicentino fonts
+% w. kraml, 1991
+
+ku#:=1.2tw#;
+
+ligtable "f" : "i" =: 12, "f" =: 11, "t" kern -1/8sw#;
+ligtable "t" : "t" kern -1/8sw#; 
+ligtable "c" : "h" =: 15;
+ligtable "r" : "." kern -1.1ku#, "," kern -1.1ku#, "a" kern-.4ku#,
+              "d" kern-.4ku#, "e" kern-.4ku#, "g" kern-.4ku#,
+              "o" kern-.4ku#, "q" kern-.4ku#;
+ligtable "J" : "a" kern -.5ku#, "e" kern -.5ku#, "i" kern-.5ku#,
+              "o" kern -.5ku#, "u" kern -.5ku#;
+ligtable "K" : "a" kern -.5ku#, "e" kern -.5ku#, "i" kern-.25ku#, 
+              "o" kern-.5ku#, "r" kern -.25ku#, "u" kern-.5ku#;
+ligtable "L" : "i" kern-.2ku#, "u" kern-.2ku#;
+ligtable "P" : "a" kern-.3ku#, "e" kern-.3ku#, "o" kern-.3ku#;
+ligtable "T" : "a" kern-ku#, "c" kern-ku#, "d" kern-ku#, "e" kern-ku#,
+              "f" kern-.75ku#, "g" kern-.5ku#, "i" kern-.25ku#,
+              "j" kern-.25ku#, "m" kern-ku#, "n" kern-ku#, "o" kern-ku#,
+              "r" kern-ku#, "s" kern-ku#, "t" kern-.5ku#, "u" kern-ku#,
+              "v" kern-ku#, "w" kern-ku#, "y" kern-ku#, "z" kern-ku#;
+ligtable "V" : "a" kern-.2ku#, "e" kern-.2ku#, "o" kern-.2ku#;
+ligtable "W" : "a" kern-.2ku#, "e" kern-.2ku#, "o" kern-.2ku#;
+ligtable "Y" : "a" kern-ku#, "c" kern-ku#, "d" kern-.75ku#, "e" kern-ku#,
+              "f" kern-.5ku#, "g" kern-.5ku#, "m" kern-ku#, "n" kern-ku#,
+              "o" kern-ku#, "p" kern-ku#, "q" kern-ku#, "r" kern-ku#,
+              "s" kern-ku#, "t" kern-.5ku#, "u" kern-ku#, "v" kern-ku#,
+              "w" kern-ku#, "x" kern-ku#, "z" kern-ku#;
+ligtable "Z" : "a" kern-ku#, "c" kern-ku#, "d" kern-.75ku#, "e" kern-ku#,
+              "g" kern+ku#, "i" kern-.5ku#, "n" kern-.5ku#, "o" kern-ku#,
+              "u" kern-ku#, "v" kern-ku#, "w" kern-ku#, "y" kern-.25ku#;
+ligtable "'" : "'" =: 34;
+ligtable "`" : "`" =: 92;
+
+ligtable "-": "-"=:oct"173";
+ligtable oct"173": "-"=:oct"174";
+

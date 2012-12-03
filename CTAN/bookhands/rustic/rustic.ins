@@ -1,0 +1,103 @@
+%%
+%% rustic.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA and NIST)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{rustic.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{rustic.drv}{t}{\from{rustic.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{rust7.mf}{t}{\from{rustic.dtx}{base7}}
+\generateFile{rust10.mf}{t}{\from{rustic.dtx}{base10}}
+\generateFile{rust17.mf}{t}{\from{rustic.dtx}{base17}}
+\generateFile{rustb7.mf}{t}{\from{rustic.dtx}{base7b}}
+\generateFile{rustb10.mf}{t}{\from{rustic.dtx}{base10b}}
+\generateFile{rustb17.mf}{t}{\from{rustic.dtx}{base17b}}
+\generateFile{rustl.mf}{t}{\from{rustic.dtx}{min}}
+\generateFile{rustu.mf}{t}{\from{rustic.dtx}{maj}}
+\generateFile{rusttitle.mf}{t}{\from{rustic.dtx}{mfd}}
+\generateFile{rustpunct.mf}{t}{\from{rustic.dtx}{punct}}
+\generateFile{rustlig.mf}{t}{\from{rustic.dtx}{lig}}
+\generateFile{rustdig.mf}{t}{\from{rustic.dtx}{dig}}
+%%% \generateFile{rustp.mf}{t}{\from{rustic.dtx}{xp}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1rust.fd}{t}{\from{rustic.dtx}{fdot1}}
+\generateFile{t1rust.fd}{t}{\from{rustic.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{rustic.sty}{t}{\from{rustic.dtx}{usc}}
+\generateFile{allrust.sty}{t}{\from{rustic.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space rust7.mf}
+\Msg{* \space\space rust10.mf}
+\Msg{* \space\space rust17.mf}
+\Msg{* \space\space rustb7.mf}
+\Msg{* \space\space rustb10.mf}
+\Msg{* \space\space rustb17.mf}
+\Msg{* \space\space rustl.mf}
+\Msg{* \space\space rustu.mf}
+\Msg{* \space\space rusttitle.mf}
+\Msg{* \space\space rustpunct.mf}
+\Msg{* \space\space rustlig.mf}
+\Msg{* \space\space rustdig.mf}
+%%% \Msg{* \space\space rustp.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1rust.fd}
+\Msg{* \space\space t1rust.fd}
+\Msg{* \space\space rustic.sty}
+\Msg{* \space\space allrust.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

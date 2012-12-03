@@ -1,0 +1,86 @@
+                  3D animations in METAPOST (version 1.0, superseded)
+                  ===================================================
+
+This directory contains a set of files allowing the creation
+of animations in metapost, and especially animations of 3-dimensional
+objects, such as polyhedra.
+
+The files contained in this distribution are:
+
+Changes      History of the macros
+
+inputs:
+             3d.mp        3D macros
+             poly.mp      Polyhedra definitions
+             animpoly.mp  Example of animation driver
+
+contrib      Contributions (currently only by Denis Barbier)
+
+doc          Subdirectory containing the formatted metapost files
+             as well as the code for the figures
+             It uses Ulrik Vieth's formatting macros for mft.
+             There is also a paper describing 
+             how an animation can be created.
+
+examples     Some animations produced with the 3d package
+             (other examples are in the contrib directory)
+
+tugboat      Files used for the production of the TUGboat paper.
+             (Courtesy of Mimi Burbank.)
+
+README       This file
+
+README.bin   Explains where to find the binaries.
+
+
+HOW TO CREATE AN ANIMATION
+--------------------------
+
+Details are given to produce the standard animation
+under UNIX, with the binaries listed in README.bin.
+For other architectures, you may have to adapt the
+write_script macro in the 3d.mp file.
+
+  1) create a directory and copy the three .mp files from the
+     inputs directory to it.
+  2) apply metapost to animpoly.mp ; this will create 100 files
+     named animpoly.101, animpoly.102, ..., animpoly.200.
+     It will also have created a script file named
+     create_animation.sh
+  3) copy the gifmerge utility (as well as programs such as pnmcut,...)
+     in this directory or let it be reachable through PATH.
+  4) apply sh to create_animation.sh; this will create the animation;
+     first the metapost outputs are converted to gif, then
+     they are collated with gifmerge.
+  5) the result is animpoly.gif which is a GIF89A animation file;
+     it can be viewed under netscape or simply with a program like xanim.
+
+Denis Roegel (roegel@loria.fr) 8 April 1998
+============================================================================
+
+                 Binaries required by the 3D package
+                 -----------------------------------
+
+As it is, the generation of animated gifs requires the following
+programs:
+
+  awk
+  gs (ghostscript)
+  pnmcut
+  ppmquant
+  ppmtogif
+  gifmerge
+
+These executables are not part of that distribution.
+
+The first two are widely available on UNIX. 
+The three p* programs are part of the NETPBM toolkit.
+You can find this toolkit on the web through any search tool.
+And gifmerge can be found at http://www.iis.ee.ethz.ch/~kiwi/GIFMerge.
+
+I have no idea how to port all this on other architectures,
+but I assume there are similar tools for PCs or Macs.
+I'd be interested to get feedback and details so that i can 
+include instructions in future releases of my package.
+
+Denis Roegel, 8 April 1998

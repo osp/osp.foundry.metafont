@@ -1,0 +1,12 @@
+% VCALTLGT - ligature tables & kerning for vicentino fonts (alternative
+% character set)
+% w. kraml, 1991, 92
+
+%ligtable "f" : "i" =: 12, "f" =: 11, "t" kern -1/8sw#;
+ligtable "f" : "f" kern -.3sw#, "u" kern -1/6sw#;
+ligtable "c" : "t" =: 12;
+ligtable "s" : "t" =: 11, "p" =: 13;
+%ligtable "t" : "t" kern -1/8sw#; 
+%ligtable "'" : "'" =: 34;
+%ligtable "`" : "`" =: 92;
+

@@ -1,0 +1,85 @@
+% tryfont.tex    Test Roman Rustic fonts
+\documentclass{article}
+%\documentclass[12pt]{article}
+\usepackage{rustic}
+
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrstuvwxyz}
+\newcommand{\punct}{.,;:!?`' \&{} () []}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\sentence}{%
+this is an example of the roman rustic font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\Sentence}{%
+This is an example of the Roman Rustic font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+
+\title{Try Roman Rustic Fonts}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+    This provides a short test of the characters in the Roman Rustic fonts
+--- the \verb|rust| font family.
+
+
+
+\begin{center}
+The Rustic Huge normal font. \\ \par
+{\rustfamily\Huge \ABC\\ \abc\\ \punct{}\dashes\\ \figs\\ \par }
+\end{center}
+
+%%\begin{center}
+%%The Rustic Large normal font \\ \par
+%%{\rustfamily\Large \ABC\\ \abc\\ } % \punct{}\dashes\\ \par }
+%%\end{center}
+
+\begin{center}
+The Rustic font in its normal size \\
+\textrust{\ABC{} \abc{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold minuscule font, the normal minuscule font, and the bold Computer Modern
+Roman, all in the normal size \\
+\textrust{\textbf{\abc{} \figs}} \\
+\textrust{\abc{} \figs} \\
+\textbf{\abc{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\rustfamily\bfseries
+\Huge \abc{} \figs \par
+\tiny \abc{} \figs \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\rustfamily\tiny \ABC{} \\ \abc\\ \figs\\ \par } 
+\end{center}
+
+\begin{center}
+    Some ligatures in the normal font \\
+\textrust{``the lazy dog --- but quick fox?''}
+\end{center}
+
+
+
+{
+\rustfamily 
+\sentence{}
+
+\Sentence{}
+
+}
+    
+    This is the end of the test file.
+
+\end{document}

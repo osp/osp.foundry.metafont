@@ -1,0 +1,105 @@
+    The humanist and allhmin packages provide Metafont fonts based on the 
+Humanist manuscript book-hand used from the 14th century AD onwards. 
+The font consists of uppercase and lowercase letters, digits, 
+and with some appropriate period punctuation marks. Both normal and bold 
+versions are provided. 
+This is one in a series of manuscript fonts.
+
+    Access to the docmfp package is desireable but not essential.
+
+Changes in version 1.1 (2003/06/20)
+----------------------
+o Added `ae' and `AE' conjunctions
+
+Changes in version 1.0 (2002/12/30)
+----------------------
+o First public release
+
+
+-------------------------------------------------------------------- 
+  Author: Peter Wilson (CUA) now at peter.r.wilson@boeing.com
+                             (or pandgwilson@earthlink.net) 
+  Copyright 2002, 2003 Peter R. Wilson
+ 
+  This work may be distributed and/or modified under the
+  conditions of the LaTeX Project Public License, either
+  version 1.3 of this license or (at your option) any 
+  later version.
+  The latest version of the license is in
+     http://www.latex-project.org/lppl.txt
+  and version 1.3 or later is part of all distributions of
+  LaTeX version 2003/06/01 or later.
+ 
+  This work has the LPPL maintenance status "author-maintained".
+ 
+  This work consists of the files README, humanist.dtx, humanist.ins,
+  tryfont.tex, and allfont.tex and the derived files humanist.sty,
+  allhmin.sty, ot1hmin.fd, t1hmin.fd, hmin7.mf, hmin10.mf, hmin17.mf,
+  hminb7.mf, hminb10.mf, hminb17.mf, hmindig.mf, hminl.mf, hminlig.mf,
+  hminpunct.mf, hmintitle.mf and hminu.mf.
+-------------------------------------------------------------------- 
+
+    The distribution consists of the following files:
+README (this file)
+humanist.ins
+humanist.dtx
+tryfont.tex
+allfont.tex
+
+
+To install the package:
+=======================
+
+o run: latex humanist.ins, which will generate:
+       hmin*.mf files
+       *.fd files
+       humanist.sty
+       allhmin.sty
+o Move the generated files to locations where LaTeX will find them.
+    For example: the hmin*.mf files to .../texmf/fonts/source/public/humanist
+                 the *.fd and *.sty files to /texmf/tex/latex/local/humanist
+
+    On a teTeX distribution you might also have to add lines like the 
+    following to texmf/fontname/special.map:
+      hmin7.mf        public    humanist
+      hmin10.mf       public    humanist
+      hmin17.mf       public    humanist
+      hminb7.mf       public    humanist
+      hminb10.mf      public    humanist
+      hminb17.mf      public    humanist
+    On a teTeX distribution remember to run texhash after moving the files.
+
+    (I use a teTeX distribution and found that if I didn't add to the special.map
+     file, then the generated tfm and pk files were put in directories corresponding
+     to some vendor's font.) 
+
+    Other LaTeX distributions might require procedures similar to those for teTeX.
+
+o If you are reinstalling the font, you should first delete any existing 
+  generated tfm and pk files for the font, then follow the above procedure.
+
+To typeset the documentation:
+=============================
+
+o run: latex humanist.dtx
+o if you want an index then run: makeindex -s gind.ist humanist
+o run: latex humanist.dtx
+o Print humanist.dvi for a hardcopy of the package manual 
+
+    Note that the docmfp package is normally required for LaTeXing humanist.dtx.
+The package is available from CTAN in tex-archive/macros/latex/contrib/supported.
+If you haven't got this and don't want to get it, then there are instructions
+in the first part of the .dtx file about how to edit it to avoid the use of docmfp.
+(docmfp is an extension of the doc package for describing METAFONT, or other
+non-LaTeX, code.)
+
+
+To check out your installation:
+===============================
+
+o run: latex tryfont  for a testpage of the fonts
+o run: latex allfont  for a document typeset with the fonts
+
+2003/06/20
+Peter Wilson
+peter.r.wilson@boeing.com

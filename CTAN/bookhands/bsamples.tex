@@ -1,0 +1,417 @@
+% bsample.tex    Samples of book-hand fonts
+\documentclass{article}
+\usepackage{sqrcaps}
+\usepackage{rustic}
+\usepackage{uncial}
+\usepackage{auncial}
+\usepackage{huncial}
+\usepackage{inslrmaj}
+\usepackage{inslrmin}
+\usepackage{carolmin}
+\usepackage{egothic}
+\usepackage{tgothic}
+\usepackage{pgothic}
+\usepackage{rotunda}
+\usepackage{humanist}
+
+%\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{a b c d e f gh i j k l m n o p q r s t u v w x y z}
+\newcommand{\punct}{. , ; : ! ? ` ' \& ( ) [ ]}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\ligs}{``the brown \& white dog --- but fast acting hare''}
+\newcommand{\sentence}{%
+    now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog.}
+\newcommand{\latin}{%
+    Te canit adcelebratque polus rex gazifer hymnis.
+Trans zephyrique globum scandunt tua facta per axem.
+Explicit secunda pars summe fratris thome de aquino
+ordinis fratrum predicatorium, longissima, prolixissima,
+\& tediossima scribent; Deo gratias, Deo gratias, et iterumm
+Deo gratias.
+}
+
+\renewcommand{\sentence}{%
+Here is is an example of the font. Now is the time for all good
+men, and women, to come to the aid of the party. Boys and girls come
+out to play while the quick brown fox jumps over the lazy dog.}
+
+\hyphenation{glo-b-um tra-ns ad-cel-e-brat-que zeph-yr-ique}
+
+\title{Bookhands Font Sampler}
+\author{Peter Wilson\\ \texttt{peter.r.wilson@boeing.com}}
+\date{December 2002}
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+
+    This document provides some samples of the book-hand fonts. They are
+available from CTAN in the \texttt{fonts/bookhands} directory. The 
+characters in each font are displayed first, followed by an example
+of some text including ligatures. Then some more text is
+shown in the font. The first part of the text are sentences containing some
+well known English phrases. The second part consists of Latin
+sentences. The first two of these are Latin
+abecedarian sentences dating from about 790~\textsc{ad}. The last
+sentence also dates from around that time.
+
+    As an example, the Computer Modern Roman font would be sampled like this:
+\begin{center}
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\sentence{} \latin \par
+\end{quotation}
+
+    It should be noted that not all the fonts have the complete range of
+punctuation marks and ligatures as shown in the CMR example. Punctuation
+was virtually non-existant in the first century while by Gutenberg's time
+all of our modern punctuation marks were in use.
+
+\clearpage
+
+\section{Square Capitals}
+
+    Square Capitals were used from the first century onwards, principally
+in the form of capital letters with other hands. 
+
+    The font and packages are in the \texttt{sqrcaps} subdirectory.
+
+\begin{center}
+\sqrcfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.7}
+\sqrcfamily 
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Roman Rustic}
+
+    The Roman Rustic font was used between the first and sixth centuries.
+Capital letters, if used at all, were just larger versions of the normal letters.
+
+    The font and packages are in the \texttt{rustic} subdirectory.
+
+\begin{center}
+\rustfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.9}
+\rustfamily 
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Uncial}
+
+    The Uncial font was used between the third and sixth centuries. 
+Capital letters, if used at all, were either just larger versions of the 
+normal letters, or Roman Rustic letters.
+
+    The font and packages are in the \texttt{uncial} subdirectory.
+
+\begin{center}
+\unclfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.37}
+\unclfamily
+\sentence{} \latin \par
+\end{quotation}
+
+\clearpage
+\section{Half Uncial}
+
+    The Half Uncial font was used between the third and ninth centuries. 
+Capital letters were only used at the
+start of a paragraph and were always partially, or completely, set in the margin.
+They were either larger versions of the normal letters, or letters from earlier
+fonts.
+
+    The font and packages are in the \texttt{huncial} subdirectory.
+
+\begin{center}
+\hunclfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.4}
+\hunclfamily
+\sentence{} \latin \par
+\end{quotation}
+
+\clearpage
+\section{Artificial Uncial}
+
+    The Artificial Uncial font was used between the sixth and tenth centuries. 
+Capital letters were only used at the
+start of a paragraph and were always partially, or completely, set in the margin.
+They were either larger versions of the normal letters, or letters from earlier
+fonts.
+
+    The font and packages are in the \texttt{auncial} subdirectory.
+
+\begin{center}
+\aunclfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.4}
+\aunclfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Insular Majuscule}
+
+    The Insular Majuscule font was used between the sixth and ninth centuries,
+firstly in Ireland and then later in England.
+Capital letters were only used at the start of sentences. 
+They were either larger versions of the normal letters, or highly decorated
+very large letters.
+
+
+    The font and packages are in the \texttt{inslrmaj} subdirectory.
+
+\begin{center}
+\imajfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.5}
+\imajfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Insular Minuscule}
+
+    The Insular Minuscule hand was an informal version of Insular Majuscule and has been
+used from the sixth century onwards. 
+Capital letters were only used at the start of sentences. 
+They were either larger versions of the normal letters, or highly decorated
+very large letters.
+
+
+    The font and packages are in the \texttt{inslrmin} subdirectory.
+
+\begin{center}
+\iminfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.5}
+\iminfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Carolingian Minuscule}
+
+    The Carolingian Minuscule script was used between the 8th and 12th centuries,
+throughout the Western Christian world.
+Capital letters were only used at the start of sentences. 
+They were either larger versions of the normal letters, or taken from
+earlier hands.
+
+    The font and packages are in the \texttt{carolmin} subdirectory.
+
+\begin{center}
+\cminfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.1}
+\cminfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Early Gothic}
+
+    The Early Gothic hand was used between the 11th and 12th centuries, as a short lived
+intermediary between the Carolingian script and the full-blown Gothic hands.
+
+
+    The font and packages are in the \texttt{egothic} subdirectory.
+
+\begin{center}
+\egothfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.3}
+\egothfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Gothic Textura Quadrata}
+
+    Gothic Textura Quadrata was the principal Gothic hand on the continent between about
+the 13th and 15th centuries. Guthenberg based his types on this hand.
+
+    The font and packages are in the \texttt{tgothic} subdirectory.
+
+\begin{center}
+\tgothfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.3}
+\tgothfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Gothic Textura Prescius}
+
+    Gothic Textura Prescius, which is slightly simpler than Quadrata, was  used in
+England from the 13th century. Caxton based his types on this hand.
+
+
+    The font and packages are in the \texttt{pgothic} subdirectory.
+
+\begin{center}
+\pgothfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.1}
+\pgothfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Rotunda}
+
+    The Italians did not go for the excesses of the Gothic Textura scripts and
+they transformed Early Gothic into the Rotunda hand, in use between the 13th and
+15th centuries.
+
+    The font and packages are in the \texttt{rotunda} subdirectory.
+
+\begin{center}
+\rtndfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.1}
+\rtndfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+\clearpage
+\section{Humanist Minuscule}
+
+    Our modern roman types are based on the Humanist Minuscule script that
+was used from the 14th century onward in Italy. It was the successor to Rotunda.
+
+
+    The font and packages are in the \texttt{humanist} subdirectory.
+
+\begin{center}
+\hminfamily
+\abc \\
+\punct{} \dashes \\
+\figs 
+
+\ligs\par
+\end{center}
+
+\begin{quotation}
+\renewcommand{\baselinestretch}{1.0}
+\hminfamily
+\sentence{} \latin \par
+\end{quotation}
+
+
+
+\end{document}
+
+

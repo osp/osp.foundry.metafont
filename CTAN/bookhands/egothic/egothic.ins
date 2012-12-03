@@ -1,0 +1,101 @@
+%%
+%% egothic.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{egothic.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{egothic.drv}{t}{\from{egothic.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{egoth7.mf}{t}{\from{egothic.dtx}{base7}}
+\generateFile{egoth10.mf}{t}{\from{egothic.dtx}{base10}}
+\generateFile{egoth17.mf}{t}{\from{egothic.dtx}{base17}}
+\generateFile{egothb7.mf}{t}{\from{egothic.dtx}{base7b}}
+\generateFile{egothb10.mf}{t}{\from{egothic.dtx}{base10b}}
+\generateFile{egothb17.mf}{t}{\from{egothic.dtx}{base17b}}
+\generateFile{egothl.mf}{t}{\from{egothic.dtx}{min}}
+\generateFile{egothu.mf}{t}{\from{egothic.dtx}{maj}}
+\generateFile{egothtitle.mf}{t}{\from{egothic.dtx}{mfd}}
+\generateFile{egothpunct.mf}{t}{\from{egothic.dtx}{punct}}
+\generateFile{egothlig.mf}{t}{\from{egothic.dtx}{lig}}
+\generateFile{egothdig.mf}{t}{\from{egothic.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1egoth.fd}{t}{\from{egothic.dtx}{fdot1}}
+\generateFile{t1egoth.fd}{t}{\from{egothic.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{egothic.sty}{t}{\from{egothic.dtx}{usc}}
+\generateFile{allegoth.sty}{t}{\from{egothic.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space egoth7.mf}
+\Msg{* \space\space egoth10.mf}
+\Msg{* \space\space egoth17.mf}
+\Msg{* \space\space egothb7.mf}
+\Msg{* \space\space egothb10.mf}
+\Msg{* \space\space egothb17.mf}
+\Msg{* \space\space egothl.mf}
+\Msg{* \space\space egothu.mf}
+\Msg{* \space\space egothtitle.mf}
+\Msg{* \space\space egothpunct.mf}
+\Msg{* \space\space egothlig.mf}
+\Msg{* \space\space egothdig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1egoth.fd}
+\Msg{* \space\space t1egoth.fd}
+\Msg{* \space\space egothic.sty}
+\Msg{* \space\space allegoth.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

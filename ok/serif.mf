@@ -1,0 +1,383 @@
+u#:=10pt#;
+define_pixels(u);
+
+% variables — defines the general parameters of the letter
+w = 1u;				% width
+h = u*1.2 = xh*0.8;	% height
+b = 1/3;			% hauteur de barre (1=top, 0=bottom)
+var = 1+2b;
+slant = .0;			% slanted (-1 > backward > 0 > italic > 1)
+pen_size = .25u;
+pen_rotation = 45;
+
+serif = 1;			% 1 or 0;
+serif_ext = .01u; 	% épaisseur des pts extérieurs
+serif_l = .3u; 		% longeur du sérif
+serif_h = .1u; 	% hauteur du point à l'intérieur du fût (attention sensible)
+
+%--------------------------------------------------- A
+beginchar("A",1.6u#,2u#,0u#);"Letter A"; 
+
+	y1 = y2 = y3-h = 0;
+	x1 = x2-(w-pen_size/2) = pen_size/2;
+	x3 - u*slant = (x2+x1)/2;
+	y4 = y5 = y3*b;
+	z4=whatever[z1,z3]; 
+	z5=whatever[z2,z3];
+	
+	if (serif = 1):
+		%serifs intérieurs
+		y6 = y7 = serif_h;
+		z6=whatever[z1,z3]; 
+		z7=whatever[z2,z3];
+		%serifs extérieurs (bot)
+		y1+serif_ext/2 = y8 = y9;
+		x1 = x8+serif_l = x9-serif_l;
+		y2+serif_ext/2 = y10 = y11;
+		x2 = x10+serif_l = x11-serif_l;
+
+		penpos6(serif_h*2,90);
+%		penpos6(serif_h*2,(z1 dotprod z3));
+		penpos7(serif_h*1.99,90);
+		penpos8(serif_ext,90);	penpos9(serif_ext,90);
+		penpos10(serif_ext,90);	penpos11(serif_ext,90);
+
+		%empattements
+		penstroke z8e{right}..z6e & z6e..{right}z9e;
+		penstroke z10e{right}..z7e & z7e..{right}z11e;
+	fi
+	% fûts
+	penpos1(pen_size/2,0); 	penpos2(pen_size,0);
+	penpos3(pen_size,pen_rotation);
+	penstroke z1e..z3e;	penstroke z2e..z3e;
+	
+	pickup pencircle xscaled .5pen_size rotated pen_rotation; 
+	draw z4{dir 20}..{dir 20}z5;
+	labels(range 1 thru 11);
+endchar;
+
+%--------------------------------------------------- B
+beginchar("B",1.6u#,2u#,0u#);"Letter B";
+	x1 = x3 - u*slant = pen_size;
+	x3 = (x4-w/3);
+	x4 = x5/(1+b) + (u*slant)*.2;
+	
+	y1 = y3-h = 0;
+	y2 = y3*2b;
+	z2 = whatever[z1,z3];
+	y4 = (y3+y2)/2;
+	y5 = (y1+y2)/(2*2b);
+	
+	% empattements	
+	if (serif=1):
+		x6 = x1-serif_l;
+		x7 = x3-serif_l;
+		z8 = whatever[z1,z3];
+		z9 = whatever[z1,z3];
+		y6-serif_ext/2 = y1 = y8-serif_h;
+		y7+serif_ext/2 = y3 = y9+serif_h;
+
+		penpos6(serif_ext,90);	penpos7(serif_ext,90);
+		penpos8(2serif_h,90);	penpos9(2serif_h,90);
+		penstroke z7e{right}..z9e;
+		penstroke z6e{right}..z8e;
+	fi	
+	%pickup pencircle xscaled pen_size rotated pen_rotation; 
+	penpos1(pen_size,0);	penpos3(pen_size,0);
+	penpos2(pen_size,pen_rotation);
+	penpos4(pen_size,.5pen_rotation);	penpos5(pen_size,pen_rotation);
+	penstroke z1e..z3e;
+	penstroke z3e{right}..z4e..{left}z2r;
+	penstroke z2e{right}..z5e..{left}z1e;
+
+	%draw z2{right}..z5..{left}z1;
+	labels(range 1 thru 9);
+endchar;
+
+%--------------------------------------------------- C
+beginchar("C",1.6u#,2u#,0u#);"Letter C";
+	x2 = pen_size/2;
+	x3 = x1 - u*slant/2 = w-.3u;
+	y3 = y1-h+.5u = y2-h*b = pen_size/3;
+
+	pickup pencircle xscaled pen_size rotated pen_rotation; 
+	draw z1{up}..{down}z2..z3;
+endchar;
+
+%--------------------------------------------------- D
+beginchar("D",1.6u#,2u#,0u#);"Letter D";
+	x1 = x2 - u*slant = x3-(w-.2u) - u*slant = pen_size/2;
+	x11 = x1+.1u;	x10 = x2+.5u;
+	y1 = y2-h = y3-h/var = 0;
+	y10 = y2;
+	y11 = y1+.02u;
+	
+	if (serif=1):
+		x6 = x1-serif_l;
+		x7 = x2-serif_l;
+		z8 = whatever[z1,z2];
+		z9 = whatever[z1,z2];
+		y6-serif_ext/2 = y1 = y8-serif_h;
+		y7+serif_ext/2 = y2 = y9+serif_h;
+
+		penpos6(serif_ext,90);	penpos7(serif_ext,90);
+		penpos8(2serif_h,90);	penpos9(2serif_h,90);
+		penstroke z7e{right}..z9e;
+		penstroke z6e{right}..z8e;
+	fi	
+	
+	penpos1(pen_size,0);	penpos2(pen_size,0);
+	penpos10(.5pen_size,pen_rotation);
+	penpos11(.5pen_size,-pen_rotation);
+	penpos3(pen_size,pen_rotation);
+	
+	penstroke z1e..z2e;
+	penstroke z9e..z10e{right}..{down}z3e;
+	penstroke z11e..{up}z3e;
+
+	
+	labels(range 1 thru 11);
+endchar;
+
+%--------------------------------------------------- E
+beginchar("E",1.6u#,2u#,0u#);"Letter E";
+	y1 = y6 = 0; % = pen_size/2
+	y2 = y5 = h/var;
+	y3 = y4 = h;
+
+	x1 = x3 - u*slant = pen_size/2;
+	z2 = whatever[z1,z3]; 
+	x4 - u*slant  = x6 = x5*var - u*slant  = w*2b;
+	
+	pickup pencircle xscaled pen_size rotated pen_rotation; 
+	draw z6--z1--z3--z4;
+	draw z2--z5;
+endchar;
+
+%--------------------------------------------------- F
+beginchar("F",1.6u#,2u#,0u#);"Letter F";
+	y1 = 0;
+	y2 = y5 = h/var;
+	y3 = y4 = h;
+
+	x1 = x3 - u*slant = pen_size/2;
+	z2 = whatever[z1,z3]; 
+	x4 - u*slant  = x5*var - u*slant  = w*2b;
+	
+	pickup pencircle xscaled pen_size rotated pen_rotation; 
+	draw z1--z3--z4;
+	draw z2--z5;
+	labels(range 1 thru 5);
+endchar;
+
+
+%--------------------------------------------------- G
+beginchar("G",1.6u#,2u#,0u#);"Letter G";
+	y2 = y4-h = y3-h/2 = 0;
+	y3 = y8 = y6 = y7;
+	y3 = y1*var = y5/var;
+	
+	x5 - u*slant/2 = x1 = w*(2.5b);
+	z6 = whatever[z1,z5];
+	x3 = x7-w = 0;
+	x2 = x4 - u*slant/2 = x8 = w/2;
+	
+	pickup pencircle xscaled pen_size rotated pen_rotation; 
+	draw z5{up}..z4..z3..z2..{up}z1--z6;
+	draw z8--z7;
+	
+	labels(range 1 thru 8);
+endchar;
+
+%--------------------------------------------------- H
+beginchar("H",1.6u#,2u#,0u#);"Letter H";
+	x1 = x3-u*slant = 0;
+	x4 = x6-u*slant = w/var;
+	
+	y1 = y4 = 0;
+	y3 = y6 = h;
+	y2 = y5 = h/var;
+	
+	z2 = whatever[z1,z3];
+	z5 = whatever[z4,z6];
+	
+	pickup pencircle xscaled pen_size rotated pen_rotation; 
+	draw z1--z3; 	draw z4--z6; 	draw z2--z5; 
+	labels(range 1 thru 6);
+endchar;
+
+
+%--------------------------------------------------- I
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%	pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- J
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- K
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- L
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- M
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- N
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+%--------------------------------------------------- O
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- P
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- Q
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- R
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- S
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- T
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- U
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- V
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- W
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- X
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- Y
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+%--------------------------------------------------- Z
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%\tpickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+
+%--------------------------------------------------- 
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+
+
+beginchar("a",1.6u#,2u#,0u#);"Letter a";
+	x1 - u*slant/4 = x3 = 0;
+	x2 - u*slant/4 = x7 = w*2b;
+	x4*1.5 = x6 = (x1+x2)/2;
+	x5 = x2+u/3;
+	
+	y4 = y5 = y6-h*(1-b) = 0;
+	y1 = y2 = y6/1.5;
+	y3 = (y1+y4)/2;
+	y7 = (y3+y4)/2;
+	
+	pickup pencircle xscaled pen_size yscaled .3pen_size rotated pen_rotation; 
+	draw z1..z6..{down}z2..z7{down}..{right}z5;
+	draw z2{down}..{down}z3..{right}z4..{up}z7;
+	
+	penlabels(1,2,3,4,5,6,7);
+endchar;
+
+%--------------------------------------- a; version fraktur
+%beginchar("a1",1.6u#,2u#,0u#);"Letter a fraktur";
+%	x1 = x3 = 0;
+%	x2 = x7 = w*2b;
+%	x4 = x6 = (x1+x2)/2;
+%	x5 = x2*1.2;
+%	
+%	y4 = y5 = y6-xh = 0;
+%	y1 = y2 = xh-b;
+%	y3 = (y1+y4)/2;
+%	y7 = (y3+y4)/2;
+%	
+%	pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	draw z1{up}..z6..{up}z2--z7..{left}z5;
+%	draw z2{down}..{down}z3..{left}z4..{down}z7;
+%	draw z7{down}..{left}z5;
+%	
+%	labels(range 1 thru 7);	
+%endchar;
+
+
+end

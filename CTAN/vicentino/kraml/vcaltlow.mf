@@ -1,0 +1,333 @@
+% VCALTLOW - lower characters for vicentino font (alternative set)
+% w. kraml, 1991, 92
+
+% lower case:
+slant := lowerslant;
+currenttransform := identity slanted slant;
+
+beginchar("a", 2tw#+sw#+1.5sw#, xh#, 0); "the letter a";
+pickup lower_pen;
+x1=x2=w-1.5sw-tw; top.y1=top.y5=h;
+rt.x3=w-.75s; y3=3.5th; bot.y6=bot.y2=0;
+lft x5=1.5tw; lft x6=1.25tw;
+path rightstem; rightstem =  z1---z2{right}...{dir126}z3;
+z4 = rightstem horintersection .7h;
+draw if modern: subpath(0,1.9) of fi rightstem;
+draw z4..tension3..z5..tension2.5..z6{right}..tension1.75..{up}z4;
+end_char;
+
+beginchar("b", 2tw#+sw#, ah#, 0); "the letter b";
+pickup lower_pen;
+x2=x3=tw+.25s; x2-x1=halfser; y2=3/4h; bot.y3=1.667th;
+z2-z1=whatever*dir40;
+top.y2'=h; x2'=x2+4/3tw;
+path stem, loop; stem = z2'{dir170}..z2{down}..{dir275}z3;
+z4 = stem horintersection y1;
+draw if modern: subpath(.1,2) of fi stem;
+x5=x8=w/2; top.y5=xh; bot.y8=0;
+z6 = stem horintersection xh/2;
+y7=y6; rt.x7=w-2/3s; 
+loop = z6{up}..z5..tension.9..z7..z8..{dir95}z3;
+draw loop;
+end_char;
+
+beginchar("c", sw#+tw#+1.5sw#, xh#, 0); "the letter c";
+pickup lower_pen;
+numeric dev, axis; dev=.5s; axis=.5sw+.5tw+.5s;
+rt x1=2axis-.5s; lft x3=.5s; 
+x2-dev=x4+dev=axis; 
+y1-dev=y3+dev=.52h;
+top.y2=h; bot y4=0;
+rt.x5=w-1.5sw; rt.x6=w-.25s; y5=3/4h; y6=3.5th;
+path p,q ; p= superellipse(z1,z2,z3,z4,0.73);
+q= z5..{left}z2 & subpath(2,6) of p & z4{right}...{dir126}z6;
+draw q;
+end_char;
+
+beginchar("d", sw#+tw#+s#, ah#, 0); "the letter d";
+pickup lower_pen;
+numeric dev, axis; dev=.5s; axis=.5sw+.5tw+.5s;
+rt x1=2axis-.5s; lft x3=.5s; 
+x2-dev=x4+dev=axis; 
+y1-dev=y3+dev=.52xh;
+top.y2=xh; bot y4=0;
+x5=.41w; top.y5=h; lft.x6=0; y6=h-1.25th;
+path p,q ; p= superellipse(z1,z2,z3,z4,0.73);
+q=z1{up}...{left}z5..{dir216}z6;
+draw p & q;
+end_char;
+
+beginchar("e", sw#+tw#+1.5sw#, xh#, 0); "the letter e";
+pickup lower_pen;
+numeric dev, axis; dev=.5s; axis=.5sw+.5tw+.75s;
+rt x1=2axis-.5s; lft x3=.5s; 
+x2-dev=x4=axis; 
+y1-dev=y3+dev=.52h;
+top.y2=h; bot y4=0;
+rt.x5=w-1.5sw; rt.x6=w-.25s; y5=3/4h; y6=3.5th;
+path p,q ; p= superellipse(z1,z2,z3,z4,0.73);
+z7 = (subpath(2,6) of p) horintersection .425h;
+q= z7{dir18}..tension1.25..
+    z5..{left}z2 & subpath(2,6) of p & z4{right}...{dir126}z6;
+draw if modern: subpath(0,6.925) of fi q;
+end_char;
+
+beginchar("f", 3.25tw#, ah#, dh#); "the letter f";
+pickup lower_pen;
+x2-.8s=x3+.8s=w/2; x1=w+1sw; x4=-1.25sw;
+top.y2+2s=top.y1+3s=h; bot.y3=-dh+2s; bot.y4=-dh+s;
+y5=y6=xh-th; lft.x5=0.25s; x6=w;
+path stem;
+stem = z1{dir105}..tension1.2..z2..tension 2.25..
+      z3{dir240}..if modern: else: {dir145}fi z4;
+draw if modern: subpath(0,2.7) of fi stem;      
+draw z5--z6;
+end_char;
+
+beginchar("g", sw#+tw#+s#, xh#, dh#); "the letter g";
+pickup lower_pen;
+x1=w/2+2/3s; x3=w/2-2/3s; x2=w-x4=.9tw;
+top.y1=h; y2=y4=.63h; y3=.24h;
+draw z1..z2..z3;
+draw z1..z4..z3;
+x8=x3-.5s; x5=.4[x2,x3]; rt.x7=w-.4s;
+bot.y8=-dh; bot.y5=.25s; y7=y8+1.65th;
+path p;
+p =z3..z5{down}..{down}z7..{left}z8;
+draw p;
+z6 = p horintersection 0;
+lft.x9=0; y9=y8+1.25th;
+draw z8{left}..z9{up}..{dir30}z6;
+end_char;
+
+beginchar("h", 2tw#+sw#, ah#, 0); "the letter h";
+pickup lower_pen;
+x2=x3=tw+.25s; x2-x1=halfser; y2=3/4h; bot.y3=0;
+z2-z1=whatever*dir40;
+top.y2'=h; x2'=x2+4/3tw;
+path stem, loop; stem = z2'{dir170}..z2{down}..{dir275}z3;
+z4 = stem horintersection y1;
+draw if modern: subpath(.1,2) of fi stem;
+x5=w/2; top.y5=xh; bot.y8=0; x8=x5+.6tw;
+z6 = stem horintersection xh/2;
+y7=y6; rt.x7=w-2/3s; 
+x9=x5+.8s; y9=.66th;
+loop = z6{up}..z5..tension.9..z7{down}..z8..z9;
+draw if modern: subpath(0,3.2) of fi loop;
+end_char;
+
+beginchar("k", 2tw#+sw#, ah#, 0); "the letter k";
+pickup lower_pen;
+x2=x3=tw; x2-x1=halfser; y2=3/4h; bot.y3=0;
+z2-z1=whatever*dir40;
+top.y2'=h; x2'=x2+4/3tw;
+path stem, loop; stem = z2'{dir170}..z2{down}..{dir275}z3;
+z4 = stem horintersection y1;
+draw if modern: subpath(.1,2) of fi stem;
+x5=w/2 + .5s; top.y5=xh;
+x5'=w-tw; y5'= if modern: .8xh else: .7xh fi;
+z6 = stem horintersection 0.45xh;
+loop = z6{up}..z5..z5'
+      if modern:{dir220} else:{dir245} fi
+      ..tension.825..{dir275}z3;
+draw if modern: subpath(1.5,3) of fi loop;
+z7 = loop horintersection 7/16xh;
+bot.y8=-2th; top.y9=-s; rt.x9=w+2tw; lft.x8=w;
+draw z7..tension1.75..z8..z9;
+end_char;
+
+beginchar("l", 2tw#+s#, ah#, 0); "the letter l";
+pickup lower_pen;
+x2=x3=w/2; x2-x1=halfser; rt x4=w; y2=3/4h; bot y3=0; y4=th;
+z2-z1=whatever*dir40;
+top.y2'=h; x2'=x2+4/3tw;
+path stem;
+stem = z2'{dir170}..z2{down}..tension7..z3..tension2..{dir40}z4;
+draw if modern: subpath(0.1,2.2) of fi stem;
+end_char;
+
+beginchar("m", 2tw#+2sw#+1.5sw#, xh#, 0); "the letter m";
+pickup lower_pen;
+x2=x3=tw; x4=x5=tw+sw; x6=x7=w-tw-1.5sw; lft.x1=0; rt.x8=w-.75s;
+top.y2=top.y4=top.y6=h; bot.y3=bot.y5=bot.y7=0;
+y1=h-th; y8=3.5th;
+path lstem, mstem, rstem;
+lstem=z1{dir40}..tension2..z2..tension7..{curl0}z3;
+mstem=z3{dir86}..tension1.9..z4{dir-30}..tension6..{curl0}z5;
+rstem=z5{dir86}..tension1.9..z6{dir-30}..tension6..z7{right}...{dir126}z8;
+draw if modern: subpath(0.8,2) of fi lstem;
+draw mstem;
+draw if modern: subpath(0,2.9) of fi rstem;
+end_char;
+
+beginchar("n", 2tw#+sw#+1.5sw#, xh#, 0); "the letter n";
+pickup lower_pen;
+x2=x3=tw; x4=x5=w-1.5sw-tw; lft.x1=.1s; rt.x6=w-.75s;
+top.y2=top.y4=h; bot.y3=bot.y5=0;
+y1=h-th; y6=3.5th;
+path lstem, rstem;
+lstem = z1{dir40}..tension2..z2..tension7..{curl0}z3;
+draw if modern: subpath(.8,2) of fi lstem;
+rstem = z3{dir86}..tension1.9..z4{dir-30}..tension6..z5{right}...{dir126}z6;
+draw if modern: subpath(0,2.9) of fi rstem;
+end_char;
+
+beginchar("p", 2tw#+sw#, xh#, dh#); "the letter p";
+pickup lower_pen;
+x1=x2=tw; y1=h+s; bot.y2=-dh+1.3th;
+lft.x3=0; y3=h-th; top.y4=h; x4=x5=.52w; bot.y5=0;
+rt.x4'=w-.5s; y4'=.525h;
+rt.x2'=0; bot.y2'=-dh;  
+path stem, bowl; stem = z1{down}..tension2.3..{dir255}z2..{dir170}z2' ;
+z6 = stem horintersection 1.25th;
+draw if modern: subpath(0,1.8) of fi stem;
+bowl=z3{dir35}...z4{right}..z4'{down}..z5{left}..{dir105}z6;
+draw if modern: subpath(0.15,4) of fi bowl;
+labels(2', 4');
+end_char;
+
+beginchar("q", 2tw#+sw#, xh#, dh#); "the letter q";
+pickup lower_pen;
+x1=w-tw; top.y1+.25th=top.y5=h;
+bot.y6=0; 
+x2=1.2tw; bot.y2=-dh;
+x2''=w+1.55tw; x2'=.5[x2,x2''];
+y2'-.25s=y2''-.75s=y2;
+lft.x5=1.25tw; lft.x6=tw;
+path rightstem; 
+rightstem =  z1{dir-85}..tension.8..{dir220}z2 & z2{dir40}..tension.8..z2'
+              ..tension.8..{dir40}z2'' ;
+draw if modern: subpath(0,2.85) of fi rightstem;
+draw z1..tension2.1..z5..tension2.2..z6{right}..tension1.7..{up}z1;
+labels(2',2'');
+end_char;
+
+beginchar("r", tw#+sw#+.5s#+1.5sw#, xh#, 0); "r";
+pickup lower_pen;
+x2=x3=tw; bot y3=0; top.y2=top.y5=h;
+lft.x1=0; y1=h-th; top.y4=h+1/3s; rt.x4=w-.75s; x5=w-.7tw-1.5sw;
+x4'=.22[x5,x4]; y4'=h-2.2th;
+path lstem, rstem;
+lstem=z1{dir40}..tension2..z2..tension7..{curl0}z3;
+rstem=z3{dir86}..tension2..z5{dir-30}..z4'{dir-10}..{dir126}z4;
+draw if modern: subpath(0.8,2) of fi lstem;
+draw if modern: subpath(0,2.95) of fi rstem;
+labels(4');
+end_char;
+
+beginchar("s", 2.5tw#, ah#, dh#); "the letter s (long form)";
+pickup lower_pen;
+x2-.8s=x3+.8s=w/2; x1=w+.42tw; rt.x4=-.4tw;
+top.y2+.25s=top.y1+.5s=h; bot.y3=-dh+s; bot.y4=-dh;
+path stem;
+stem = z1{dir105}..tension1.2..z2..tension 2.25..
+      z3{dir240}..if modern: else: {dir145}fi z4;
+draw if modern: subpath(0,2.8) of fi stem;      
+end_char;
+
+beginchar("t", 2.5tw#+1.5sw#, xh#, 0); "the letter t";
+pickup lower_pen;
+x1=x2=1.25tw; rt.x3=w-.75s; y1=h+s; bot.y2=0; y3=3.5th;
+y4=y5=xh-th; lft.x4=0.25s; x5=2.5tw;
+path stem;
+stem=z1{curl0}..tension9..z2{right}...{dir126}z3;
+draw if modern: subpath(0,1.9) of fi stem;
+draw z4--z5;
+end_char;
+
+beginchar("u", 2tw#+sw#+sw#, xh#, 0); "the letter u";
+pickup lower_pen;
+x2=x3-.5s=tw+sw; x4=x5=w-tw; lft.x1=0.5s; rt.x6=w;
+top.y2=top.y4=h; bot.y3=bot.y5=0;
+y1=h-2.5th; y6=th;
+path lstem, rstem;
+lstem=z1{dir126}...z2{right}..tension5.5..z3{right}..tension1.5..{dir86}z4;
+rstem=z4{curl0}..tension8..z5..tension1.5..{dir40}z6;
+draw if modern: subpath(.07,3) of fi lstem;
+draw if modern: subpath(0,1.2) of fi rstem;
+end_char;
+
+beginchar("v", 2tw#+sw#+sw#, xh#, 0); "the letter v";
+pickup lower_pen;
+x2=tw+sw; x4-x5=2/3tw;
+lft.x1=0.5s; rt.x4=w-2/3tw; x3=.7[x1,x4];
+top.y2=top.y4=h; y1=h-2.5th; y5=h-th; bot.y3=0;
+path stem;
+stem = z1{dir126}...z2{right}..tension6.7..
+     z3{right}..tension2..z4{left}..tension1.5..z5;
+draw if modern: subpath(.07,3.2) of fi stem;
+end_char;
+
+beginchar("w", 3tw#+2sw#-2s#+sw#, xh#, 0); "the letter w";
+pickup lower_pen;
+x2=tw+sw; x7-x8=2/3tw;
+lft.x1=0.5s; rt.x7=w-2/3tw; x3=.7[x1,x4];
+x7-x4=x6-x3=x4-x2;
+top.y2=top.y4=top.y7=h; y1=h-2.5th; y8=h-th; bot.y3=bot.y6=0;
+path lstem, rstem;
+lstem=z1{dir126}...z2{right}..tension6.7..
+    z3{right}..tension2.2..z4{dir130}; 
+rstem=z4{right}..tension6.7..z6{right}..tension2..z7{left}..tension1.5..z8;
+draw if modern: subpath(.07,3) of fi lstem;
+draw if modern: subpath(0,2.2) of fi rstem;
+end_char;
+
+beginchar("x", 2tw#+sw#+.5s#, xh#, 0); "the letter x";
+pickup lower_pen;
+lft.x1-.3s=lft.x5=0; x2=x6+.75s=tw+.1s;
+x7-.5s=w-tw; rt.x8=w-.5s; x4=w+1.9tw; x3=w-.6tw;
+top.y2=top.y7=h; y1=y8=h-th;
+y5=th; y4=-1.5th; 0=bot.y6=bot.y3;
+path nwso, swno;
+nwso=z1{dir42}..tension1.75..z2..tension4..{z3-.75[z1,z2]}z3...{dir40}z4;
+swno=z5..tension1.7..z6..tension3.3..z7..tension1.7..z8;
+draw if modern: subpath(.8,2.9) of fi nwso;
+draw if modern: subpath(.8,2.2) of fi swno;
+end_char;
+
+beginchar("y", 2tw#+sw#+sw#, xh#, dh#); "the letter y";
+pickup lower_pen;
+lft.x1=0; rt.x4=w; x2=2/3tw;
+x4'=w-sw-s; y4'=h-1.2th;
+x6=-tw; x5=x6+1.33tw;
+top.y2=top.y4=h; y1=h-th; bot.y5=-dh;
+y6=-dh+th;
+path rstem, lstem;
+rstem = z4...z4'..tension2.3..z5..tension1.2..z6;
+z3=rstem horintersection -.55s;
+lstem = z1{dir40}..tension2..z2{right}..tension2.7..{z5-z4'}z3;
+draw if modern: subpath(0.07,2.7) of fi rstem;
+draw if modern: subpath(.8,1.97) of fi lstem;
+end_char;
+
+beginchar("z", 2tw#+sw#-.5s#, xh#, 0); "the letter z";
+pickup lower_pen;
+lft.x1=lft.x4=0.175tw; rt.x3+.275tw=w; 
+x2=1.1tw; x5=w-1.275tw;
+top.y2=top.y3=h; y1=h-1.225th; bot.y4=bot.y5=0;
+x6 =w+2.1tw; y6=-2th;
+path stem;
+stem=z1{dir38}...z2..
+     if modern: tension 1.2 else: tension.9 fi ..
+     {dir40}z3 &  z3..tension6.. {dir265}z4 &
+     z4{dir40}..tension1.1..z5..{dir35}z6;
+draw if modern: subpath(.25,4.9) of fi stem;
+end_char;
+
+beginchar(char25, 5.1tw#, ah#, dh#); "the ss ligature (long forms)";
+pickup lower_pen;
+x2-.8s=x3+.8s=1.5tw+.1s; x1=3.2tw+0.5s; rt.x4=-.25s;
+top.y2+.75s=top.y1+s=h; bot.y3=-dh+s; bot.y4=-dh;
+x11=x1+2.2tw; x12=x2+2.2tw; x13=x3+2.2tw; x14=x4+2.2tw;
+y11=y1; y12=y2+.2s; y13=y3; y14=y4;
+path lstem, rstem;
+rstem = z11{dir106}..tension1.1..z12..tension2.25..
+      z13{dir240}..if not.modern: {dir145}fi z14;
+z1'=rstem horintersection h-2th;
+lstem = z1'{dir110}..tension1.25..z2..tension 2.25..
+      z3{dir240}..if modern: else: {dir145}fi z4;
+draw if modern: subpath(0,2.75) of fi rstem; 
+draw if modern: subpath(0,2.6) of fi lstem;
+labels(1');
+end_char;
+

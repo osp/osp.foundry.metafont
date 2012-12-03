@@ -1,0 +1,63 @@
+beginchar("110",7pt#,6pt#,0pt#);
+u#=1pt#; define_pixels(u);
+
+numeric basdecasse, oo, plein,
+delie, pointe, hempat;
+
+	% hauteur d’x
+	basdecasse=5.1u;
+	% hauteur de la boucle
+	oo=1u;
+	% plein = graisse
+	plein=1u; 
+	% épaisseur du délié
+	delie=.001u;
+	% pointe -> épaisseur du sérif vers l'extérieur
+	pointe=.001u;
+	% hempat -> épaisseur du sérif vers l'intérieur
+	hempat=2u;
+	% creux sous le serif (bosse < 0 < creux)
+	numeric delta; delta=0u;
+	% placement du fut gauche
+	z4=(1.6u,delta);
+	% décalage -> le haut se décale (gauche < 0 < droite)
+	numeric decalage; decalage=0;
+	x3=x4+decalage; y3r=basdecasse;
+	penpos4(plein,180);
+	x3l-x3r=plein;
+	y3l-y3r=.5pointe; z3=.5[z3l,z3r];
+	penstroke z3e..{down}z4e;
+	x11=w-1.65u; y11=y4; penpos11(plein,180);
+	y10=y8=.7basdecasse; z8=whatever[z3,z4];
+	z10-z11=whatever*(z3-z4);
+	z10l-z10r=z3l-z3r; z10=.5[z10l,z10r];
+	penpos9(.87[delie,plein],-136);
+	y9l=basdecasse+oo;
+	x9=.68[x8,x10];
+	z8'=whatever[z11,z10]; y8'=1.25basdecasse;
+	penpos8(delie,angle(z8'-z8)-90);
+	penstroke z8e{z8'-z8}..tension 1.5..z9e{right}..z10e---z11e;
+	% longueur des empattements (0→ sans ; 1→ normal)
+	numeric empat; empat=x11r-x12=2u;
+	x7-x4l=empat; x3r-x1=.95empat;
+	x4r-x5=.9empat; x14-x11l=.8empat;
+	y1l=y3l; penpos1(pointe,-90); z2=z3l;
+	penpos2(1.25hempat,angle(direction 0 of (z3l..{down}z4l)));
+	penstroke z1e{right}..z2e;
+	if (x7-x4+.2u+x11-x12 > x11-x4):
+	% évite aux sérifs intérieur de se toucher
+		x7:=.5[x4,x11]-.1u;
+		x12:=.5[x4,x11]+.1u;
+	fi		
+	penpos5(pointe,-90); penpos7(pointe,-90);
+	penpos12(pointe,-90); penpos14(pointe,-90);
+	penpos6(hempat,-90); penpos13(hempat,-90);
+	y5r=y7r=y12r=y14r=0; z6r=z4; z13r=z11;
+	penstroke z5e{right}..z6e & z6e..{right}z7e;
+	penstroke z12e{right}..z13e & z13e..{right}z14e;
+
+labels(range 1 thru 14);
+endchar;
+enfor
+bye
+

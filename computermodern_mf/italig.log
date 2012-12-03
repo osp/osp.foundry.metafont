@@ -1,0 +1,12 @@
+This is METAFONT, Version 2.718281 (TeX Live 2012/Debian) (base=mf 2012.11.2)  19 NOV 2012 12:39
+**italig.mf
+(italig.mf
+>> -x_height#+asc_height#
+>> slant
+! Not implemented: (unknown numeric)*(unknown numeric).
+<to be read again> 
+                   +
+l.8 itc=(asc_height#-x_height#)*slant+
+                                      .75u#;
+? x
+

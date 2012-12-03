@@ -1,0 +1,30 @@
+This DCL archive contains all the required bits and pieces for preparing
+pictures for plotting by TeX. When executed, the archive creates
+the following files:
+
+   o BLURB.TXT     this file
+   o HALFTONE.TEX  user-level documentation (for LaTeX)
+   o PICTURE.TEX   picture from TeXPIC used by HALFTONE.TEX
+   o TEXPIC.FOR    the software. Note that there are two versions
+                   of TEXPIC in this file, one for VMS and another
+                   which is a little more portable.
+   o HALFTONE.MF   Don Knuth's halftone font
+
+If you intend to produce pictures of size >= 256 x 256, you'll need to
+expand TeX's memory (see my article in TUGboat vol 8 no 3 for more
+details). I can supply a TeX change file for VAX/VMS which effects this
+change (and provides an editor interface) either by e-MAIL or on tape.
+Contact me for more details. 
+
+If you want to use this software, but you're not a TeX guru...find
+someone who is!  He/she will be able to generate convert the Metafont
+source for the halftone font (HALFTONE.MF) to a form acceptible to
+TeX, and put it in the right directories for you to use.  I can supply
+outline help, but the font generation process tends to be horribly
+site-dependent.  Sorry.
+
+If you have any trouble with the software, please let me know (it's not
+quite the same as the version I use myself). I'm particularly keen
+to receive feedback from non-VMS sites.
+
+                           `Alien'   (ALIEN @UK.AC.ESSEX.ESE on JANET)

@@ -1,0 +1,4630 @@
+% \iffalse meta-comment
+%
+% inslrmin.dtx
+% Copyright 1999 Peter R. Wilson
+%
+% This program is provided under the terms of the
+% LaTeX Project Public License distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt.
+%
+% Author: Peter Wilson (CUA) (now at: peter.r.wilson@boeing.com)
+% 
+% If you do not have the docmfp package (available from CTAN in
+% tex-archive/macros/latex/contrib/supported), comment out the
+% \usepackage{docmfp} line below and uncomment the line following it. 
+% 
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{docmfp}
+%%%%%% \providecommand{\DescribeVariable}[1]{} \newenvironment{routine}[1]{}{}
+\EnableCrossrefs
+\CodelineIndex
+%% comment out next line to see the code
+\OnlyDescription
+\setcounter{StandardModuleDepth}{1}
+\begin{document}
+  \DocInput{inslrmin.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{134}
+%
+% \DoNotIndex{\',\.,\@M,\@@input,\@addtoreset,\@arabic,\@badmath}
+% \DoNotIndex{\@centercr,\@cite}
+% \DoNotIndex{\@dotsep,\@empty,\@float,\@gobble,\@gobbletwo,\@ignoretrue}
+% \DoNotIndex{\@input,\@ixpt,\@m}
+% \DoNotIndex{\@minus,\@mkboth,\@ne,\@nil,\@nomath,\@plus,\@set@topoint}
+% \DoNotIndex{\@tempboxa,\@tempcnta,\@tempdima,\@tempdimb}
+% \DoNotIndex{\@tempswafalse,\@tempswatrue,\@viipt,\@viiipt,\@vipt}
+% \DoNotIndex{\@vpt,\@warning,\@xiipt,\@xipt,\@xivpt,\@xpt,\@xviipt}
+% \DoNotIndex{\@xxpt,\@xxvpt,\\,\ ,\addpenalty,\addtolength,\addvspace}
+% \DoNotIndex{\advance,\Alph,\alph}
+% \DoNotIndex{\arabic,\ast,\begin,\begingroup,\bfseries,\bgroup,\box}
+% \DoNotIndex{\bullet}
+% \DoNotIndex{\cdot,\cite,\CodelineIndex,\cr,\day,\DeclareOption}
+% \DoNotIndex{\def,\DisableCrossrefs,\divide,\DocInput,\documentclass}
+% \DoNotIndex{\DoNotIndex,\egroup,\ifdim,\else,\fi,\em,\endtrivlist}
+% \DoNotIndex{\EnableCrossrefs,\end,\end@dblfloat,\end@float,\endgroup}
+% \DoNotIndex{\endlist,\everycr,\everypar,\ExecuteOptions,\expandafter}
+% \DoNotIndex{\fbox}
+% \DoNotIndex{\filedate,\filename,\fileversion,\fontsize,\framebox,\gdef}
+% \DoNotIndex{\global,\halign,\hangindent,\hbox,\hfil,\hfill,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hspace,\hss,\if@tempswa,\ifcase,\or,\fi,\fi}
+% \DoNotIndex{\ifhmode,\ifvmode,\ifnum,\iftrue,\ifx,\fi,\fi,\fi,\fi,\fi}
+% \DoNotIndex{\input}
+% \DoNotIndex{\jobname,\kern,\leavevmode,\let,\leftmark}
+% \DoNotIndex{\list,\llap,\long,\m@ne,\m@th,\mark,\markboth,\markright}
+% \DoNotIndex{\month,\newcommand,\newcounter,\newenvironment}
+% \DoNotIndex{\NeedsTeXFormat,\newdimen}
+% \DoNotIndex{\newlength,\newpage,\nobreak,\noindent,\null,\number}
+% \DoNotIndex{\numberline,\OldMakeindex,\OnlyDescription,\p@}
+% \DoNotIndex{\pagestyle,\par,\paragraph,\paragraphmark,\parfillskip}
+% \DoNotIndex{\penalty,\PrintChanges,\PrintIndex,\ProcessOptions}
+% \DoNotIndex{\protect,\ProvidesClass,\raggedbottom,\raggedright}
+% \DoNotIndex{\refstepcounter,\relax,\renewcommand,\reset@font}
+% \DoNotIndex{\rightmargin,\rightmark,\rightskip,\rlap,\rmfamily,\roman}
+% \DoNotIndex{\roman,\secdef,\selectfont,\setbox,\setcounter,\setlength}
+% \DoNotIndex{\settowidth,\sfcode,\skip,\sloppy,\slshape,\space}
+% \DoNotIndex{\symbol,\the,\trivlist,\typeout,\tw@,\undefined,\uppercase}
+% \DoNotIndex{\usecounter,\usefont,\usepackage,\vfil,\vfill,\viiipt}
+% \DoNotIndex{\viipt,\vipt,\vskip,\vspace}
+% \DoNotIndex{\wd,\xiipt,\year,\z@}
+%
+% \changes{v1.0}{2002/12/30}{First public release}
+%
+% \def\fileversion{v1.0}
+% \def\filedate{2002/12/30}
+% \newcommand*{\Lpack}[1]{\textsf {#1}}           ^^A typeset a package
+% \newcommand*{\Lopt}[1]{\textsf {#1}}            ^^A typeset an option
+% \newcommand*{\file}[1]{\texttt {#1}}            ^^A typeset a file
+% \newcommand*{\Lcount}[1]{\textsl {\small#1}}    ^^A typeset a counter
+% \newcommand*{\pstyle}[1]{\textsl {#1}}          ^^A typeset a pagestyle
+% \newcommand*{\Lenv}[1]{\texttt {#1}}            ^^A typeset an environment
+% \newcommand*{\AD}{\textsc{ad}}
+% \newcommand*{\thisfont}{Insular Minuscule}
+%
+% \title{The \Lpack{Insular Minuscule} fonts\thanks{This
+%        file has version number \fileversion, last revised
+%        \filedate.}}
+%
+% \author{%
+% Peter Wilson\\
+% Catholic University of America \\
+% Now at \texttt{peter.r.wilson@boeing.com}
+% }
+% \date{\filedate}
+% \maketitle
+% \begin{abstract}
+%    The \Lpack{inslrmin} and \Lpack{allimin} packages provide a set of 
+% Metafont \thisfont{} book-hands 
+% as used
+% for manuscripts from the 6th century onwards. This is one in a series
+% of manuscript fonts.
+% \end{abstract}
+% \tableofcontents
+% \listoftables
+%
+%
+% 
+%
+% \section{Introduction}
+%
+%    The \Lpack{inslrmin} and \Lpack{allimin} packages provide a Metafont~\cite{METAFONT} version
+% of the \thisfont{} manuscript book-hand that was in use from the
+% sixth century~\AD{} onwards. It is part of a project to provide fonts
+% covering the major manuscript hands between the first century~\AD{} and
+% the invention of printing. The principal resources used in this project
+% are listed in the Bibliography.
+%
+% This manual is typeset according to the conventions of the
+% \LaTeX{} \textsc{docstrip} utility which enables the automatic
+% extraction of the \LaTeX{} macro source files~\cite{GOOSSENS94}.
+% The \Lpack{docmfp} package is used for documenting the Metafont portions
+% of the distribution~\cite{DOCMFP}.
+%
+%    Section~\ref{sec:usc} describes the usage of the package.
+% Commented code for the fonts is in Sections~\ref{sec:mf} and~\ref{sec:fd}
+% and source code for the package is in Section~\ref{sec:code}.
+%
+% \subsection{Manuscript book-hands}
+%
+% Before the invention of printing all books were written by hand. The book-hands
+% used by the scribes and copyists for the manuscripts changed as time 
+% went on. Table~\ref{tab:1} lists some of the common book-hands which were used
+% between the 1st and 15th centuries. The later book-hands formed the basis of the
+% fonts used by the early printers, which in turn form the basis of the printing
+% fonts in use today.
+%
+%    The manuscript book-hands were written with a broad nibbed reed or quill
+% pen. Among the distinguishing characteristics of a hand, apart from the 
+% actual shape of the letters, are the angle of the pen (which controls the
+% variation between thick and thin strokes) and the height of a letter compared
+% to the width of the nib. The lower the ratio of the letter height to nib
+% width, the more condensed is the script. The scripts also varied in their
+% typical height. 
+%
+%    Table~\ref{tab:1} gives an `average' x-height for each
+% script, which I obtained by measuring a sample of photographs of
+% manuscripts written in the various hands. About a dozen examples
+% of each book-hand were measured. This figure should not be taken too
+% seriously.
+% 
+%    There was not a sharp division between the use of one hand and another.
+% Many manuscripts exhibit a variety of hands in the same document. For example,
+% the scribe writing in an Uncial hand may have used Roman Rustic letters
+% for capitals. Usually the same pen was used for the two different scripts.
+%
+%    Generally speaking, as a hand got older it became more embelished, and 
+% therefore took longer to write. As this happened a new hand would appear that
+% was faster, and which would eventually make the earlier one obsolete.
+%
+%    Many of the book-hands were single-cased; that is, they did not have an
+% upper- and lower-case as we do nowadays in Western scripts. On the other
+% hand, a script might be majuscule or minuscule. A \textit{majuscule} script
+% is one, like our upper-case, where the letters are drawn between two lines
+% and are of a uniform height with no ascenders or descenders. 
+% A \textit{minuscule} script, like our lower-case, is drawn between four lines 
+% and has ascenders and  descenders.
+%
+% \begin{table}
+% \centering
+% \caption{The main manuscript book-hands} \label{tab:1}
+% \begin{tabular}{lccccc} \hline
+% Name                  & Century  & x-height & Height     & Pen  & Normalised \\
+%                       &          & (mm)   & (nib widths) & angle & height  \\ \hline
+% Roman Rustic          & 1--6     & 5.7    & 4--6         & 45     & 1.90 \\
+% Uncial                & 3--6     & 4.1    & 4--5         & 30     & 1.37 \\
+% Half Uncial           & 3--9     & 3.2    & 3--6         & 20--30 & 1.07 \\
+% Artificial Uncial     & 6--10    & 4.2    & 3--6         & 10     & 1.40 \\
+% Insular majuscule     & 6--9     & 4.2    & 5            & 0--20  & 1.40 \\
+% Insular minuscule     & 6 onward & 4.1    & 5--6         & 45--70 & 1.37 \\
+% Carolingian minuscule & 8--12    & 3.0    & 3--5         & 45     & 1.00 \\
+% Early Gothic          & 11--12   & 3.8    & 4--6         & 20--45 & 1.27 \\
+% Gothic Textura        & 13--15   & 3.9    & 3--5         & 30--45 & 1.30 \\
+% Gothic Prescius       & 13 onward & 3.3   & 4--5         & 45     & 1.10 \\
+% Rotunda               & 13--15   & 3.2    & 4--6         & 30     & 1.07 \\
+% Humanist minuscule    & 14 onward & 3.0   & 4--5         & 30--40 & 1.00 \\ \hline
+% \end{tabular}
+% \end{table}
+%
+%    During the period under consideration arabic numerals were effectively
+% not used. At the beginning they were unknown and even though some knew
+% of them towards the end, the glyphs used for them are not recognisable ---
+% to me they look somewhat like cryllic letters --- and each locality
+% and time had its own highly individualistic rendering. The general rule
+% when using one of these book-hands is to write all numbers using
+% roman numerals.
+%
+%    The Roman alphabet consisted of 23 capital letters --- the J, U and W 
+% were absent. The book-hands initially used both a `u' and a `v' interchangeably
+% but by the 10th century the practice had become to use the `v' before a vowel 
+% and the `u' otherwise. The letter corresponding to the W sound appeared 
+% in England around the 7th century in
+% the form of the runic \textit{wen} character and by about the 11th century
+% the `w' chacter was generally used. The `J' is the newest letter of all, not
+% appearing until about the mid 16th century.
+%
+%    In the first century punctuation was virtually unknown, and typically
+% would not even be any additional space between individual words, never
+% mind denoting ends of sentences. Sometimes a dot at mid-height would be
+% used as a word seperator, or to mark off the end of a paragraph. Effectively
+% a text was a continuous stream of letters. By the time that printing was
+% invented, though, all of our modern punctuation marks were being used.
+%
+%    Among all these manuscript hands, the Carolingian minuscule is the
+% most important as our modern fonts are based on its letter shapes, and it is
+% also at this point in time where the division occured between the black letter
+% scripts as used even today in Germany, and the lighter fonts used elesewhere.
+% The Rotunda and Humanist minuscule hands were developed in Italy and were
+% essentially a rediscovery of the Carolingian minusucle. Guthenberg took the
+% Gothic scripts as the model for his types. Later printers, 
+% such as Nicholas Jenson of Venice,
+% took the Humanist scripts as their models.
+%
+%
+% \subsection{The \thisfont{} script}
+%
+%    The \thisfont{} hand has been in use from the sixth century.
+% It was originally developed in Ireland by St.~Patrick's monks
+% as a less formal and faster hand than the Insular majuscule,
+% the most famous example of which is the \textit{Book of Kells}.
+%
+%    Although the letter shapes in this book-hand are principally of
+% a lower-case form, there are a few that are shaped like capital letters.
+% For example, the `n' appeared as both an `n' and as an `N',
+% while the `f' and `r' were written like `F' and `R'.
+% Some letters had multiple forms. As well as the `n' the `r' could be written
+% as either `r' or `R'.
+%
+%    The letters were written very close together and the scibes used many
+% adhoc ligatures. A favourite was using a long `e' before a letter
+% with a bar at the x-height, and joining the crossbar of the `e' to
+% the bar of the following letter, for instance the pair `eg'. 
+% I have only provided the ampersand, `\&', as a ligature, standing for
+% `et' which is the Latin for `and'.
+% Letters were also stretched if a line
+% needed some filling. For example, the capital form of the `N' might be
+% stretched to 2 or 3 times its normal width.
+%
+% Usually the
+% lettering in a manuscript was all one size. If the scribe felt the need
+% for `capital' letters then, using the same pen, would either write a larger
+% \thisfont{} letter or a letter from one of the more formal book-hands. 
+%    I have provided a set of `capital' letters that are only a little larger
+% than the normal letters for use in running text. 
+% During the time the \thisfont{} script was used the alphabet only had 24 
+% letters. I have included the missing J.
+%
+%    Arabic numerals were unknown at this time, so all numbers were written
+% using the roman numbering system. I have provided \thisfont{} versions of
+% the arabic digits.
+%
+%    Punctuation was used, but not with the frequency of today.
+% A sentence might be ended with
+% a dot at mid-height or a paragraph ended with a colon, also at mid-height.
+% The comma was was  a small 
+% slash; the semi-colon was known, as was the single quotation 
+% mark which was represented by a raised comma.
+%
+%
+% \section{The \Lpack{inslrmin} and \Lpack{allimin} packages} \label{sec:usc}
+%
+%     The \thisfont{} font family is called |imin|. The font is supplied in both
+% OT1 and T1 encodings.
+%
+% \subsection{The \Lpack{inslrmin} package}
+%
+%    This is intended for the occasions when some short pieces of text have
+% to be written in \thisfont{} while the majority of the document is in another
+% font. The normal baselineskips are used.
+%
+% \DescribeMacro{\iminfamily}
+%    The |\iminfamily| declaration starts typesetting with the \thisfont{} fonts.
+% Use of the \thisfont{} font will continue until either there is another |\...family|
+% declaration or the current group (e.g., environment) is closed.
+%
+% \DescribeMacro{\textimin}
+%    The command |\textimin{|\meta{text}|}| will typeset \meta{text} using the
+% \thisfont{} fonts.
+%
+% \subsection{The \Lpack{allimin} package}
+%
+%
+%    This package is for when the entire document will be typeset with the
+% \thisfont{} font. The baselineskips are set to those appropriate to the
+% book-hand. 
+%
+%    This is a minimalist package. Apart from declaring \thisfont{} to be the
+% default font and setting the baselineskips appropriately, it makes no other
+% alterations. 
+% Vertical spacing
+% before and after section titles and before and after lists, etc., will be
+% too small as the \LaTeX{} design assumes a font comparable in size to
+% normal printing fonts, and the book-hand is much taller.
+% To capture more of the flavour of the time, all numbers
+% should be written using roman numerals. 
+% The \Lpack{romannum} package~\cite{ROMANNUM}
+% can be used so that \LaTeX{} will typeset the numbers that it generates,
+% like sectioning or caption numbers, using roman numerals instead of arabic 
+% digits. 
+%
+% \DescribeMacro{\cmrfamily}
+% \DescribeMacro{\textcmr}
+% \DescribeMacro{\cmssfamily}
+% \DescribeMacro{\textcmss}
+% \DescribeMacro{\cmttfamily}
+% \DescribeMacro{\textcmtt}
+%    The |...family| declarations start typesetting with the Computer Modern Roman
+% (|\cmrfamily|), the Computer Modern Sans (|\cmssfamily|), and the Computer
+% Modern Typewriter (|\cmttfamily|) font families. The |\textcm..{|\meta{text}|}|
+% commands will typeset \meta{text} in the corresponding Computer Modern font.
+%
+%    The \Lpack{allimin} package automatically loads the \Lpack{inslrmin} package,
+% so its font commands are available if necessary.
+%
+% \StopEventually{
+% \bibliographystyle{alpha}
+% \renewcommand{\refname}{Bibliography}
+% \begin{thebibliography}{GMS94}
+% \addcontentsline{toc}{section}{\refname}
+%
+% \bibitem[And69]{ANDERSON69}
+% Donald M.~Anderson.
+% \newblock {\em The Art of Written Forms: The Theory and Practice of Calligraphy}.
+% \newblock Holt, Rinehart and Winston, 1969.
+%
+% \bibitem[Bol95]{BOLOGNA95}
+% Giulia Bologna.
+% \newblock {\em Illuminated Manuscripts: The Book before Gutenberg}.
+% \newblock Crescent Books, 1995.
+%
+% \bibitem[Day95]{DAY95}
+% Lewis F.~Day.
+% \newblock {\em Alphabets Old \& New}.
+% \newblock (3rd edition originally published by B.~T.~Batsford, 1910) 
+% \newblock Senate, 1995.
+%
+% \bibitem[Dro80]{DROGIN80}
+% Marc Drogin.
+% \newblock {\em Medieval Calligraphy: Its History and Technique}.
+% \newblock Allenheld, Osmun \& Co., 1980.
+%
+% \bibitem[Dru95]{DRUCKER95}
+% Johanna Drucker.
+% \newblock {\em The Alphabetic Labyrinth}.
+% \newblock Thames \& Hudson, 1995.
+%
+% \bibitem[Fir93]{FIRMAGE93}
+% Richard A.~Firmage.
+% \newblock {\em The Alphabet Abecedarium}.
+% \newblock David R~Goodine, 1993.
+%
+% \bibitem[Fli98]{LETTRINE}
+% Daniel Flipo.
+% \newblock {\em The LETTRINE package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1998.
+%
+% \bibitem[Har95]{HARRIS95}
+% David Harris.
+% \newblock {\em The Art of Calligraphy}.
+% \newblock DK Publishing, 1995.
+%
+% \bibitem[Jen95]{BETON}
+% Frank Jensen.
+% \newblock {\em The BETON package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1995.
+%
+% \bibitem[Joh71]{JOHNSTON75}
+% Edward Johnston (ed. Heather Child).
+% \newblock {\em Formal Penship and Other Papers}.
+% \newblock Penthalic, 1971.
+%
+% \bibitem[Knu87]{CM}
+% Donald E.~Knuth.
+% \newblock {\em Computer Modern Typefaces}.
+% \newblock Addison-Wesley, 1987.
+%
+% \bibitem[Knu92]{METAFONT}
+% Donald E.~Knuth.
+% \newblock {\em The METAFONTbook}.
+% \newblock Addison-Wesley, 1992.
+%
+% \bibitem[GMS94]{GOOSSENS94}
+% Michel Goossens, Frank Mittelbach, and Alexander Samarin.
+% \newblock {\em The LaTeX Companion}.
+% \newblock Addison-Wesley Publishing Company, 1994.
+%
+% \bibitem[Tho75]{THOMAS75}
+% Alan G.~Thomas.
+% \newblock {\em Great Books and Book Collectors}.
+% \newblock Weidenfield and Nichoson, 1975.
+%
+% \bibitem[Wil99]{DOCMFP}
+% Peter R.~Wilson.
+% \newblock {\em The DOCMFP Package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1999.
+%
+% \bibitem[Wil99b]{ROMANNUM}
+% Peter R.~Wilson.
+% \newblock {\em The ROMANNUM Package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1999.
+%
+% \end{thebibliography}
+% }
+%
+% \section{The Metafont code} \label{sec:mf}
+%
+%
+%    As previously noted, this work is part of a larger project to provide
+% fonts covering the main manuscript book-hands. As such, one of the
+% aims is to produce a coordinated set of fonts, especially as multiple
+% hands might be used in a single document. 
+%
+%    Noting that the hands tend to be somewhat larger than the typical 10pt
+% size (where the x-height is approximately 1.5mm) used for modern books, 
+% I have also designed the fonts
+% at a larger than normal size, then applied some non-linear factors when reducing
+% them down to a 10pt size.
+%    Further, I have used the height of the Carolingian minuscule as a 
+% normalising factor when deciding on the absolute height of any particular
+% script. The x-height of the Carolingian font is made equal to the
+% x-height of the Computer Modern Roman (CMR) font.
+%
+%    Modern fonts are effectively drawn. That is, the outline of the letter is
+% drawn carefully and the center is filled with ink. This is shown to good
+% effect in the Metafont code for the Computer Modern fonts~\cite{CM}.
+% In contrast, the manuscript letters were inked by single pen strokes in
+% a calligraphic manner. I have tried to repeat this calligraphic style
+% in the Metafont code.
+%
+%    As much as possible I have tried to use parameter values from the
+% Computer Modern Roman (CMR) fonts in order to reduce possible
+% infelicities if the CM and manuscript fonts are used together. However,
+% few of the CMR parameters are applicable to the calligraphic style.
+%
+%
+% \subsection{The parameter file}
+%
+%    We deal with the parameter files first, and start by announcing
+% what they are for. The \thisfont{} font comes in three sizes and also as a normal
+% and a bold font.
+%    \begin{macrocode}
+%<*base7|base10|base17|base7b|base10b|base17b>
+%<base7>%%% IMIN7.MF    Insular Minuscule at 7 point design size.
+%<base10>%%% IMIN10.MF  Insular Minuscule at 10 point design size.
+%<base17>%%% IMIN17.MF  Insular Minuscule at 17 point design size.
+%<base7b>%%% IMINB7.MF    Insular Minuscule Bold at 7 point design size.
+%<base10b>%%% IMINB10.MF  Insular Minuscule Bold at 10 point design size.
+%<base17b>%%% IMINB17.MF  Insular Minuscule Bold at 17 point design size.
+%
+%    \end{macrocode}
+%    Parameters from CMR are used as much as possible. We also
+% make sure that \Lpack{cmbase} is loaded as well as plain Metafont.
+%    \begin{macrocode}
+if unknown cmbase: input cmbase fi
+
+%<base7>font_identifier:="IMIN"; font_size 7pt#;
+%<base10>font_identifier:="IMIN"; font_size 10pt#;
+%<base17>font_identifier:="IMIN"; font_size 17.28pt#;
+%<base7b>font_identifier:="IMINB"; font_size 7pt#;
+%<base10b>font_identifier:="IMINB"; font_size 10pt#;
+%<base17b>font_identifier:="IMINB"; font_size 17.28pt#;
+
+%    \end{macrocode}
+%
+% \DescribeVariable{jutstretch}
+%    The CMR scaling for lowercase serifs wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> jutstretch:=1.19; 
+%<base10|base10b> jutstretch:=1.152; 
+%<base17|base17b> jutstretch:=1.0;
+%    \end{macrocode}
+%
+% \DescribeVariable{stemstretch}
+%    The CMR scaling for lowercase stem widths wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> stemstretch:=1.50;
+%<base10|base10b> stemstretch:=1.31;
+%<base17|base17b> stemstretch:=1.0;
+%    \end{macrocode}
+%
+% \DescribeVariable{caprat}
+%    The scaling for `capitals' wrt `lowercase'. This is pretty much a guess
+% (the ratio for CMR10 is 1.59).
+%    \begin{macrocode}
+ caprat:=1.5;          % ratio of capital height to minuscule height
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_jutstretch}
+%    The CMR scaling for uppercase serifs wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> cap_jutstretch:=1.3;   
+%<base10|base10b> cap_jutstretch:=1.2;   
+%<base17|base17b> cap_jutstretch:=1.0;   
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_stemstretch}
+%    The CMR scaling for uppercase stem width wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> cap_stemstretch:=1.45;  
+%<base10|base10b> cap_stemstretch:=1.31;  
+%<base17|base17b> cap_stemstretch:=1.0;  
+%    \end{macrocode}
+%
+% \DescribeVariable{bfudge}
+%    Letter width scaling for bold font wrt normal font.
+%    \begin{macrocode}
+%<base7|base10|base17> bfudge:=1.0;
+%<base7b|base10b|base17b> bfudge:=1.2;
+%    \end{macrocode}
+%
+% \DescribeVariable{szfudge}
+%    Width scaling wrt 17pt letter width.
+%    \begin{macrocode}
+%<base7|base7b> szfudge:=1.18; 
+%<base10|base10b> szfudge:=1.0; 
+%<base17|base17b> szfudge:=1.0; 
+%    \end{macrocode}
+%
+% \DescribeVariable{hstretch}
+%    Horizontal stretching factor wrt 17pt size letter width.
+%    \begin{macrocode}
+ hstretch:=szfudge*bfudge;
+%    \end{macrocode}
+%
+% \DescribeVariable{carol_height}
+%    The x-height of the Carolingian minuscule font.
+%    \begin{macrocode}
+%<base7|base7b> carol_height#:=108.5/36pt#; 
+%<base10|base10b> carol_height#:=155/36pt#; 
+%<base17|base17b> carol_height#:=268/36pt#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{vstretch}
+%    The height of this font wrt the Carolingian font.
+%    \begin{macrocode}
+ vstretch:=1.37;   
+
+%    \end{macrocode}
+%
+% \DescribeVariable{x_height} 
+%    The x-height of lower case letters. Scaled from the Carolingian font.
+%    \begin{macrocode}
+ x_height#:=vstretch*carol_height#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{u}
+%    The unit width. The CMR values are used.
+%    \begin{macrocode}
+%<base7> u#:=15.5/36pt#;  
+%<base10> u#:=20/36pt#;  
+%<base17> u#:=32.5/36pt#;  
+%<base7b> u#:=17.9/36pt#;  
+%<base10b> u#:=23/36pt#;  
+%<base17b> u#:=37/36pt#;  
+%    \end{macrocode}
+%
+% \DescribeVariable{width_adj}
+% \DescribeVariable{serif_fit}
+% \DescribeVariable{cap_serif_fit}
+% \DescribeVariable{letter_fit}
+%    The majority of these parameters and values are constant.
+% They are for fine adjustements of characters. The CM values are used.
+%    \begin{macrocode}
+ width_adj#:=0pt#;         % width adjustment for certain characters
+ serif_fit#:=0pt#;         % extra sidebar near lowercase serifs
+%<base7|base7b> cap_serif_fit#:=3.5/36pt#;  % extra sidebar near uppercase serifs
+%<base10|base10b> cap_serif_fit#:=5/36pt#;  % extra sidebar near uppercase serifs
+%<base17|base17b> cap_serif_fit#:=8/36pt#;  % extra sidebar near uppercase serifs
+%<base7|base7b> letter_fit#:=0pt#;        % extra space added to all sidebars
+%<base10|base10b> letter_fit#:=0pt#;        % extra space added to all sidebars
+%<base17|base17b> letter_fit#:=-0.1pt#;        % extra space added to all sidebars
+%    \end{macrocode}
+%
+% \DescribeVariable{sb}
+%    A length used for adjusting the side bearings of characters.
+%    \begin{macrocode}
+%<base7|base7b> sb#:=1/2u#;                   % unit for side bearings
+%<base10|base10b> sb#:=1/2u#;                 % unit for side bearings
+%<base17|base17b> sb#:=1/2u#;                 % unit for side bearings
+
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_height} 
+%    The height of capital letters.
+%    \begin{macrocode}
+%<base7|base7b> cap_height#:=172.2/36pt#;        % height of caps
+%<base10|base10b> cap_height#:=246/36pt#;        % height of caps
+%<base17|base17b> cap_height#:=425/36pt#;        % height of caps
+%    \end{macrocode}
+%
+% \DescribeVariable{thickfudge}
+%    The reciprocal of the font height in nib widths. Normal font height
+% is 6 nib widths and the bold font height is 5 nib widths.
+%    \begin{macrocode}
+%<base7|base10|base17> thickfudge:=1/6;     
+%<base7b|base10b|base17b> thickfudge:=1/5;     
+%    \end{macrocode}
+%
+% \DescribeVariable{thinfudge}
+%    The nib sharpness.
+%    \begin{macrocode}
+thinfudge:=1/6;      
+%    \end{macrocode}
+%
+% \DescribeVariable{thick}
+%    The maximum nib width. 
+% That is, the width of the thickest line that can be penned.
+%    \begin{macrocode}
+thick#:=stemstretch*thickfudge*x_height#;    % max pen breadth
+%    \end{macrocode}
+%
+% \DescribeVariable{thin}
+%    The nib thinness. 
+% That is, the width of the thinnest line that can be penned.
+%    \begin{macrocode}
+thin#:=thinfudge*thick#;  
+%    \end{macrocode}
+%
+% \DescribeVariable{pangle}
+%  The pen angle (in degrees).
+%    \begin{macrocode} 
+pangle:=45;                  % pen angle
+%    \end{macrocode}
+%
+% \DescribeVariable{ascratio}
+%    The height of lower case ascenders wrt |x_height|.
+%    \begin{macrocode}
+  ascratio:=6/4;
+%    \end{macrocode}
+%
+% \DescribeVariable{asc_height} 
+%    The height of lower case ascenders.
+%    \begin{macrocode}
+  asc_height#:=ascratio*x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{descratio}
+%    The depth of lower case descenders wrt |x_height|.
+%    \begin{macrocode}
+  descratio:=5/4;
+%    \end{macrocode}
+%
+% \DescribeVariable{desc_depth} 
+%    The depth of lower case descenders.
+%    \begin{macrocode}
+  desc_depth#:=descratio*x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{fig_height} 
+%    The height of numerals. Make these midway between normal and capital
+% letters.
+%    \begin{macrocode}
+  fig_height#:=(0.5[1,caprat])*x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{fig_width} 
+%    The width of numerals. All numerals are the same width (roughly, an `o').
+%    \begin{macrocode}
+  fig_width#:=hstretch*(x_height#);
+%    \end{macrocode}
+%
+% \DescribeVariable{body_height} 
+%    The height of the tallest character.
+%    \begin{macrocode}
+ body_height#:=caprat*asc_height#;    
+%    \end{macrocode}
+%
+% \DescribeVariable{body_depth} 
+%    The depth of the lowest character.
+%    \begin{macrocode}
+ body_depth#:=caprat*desc_depth#;    
+%    \end{macrocode}
+%
+% \DescribeVariable{half_height} 
+%    Half the normal letter height.
+%    \begin{macrocode}
+ half_height#:=1/2x_height#;    % half the height of x height letters
+
+%    \end{macrocode}
+%
+% \DescribeVariable{side}
+%    We might be using a square for the character design.
+%    \begin{macrocode}
+side#:=x_height#;     
+%    \end{macrocode}
+%
+% \DescribeVariable{rule_thickness}
+%    Thickness of rules (in math symbols). The CMR values are used.
+%    \begin{macrocode}
+%<base7|base7b> rule_thickness#:=.34pt#; 
+%<base10|base10b> rule_thickness#:=.4pt#; 
+%<base17|base17b> rule_thickness#:=.6pt#; 
+
+%    \end{macrocode}
+%
+% \DescribeVariable{jutfudge}
+%    Controls the protrusion of serifs.
+%    \begin{macrocode}
+jutfudge:= 3/4;
+%%%%jutfudge:= 1/2;
+%    \end{macrocode}
+%
+% \DescribeVariable{jut} 
+%    The lowercase serif protrusion.
+%    \begin{macrocode}
+jut#:=jutstretch*jutfudge*thick#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{srad}
+%    |srad| with |0 < srad < 1| controls the serif radius.
+%    \begin{macrocode}
+srad:=0.8;   % was 0.5
+%    \end{macrocode}
+%
+% \DescribeVariable{trijut}
+%    The lowercase triangular serif protrusion.
+%    \begin{macrocode}
+trijut#:=0.75jutstretch*thick#;
+%    \end{macrocode}
+%
+% \DescribeVariable{clubjut}
+%    The fractional protusion of the club base.
+%    \begin{macrocode}
+clubjut:=5/12;
+%    \end{macrocode}
+%
+% \DescribeVariable{o}
+%    Amount of overshoot for curves (as in an `o'). Use CMR values.
+%    \begin{macrocode} 
+%<base7|base7b> o#:=5/36pt#;   
+%<base10|base10b> o#:=8/36pt#;   
+%<base17|base17b> o#:=10/36pt#;   
+
+%    \end{macrocode}
+%
+% \DescribeVariable{slant}
+% |slant| is the amount the font slopes to the right. 
+%    \begin{macrocode}
+slant:=0;      % tilt ratio $(\Delta x/\Delta y)$
+
+%    \end{macrocode}
+% 
+% \DescribeVariable{monospace} 
+%    We are generating a variable-width font.
+%    \begin{macrocode}
+monospace:=false;    % should all characters have the same width?
+
+%    \end{macrocode}
+%
+% \DescribeVariable{dot_size}
+%    The size of (punctuation) dots.
+%    \begin{macrocode}
+dot_size#:=5thin#;   % size of dots
+%    \end{macrocode}
+%
+% \DescribeVariable{comma_width}
+%    The horizontal width of a comma.
+%    \begin{macrocode}
+comma_width#:=2.5dot_size#; 
+
+%    \end{macrocode}
+%
+%    Finally, call the driver file for the font.
+%    \begin{macrocode} 
+generate imintitle      %% switch to the driver file
+
+%    \end{macrocode}
+%
+%    The end of this code section.
+%    \begin{macrocode}
+%</base7|base10|base17|base7b|base10b|base17b>
+%    \end{macrocode}
+%
+%
+% \subsection{The driver file}
+%
+%    The driver file sets up the font parameters and also contains
+% the macros used in the definition of the characters.
+%
+%    \begin{macrocode}
+%<*mfd>
+% This is IMINTITLE.MF for the Insular Minuscule font.
+% This makes a short font.
+% This file also contains special macros universally needed in the 
+% font but either not in the cmbase.mf file or modifications of these.
+%
+%    \end{macrocode}
+%
+% \begin{routine}{makebox}
+%    This is a new version of the \Lpack{cmbase.mf} |makebox| macro.
+% Essentially, as we are only generating a single case font, we don't
+% need all the horizontals for the CMR characters.
+%
+%    \begin{macrocode}
+% A new version of cmbase.mf makebox macro
+def makebox(text rule) =
+  for y=0,half_height,cap_height,body_height,x_height,-desc_depth,-body_depth:
+    rule((l,y)t_,(r,y)t_); endfor  % horizontals
+  for x=l,r: rule((x,-body_depth)t_,(x,body_height)t_); endfor % verticals
+  for x=u*(1+floor(1/u)) step u until r-1:
+    rule((x,-body_depth)t_,(x,body_height)t_); endfor         % more verticals
+  if charic<>0:
+    rule((r+charic*pt,h.o_),(r+charic*pt,.5h.o_)); fi  % italic correction
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{proofpcbb}
+%    The macro |proofpcbb(S, xoff, yoff)| draws crosses at the corners of the
+% square, and at the bottom and top midpoints, where the point |zS| is at
+% position |(xoff,yoff)| in the square. 
+%    \begin{macrocode}
+
+% A macro to delineate a letter's bounding square in proof mode.
+% Point z$ is at (xoff,yoff) in the bounding square.
+def proofpcbb(suffix $)(expr xoff, yoff) =
+if proofing > 0:
+  x$bl = x$ - xoff; y$bl = y$ - yoff;         % Bottom Left Hand Corner
+  z$br = (x$bl+side, y$bl);                   % BRHC
+  z$tr = (x$bl+side, y$bl+side);              % TRHC
+  z$tl = (x$bl, y$bl+side);                   % TLHC
+  z$bc = 1/2[z$bl,z$br]; z$tc = 1/2[z$tl,z$tr];  % horizontal mid points
+  pair hc, vc;
+  hc = (2u,0); vc = (0,2u);
+  pickup pensquare scaled 2;
+  for s = z$bl, z$br, z$tr, z$tl, z$bc, z$tc:
+    draw s-hc--s+hc;
+    draw s-vc--s+vc;
+  endfor
+fi
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+% \begin{routine}{inslrmin_font_setup}
+%    This macro contains the set up for the \thisfont{} fonts.
+%    \begin{macrocode}
+ 
+def inslrmin_font_setup= % contains special stuff for inslrmin fonts
+  define_pixels(side,half_height,carol_height,comma_width);
+  define_pixels(u,dot_size,letter_size,cap_height,width_adj,serif_fit,
+                cap_serif_fit,jut,cap_jut,trijut);
+  define_pixels(fig_width);
+  define_whole_pixels(letter_fit,sb);
+  define_whole_vertical_pixels(body_height,asc_height,cap_height,x_height,
+                               desc_depth,body_depth,fig_height);
+  define_corrected_pixels(o);
+  define_blacker_pixels(thick,thin);
+  let adjust_fit = normal_adjust_fit;
+%    \end{macrocode}
+% \DescribeVariable{stylus}
+%  The pen for drawing the thinnest lines is |stylus|.
+%    \begin{macrocode}
+  pickup pencircle scaled thin;
+  stylus:=savepen;
+%    \end{macrocode}
+% \DescribeVariable{thickstylus}
+%  The pen for drawing lines a bit thicker than the thinnest is |thickstylus|.
+%    \begin{macrocode}
+  pickup pencircle scaled (1.5thin);
+  thickstylus:=savepen;
+%    \end{macrocode}
+% \DescribeVariable{quill}
+%  The normal calligraphic pen is |quill|.
+%    \begin{macrocode}
+  pickup pencircle xscaled thick yscaled thin rotated pangle;
+  quill:=savepen;
+  numeric pcshiftx#; % x value of LHS of box wrt origin of char box
+  define_pixels(pcshiftx);
+  numeric sqxside#;   % x size of the square
+  numeric sqyside#;   % y size of the square
+  define_pixels(sqxside,sqyside);
+
+enddef; % end of inslrmin_font_setup
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \DescribeVariable{ductus}
+% A boolean to control drawing the ductus (TRUE) or the full letter (FALSE).
+%    \begin{macrocode}
+boolean ductus;
+ductus:=false;
+%    \end{macrocode}
+%
+% \DescribeVariable{qhor}
+% \DescribeVariable{qvert}
+% The cosine and sine of the pen angle.
+%    \begin{macrocode}
+numeric qhor, qvert;
+qhor:=cosd(pangle); qvert:=sind(pangle);
+%    \end{macrocode}
+%
+% \DescribeVariable{pdir}
+% The vector corresponding to the pen angle.
+%    \begin{macrocode}
+pair pdir; pdir=dir(pangle);
+%    \end{macrocode}
+%
+% \DescribeVariable{ppdir}
+% The vector that is perpendicular (anticlockwise) to the pen angle.
+%    \begin{macrocode}
+pair ppdir; ppdir=dir(pangle+90);
+%    \end{macrocode}
+%
+% \begin{routine}{draw_serif}
+% A macro to draw a serif. |draw_serif(1,2,f)| uses the current pen to
+% draw a serif of extent |jut| at |z1| to the left of the line from |z2| 
+% to |z1|. The
+% radius is controlled by |f|, where $0<f<1$. The `stem' from |z1| to |z2|
+% starts at the point |z1a|.
+%    \begin{macrocode}
+
+def draw_serif(suffix $, $$)(expr fr)=
+  numeric beta, ajut, bjut;
+%    \end{macrocode}
+% |fr| and |beta| control the serif radius.
+%    \begin{macrocode}
+  beta=1-fr;
+  ajut=fr*jut; bjut=beta*jut;
+%    \end{macrocode}
+% The points |$c|, |$b| and |$a| define the serif. For a top (bottom) serif
+% the leftmost (rightmost) point is 
+% |$c| and |$a| is on the stem. |$a| is moved from |$| towards |$$| by the 
+% distance |ajut|, and the other points are calculated from this. If the stem
+% is not vertical, then we have to rotate |$b| to match.
+%    \begin{macrocode}
+  pair vec[]; vec1=unitvector(z$$-z$);
+  vec2=ajut*vec1;
+  z$a=z$ shifted vec2;
+  z$b=z$a rotatedaround (z$,-90);
+  boolean top_serif;
+  if y$>y$$:
+    top_serif := true;
+    z$c=z$b shifted (-bjut*pdir);
+  else:
+    top_serif:=false;
+    z$c=z$b shifted (bjut*pdir);
+  fi
+%    \end{macrocode}
+% Draw the parts, and finish off.
+%    \begin{macrocode}
+  if top_serif:
+    draw z$c--z$b{pdir}..{z$$-z$}z$a;    % the serif
+  else:
+    draw z$c--z$b{-pdir}..{z$$-z$}z$a;
+  fi
+  labels($a,$b,$c);
+enddef; % end of draw_serif
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_roundserif}
+% The |draw_serif| routine can leave a bump at the end of the stem.
+% The |draw_roundserif| routine, which takes the same arguments,
+% is meant to eliminate the bump.
+%    \begin{macrocode}
+
+def draw_roundserif(suffix $, $$)(expr fr)=
+  draw_serif($, $$, fr);
+  undraw z$--z$a;
+enddef; % end of draw_roundserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{draw_flatserif}
+% A macro to draw a serif. |draw_serif(1,2,f)| uses the current pen to
+% draw a serif of extent |jut| at |z1| to the left of the line from |z2| 
+% to |z1|. The
+% radius is controlled by |f|, where $0<f<1$. The `stem' from |z1| to |z2|
+% starts at the point |z1a|. This produces a serif like |draw_serif| except
+% that one side of the seerif is flat.
+%    \begin{macrocode}
+
+def draw_flatserif(suffix $, $$)(expr fr)=
+  numeric beta, ajut, bjut;
+%    \end{macrocode}
+% |fr| and |beta| control the serif radius.
+%    \begin{macrocode}
+  beta=1-fr;
+  ajut=fr*jut; bjut=beta*jut;
+%    \end{macrocode}
+% The points |$c|, |$b| and |$a| define the serif. For a top (bottom) serif
+% the leftmost (rightmost) point is 
+% |$c| and |$a| is on the stem. |$a| is moved from |$| towards |$$| by the 
+% distance |ajut|, and the other points are calculated from this. If the stem
+% is not vertical, then we have to rotate |$b| to match.
+%    \begin{macrocode}
+  pair vec[]; vec1=unitvector(z$$-z$);
+  vec2=ajut*vec1;
+  z$a=z$ shifted vec2;
+%%%  z$b=z$a rotatedaround (z$,-90);
+  boolean top_serif;
+  if y$>y$$:
+    top_serif := true;
+    z$c=z$ shifted (-jut*pdir);
+  else:
+    top_serif:=false;
+    z$c=z$ shifted (jut*pdir);
+  fi
+  z$b = fr[z$,z$c];
+%    \end{macrocode}
+% Draw the parts, and finish off.
+%    \begin{macrocode}
+  draw z$a--z$;
+  if top_serif:
+    draw z$c--z$b{pdir}..{z$$-z$}z$a;    % the serif
+  else:
+    draw z$c--z$b{-pdir}..{z$$-z$}z$a;
+  fi
+  labels($a,$b,$c);
+enddef; % end of draw_flatserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+% \begin{routine}{draw_triserif}
+% A macro to draw a triangular top left serif.
+% |draw_triserif(1,tj)| draws a serif at |z1| with its leftmost x
+% value at |x1-tj|, where it is assumed that the
+% top point on the stem is at |z1| and the stem was drawn with |quill|.
+%    \begin{macrocode}
+
+def draw_triserif(suffix $)(expr tj)=
+  pen oldpen; oldpen:=currentpen;
+  pickup quill;
+  x$ts1'=lft x$; y$ts1'=bot y$;
+  pickup stylus;
+  lft x$ts1=x$ts1'; bot y$ts1=y$ts1';
+  x$ts2=x$ts1-tj; z$ts2=whatever[z$,z$ts1];
+  x$ts3=x$ts1; y$ts3=y$ts2-tj;
+  pickup stylus;
+%%  filldraw z$ts1--z$ts2--z$ts3--cycle;
+  filldraw z$--z$ts2--z$ts3--cycle;
+  pickup oldpen;
+  labels($ts1,$ts2,$ts3);
+enddef; % end of draw_triserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_istem}
+%  A macro to draw the shape of an i. |draw_istem(1,2,f)| draws a stem whose
+% top is at |z1| and bottom at |z2|. It draws with the current pen and the serifs
+% are of extent |jut|. There is a top left and bottom right serif.
+% The serif radius is controlled by |f|, with $0<f<1$.
+%    \begin{macrocode}
+
+def draw_istem(suffix $, $$)(expr fr)=
+  draw_serif($, $$, fr);  % top serif
+  draw_serif($$, $, fr);  % bottom serif
+  draw z$a--z$$a;  % the stem
+enddef; % end of draw_istem
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_tstem}
+%  A macro to draw the shape of the stem of a `t'. |draw_tstem(1,2,f)| draws a 
+% stem whose
+% top is at |z1| and bottom at |z2| with a right serif at |z2|. The radius
+% is controlled by |f|, with $0 < f < 1$.
+% It draws with the current pen and the serif is of extent |jut|.
+% NOTE: for the IMIN font, just the stem is drawn --- no serif!
+%    \begin{macrocode}
+
+def draw_tstem(suffix $, $$)(expr fr)=
+%%  draw_serif($$, $, fr);  % the serif
+%%  draw z$--z$$a;                      % the stem
+  draw z$--z$$;
+enddef; % end of draw_tstem
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_tlserif}
+%  A macro to draw a top left serif. |draw_tlserif(1,2,f)| draws a serif on top
+% of a stem whose absolute 
+% top is at |z1| and bottom at |z2|. It draws with the current pen and the serif
+% is of extent |jut|. It also draws the stem to the point |z2|. The serif
+% radius is controlled by |f|, with $0<f<1$.
+%    \begin{macrocode}
+
+def draw_tlserif(suffix $, $$)(expr fr)=
+  draw_serif($, $$, fr);  % the serif
+  draw z$a--z$$;                       % the stem
+enddef; % end of draw_tlserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{draw_flick}
+%  A macro to draw a flick (like an eyebrow). 
+% |draw_flick(1,rise,fall,fjut)| draws a stroke starting at |z1| rising up by
+% |rise| and falling down by |fall| wrt |z1|. The overall stroke distance is
+% |fjut| to the right of |z1|. It is drawn with the current pen.
+%    \begin{macrocode}
+
+def draw_flick(suffix $)(expr rise, fall, fjut)=
+%    \end{macrocode}
+% The points |z$a| and |z$b|, together with |z$| make up three points on the
+% ductus.
+%    \begin{macrocode}
+  rt x$b = x1+fjut; top y$b=y$-fall;
+  x$a=0.5[x$,x$b]; top y$a=y$+rise;
+%    \end{macrocode}
+% Draw the part, and finish off.
+%    \begin{macrocode}
+  draw z$..z$a..z$b; 
+  labels($a,$b);
+enddef; % end of draw_flick
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{draw_wave}
+% A macro to draw a (horizontal) stroke with a flick at each end 
+% (down at the left and up at the right). |draw_wave(1,2,f)| uses the current
+% pen to draw from |z1wl| to |z1wr|, where |x1wl=x1|, |y1wl=y1-f|, and
+% |x1wr=x2|, |y1wr=y2+f|, with |z1| assumed to be at the left of |z2|.
+%    \begin{macrocode}
+
+def draw_wave(suffix $,$$)(expr f)=
+  x$wl=x$; y$wl=y$-f;
+  x$wr=x$$; y$wr=y$$+f;
+  z$wc=0.5[z$wl,z$wr];
+  draw z$wl{pdir}..z$wc{right}..{pdir}z$wr;
+  labels($wl,$wc,$wr);
+enddef; % end of draw_wave
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_tail}
+% A macro to draw a tail at the bottom of a (vertical) stem.
+% |draw_tail(1,fjut)| draws a tail at the bottom of the stem which ends at |z1|.
+% The depth is controlled by the |desc_depth| value and the jut by |fjut|.
+%    \begin{macrocode}
+
+def draw_tail(suffix $)(expr fj)=
+  pen oldpen; oldpen:=currentpen;
+  pickup quill;
+  x$tl' = lft x$; y$tl=bot y$;
+  pickup stylus;
+  lft x$tl=x$tl';
+  x$tb=x$tl-fj; bot y$tb=y$tl-1/2desc_depth;
+  filldraw z${down}..{-pdir}z$tb & z$tb{pdir}..{up}z$tl--cycle;
+  pickup oldpen;
+  labels($tb,$tl);
+enddef; % end of draw_tail
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_triangle}
+% A macro to draw a downward pointing equilateral triangle.
+% |draw_triangle(1,sz)| draws a triangle of side length |sz| with |z1| in the middle
+% of the base.
+%    \begin{macrocode}
+
+def draw_triangle(suffix $)(expr sz)=
+  pen oldpen; oldpen:=currentpen;
+  pickup stylus;
+  x$t1=x$-sz/2; x$t3=x$+sz/2;
+  y$t1=y$t3=y$;
+  x$t2=x$; y$t2=y$-0.9sz;   % approx sqrt(3)/2
+  filldraw z$t1--z$t2--z$t3--cycle;
+  pickup oldpen;
+  labels($t1,$t2,$t3);
+enddef; % end of draw_triangle
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_utriangle}
+% A macro to draw an upward pointing equilateral triangle.
+% |draw_utriangle(1,sz)| draws a triangle of side length |sz| with |z1| in the middle
+% of the base.
+%    \begin{macrocode}
+
+def draw_utriangle(suffix $)(expr sz)=
+  pen oldpen; oldpen:=currentpen;
+  pickup stylus;
+  x$t1=x$-sz/2; x$t3=x$+sz/2;
+  y$t1=y$t3=y$;
+  x$t2=x$; y$t2=y$+0.9sz;   % approx sqrt(3)/2
+  filldraw z$t1--z$t2--z$t3--cycle;
+  pickup oldpen;
+  labels($t1,$t2,$t3);
+enddef; % end of draw_utriangle
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_rtriangle}
+% A macro to draw a downward pointing right angled triangle.
+% |draw_rtriangle(1,sz)| draws a triangle of side length |sz| with |z1| at the
+% right (where the right angle is).
+%    \begin{macrocode}
+
+def draw_rtriangle(suffix $)(expr sz)=
+  pen oldpen; oldpen:=currentpen;
+  pickup stylus;
+  x$t1=x$-sz; rt x$t3=x$;
+  y$t1=y$t3=y$;
+  x$t2=x$t3; y$t2=y$-sz;
+  filldraw z$t1--z$t2--z$t3--cycle;
+  pickup oldpen;
+  labels($t1,$t2,$t3);
+enddef; % end of draw_rtriangle
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_rutriangle}
+% A macro to draw an upward pointing right angled triangle.
+% |draw_rutriangle(1,sz)| draws a triangle of side length |sz| with |z1| at the
+% right (where the right angle is).
+%    \begin{macrocode}
+
+def draw_rutriangle(suffix $)(expr sz)=
+  pen oldpen; oldpen:=currentpen;
+  pickup stylus;
+  x$t1=x$-sz; rt x$t3=x$;
+  y$t1=y$t3=y$;
+  x$t2=x$t3; y$t2=y$+sz;
+  filldraw z$t1--z$t2--z$t3--cycle;
+  pickup oldpen;
+  labels($t1,$t2,$t3);
+enddef; % end of draw_rutriangle
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_fork}
+% A macro to draw a forked line.
+% |draw_fork(1,2,sz)| draws a graduated line from |z1| to |z2| with a forked
+% end of size |sz|.
+%    \begin{macrocode}
+
+def draw_fork(suffix $, $$)(expr sz)=
+  pen oldpen; oldpen:=currentpen;
+  pickup quill;
+  x$f1'=lft x$; y$f1'=bot y$;
+  x$f3'=rt x$;  y$f3'=top y$;
+  pickup stylus;
+  lft x$f1=x$f1'; bot y$f1=y$f1';
+  rt x$f3=x$f3';  y$f3-y$=2*(y$-y$f1);
+  rt x$f2=x$$-sz; bot y$f2=y$$;
+  rt x$f4= rt x$f5=x$$;
+  bot y$f5=y$$-sz; top y$f4=y$$+1/2sz;
+  filldraw z$f1--z$f2--z$f3--cycle;   % the line
+  draw z$f2{right}..z$f4;             % upper fork
+  draw z$f2{right}..z$f5;             % lower fork
+  pickup oldpen;
+  labels($f1,$f2,$f3,$f4,$f5);
+enddef; % end of draw_fork
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_urswish}
+% A macro to draw a line up and to the right with an under curl at the end.
+% |draw_urswish(1,2)| draws from |z1| towards |z2|, which is the max upper right
+% of a bounding box, where the curl is.
+%    \begin{macrocode}
+
+def draw_urswish(suffix $, $$)=
+  pen oldpen; oldpen:=currentpen;
+  pickup quill;
+  rt x$$s1=x$$-thick; top y$$s1=y$$;
+  rt x$$s2=x$$; 
+%%  x$$s3=x$$-thick;
+  lft x$$s3=x$$s1;
+  bot y$$s3=y$$-thick; y$$s2=0.5[y$$s1,y$$s3];
+%%  draw z$---z$$s1{right}..z$$s2{down}..{-pdir}z$$s3;
+  draw z$..z$$s1{pdir}..z$$s2{down};
+  labels($$s1,$$s2,$$s3); 
+enddef; % end of draw_urswish
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{bowl_stem}
+%  Calculate where a bowl should meet a stem so that the pen is moving in the
+% pen direction.
+% |bowl_stem(1,2)| calculates the point |z1i|, where |z1| is on the bowl and
+% there is a vertical line at |x2|.
+%
+%    \begin{macrocode}
+
+def bowl_stem(suffix $, $$)=
+  x$'=0.5[x$,x$$]; y$'=y$;    % the mid-point
+  z$''=z$' shifted (thick*pdir);
+  x$i=x$$; z$i=whatever[z$',z$''];
+  labels($',$i);
+enddef; % end of bowl_stem
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_clubbase}
+% Draw a clubbed bottom of a vertical stem for the IMIN font.
+% |draw_clubbase(1, 2, st, left, right)| draws from |st[z2,z1]| to |z2|. 
+% At |z2| the pen
+% is shifted |left| fraction of the pen width and |right| fraction of the
+% pen width, both in the direction of the pen angle. Pen draws smoothly the
+% path |z1|, |left|, |right|, |z1|.
+%    \begin{macrocode}
+
+% draw clubbed bottom of vertical stem for IMIN font.
+def draw_clubbase(suffix $, $$)(expr st, lft, rt)=
+  z$$l = z$$ shifted (lft*thick*(-pdir));
+  z$$r = z$$ shifted (rt*thick*(pdir));
+  z$$t = st[z$$,z$];
+  draw z$$t{z$$-z$}..z$$l--z$$r..{z$-z$$}z$$t;
+  labels($$t,$$l,$$r);
+enddef; % end of draw_clubbase
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_pdot}
+%  A macro to draw a period dot.
+% |draw_pdot(1,sz)| uses |stylus| to draw a dot centered at |z1| of overall size |sz|.
+%    \begin{macrocode}
+
+def draw_pdot(suffix $)(expr sz)=
+%    \end{macrocode}
+% Draw a square rotated 45 degrees.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$ shifted (0.5sz*up);
+  z$u = z$s shifted (sz*right);
+  z$v = z$t shifted (sz*down);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_pdot
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_pcomma}
+%  A macro to draw a period comma.
+% |draw_pcomma(1,t,w)| draws a comma placed at |z1| (the top), line width is |t|
+% and bottom of line is |w| horizontally from |z1|. The pen is |stylus|.
+%    \begin{macrocode}
+
+def draw_pcomma(suffix $)(expr sz, ar)=
+%    \end{macrocode}
+% Draw a line of at |z$| of width |sz| sloping back and down at 45 degrees
+% for a total width of |ar|.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$s shifted (sz*right);
+  x$v=x$s-ar; y$v=y$s-ar;
+  z$u = z$v shifted (sz*right);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+%%  filldraw z$s--z$t--z$u--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_pcomma
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_plq}
+%  A macro to draw a period left quote.
+% |draw_pcomma(1,t,w)| draws a left quote placed at |z1| (the top), line width is |t|
+% and bottom of line is |w| horizontally from |z1|.
+%    \begin{macrocode}
+
+def draw_plq(suffix $)(expr sz, ar)=
+%    \end{macrocode}
+% Draw a line of at |z$| of width |sz| sloping forward and down at 45 degrees
+% for a total width of |ar|.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$s shifted (sz*right);
+  x$v=x$s+ar; y$v=y$s-ar;
+  z$u = z$v shifted (sz*right);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+%%  filldraw z$s--z$t--z$v--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_plq
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{offsetbowl}
+%    A macro to calculate the outer and inner paths (|obouter| and |obinner|)
+% for a non-centered letter `o'. |offsetbowl($, sx, sy, fx, fy)| 
+% calculates the paths for an `o'
+% enclosed in a rectangle size |sx| by |sy| with its bottom lefthand corner
+% located at |z$|, where the center of the o is at |(fx*sx, fy*sy)| in the
+% bounding rectangle.
+%
+%    Two construction paths, namely |obfirst| and |obsecond| are also
+% available. They should be identical.
+%
+%    All paths have points listed in a clockwise direction, starting with
+% |z$nh| or |z$minl| as appropriate.
+%
+%  |offsetbowl($, sx, sy, 1/2, 1/2)| gives the same results as |obowl($, sx, sy)|.
+%    \begin{macrocode}
+
+path obouter, obinner, obfirst, obsecond;
+def offsetbowl(suffix $)(expr sx, sy, fx, fy)=
+  numeric inx, iny, cx, cy;
+  pair pt[];
+  path pth[];
+  inx := 1/2thick*cosd(pangle); iny := 1/2thick*sind(pangle);
+  cx := x$+fx*sx; cy := y$+fy*sy;
+  z$obc = (cx,cy);
+%    \end{macrocode}
+% Calulate points on the centre path of the pen. These are offset by |inx|
+% from the rectangles vertical sides and by |iny| from the horizontal sides.
+% If the pen is parallel to a side, offset the point by half the pen's 
+% dimension. First do the West, East, North and South points.
+%    \begin{macrocode}
+  if pangle = 90:
+    z$wt=(x$+1/2thin, cy);
+    z$et=(x$+sx-1/2thin, cy);
+  else:
+    z$wt=(x$+inx, cy);
+    z$et=(x$+sx-inx, cy);
+    penpos$wt(thick,pangle);
+    penpos$et(thick,pangle);
+  fi
+  if pangle = 0:
+    z$nh=(cx, y$+sy-1/2thin);
+    z$sh=(cx, y$+1/2thin);
+  else:
+    z$nh=(cx, y$+sy-iny);
+    z$sh=(cx, y$+iny);
+    penpos$nh(thick,pangle);
+    penpos$sh(thick,pangle);
+  fi
+  obfirst := z$nh{right}..z$et{down}..z$sh{left}..z$wt{up}..cycle;
+%    \end{macrocode}
+% Now calculate the points on the path |obfirst| where the pen will
+% draw the min width lines (i.e., the points where the pen will be
+% moving parallel to |pangle|).
+%    \begin{macrocode}
+  if pangle = 90:
+      z$minl = z$wt; z$maxr = z$nh; z$minr = z$et; z$maxl = z$sh;
+  else:
+    if pangle = 0:
+      z$minl = z$nh; z$maxr = z$et; z$minr = z$sh; z$maxl = z$wt;
+    else:
+      z$minl = directionpoint dir(pangle)     of obfirst;
+      z$minr = directionpoint -dir(pangle)    of obfirst;
+%    \end{macrocode}
+% The max points are roughly where the inner and outer diverge 
+% the most. These are simple for 0 and 90 degree pens and have
+% been calculated above. It's not so simple for intermediate
+% angles. For a reasonable looking result, we pick the max
+% points to be halfway between the min points. This involves
+% calculating some angles, paths and intersections.
+%    \begin{macrocode}
+      pt1 := z$minr - z$minl;           % direction
+      pt2 := (- ypart pt1, xpart pt1);  % perpendicular
+      pt3 := 1/2[z$minl, z$minr];
+      pt4 := pt3 shifted pt2;
+      pt5 := pt3 shifted -pt2;
+      pth1 := pt3--pt4;
+      pth2 := pt3--pt5;
+      z$maxr = pth1 intersectionpoint obfirst;
+      z$maxl = pth2 intersectionpoint obfirst;
+    \fi
+  \fi
+%    \end{macrocode}
+% Place the pen at each of these points to get the outer and inner points.
+%    \begin{macrocode}
+  penpos$minl(thin,pangle+90);
+  penpos$maxr(thick,pangle);
+  penpos$minr(thin,pangle+90);
+  penpos$maxl(thick,pangle);
+%    \end{macrocode}
+% Finally, the outer and inner paths.
+%    \begin{macrocode}
+  obsecond := z$minl..z$maxr..z$minr..z$maxl..cycle;
+  z$minlo = z$minl.r; z$maxro = z$maxr.r;
+  z$minro = z$minr.l; z$maxlo = z$maxl.l;
+  obouter := z$minlo{dir(pangle)}...z$maxro...z$minro{-dir(pangle)}...z$maxlo...cycle;
+  z$minli = z$minl.l; z$maxri = z$maxr.l;
+  z$minri = z$minr.r; z$maxli = z$maxl.r;
+  obinner := z$minli...z$maxri...z$minri...z$maxli...cycle;
+  labels($obc, $nh, $et, $sh, $wt);
+  labels($minl, $maxr, $minr, $maxl);
+  labels($minlo, $maxro, $minro, $maxlo);
+  labels($minli, $maxri, $minri, $maxli);
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{obowl}
+%    A macro to calculate the outer and inner paths (|obouter| and |obinner|)
+% for the letter `o'. |obowl($, sx, sy)| calculates the paths for an `o'
+% centered and enclosed in a rectangle size |sx| by |sy| with its bottom 
+% lefthand corner located at |z$|.
+%    \begin{macrocode}
+
+def obowl(suffix $)(expr sx, sy)=
+  offsetbowl($, sx, sy, 1/2, 1/2);
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{scalarprod}
+%  |v scalarprod w| calulates the scalar product between the
+% two vectors |v| and |w|.
+%    \begin{macrocode}
+
+primarydef v scalarprod w =
+  (xpart v * ypart w - ypart v * xpart w)
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{tangentpoint}
+% |tangentpoint($, path)| calculates the point |z$tan| on the |path|
+% so that |z$tan--z$| is tangent to the path. It uses a binary search
+% to find a point on the path such that the path direction is
+% (anti-) parallel to the dirction from that point to the given point.
+%    \begin{macrocode}
+
+def tangentpoint(suffix $)(expr pth)=
+  pair vecll, veclr, veclm;    % "tangent" line directions
+  numeric pl, pr, pm;          % path parameter values
+  pair vecpl, vecpr, vecpm;    % path directions
+  pair ptl, ptr, ptm;          % path points
+  numeric sl, sr, sm;          % scalar products of path/line directions
+  numeric stpsize;             % size of current binary step
+  numeric tantol;              % tolerance
+  boolean wtest;               % a boolean
+
+  tantol := eps;
+%    \end{macrocode}
+% Initialise using the left right and middle points on the path.
+%    \begin{macrocode}
+  pl:=0; pr:=length pth; pm:=0.5(pl+pr); stpsize:=pr-pl;
+  ptl := point pl of pth;
+  ptm := point pm of pth;
+  ptr := point pr of pth;
+%    \end{macrocode}
+% Now the various vectors, and make sure they are unit vectors to
+% have a consistent measure scale when we take the scalar products.
+%    \begin{macrocode}
+  vecll := unitvector (z$-ptl);
+  veclm := unitvector (z$-ptm);
+  veclr := unitvector (z$-ptr);
+  vecpl := unitvector (direction pl of pth);
+  vecpm := unitvector (direction pm of pth);
+  vecpr := unitvector (direction pr of pth);
+  sl := vecll scalarprod vecpl;
+  sm := veclm scalarprod vecpm;
+  sr := veclr scalarprod vecpr;
+%    \end{macrocode}
+% We stop if any of the points is the tangent point, or if the step
+% size is too small, or if the signs of the left and right scalar
+% products are the same.
+%    \begin{macrocode}
+  wtest := (stpsize < tantol) or (sl*sr > 0) or
+           (abs sl < tantol) or (abs sm < tantol) or (abs sr < tantol);
+  if wtest:
+    if (stpsize < tantol):
+      z$tan=(0,0);
+      errmessage("No tangent; path too short");
+    else:
+      if (sl*sr > 0):
+        z$tan=(0,0);
+        errmessage("No tangent; end products have the same sign");
+      else:
+        if (abs sl < tantol):
+          z$tan=ptl;
+        else:
+          if (abs sm < tantol):
+            z$tan=ptm;
+          else:
+            z$tan=ptr;
+          fi
+        fi
+      fi
+    fi
+  else:
+%    \end{macrocode}
+% There should be a tangent and we iterate to find it, using
+% bisection. If there is one to be found it will be at the
+% current middle point. The tangent point will be somewhere
+% between the two points that lead to opposite signed scalar 
+% products. 
+%    \begin{macrocode}
+    forever:
+      if (sl*sm < 0):  % opposite signs, look between pl & pm
+        pr:=pm; pm:=0.5(pr+pl);
+        vecpr := vecpm; veclr := veclm; sr:=sm;
+      else:
+        pl:=pm; pm:=0.5(pr+pl);
+        vecpl:=vecpm; vecll:=veclm; sl:=sm;
+      fi
+      stpsize:=pr-pl;
+      ptm := point pm of pth;
+      veclm := unitvector (z$-ptm);
+      vecpm := unitvector (direction pm of pth);
+      sm := veclm scalarprod vecpm;
+%    \end{macrocode}
+%  We stop the iteration if the step size is too small or the
+% middle point is the tangent point. In either case, the
+% middle point is the best guess that can be made.
+%    \begin{macrocode}
+      wtest := (stpsize < tantol) or (abs sm < tantol);
+      if wtest:
+        if (abs sm < tantol):
+          z$tan = ptm;
+        else:
+          z$tan = ptm;
+%%%%%%          errmessage("Warning: tangent approximated");
+        fi
+      fi
+      exitif wtest;
+    endfor
+  fi
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%    Set the mode and font setup.
+%    \begin{macrocode}
+ 
+font_coding_scheme:="ASCII minuscules and punctuation";
+mode_setup; 
+inslrmin_font_setup;
+
+%    \end{macrocode}
+%
+%
+%    We generate letters, together with some punctuation and
+% analphabetics.
+%    \begin{macrocode}
+ 
+input iminl;        % lower case
+input iminu;        % capitals
+input iminpunct;    % punctuation
+input iminlig;      % the several dashes
+input imindig;      % arabic digits
+
+%    \end{macrocode}
+%
+% Set up the spacings, stretches and shrinks.
+%
+%    \begin{macrocode}
+ 
+font_slant slant; font_x_height x_height#;
+if monospace: 
+  font_normal_space vstretch*9u#; % no stretching or shrinking
+  font_quad vstretch*18u#;
+  font_extra_space vstretch*9u#;
+else: 
+  font_normal_space vstretch*6u#+2letter_fit#;
+  font_normal_stretch vstretch*3u#; font_normal_shrink vstretch*2u#;
+  font_quad vstretch*18u#+4letter_fit#;
+  font_extra_space vstretch*2u#;
+
+%    \end{macrocode}
+%
+% Finally, do the ligtables, but I don't think they are needed (yet?).
+%
+%    \begin{macrocode}
+fi
+
+bye.
+
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  k#:=-.5u#; kk#:=-1.5u#; kkk#:=-2u#; % three degrees of kerning
+  kks#:=-4u#;  kkx#:=-1.5u#; kkj#:=-2u#; kkr#:=-5u#; kkrs#:=-2u#; kkrl#:=-8u#;
+  ligtable "s":
+                "a" kern kks#, "A" kern kks#,
+                "c" kern kks#, "C" kern kks#,
+                "d" kern kks#, "D" kern kks#,
+                "e" kern kks#, "E" kern kks#,
+                "f" kern kks#, "F" kern kks#,
+                "g" kern kks#, "G" kern kks#,
+                "i" kern kks#, "I" kern kks#,
+                "j" kern kks#, "J" kern kks#,
+                "k" kern kks#, "K" kern kks#,
+                "m" kern kks#, "M" kern kks#,
+                "n" kern kks#, "N" kern kks#,
+                "o" kern kks#, "O" kern kks#,
+                "p" kern kks#, "P" kern kks#,
+                "q" kern kks#, "Q" kern kks#,
+                "r" kern kks#, "R" kern kks#,
+                "t" kern kks#, "T" kern kks#,
+                "u" kern kks#, "U" kern kks#,
+                "v" kern kks#, "V" kern kks#,
+                "w" kern kks#, "W" kern kks#,
+                "x" kern kks#, "X" kern kks#,
+                "y" kern kks#, "Y" kern kks#,
+                "z" kern kks#, "Z" kern kks#;
+
+  ligtable "S":
+                "a" kern kks#, "A" kern kks#,
+                "c" kern kks#, "C" kern kks#,
+                "d" kern kks#, "D" kern kks#,
+                "e" kern kks#, "E" kern kks#,
+                "f" kern kks#, "F" kern kks#,
+                "g" kern kks#, "G" kern kks#,
+                "i" kern kks#, "I" kern kks#,
+                "j" kern kks#, "J" kern kks#,
+                "k" kern kks#, "K" kern kks#,
+                "m" kern kks#, "M" kern kks#,
+                "n" kern kks#, "N" kern kks#,
+                "o" kern kks#, "O" kern kks#,
+                "p" kern kks#, "P" kern kks#,
+                "q" kern kks#, "Q" kern kks#,
+                "r" kern kks#, "R" kern kks#,
+                "t" kern kks#, "T" kern kks#,
+                "u" kern kks#, "U" kern kks#,
+                "v" kern kks#, "V" kern kks#,
+                "w" kern kks#, "W" kern kks#,
+                "x" kern kks#, "X" kern kks#,
+                "y" kern kks#, "Y" kern kks#,
+                "z" kern kks#, "Z" kern kks#;
+
+  ligtable "x": 
+                "a" kern kkx#, "A" kern kkx#,
+                "b" kern kkx#, "B" kern kkx#,
+                "c" kern kkx#, "C" kern kkx#,
+                "d" kern kkx#, "D" kern kkx#,
+                "e" kern kkx#, "E" kern kkx#,
+                "g" kern kkx#, "G" kern kkx#,
+                "j" kern kkx#, "J" kern kkx#,
+                "l" kern kkx#, "L" kern kkx#,
+                "o" kern kkx#, "O" kern kkx#,
+                "q" kern kkx#, "Q" kern kkx#,
+                "t" kern kkx#, "T" kern kkx#,
+                "u" kern kkx#, "U" kern kkx#,
+                "v" kern kkx#, "V" kern kkx#,
+                "w" kern kkx#, "W" kern kkx#,
+                "y" kern kkx#, "Y" kern kkx#;
+
+  ligtable "X": 
+                "a" kern kkx#, "A" kern kkx#,
+                "b" kern kkx#, "B" kern kkx#,
+                "c" kern kkx#, "C" kern kkx#,
+                "d" kern kkx#, "D" kern kkx#,
+                "e" kern kkx#, "E" kern kkx#,
+                "g" kern kkx#, "G" kern kkx#,
+                "j" kern kkx#, "J" kern kkx#,
+                "l" kern kkx#, "L" kern kkx#,
+                "o" kern kkx#, "O" kern kkx#,
+                "q" kern kkx#, "Q" kern kkx#,
+                "t" kern kkx#, "T" kern kkx#,
+                "u" kern kkx#, "U" kern kkx#,
+                "v" kern kkx#, "V" kern kkx#,
+                "w" kern kkx#, "W" kern kkx#,
+                "y" kern kkx#, "Y" kern kkx#;
+
+  ligtable "a": "A":
+           "b": "B":
+           "c": "C":
+           "d": "D":
+           "e": "E":
+           "h": "H":
+           "i": "I":
+           "k": "K":
+           "l": "L":
+           "m": "M":
+           "n": "N":
+           "o": "O":
+           "p": "P":
+           "t": "T":
+           "u": "U":
+           "v": "V":
+           "w": "W":
+           "z": "Z":
+           "j" kern kkj#, "J" kern kkj#;
+
+  ligtable "r":
+                "a" kern kkr#, "A" kern kkr#,
+                "b" kern kkr#, "B" kern kkr#,
+                "c" kern kkr#, "C" kern kkr#,
+                "d" kern kkr#, "D" kern kkr#,
+                "e" kern kkr#, "E" kern kkr#,
+                "f" kern kkrs#, "F" kern kkrs#,
+                "g" kern kkrs#, "G" kern kkrs#,
+                "h" kern kkr#, "H" kern kkr#,
+                "i" kern kkr#, "I" kern kkr#,
+                "j" kern kkj#, "J" kern kkj#,
+                "k" kern kkrs#, "K" kern kkrs#,
+                "l" kern kkr#, "L" kern kkr#,
+                "m" kern kkr#, "M" kern kkr#,
+                "n" kern kkrs#, "N" kern kkrs#,
+                "o" kern kkr#, "O" kern kkr#,
+                "p" kern kkrs#, "P" kern kkrs#,
+                "q" kern kkr#, "Q" kern kkr#,
+                "r" kern kkrs#, "R" kern kkrs#,
+                "s" kern kkr#, "S" kern kkr#,
+                "t" kern kkr#, "T" kern kkr#,
+                "u" kern kkr#, "U" kern kkr#,
+                "v" kern kkr#, "V" kern kkr#,
+                "w" kern kkr#, "W" kern kkr#,
+                "x" kern kkx#, "X" kern kkx#,
+                "y" kern kkr#, "Y" kern kkr#,
+                "z" kern kkr#, "Z" kern kkr#;
+
+  ligtable "R":
+                "a" kern kkr#, "A" kern kkr#,
+                "b" kern kkr#, "B" kern kkr#,
+                "c" kern kkr#, "C" kern kkr#,
+                "d" kern kkr#, "D" kern kkr#,
+                "e" kern kkr#, "E" kern kkr#,
+                "f" kern kkrs#, "F" kern kkrs#,
+                "g" kern kkrs#, "G" kern kkrs#,
+                "h" kern kkr#, "H" kern kkr#,
+                "i" kern kkr#, "I" kern kkr#,
+                "j" kern kkj#, "J" kern kkj#,
+                "k" kern kkrs#, "K" kern kkrs#,
+                "l" kern kkr#, "L" kern kkr#,
+                "m" kern kkr#, "M" kern kkr#,
+                "n" kern kkrs#, "N" kern kkrs#,
+                "o" kern kkr#, "O" kern kkr#,
+                "p" kern kkrs#, "P" kern kkrs#,
+                "q" kern kkr#, "Q" kern kkr#,
+                "r" kern kkrs#, "R" kern kkrs#,
+                "s" kern kkr#, "S" kern kkr#,
+                "t" kern kkr#, "T" kern kkr#,
+                "u" kern kkr#, "U" kern kkr#,
+                "v" kern kkr#, "V" kern kkr#,
+                "w" kern kkr#, "W" kern kkr#,
+                "x" kern kkx#, "X" kern kkx#,
+                "y" kern kkr#, "Y" kern kkr#,
+                "z" kern kkr#, "Z" kern kkr#;
+
+
+fi
+
+bye.
+
+%</mfd>
+%    \end{macrocode}
+%
+% \subsection{The code for normal letters}
+%
+%    The following code is for the lower case characters.
+%
+%    \begin{macrocode}
+%<*min>
+% IMINL.MF Program file for Insular Minuscule lower case
+%
+
+%    \end{macrocode}
+%
+%
+% \begin{routine}{a}
+% The letter `a'.
+%    \begin{macrocode}
+cmchar "IMIN letter a";
+beginchar("a", 2sb#+hstretch*(3/4x_height#+jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pair pr[];
+pickup quill;
+n1 := w - 2pcshiftx -jut; % effective letter width
+% "stem"
+x1 = pcshiftx + 2/3n1; top y1=h;
+rt x2 = pcshiftx + n1; bot y2=0;
+z16 = 1/6[z2,z1];
+rt x6 = x16; y6=y16;
+lft x4 = pcshiftx; y4 = 1/2h;
+% stem path
+pth1 := z1{down}..z2;
+pr1 := direction 1 of pth1;
+z20 = z2 shifted -10pr1;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+else:
+  % draw stem
+  draw pth1;
+  draw_roundserif(2,20,srad);
+  % draw bowl
+  draw z1{-pdir}..z4{down}..z6{pdir};
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "a"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{b}
+% The letter `b'. 
+%    \begin{macrocode}
+cmchar "IMIN letter b";
+beginchar("b", 2sb#+hstretch*(3/4x_height#), 
+               asc_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+path pth[];
+pcshiftx := sb;
+pickup quill;
+n1:=w-2pcshiftx;    % actual letter width
+n2:=h/ascratio;    % top of bowl
+%%ductus:=true;
+lft x1 = pcshiftx+jut; top y1=h;
+lft x3 = pcshiftx; y3=1/2n2;
+rt x5 = w-pcshiftx; y5=y3;
+x4 = 1/2[x3,x5]; bot y4=0;
+x6=x4; top y6=n2;
+pth1 := z1..z3{down}..z4{right}.. z5{up};
+z98=(0,3/4n2); z99=(w,y98);
+pth2 := z98--z99;
+z7 = pth1 intersectionpoint pth2;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z3{down}..z4{right}..z5{up}..z6{left}..z7{-pdir};
+draw_flatserif(1,7,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "b"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{c}
+% The letter `c'.
+%    \begin{macrocode}
+cmchar "IMIN letter c";
+beginchar("c", 2sb#+hstretch*(5/8x_height#), 
+               x_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+n1:=w-2pcshiftx;     % actual letter width
+n2:=6/5w-2pcshiftx;  % width of full bowl
+x1=pcshiftx + 1/2n1; top y1 = h;
+lft x2 = pcshiftx; y2 = 1/2h;
+x3 = x1; bot y3 = 0;
+rt x4 = w-pcshiftx; y4 = 1/4h;
+x24 = x4; y24 = 3/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z24..z1{left}..z2{down}..z3{right}..z4{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,14,16,17,18,100);
+endchar; % end "c"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{d}
+% The letter `d'. There is a choice between a curved and straight stem.
+% I have done the straight one.
+%    \begin{macrocode}
+cmchar "IMIN letter d";
+beginchar("d", 2sb#+hstretch*(3/4x_height#), 
+               asc_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+path pth[];
+pcshiftx := sb;
+pickup quill;
+lft x1=pcshiftx; top y1=h;
+rt x3 = w-pcshiftx; y3 = 1/2h/ascratio;
+x4 = 1/2[x1,x3]; bot y4 = 0;
+z5=(x1,y3);
+z98=(0,h/ascratio); z99=(w,y98); pth2 := z98--z99;
+pth1 := z1{-ppdir}..z3{down}..z4{left};
+z6 = pth1 intersectionpoint pth2;
+if ductus:
+  pickup stylus;
+fi
+draw z1{-ppdir}..z3{down}..z4{left}..z5{up}..z6{pdir};
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,7,8,100);
+endchar; % end "d"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{e}
+% The letter `e'.
+%    \begin{macrocode}
+cmchar "IMIN letter e";
+beginchar("e", sb#+hstretch*(5/4x_height#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pickup quill;
+n1 := w-pcshiftx;    % actual letter width
+n2 := 4/8n1;   % width of bowl
+x1 = pcshiftx + 5/8n2; top y1=h;
+lft x2 = pcshiftx; y2 = 1/2h;
+x3 = pcshiftx + 1/2n2; bot y3 = 0;
+rt x4 = pcshiftx + n2; y4 = 1/4h;
+z98=(0,3/8h); z99=(w,y98);
+pth1 := z98--z99;
+pth2 := z1{left}..z2{down}..z3{right};
+z7 = pth1 intersectionpoint pth2;
+rt x9 = w-pcshiftx; y9 = 3/4h;
+z8=1/2[z7,z9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z7{pdir}..z1{left}..z2{down}..z3{right}..z4{pdir};
+draw z7{pdir}..z8{right}..z9{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "e"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{f}
+% The letter `f'. 
+%    \begin{macrocode}
+cmchar "IMIN letter f";
+beginchar("f", 2sb#+hstretch*(3/4x_height#+jut#), 
+               (x_height#), desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; y2=-1/2d;
+lft x20=0; bot y20=-d;
+%% bottom bar
+z4=(rt x1,-thin); rt x6=w-pcshiftx; y6=y4+2thin; z5=1/2[z4,z6];
+%% top bar
+x7= x1; bot y7 = 1/2h;
+rt x9= w-pcshiftx; y9 = 1/2[y7,y1];
+x8 = 2/3[x7,x9]; top y8 = h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad);  
+draw z4{dir(45)}..z5{right}..z6{dir(45)};   % bottom bar
+%%draw_flick(7, 2thin, thin, (w-pcshiftx-x7+1/2thick)); % top bar
+draw z7..z8..z9;     % top bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "f"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{g}
+% The letter `g'. 
+%    \begin{macrocode}
+cmchar "IMIN letter g";
+beginchar("g", 2sb#+hstretch*(x_height#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+path pth[];
+pair vec[];
+pcshiftx := sb;
+pickup quill;
+%% top bar
+lft x1=pcshiftx; top y1=h; rt x2=w-pcshiftx; top y2=h;
+x3=1/2[x1,x2]; bot y3=1/8h;
+rt x5 = w-pcshiftx; y5 = -1/2d;
+x6 = x3; bot y6 = -d;
+x7 = 1/2[x1,x3]; y7 = y5;
+x8=x3; y8 = -y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+  draw z1--z2;               % top bar
+  draw pth1; draw pth2;      % curves
+  draw rt z8--z9;            % diagonal
+else:
+  draw z1--z2;
+  draw z2--z3;
+  draw z3{pdir}..z5{down}..z6{left}..z7{up}..z8{pdir};
+  draw_roundserif(1,2,srad);
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "g"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{h}
+% The letter `h'.
+%    \begin{macrocode}
+cmchar "IMIN letter h";
+beginchar("h", 2sb#+hstretch*(7/8x_height#+jut#), 
+               asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+numeric n[];
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=0;
+%% bowl
+z3=1/2[z2,z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h/ascratio;
+lft x6=x4; bot y6=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                       % stem
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw z3{pdir}..z4..z5..z6{-pdir};
+
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "h"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{i}
+% The letter `i'.
+%    \begin{macrocode}
+cmchar "IMIN letter i";
+beginchar("i", 2sb#+hstretch*(thick#+2jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=0;
+%%ductus:=true;
+draw_tstem(1,2,srad);
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+ductus:=false;
+penlabels(1,2,100);
+endchar; % end "i"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{j}
+% The letter `j'. This letter was not in the script, it being a later invention.
+%    \begin{macrocode}
+cmchar "IMIN letter j";
+beginchar("j", sb#+hstretch*(3/8x_height#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+rt x1 = w-pcshiftx; top y1 = h;
+x2=x1; y2=-1/2d;
+%% bottom hook
+lft x3 = 0; bot y3 = -d;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z2;               % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z3{-pdir};               % hook
+ductus:=false;
+penlabels(1,2,3,100);
+endchar; % end "j"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{k}
+% The letter `k'.
+%    \begin{macrocode}
+cmchar "IMIN letter k";
+beginchar("k", 2sb#+hstretch*(x_height#+jut#), 
+               asc_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; y2=-1/2d;
+lft x20=pcshiftx; bot y20=-d;
+%% top arm
+z3=(x1,1/2h/ascratio);
+rt x5=w-pcshiftx; y5=1/2[y3,y4];
+x4=1/2[x3,x5]; top y4=h/ascratio;
+%% lower arm
+x7=x5; bot y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad);
+draw z3..z4{right}..z5;          % upper arm
+draw z3..{right}z7;              % lower arm
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "k"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{l}
+% The letter `l'. 
+%    \begin{macrocode}
+cmchar "IMIN letter l";
+beginchar("l", 2sb#+hstretch*(3/4x_height#), 
+               asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x2=pcshiftx; y2=1/5h;
+x1=x2+jut; top y1=h;
+rt x4=w-pcshiftx; y4=1/5h;
+x3=1/2[x2,x4]; bot y3=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{down}..z2..z3{right}..z4;
+draw_flatserif(1,2,srad);
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "l"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{m}
+% The letter `m'. 
+%    \begin{macrocode}
+cmchar "IMIN letter m";
+beginchar("m", 2sb#+hstretch*(x_height#+2jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pickup quill;
+%% left stem
+lft x1=pcshiftx+jut; top y1=h;
+x2=x1; bot y2=0;
+%% start of bowl
+x13=x1; y13=3/4h;
+%% bottom of right and middle stems
+rt x6 = w -pcshiftx - jut; y6=y2;
+z4 = 1/2[z2,z6];
+%% top of middle and right stems
+x3=x4; y3=y1;
+x5=x6; y5=y13;
+%% top of bowls
+x14=2/3[x13,x3]; top y14 = h;
+x33=x4; y33=y13;
+x34=2/3[x33,x5]; y34 = y14;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                             % left half
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw z13{pdir}..z14{right}..z33{down}--z4;
+draw_roundserif(4,3,srad);
+draw z33{pdir}..z34{right}..z5{down}--z6;
+draw_roundserif(6,5,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,13,14,33,34,100);
+endchar; % end "m"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{n}
+% The letter `n'. This could be like a capital `N' or a lower-case `n'.
+% I have chosen to do the second form.
+%    \begin{macrocode}
+cmchar "IMIN letter n";
+beginchar("n", 2sb#+hstretch*(5/8x_height#+2jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1=pcshiftx+jut; top y1=h;
+x2=x1; bot y2=0;
+% start of bowl
+x13=x1; y13=3/4h;
+%% right stem
+rt x4 = w-pcshiftx-jut; y4=y2;
+x3 = x4; y3 = y13;
+% top of bowl
+x14 = 2/3[x13,x3]; top y14 = h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                % left stem
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw z13{pdir}..z14{right}..z3{down}--z4;
+draw_roundserif(4,3,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,13,14,100);
+endchar; % end "n"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{o}
+% The letter `o'.
+%    \begin{macrocode}
+cmchar "IMIN letter o";
+beginchar("o", 2sb#+hstretch*(3/4x_height#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+draw z1..z2..z3..z4..cycle;
+z5=(pcshiftx,-o);
+obowl(5, w-2pcshiftx, h+2o);
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+  draw obfirst; draw obsecond; draw obouter; draw obinner;
+else:
+%%  fill obouter; unfill obinner;
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "o"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{p}
+% The letter `p'.
+%    \begin{macrocode}
+cmchar "IMIN letter p";
+beginchar("p", 2sb#+hstretch*(3/4x_height#+jut#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=-1/2d;
+lft x20 = pcshiftx; bot y20 = -d;
+%% bowl                        % from "h"
+z3=3/4[(x1,0),z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h;
+lft x6=x4; bot y6=0;
+
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                         % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z20{-pdir};
+draw z3{pdir}..z4..z5..z6{-pdir};             % bowl (from h)
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "p"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{q}
+% The letter `q'. 
+%    \begin{macrocode}
+cmchar "IMIN letter q";
+beginchar("q", 2sb#+hstretch*(3/4x_height#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% right stem
+rt x1=w-pcshiftx; top y1=h;
+x2=x1; bot y2=-1/2d;
+x20 = x1-jut; bot y20=-d;
+%% bowl
+z3=1/4[(x1,0),z1];
+lft x5=pcshiftx; y5=y3;
+x4=1/2[x3,x5]; bot y4=0;
+x6=x1-jut; top y6=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);  
+draw z2{down}..z20{-pdir};                            % stem
+draw_flatserif(1,2,srad);
+draw z3{-pdir}..z4{left}..z5{up}..z6{pdir};
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,7,8,100);
+endchar; % end "q"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{r}
+% The letter `r'.
+%    \begin{macrocode}
+cmchar "IMIN letter r";
+beginchar("r", sb#+hstretch*(7/8x_height#+jut#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=-1/2d;
+lft x20 = pcshiftx; bot y20 = -d;
+%% bowl         
+z3=3/4[(x1,0),z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                         % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z20{-pdir};
+
+draw z3{pdir}..z4{right}..z5{pdir};
+
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "r"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{s}
+% The letter `s'. This is a `long' S.
+%    \begin{macrocode}
+cmchar "IMIN letter s";
+beginchar("s", 2sb#+hstretch*(3/4x_height#+jut#), 
+               asc_height#, desc_depth#);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut; top y1=h/ascratio; bot y2=-1/2d;
+lft x20=pcshiftx; bot y20=-d;
+%% flick
+x4=x2; y4 = 1/2h/ascratio;
+rt x6=w-pcshiftx; y6 = 2/3h;
+x5 = 2/3[x4,x6]; top y5=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad); 
+draw z4{up}...z5{right}...z6; 
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,11,17,20,26,27,28,100);
+endchar; % end "s"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{t}
+% The letter `t'.
+%    \begin{macrocode}
+cmchar "IMIN letter t";
+beginchar("t", 2sb#+hstretch*(5/4x_height#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% bar
+lft x1 = pcshiftx; top y1=h; rt x2=w-pcshiftx; bot y2=h;
+n1 := w;     % width of bowl
+n2 := h;     % height of bowl
+z3=1/2[z1,z2];
+lft x4 = pcshiftx + 1/8n1; y4 = 1/2h;
+x5=x3; bot y5 = 0;
+rt x6 = pcshiftx + 3/4n1; top y6 = 1/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{pdir}..z3..z2{pdir};           % bar
+draw z3..z4{down}..z5{right}..z6{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,11,12,100);
+endchar; % end "t"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{u}
+% The letter `u'. 
+%    \begin{macrocode}
+cmchar "IMIN letter u";
+beginchar("u", 2sb#+hstretch*(5/8x_height#+2jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx-jut; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};
+draw_flatserif(1,13,srad);
+draw_tstem(3,4,srad);           % right stem
+draw_flatserif(3,4,srad);
+draw_roundserif(4,3,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,13,14,16,33,100);
+endchar; % end "u"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{v}
+% The letter `v'. 
+%    \begin{macrocode}
+cmchar "IMIN letter v";
+beginchar("v", 2sb#+hstretch*(3/4x_height#+jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx-jut; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+rt x23=w-pcshiftx; y23=3/4h;
+lft x26=x14; top y26=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}; % left stem
+draw_flatserif(1,13,srad);
+draw z14{pdir}..z23{up}..z26;
+
+ductus:=false;
+penlabels(1,2,3,4,5,11,13,14,23,26,100);
+endchar; % end "v"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{w}
+% The letter `w'. This is a modern version as the font did not have a W.
+%    \begin{macrocode}
+cmchar "IMIN letter w";
+beginchar("w", 2sb#+hstretch*(x_height#+2jut#), 
+               x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x5=w-pcshiftx-jut; y5=y1;
+x6=x5; bot y6=0;
+z53=1/4[z6,z5];  % start of bowl
+% middle stem
+z3 = 1/2[z1,z5];
+z33=(x3,y13);
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+% middle of right bowl
+x34=1/3[x3,x5]; y34=y14;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};  % left
+draw_flatserif(1,13,srad); 
+draw z3--z33{down}..z34{right}..z53{pdir};  % middle
+draw_flatserif(3,33,srad);
+draw_tstem(5,6,srad);           % right stem
+draw_flatserif(5,6,srad);
+draw_roundserif(6,5,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,13,14,33,34,53,16,100);
+endchar; % end "w"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{x}
+% The letter `x'.
+%    \begin{macrocode}
+cmchar "IMIN letter x";
+beginchar("x", 2sb#+hstretch*(x_height#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+n1 := w-2pcshiftx;    % total width
+n2 := thick;          % triangle side
+%% diag top left to bottom right
+lft x1=pcshiftx; bot y1=2/3h;
+x2=pcshiftx+1/7n1; top y2=h;
+x5=pcshiftx+11/14n1; bot y5=-1/4d;
+rt x6=pcshiftx+n1; top y6=1/6h;
+z25 = 1/3[z2,z5];
+%% diag bottom left to top right
+lft x10 = -w + 2pcshiftx; bot y10=-d;
+x50=x5; top y50=h;
+rt x60 = w -pcshiftx; bot y60=2/3h;
+x40=pcshiftx+8/14n1; y40=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z5{right}..z6;    % top left to bottom right
+draw z10{1/2pdir}..z25..z50{right}..z60;   % bottom left to top right
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,10,40,50,60,100);
+endchar; % end "x"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{y}
+% The letter `y'. Modern, but with a dot on top.
+%    \begin{macrocode}
+cmchar "IMIN letter y";
+beginchar("y", 2sb#+hstretch*(5/8x_height#+jut#), 
+               x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+z50=(x3,-1/2d);
+x60=x14; bot y60=-d;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};
+draw_flatserif(1,13,srad);
+draw_tstem(3,50,srad);           % right stem
+draw z50{down}..z60{-pdir};
+draw_flatserif(3,4,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "y"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{z}
+% The letter `z'.
+%    \begin{macrocode}
+cmchar "IMIN letter z";
+beginchar("z", 2sb#+hstretch*(x_height#), 
+               x_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+%% top bar
+n10 := w-2pcshiftx;   % letter width
+lft x1=pcshiftx; top y1=h;
+rt x2= w-pcshiftx; bot y2=y1;
+%% diagonal
+x3=x1; bot y3=0;
+%% bowl
+x4=3/4[x1,x2]; top y4 = 1/2h;
+x6=x4; bot y6 = 0;
+rt x5 = w-pcshiftx; y5 = 1/2[y4,y6];
+x7=1/2[x3,x5]; y7 = 1/2[y6,y5];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{right}..z2{right};              % top bar
+draw_roundserif(1,2,srad);
+draw z2--z3;              % diagonal
+draw z3..z4{right}..z5{down}..z6{left}..z7;
+ductus:=false;
+penlabels(1,2,3,4,5,6,10o,10i,20o,20i,100);
+endchar; % end "z"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%    The end of this file
+%    \begin{macrocode} 
+%</min>
+%    \end{macrocode}
+%
+%
+% \subsection{The code for capital letters}
+%
+%    \thisfont{} `capitals' were drawn with the same pen as for the minuscules,
+% and the letters were merely larger versions of the minuscules.
+%
+%    \begin{macrocode}
+%<*maj>
+% IMINU.MF Program file for Insular Minuscule `capitals'
+%
+
+%    \end{macrocode}
+%
+%
+%
+% \begin{routine}{A}
+% The letter `A'.
+%    \begin{macrocode}
+cmchar "IMIN letter A";
+beginchar("A", 2sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pair pr[];
+pickup quill;
+n1 := w - 2pcshiftx -jut; % effective letter width
+% "stem"
+x1 = pcshiftx + 2/3n1; top y1=h;
+rt x2 = pcshiftx + n1; bot y2=0;
+
+z16 = 1/6[z2,z1];
+rt x6 = x16; y6=y16;
+
+lft x4 = pcshiftx; y4 = 1/2h;
+
+% stem path
+pth1 := z1{down}..z2;
+pr1 := direction 1 of pth1;
+z20 = z2 shifted -10pr1;
+
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+else:
+  % draw stem
+  draw pth1;
+  draw_roundserif(2,20,srad);
+  % draw bowl
+  draw z1{-pdir}..z4{down}..z6{pdir};
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "A"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{B}
+% The letter `B'. 
+%    \begin{macrocode}
+cmchar "IMIN letter B";
+beginchar("B", 2sb#+caprat*hstretch*(3/4x_height#), 
+               caprat*asc_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+path pth[];
+pcshiftx := sb;
+pickup quill;
+n1:=w-2pcshiftx;    % actual letter width
+n2:=h/ascratio;    % top of bowl
+lft x1 = pcshiftx+jut; top y1=h;
+lft x3 = pcshiftx; y3=1/2n2;
+rt x5 = w-pcshiftx; y5=y3;
+x4 = 1/2[x3,x5]; bot y4=0;
+x6=x4; top y6=n2;
+pth1 := z1..z3{down}..z4{right}.. z5{up};
+z98=(0,3/4n2); z99=(w,y98);
+pth2 := z98--z99;
+z7 = pth1 intersectionpoint pth2;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z3{down}..z4{right}..z5{up}..z6{left}..z7{-pdir};
+draw_flatserif(1,7,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "B"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{C}
+% The letter `C'.
+%    \begin{macrocode}
+cmchar "IMIN letter C";
+beginchar("C", 2sb#+caprat*hstretch*(5/8x_height#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+n1:=w-2pcshiftx;     % actual letter width
+n2:=6/5w-2pcshiftx;  % width of full bowl
+x1=pcshiftx + 1/2n1; top y1 = h;
+lft x2 = pcshiftx; y2 = 1/2h;
+x3 = x1; bot y3 = 0;
+rt x4 = w-pcshiftx; y4 = 1/4h;
+x24 = x4; y24 = 3/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z24..z1{left}..z2{down}..z3{right}..z4{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,14,16,17,18,100);
+endchar; % end "C"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{D}
+% The letter `D'. There is a choice between a curved and straight stem.
+% I have done the straight one.
+%    \begin{macrocode}
+cmchar "IMIN letter D";
+beginchar("D", 2sb#+caprat*hstretch*(3/4x_height#), 
+               caprat*asc_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+path pth[];
+pcshiftx := sb;
+pickup quill;
+lft x1=pcshiftx; top y1=h;
+rt x3 = w-pcshiftx; y3 = 1/2h/ascratio;
+x4 = 1/2[x1,x3]; bot y4 = 0;
+z5=(x1,y3);
+z98=(0,h/ascratio); z99=(w,y98); pth2 := z98--z99;
+pth1 := z1{-ppdir}..z3{down}..z4{left};
+z6 = pth1 intersectionpoint pth2;
+if ductus:
+  pickup stylus;
+fi
+draw z1{-ppdir}..z3{down}..z4{left}..z5{up}..z6{pdir};
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,7,8,100);
+endchar; % end "D"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{E}
+% The letter `E'.
+%    \begin{macrocode}
+cmchar "IMIN letter E";
+beginchar("E", sb#+caprat*hstretch*(5/4x_height#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pickup quill;
+n1 := w-pcshiftx;    % actual letter width
+n2 := 4/8n1;   % width of bowl
+x1 = pcshiftx + 5/8n2; top y1=h;
+lft x2 = pcshiftx; y2 = 1/2h;
+x3 = pcshiftx + 1/2n2; bot y3 = 0;
+rt x4 = pcshiftx + n2; y4 = 1/4h;
+z98=(0,3/8h); z99=(w,y98);
+pth1 := z98--z99;
+pth2 := z1{left}..z2{down}..z3{right};
+z7 = pth1 intersectionpoint pth2;
+rt x9 = w-pcshiftx; y9 = 3/4h;
+z8=1/2[z7,z9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z7{pdir}..z1{left}..z2{down}..z3{right}..z4{pdir};
+draw z7{pdir}..z8{right}..z9{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "e"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{F}
+% The letter `F'. 
+%    \begin{macrocode}
+cmchar "IMIN letter F";
+beginchar("F", 2sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*(x_height#), desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; y2=-1/2d;
+lft x20=0; bot y20=-d;
+%% bottom bar
+z4=(rt x1,-thin); rt x6=w-pcshiftx; y6=y4+2thin; z5=1/2[z4,z6];
+%% top bar
+x7= x1; bot y7 = 1/2h;
+rt x9= w-pcshiftx; y9 = 1/2[y7,y1];
+x8 = 2/3[x7,x9]; top y8 = h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad);  
+draw z4{dir(45)}..z5{right}..z6{dir(45)};   % bottom bar
+draw z7..z8..z9;     % top bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "F"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{G}
+% The letter `G'. 
+%    \begin{macrocode}
+cmchar "IMIN letter G";
+beginchar("G", 2sb#+caprat*hstretch*(x_height#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+path pth[];
+pair vec[];
+pcshiftx := sb;
+pickup quill;
+%% top bar
+lft x1=pcshiftx; top y1=h; rt x2=w-pcshiftx; top y2=h;
+x3=1/2[x1,x2]; bot y3=1/8h;
+rt x5 = w-pcshiftx; y5 = -1/2d;
+x6 = x3; bot y6 = -d;
+x7 = 1/2[x1,x3]; y7 = y5;
+x8=x3; y8 = -y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+  draw z1--z2;               % top bar
+  draw pth1; draw pth2;      % curves
+  draw rt z8--z9;            % diagonal
+else:
+  draw z1--z2;
+  draw z2--z3;
+  draw z3{pdir}..z5{down}..z6{left}..z7{up}..z8{pdir};
+  draw_roundserif(1,2,srad);
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "G"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{H}
+% The letter `H'.
+%    \begin{macrocode}
+cmchar "IMIN letter H";
+beginchar("H", 2sb#+caprat*hstretch*(7/8x_height#+jut#), 
+               caprat*asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+numeric n[];
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=0;
+%% bowl
+z3=1/2[z2,z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h/ascratio;
+lft x6=x4; bot y6=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                       % stem
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw z3{pdir}..z4..z5..z6{-pdir};
+
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "H"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{I}
+% The letter `I'.
+%    \begin{macrocode}
+cmchar "IMIN letter I";
+beginchar("I", 2sb#+caprat*hstretch*(thick#+2jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=0;
+%%ductus:=true;
+draw_tstem(1,2,srad);
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+ductus:=false;
+penlabels(1,2,100);
+endchar; % end "i"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{J}
+% The letter `J'. This letter was not in the script, it being a later invention.
+%    \begin{macrocode}
+cmchar "IMIN letter J";
+beginchar("J", sb#+caprat*hstretch*(3/8x_height#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+rt x1 = w-pcshiftx; top y1 = h;
+x2=x1; y2=-1/2d;
+%% bottom hook
+lft x3 = 0; bot y3 = -d;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z2;               % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z3{-pdir};               % hook
+ductus:=false;
+penlabels(1,2,3,100);
+endchar; % end "J"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{K}
+% The letter `K'.
+%    \begin{macrocode}
+cmchar "IMIN letter K";
+beginchar("K", 2sb#+caprat*hstretch*(x_height#+jut#), 
+               caprat*asc_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; y2=-1/2d;
+lft x20=pcshiftx; bot y20=-d;
+%% top arm
+z3=(x1,1/2h/ascratio);
+rt x5=w-pcshiftx; y5=1/2[y3,y4];
+x4=1/2[x3,x5]; top y4=h/ascratio;
+%% lower arm
+x7=x5; bot y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad);
+draw z3..z4{right}..z5;          % upper arm
+draw z3..{right}z7;              % lower arm
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "K"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{L}
+% The letter `L'. 
+%    \begin{macrocode}
+cmchar "IMIN letter L";
+beginchar("L", 2sb#+caprat*hstretch*(3/4x_height#), 
+               caprat*asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x2=pcshiftx; y2=1/5h;
+x1=x2+jut; top y1=h;
+rt x4=w-pcshiftx; y4=1/5h;
+x3=1/2[x2,x4]; bot y3=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{down}..z2..z3{right}..z4;
+draw_flatserif(1,2,srad);
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "L"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{M}
+% The letter `M'. 
+%    \begin{macrocode}
+cmchar "IMIN letter M";
+beginchar("M", 2sb#+caprat*hstretch*(x_height#+2jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pickup quill;
+%% left stem
+lft x1=pcshiftx+jut; top y1=h;
+x2=x1; bot y2=0;
+%% start of bowl
+x13=x1; y13=3/4h;
+%% bottom of right and middle stems
+rt x6 = w -pcshiftx - jut; y6=y2;
+z4 = 1/2[z2,z6];
+%% top of middle and right stems
+x3=x4; y3=y1;
+x5=x6; y5=y13;
+%% top of bowls
+x14=2/3[x13,x3]; top y14 = h;
+x33=x4; y33=y13;
+x34=2/3[x33,x5]; y34 = y14;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                             % left half
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw z13{pdir}..z14{right}..z33{down}--z4;
+draw_roundserif(4,3,srad);
+draw z33{pdir}..z34{right}..z5{down}--z6;
+draw_roundserif(6,5,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,13,14,33,34,100);
+endchar; % end "M"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{N}
+% The letter `N'. This could be like a capital `N' or a lower-case `n'.
+% I have chosen to do the first form.
+%    \begin{macrocode}
+cmchar "IMIN letter N";
+beginchar("N", 2sb#+caprat*hstretch*(3/4x_height#+2jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1=pcshiftx+jut; top y1=h;
+x2=x1; bot y2=0;
+%% right stem
+rt x3=w-pcshiftx-jut; y3=y1;
+z4=(x3,y2);
+%% bar
+z5=3/8[lft z2, lft z1]; z6=2/8[rt z4,rt z3];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                % left stem
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+draw_tstem(3,4,srad);                % right stem
+draw_flatserif(3,4,srad);
+draw_roundserif(4,3,srad);
+draw z5{right}..z6{right};                         % bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "N"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{O}
+% The letter `O'.
+%    \begin{macrocode}
+cmchar "IMIN letter O";
+beginchar("O", 2sb#+caprat*hstretch*(3/4x_height#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+draw z1..z2..z3..z4..cycle;
+z5=(pcshiftx,-o);
+obowl(5, w-2pcshiftx, h+2o);
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+  draw obfirst; draw obsecond; draw obouter; draw obinner;
+else:
+%%  fill obouter; unfill obinner;
+fi
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "O"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{P}
+% The letter `P'.
+%    \begin{macrocode}
+cmchar "IMIN letter P";
+beginchar("P", 2sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=-1/2d;
+lft x20 = pcshiftx; bot y20 = -d;
+%% bowl                        % from "h"
+z3=3/4[(x1,0),z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h;
+lft x6=x4; bot y6=0;
+
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                         % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z20{-pdir};
+draw z3{pdir}..z4..z5..z6{-pdir};             % bowl (from h)
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "P"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{Q}
+% The letter `Q'. 
+%    \begin{macrocode}
+cmchar "IMIN letter Q";
+beginchar("Q", 2sb#+caprat*hstretch*(3/4x_height#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% right stem
+rt x1=w-pcshiftx; top y1=h;
+x2=x1; bot y2=-1/2d;
+x20 = x1-jut; bot y20=-d;
+%% bowl
+z3=1/4[(x1,0),z1];
+lft x5=pcshiftx; y5=y3;
+x4=1/2[x3,x5]; bot y4=0;
+x6=x1-jut; top y6=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);  
+draw z2{down}..z20{-pdir};                            % stem
+draw_flatserif(1,2,srad);
+draw z3{-pdir}..z4{left}..z5{up}..z6{pdir};
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,7,8,100);
+endchar; % end "Q"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{R}
+% The letter `R'.
+%    \begin{macrocode}
+cmchar "IMIN letter R";
+beginchar("R", sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut;
+top y1=h; bot y2=-1/2d;
+lft x20 = pcshiftx; bot y20 = -d;
+%% bowl                        % almost a "p" bowl
+z3=3/4[(x1,0),z1];
+rt x5 = w-pcshiftx; y5=y3;
+x4=1/2[x3,x5]; top y4 = h;
+x100=x1; bot y100 = 0;
+lft x6= rt x100; y6=y100;
+
+rt x26=w-pcshiftx; y26=-1/6d;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);                         % stem
+draw_flatserif(1,2,srad);
+draw z2{down}..z20{-pdir};
+draw z3{pdir}..z4..z5..z6{-pdir};             % bowl (from h)
+draw z6{-ppdir}..z26{pdir};                  % leg
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "R"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{S}
+% The letter `S'. This is a `long' S.
+%    \begin{macrocode}
+cmchar "IMIN letter S";
+beginchar("S", 2sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*asc_height#, desc_depth#);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+%% stem
+lft x1=lft x2=pcshiftx+jut; top y1=h/ascratio; bot y2=-1/2d;
+lft x20=pcshiftx; bot y20=-d;
+%% flick
+x4=x2; y4 = 1/2h/ascratio;
+rt x6=w-pcshiftx; y6 = 2/3h;
+x5 = 2/3[x4,x6]; top y5=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);            % stem
+draw z2{down}..z20{-pdir};
+draw_flatserif(1,2,srad); 
+draw z4{up}...z5{right}...z6; 
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,11,17,20,26,27,28,100);
+endchar; % end "S"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{T}
+% The letter `T'.
+%    \begin{macrocode}
+cmchar "IMIN letter T";
+beginchar("T", 2sb#+caprat*hstretch*(5/4x_height#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% bar
+lft x1 = pcshiftx; top y1=h; rt x2=w-pcshiftx; bot y2=h;
+n1 := w;     % width of bowl
+n2 := h;     % height of bowl
+z3=1/2[z1,z2];
+lft x4 = pcshiftx + 1/8n1; y4 = 1/2h;
+x5=x3; bot y5 = 0;
+rt x6 = pcshiftx + 3/4n1; top y6 = 1/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{pdir}..z3..z2{pdir};           % bar
+draw z3..z4{down}..z5{right}..z6{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,11,12,100);
+endchar; % end "T"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{U}
+% The letter `U'. 
+%    \begin{macrocode}
+cmchar "IMIN letter U";
+beginchar("U", 2sb#+caprat*hstretch*(5/8x_height#+2jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx-jut; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};
+draw_flatserif(1,13,srad);
+draw_tstem(3,4,srad);           % right stem
+draw_flatserif(3,4,srad);
+draw_roundserif(4,3,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,13,14,16,33,100);
+endchar; % end "U"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{V}
+% The letter `V'. 
+%    \begin{macrocode}
+cmchar "IMIN letter V";
+beginchar("V", 2sb#+caprat*hstretch*(3/4x_height#+jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx-jut; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+rt x23=w-pcshiftx; y23=3/4h;
+lft x26=x14; top y26=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}; % left stem
+draw_flatserif(1,13,srad);
+draw z14{pdir}..z23{up}..z26;
+ductus:=false;
+penlabels(1,2,3,4,5,11,13,14,23,26,100);
+endchar; % end "V"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{W}
+% The letter `W'. This is a modern version as the font did not have a W.
+%    \begin{macrocode}
+cmchar "IMIN letter W";
+beginchar("W", 2sb#+caprat*hstretch*(x_height#+2jut#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x5=w-pcshiftx-jut; y5=y1;
+x6=x5; bot y6=0;
+z53=1/4[z6,z5];  % start of bowl
+% middle stem
+z3 = 1/2[z1,z5];
+z33=(x3,y13);
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+% middle of right bowl
+x34=1/3[x3,x5]; y34=y14;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};  % left
+draw_flatserif(1,13,srad); 
+draw z3--z33{down}..z34{right}..z53{pdir};  % middle
+draw_flatserif(3,33,srad);
+draw_tstem(5,6,srad);           % right stem
+draw_flatserif(5,6,srad);
+draw_roundserif(6,5,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,13,14,33,34,53,16,100);
+endchar; % end "W"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{X}
+% The letter `X'.
+%    \begin{macrocode}
+cmchar "IMIN letter X";
+beginchar("X", 2sb#+caprat*hstretch*(x_height#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+n1 := w-2pcshiftx;    % total width
+n2 := thick;          % triangle side
+%% diag top left to bottom right
+lft x1=pcshiftx; bot y1=2/3h;
+x2=pcshiftx+1/7n1; top y2=h;
+x5=pcshiftx+11/14n1; bot y5=-1/4d;
+rt x6=pcshiftx+n1; top y6=1/6h;
+z25 = 1/3[z2,z5];
+%% diag bottom left to top right
+%%x10=x1; bot y10=-d;
+lft x10 = -w + 2pcshiftx; bot y10=-d;
+x50=x5; top y50=h;
+%%rt x60=x5; bot y60=2/3h;
+rt x60 = w -pcshiftx; bot y60=2/3h;
+x40=pcshiftx+8/14n1; y40=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z5{right}..z6;    % top left to bottom right
+draw z10{1/2pdir}..z25..z50{right}..z60;   % bottom left to top right
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,10,40,50,60,100);
+endchar; % end "X"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{Y}
+% The letter `Y'. Modern style.
+%    \begin{macrocode}
+cmchar "IMIN letter Y";
+beginchar("Y", 2sb#+caprat*hstretch*(5/8x_height#+jut#), 
+               caprat*x_height#, desc_depth#);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+%% left stem
+lft x1 = pcshiftx + jut; top y1 = h;
+% start of bowl
+x13=x1; y13=1/3h;
+% right stem
+rt x3=w-pcshiftx; y3=y1;
+x4=x3; bot y4=0;
+z33=1/4[z4,z3];  % start of bowl
+% middle of bowl
+x14=1/3[x1,x3]; bot y14=0;
+z50=(x3,-1/2d);
+x60=x14; bot y60=-d;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1--z13{down}..z14{right}..z33{pdir};
+draw_flatserif(1,13,srad);
+draw_tstem(3,50,srad);           % right stem
+draw z50{down}..z60{-pdir};
+draw_flatserif(3,4,srad);
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "Y"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{Z}
+% The letter `Z'.
+%    \begin{macrocode}
+cmchar "IMIN letter Z";
+beginchar("Z", 2sb#+caprat*hstretch*(x_height#), 
+               caprat*x_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+pcshiftx := sb;
+pickup quill;
+%% top bar
+n10 := w-2pcshiftx;   % letter width
+lft x1=pcshiftx; top y1=h;
+rt x2= w-pcshiftx; bot y2=y1;
+%% diagonal
+x3=x1; bot y3=0;
+%% bowl
+x4=3/4[x1,x2]; top y4 = 1/2h;
+x6=x4; bot y6 = 0;
+rt x5 = w-pcshiftx; y5 = 1/2[y4,y6];
+x7=1/2[x3,x5]; y7 = 1/2[y6,y5];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1{right}..z2{right};              % top bar
+draw_roundserif(1,2,srad);
+draw z2--z3;              % diagonal
+draw z3..z4{right}..z5{down}..z6{left}..z7;
+ductus:=false;
+penlabels(1,2,3,4,5,6,10o,10i,20o,20i,100);
+endchar; % end "Z"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+%    The end of this file
+%    \begin{macrocode} 
+%</maj>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{The punctuation file}
+%
+% The main punctuation marks are defined in this file.
+%
+%    \begin{macrocode}
+%<*punct>
+% IMINPUNCT.MF This file contains punctuation marks
+
+%    \end{macrocode}
+%
+%
+% \begin{routine}{!}
+%    The `!' character, which had not been invented at this time.
+%    \begin{macrocode}
+
+cmchar "Exclamation mark";
+beginchar("!", 2sb#+hstretch*(thick#+trijut#),
+               asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+pickup quill;
+x1=w/2; top y1 = h;
+z3=(x1, 1/2dot_size);
+z2=(x1, y3+3/2dot_size);
+draw z1--z2;
+draw_pdot(3,dot_size);
+penlabels(1,2,3);
+
+endchar;  % end of "!"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{?}
+%    The `?' character, which had not been invented at this time.
+%    \begin{macrocode}
+
+cmchar "Question mark";
+beginchar("?", 2sb#+hstretch*(3/4x_height#),
+               asc_height#, 0);
+adjust_fit(0,0);
+pcshiftx := sb;
+numeric n[];
+path pth[];
+pickup quill;
+n1 := w-2pcshiftx;     % actual character width
+n2 := 1/3h;            % height of top bowl
+n3 := n2;              % height of bottom bowl
+z5=(1/2w,1/2dot_size);
+x4 = x5; y4=y5+3/2dot_size;
+lft x1 = pcshiftx; y1 = 3/4h;
+x2 = 1/2w; top y2 = h;
+rt x3 = w-pcshiftx; y3 = 2/3h;
+
+%%ductus:= true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z3{down}..z4{down};
+draw_pdot(5, dot_size);
+penlabels(1,2,3,4,5);
+endchar;  % end of "?"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{,}
+%    The `,' character.
+%    \begin{macrocode}
+
+cmchar "Comma";
+beginchar(",",2sb#+hstretch*(comma_width#+dot_size#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=1/2dot_size;
+draw_pcomma(1,dot_size,comma_width);
+penlabels(1); 
+endchar; % end of ","
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{.}
+%    The `.' character.
+%    \begin{macrocode}
+
+cmchar "Period";
+beginchar(".",2sb#+hstretch*(dot_size#),x_height#,0);
+pcshiftx:=sb;
+z1=(w/2, 1/2dot_size);
+draw_pdot(1,dot_size);
+penlabels(1); 
+endchar; % end of "."
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{:}
+%    The `:' character.
+%    \begin{macrocode}
+
+cmchar "Colon";
+beginchar(":",2sb#+hstretch*(dot_size#),x_height#,0);
+pcshiftx:=sb;
+x1=x2=w/2; y1=2/3h; y2=1/3h;
+draw_pdot(1,dot_size);
+draw_pdot(2,dot_size);
+penlabels(1,2); 
+endchar; % end ":"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{;}
+%    The `;' character.
+%    \begin{macrocode}
+
+cmchar "Semicolon";
+beginchar(";",2sb#+hstretch*(comma_width#+dot_size#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=x2=w-pcshiftx-(0.5hstretch*dot_size); y1=2/3h; y2=1/3h;
+draw_pdot(1,dot_size);
+draw_pcomma(2,dot_size,comma_width);
+penlabels(1,2); 
+endchar; % end of ";"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{'}
+%    The `'' character.
+%    \begin{macrocode}
+
+cmchar "Apostrophe";
+beginchar("'",2sb#+hstretch*(comma_width#+dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=h;
+draw_pcomma(1,dot_size,comma_width);
+penlabels(1); 
+endchar;  % end of "'"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{`}
+%    The ``' character.
+%    \begin{macrocode}
+
+cmchar "Reverse apostrophe";
+beginchar("`",2sb#+hstretch*(comma_width#+dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=pcshiftx+(0.5hstretch*dot_size); y1=h;
+draw_plq(1,dot_size,comma_width);
+penlabels(1); 
+endchar;  % end of "`"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% The end of this file.
+%    \begin{macrocode}
+%</punct>
+%    \end{macrocode}
+%
+%
+% \subsection{The ligatures and dashes file}
+%
+%    The ligatured letters, punctuation marks and dashes are defined in this file.
+%    \begin{macrocode}
+%<*lig>
+% IMINLIG.MF Uncial ligatured letters, punctation and dashes
+
+%    \end{macrocode}
+%  First the ligtables.
+%    \begin{macrocode}
+
+ligtable "`": "`"=:oct"134";
+ligtable "'": "'"=:oct"042"; %% , "?" kern 2u#, "!" kern 2u#;
+
+ligtable "-": "-"=:oct"173";
+ligtable oct"173": "-"=:oct"174";
+
+%%%%ligtable "f": "i"=:oct"014";
+
+%    \end{macrocode}
+%
+% \begin{routine}{''}
+%   The `''' ligature.
+%    \begin{macrocode}
+
+cmchar "Closing quotes";
+beginchar(oct"042",2sb#+hstretch*(comma_width#+3dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=y2=h;
+x2=x1-(2hstretch*dot_size);
+draw_pcomma(1,dot_size,comma_width);  % right
+draw_pcomma(2,dot_size,comma_width);  % left
+penlabels(1,2); 
+endchar; % end of "''"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{``}
+%   The ```' ligature.
+%    \begin{macrocode}
+
+cmchar "Opening quotes";
+beginchar(oct"134",2sb#+hstretch*(comma_width#+3dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb;
+x1=pcshiftx+(0.5hstretch*dot_size); y1=y2=h;
+x2=x1+(2hstretch*dot_size);
+draw_plq(1,dot_size,comma_width); % left
+draw_plq(2,dot_size,comma_width); % right
+penlabels(1,2); 
+endchar; % end of "``"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{-}
+%   The `-' (hyphen) character.
+%    \begin{macrocode}
+
+cmchar "Hyphen";
+beginchar("-",sb#+hstretch*(0.8x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb/2;
+numeric alpha; alpha:=w/8;
+%%pickup quill;
+%%lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+%%x11=lft x1+alpha/2; y11=top y1-0.5thin;
+%%x12=rt x2; y12=bot y1+0.5thin;
+%%draw_triangle(11,alpha);
+%%draw_rutriangle(12,alpha);
+pickup thickstylus;
+lft x21=pcshiftx; rt x22=w-pcshiftx; y21=y22=1/2h;
+draw z21--z22;
+draw_roundserif(21,22,srad); draw_flatserif(22,21,srad);
+penlabels(1,2); 
+endchar; % end of "-"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{--}
+%   The `--' (en-dash) ligature. 
+%    \begin{macrocode}
+
+cmchar "En dash";
+beginchar(oct"173",sb#+hstretch*(x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb/2;
+numeric alpha; alpha:=w/8;
+pickup quill;
+%%lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+%%x11=lft x1+alpha/2; y11=top y1-0.5thin;
+%%x12=rt x2; y12=bot y1+0.5thin;
+%%draw_triangle(11,alpha);
+%%draw_rutriangle(12,alpha);
+pickup thickstylus;
+lft x21=pcshiftx; rt x22=w-pcshiftx; y21=y22=1/2h;
+draw z21--z22;
+draw_roundserif(21,22,srad); draw_flatserif(22,21,srad);
+penlabels(1,2); 
+endchar; % end of "--"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{---}
+%   The `---' (em dash) ligature. The em dash is twice the width of the en dash.
+%    \begin{macrocode}
+
+cmchar "Em dash";
+beginchar(oct"174",sb#+hstretch*(2x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=sb/2;
+numeric alpha; alpha:=w/8;
+pickup quill;
+%%lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+%%x11=lft x1+alpha/2; y11=top y1-0.5thin;
+%%x12=rt x2; y12=bot y1+0.5thin;
+%%draw_triangle(11,alpha);
+%%draw_rutriangle(12,alpha);
+pickup thickstylus;
+lft x21=pcshiftx; rt x22=w-pcshiftx; y21=y22=1/2h;
+draw z21--z22;
+draw_roundserif(21,22,srad); draw_flatserif(22,21,srad);
+penlabels(1,2); 
+endchar; % end of "---"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{&}
+% The ampersand (which is really an `et' ligature).
+%    \begin{macrocode}
+
+cmchar "IMIN ampersand";
+beginchar("&", 2sb#+hstretch*(5/4x_height#), asc_height#, 0);
+adjust_fit(0,0);
+numeric n[];
+path pth[];
+pcshiftx:=sb;
+pickup quill;
+%% E part
+n1 := w-pcshiftx;    % actual letter width
+n2 := 4/8n1;         % width of bowl
+x1 = pcshiftx + 5/8n2; top y1=h;
+lft x2 = pcshiftx; y2 = 1/2h;
+x3 = pcshiftx + 1/2n2; bot y3 = 0;
+rt x4 = pcshiftx + n2; y4 = 1/4h;
+z98=(0,3/8h); z99=(w,y98);
+pth1 := z98--z99;
+pth2 := z1{left}..z2{down}..z3{right};
+z7 = pth1 intersectionpoint pth2;
+rt x9 = w-pcshiftx; y9 = 3/4h;
+z8=6/8[z7,z9];
+
+%% T part
+x18=x8; bot y18=0;
+x19=5/8[x18,x9];
+y19=1/8h;
+
+
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+%% E part
+draw z7{pdir}..z1{left}..z2{down}..z3{right}..z4{up}..z8{right};
+draw z7{pdir}..z8{right}..z9{pdir};
+%% T bowl
+draw z8{left}..z4{down}..z18{right}..z19{pdir};
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,16,17,18,19,31,32,33);
+endchar; % end of "&"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% The end of this file.
+%    \begin{macrocode}
+%</lig>
+%    \end{macrocode}
+%
+% \subsection{The digits file}
+%
+%    These are arabic digits in the style of the book-hand. They are a
+% modern invention.
+%
+%    \begin{macrocode}
+%<*dig>
+% IMINDIG.MF  Program file for Insular Minuscule digits
+%
+
+%    \end{macrocode}
+% 
+% 
+%
+% \begin{routine}{1}
+% The digit `1'.
+%    \begin{macrocode}
+cmchar "Uncial digit 1";
+beginchar("1", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+y100 = h/2; x100 = pcshiftx+y100;  % square center
+pickup quill;
+x1=x2=w/2;
+y1=h; bot y2=0;
+%%ductus:=true;
+draw_tstem(1,2,srad);
+draw_flatserif(1,2,srad);
+draw_roundserif(2,1,srad);
+ductus:=false;
+proofpcbb(100, y100, y100);
+penlabels(1,2,100);
+endchar; % end "1"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{2}
+% The digit `2'. 
+%    \begin{macrocode}
+cmchar "Uncial digit 2";
+beginchar("2", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem
+lft x1=pcshiftx+o; top y1=h-2thin;
+x2=1/2w; top y2= h+o;
+rt x3=w-pcshiftx-o; y3=3/4h;
+% foot
+lft x5=pcshiftx; bot y5=0;
+rt x6=w-pcshiftx; y6=y5;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_wave(5,6,thin);                          % foot
+draw z1..z2{right}..z3{down}..{-pdir}z5wl;    % curve
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "2"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{3}
+% The digit `3'. 
+%    \begin{macrocode}
+cmchar "Uncial digit 3";
+beginchar("3", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% x values
+lft x3=pcshiftx; x10=x3;
+rt x5=w-pcshiftx; x8=x5-3thin;
+x4=0.5[x3,x5];
+x9=0.5[x10,x8];
+%%lft x6=pcshiftx+3thin; x7=x6;
+x6=1/2[x3,x9]; x7=x6;
+% y values
+bot y3=thin; top y10=h-2thin;
+y6=0.5[y3,y10]; y7=y6;
+bot y4=-thin; top y9=h+thin;
+y5=0.5[y3,y6];
+y8=11/12[y7,y10];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+%%draw z3..z4{right}..z5{up}...{-pdir}z6;                 % bottom bowl
+%%draw z7{pdir}..z8{up}..z9{left}..z10;                   % top bowl
+draw z3..z4{right}..z5{up}...{left}z6;                 % bottom bowl
+draw z7{right}..z8{up}..z9{left}..z10;                   % top bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "3"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{4}
+% The digit `4'.
+%    \begin{macrocode}
+cmchar "Uncial digit 4";
+beginchar("4", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the stem
+x1=x2=w-pcshiftx-jut;
+y1=h; bot y2=0;
+% the crossbar
+lft x3=pcshiftx; y3=0.33h;
+rt x4=w-pcshiftx; y4=y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_tstem(1,2,srad);              % main stem
+draw_wave(3,4,thin);               % crossbar
+draw z3wl--z1;                     % diagonal
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "4"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+% \begin{routine}{5}
+% The digit `5'.
+%    \begin{macrocode}
+cmchar "Uncial digit 5";
+beginchar("5", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% for the top
+rt x1=w-pcshiftx; top y1=h;
+lft x2=pcshiftx; y2=y1;
+% the S curve
+x3=x2; y3=0.5h+thin;
+x4=0.5[x1,x3]; y4=0.5[y3,y5];
+rt x5=w-pcshiftx; y5=0.3h;
+x6=w/2; bot y6=0;
+lft x7=pcshiftx; bot y7=2thin;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_wave(2,1,thin);                      % top squiggle
+draw z3{pdir}..z5{down}..z6{left}..z7;    % curve
+draw z2wl--z3;                            % vertical
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "5"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{6}
+% The digit `6'.
+%    \begin{macrocode}
+cmchar "Uncial digit 6";
+beginchar("6", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+rt x1=w-pcshiftx; top y1=h-2thin;
+x2=1/2w; top y2= h;
+lft x3=pcshiftx; y3=1/2h;
+x4=x2; bot y4=0;
+rt x5=w-pcshiftx; y5=1/4h;
+lft x6=rt x3; bot y6=y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{left}..z3{down}..z4{right}..z5{up}..{-pdir}z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "6"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{7}
+% The digit `7'.
+%    \begin{macrocode}
+cmchar "Uncial digit 7";
+beginchar("7", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% top bar
+lft x1=pcshiftx;
+rt x2=w-pcshiftx;
+top y1=top y2=h;
+% bowed leg
+x4=w/2; bot y4=0;
+x3=0.5[x2,x4]-3thin; y3=0.5[y2,y4];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_wave(1,2,thin);         % top bar
+draw z1wr..z3..z4;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "7"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{8}
+% The digit `8'.
+%    \begin{macrocode}
+cmchar "Uncial digit 8";
+beginchar("8", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+numeric alpha; alpha:=1;
+pickup quill;
+lft x1=alpha*pcshiftx+o; rt x3=w-alpha*pcshiftx-o; y1=y3=3/4h;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+x5=x2; y5=h/2+2o;
+lft x11=pcshiftx; rt x13=w-pcshiftx; y11=y13=1/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z5..z11..z4..z13..z5..cycle;
+ductus:=false;
+penlabels(1,2,3,4,5,11,13,100);
+endchar; % end "8"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{9}
+% The digit `9'.
+%    \begin{macrocode}
+cmchar "Uncial digit 9";
+beginchar("9", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; bot y1=2thin;
+x2=1/2w; bot y2= 0;
+rt x3=w-pcshiftx; y3=1/2h;
+x4=x2; top y4=h;
+lft x5=pcshiftx; y5=3/4h;
+rt x6=lft x3; top y6=y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z3{up}..z4{left}..z5{down}..{pdir}z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "9"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{0}
+% The digit `0'.
+%    \begin{macrocode}
+cmchar "Uncial digit 0";
+beginchar("0", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+y100 = h/2; x100 = pcshiftx+y100;  % square center
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;
+ductus:=false;
+proofpcbb(100, y100, y100);
+penlabels(1,2,3,4,100);
+endchar; % end "0"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% The end of this file.
+%    \begin{macrocode}
+%</dig>
+%    \end{macrocode}
+%
+%
+% \section{The font definition files} \label{sec:fd}
+%
+%    The font comes in normal and bold weights only.
+%
+%    \begin{macrocode}
+%<*fdot1>
+\DeclareFontFamily{OT1}{imin}{}
+  \DeclareFontShape{OT1}{imin}{m}{n}{ <-8.5> imin7 <8.5-15> imin10 <15-> imin17 }{} 
+  \DeclareFontShape{OT1}{imin}{m}{sl}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{OT1}{imin}{m}{it}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{OT1}{imin}{m}{sc}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{OT1}{imin}{m}{u}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{OT1}{imin}{bx}{n}{ <-8.5> iminb7 <8.5-15> iminb10 <15-> iminb17 }{}
+  \DeclareFontShape{OT1}{imin}{bx}{it}{ <-> sub * imin/bx/n }{}
+  \DeclareFontShape{OT1}{imin}{bx}{sl}{ <-> sub * imin/bx/n }{}
+  \DeclareFontShape{OT1}{imin}{b}{n}{ <-> sub * imin/bx/n }{}
+%</fdot1>
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%<*fdt1>
+\DeclareFontFamily{T1}{imin}{}
+  \DeclareFontShape{T1}{imin}{m}{n}{ <-8.5> imin7 <8.5-15> imin10 <15-> imin17 }{} 
+  \DeclareFontShape{T1}{imin}{m}{sl}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{T1}{imin}{m}{it}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{T1}{imin}{m}{sc}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{T1}{imin}{m}{u}{ <-> sub * imin/m/n }{}
+  \DeclareFontShape{T1}{imin}{bx}{n}{ <-8.5> iminb7 <8.5-15> iminb10 <15-> iminb17 }{}
+  \DeclareFontShape{T1}{imin}{bx}{it}{ <-> sub * imin/bx/n }{}
+  \DeclareFontShape{T1}{imin}{bx}{sl}{ <-> sub * imin/bx/n }{}
+  \DeclareFontShape{T1}{imin}{b}{n}{ <-> sub * imin/bx/n }{}
+%</fdt1>
+%    \end{macrocode}
+%
+% \section{The package code} \label{sec:code}
+%
+% \subsection{The \Lpack{inslrmin} package}
+%
+%    The \Lpack{inslrmin} package is for typesetting short pieces of text
+% in the \thisfont{} fonts.
+%
+%    Announce the name and version of the package, which requires
+% \LaTeXe{}.
+%    \begin{macrocode}
+%<*usc>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{inslrmin}[2002/12/30 v1.0 package for Insular Minuscule fonts]
+%    \end{macrocode}
+%
+% \begin{macro}{\Tienc}
+%  A  macro for testing the value of |\encodingdefault|.
+%    \begin{macrocode}
+\providecommand{\Tienc}{T1}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\iminfamily}
+%    Selects the \thisfont{} font family in the OT1 or T1 encoding.
+%    \begin{macrocode}
+\ifx\Tienc\encodingdefault
+  \newcommand{\iminfamily}{\usefont{T1}{imin}{m}{n}}
+\else
+  \newcommand{\iminfamily}{\usefont{OT1}{imin}{m}{n}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textimin}
+%    Text command for the \thisfont{} font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textimin}{\iminfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+%    The end of this package.
+%    \begin{macrocode}
+%</usc>
+%    \end{macrocode}
+%
+% \subsection{The \Lpack{allimin} package}
+%
+%    The \Lpack{allimin} package is intended for use when the entire document
+% will be typeset in the book-hand. This is a minimal package. Because the
+% book-hand should not contain arabic digits a fuller package would redefine
+% anything numbered in \LaTeX{} to use roman instead of arabic numbering.
+% Also, because of the large |\baselineskip| many other aspects of \LaTeX{}
+% to do with vertical positioning should also be redefined. 
+%
+%
+%    Announce the name and version of the package, which requires
+% \LaTeXe{}. It also uses the \Lpack{inslrmin} package.
+%    \begin{macrocode}
+%<*uscall>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{allimin}[2002/12/30 v1.0 package for all Insular Minuscule fonts]
+\RequirePackage{inslrmin}
+%    \end{macrocode}
+%
+% \begin{macro}{\Tienc}
+%  A  macro for testing the value of |\encodingdefault|.
+%    \begin{macrocode}
+\providecommand{\Tienc}{T1}
+%    \end{macrocode}
+% \end{macro}
+%
+%  Redefine the default fonts to be \thisfont, which has only one family 
+% member.
+% \begin{macro}{\rmdefault}
+% \begin{macro}{\sfdefault}
+% \begin{macro}{\ttdefault}
+%    \begin{macrocode}
+\renewcommand{\rmdefault}{imin}
+\renewcommand{\sfdefault}{imin}
+\renewcommand{\ttdefault}{imin}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% The `leading' in the book-hands is a function of the |x-height|, which is 
+% normally much
+% greater than for the CMR fonts. I have borrowed code from Frank Jensen's
+% \Lpack{beton} package~\cite{BETON} to do this. The |x-height| (in points) 
+% for the CMR
+% fonts is given in Table~\ref{tab:cmrx}. Note that the CMR design sizes are
+% 5--10, 12, and 17.28 points. The other values given are scaled from these 
+% figures.
+%
+% \begin{table}
+% \centering
+% \caption{The x heights of the CMR and \thisfont{} fonts} \label{tab:cmrx}
+% \begin{tabular}{ccc} \hline
+% Design & CMR & \thisfont \\
+% Size & X Height & X Height \\ \hline
+% 5 & 2.14 & 3.00 \\     ^^A CMR skip = 6pt = 2.8 times
+% 6 & 2.58 & 3.61 \\     ^^A CMR skip = 7pt = 2.7 times
+% 7 & 3.00 & 4.20 \\     ^^A CMR skip = 8pt = 2.7 times
+% 8 & 3.44 & 4.81 \\     ^^A CMR skip = 9.5pt = 2.8 times
+% 9 & 3.86 & 5.40 \\     ^^A CMR skip = 11pt = 2.8 times
+% 10 & 4.31 & 6.03 \\    ^^A CMR skip = 12pt = 2.8 times
+% 11 & 4.74 & 6.64 \\    ^^A CMR skip = 13.6pt = 2.8 times
+% 12 & 5.17 & 7.24 \\    ^^A CMR skip = 14.5pt = 2.8 times
+% 14 & 6.03 & 8.44 \\    ^^A CMR skip = 18pt = 3.0 times
+% 17 & 7.44 & 10.41 \\    ^^A CMR skip = 22pt = 3.0 times
+% 20 & 8.75 & 12.25  \\   ^^A CMR skip = 25pt = 2.9 times
+% 25 & 10.94 & 15.32 \\  ^^A CMR skip = 30pt = 2.7 times
+% \hline
+% \end{tabular}
+% \end{table}
+%
+% \begin{macro}{\imin@baselineskip@table}
+% A table of the normal font sizes and the corresponding baselineskip.
+% The distance between baselines for \thisfont{} is over twice 
+% the |x-height|.  ^^A actually 2.5 times to nearest half point
+% 
+%    \begin{macrocode}
+\newcommand{\imin@baselineskip@table}{%
+  <\@vpt>7.5%
+  <\@vipt>9.0%
+  <\@viipt>10.5%
+  <\@viiipt>12.0%
+  <\@ixpt>13.5%
+  <\@xpt>15.0%
+  <\@xipt>16.5%
+  <\@xiipt>18.0%
+  <\@xivpt>21.0%
+  <\@xviipt>26.0%
+  <\@xxpt>30.5%
+  <\@xxvpt>38.5}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\imin@new@setfontsize}
+%  This is a macro that replaces the |\@setfontsize| macro which is called by
+% the font size changing commands.
+%    \begin{macrocode}
+\newcommand{\imin@new@setfontsize}[3]{%
+  \edef\@tempa{\def\noexpand\@tempb####1<#2}%
+  \@tempa>##2<##3\@nil{\def\imin@baselineskip@value{##2}}%
+  \edef\@tempa{\noexpand\@tempb\imin@baselineskip@table<#2}%
+  \@tempa><\@nil
+  \ifx\imin@baselineskip@value\@empty
+    \def\imin@baselineskip@value{#3}%
+  \fi
+  \imin@old@setfontsize{#1}{#2}\imin@baselineskip@value}
+%    \end{macrocode}
+% \end{macro}
+%
+% We had better give an author a means of using The Computer Modern fonts
+% if necessary.
+%
+% \begin{macro}{\cmrfamily}
+% \begin{macro}{\cmssfamily}
+% \begin{macro}{\cmttfamily}
+%    These macros select the Computer Modern Roman, Sans, and Typewriter 
+% font families in either the T1 or OT1 encodings.
+%    \begin{macrocode}
+\ifx\Tienc\encodingdefault
+  \providecommand{\cmrfamily}{\usefont{T1}{cmr}{m}{n}}
+  \providecommand{\cmssfamily}{\usefont{T1}{cmss}{m}{n}}
+  \providecommand{\cmttfamily}{\usefont{T1}{cmtt}{m}{n}}
+\else
+  \providecommand{\cmrfamily}{\usefont{OT1}{cmr}{m}{n}}
+  \providecommand{\cmssfamily}{\usefont{OT1}{cmss}{m}{n}}
+  \providecommand{\cmttfamily}{\usefont{OT1}{cmtt}{m}{n}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\textcmr}
+%    Text command for the Computer Modern Roman font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmr}{\cmrfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textcmss}
+%    Text command for the Computer Modern Sans font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmss}{\cmssfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textcmtt}
+%    Text command for the Computer Modern Typewriter font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmtt}{\cmttfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% At the start of the document, change the |\@setfontsize| macro and call
+% the normal font to implement the change.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \let\imin@old@setfontsize=\@setfontsize
+  \let\@setfontsize=\imin@new@setfontsize}
+\AtBeginDocument{\normalsize}
+%    \end{macrocode}
+%
+%
+%    The end of this package.
+%    \begin{macrocode}
+%</uscall>
+%    \end{macrocode}
+%
+%
+%
+%
+%
+% \Finale
+% \PrintIndex
+%
+\endinput
+
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+
+

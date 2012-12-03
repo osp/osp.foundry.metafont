@@ -1,0 +1,99 @@
+\starttext
+\startuseMPgraphic{name}
+  fill fullcircle scaled 5cm withcolor red;
+
+%beginfig(60)
+    %u:=.5cm;
+    %pair A,B,C,D;
+    %A:=(0,0);   B:=(u,5u);
+    %C:=(4u,3u); D:=(3u,0);
+    %draw A.. controls B and C .. D
+         %withpen pencircle scaled 2pt;
+    %draw B--C dashed evenly;
+    %drawarrow A--B;
+    %drawarrow D--C;
+  
+%endfig;
+
+%beginfig(150)
+  %for i=0 step 1 until 360:
+    %pair P;
+    %P = 2cm* (sind(2*i), cosd(3*i));
+    %fill fullcircle scaled 4mm shifted P withcolor white;
+    %draw fullcircle scaled 4mm shifted P;
+  %endfor;
+%endfig;
+
+
+%u#:=4/9pt#;
+%define_pixels(u);
+%beginchar(66,13u#,16u#,5u#);"Letter beta";
+%x1=2u; x2=x3=3u;
+%bot y1=-5u; y2=8u; y3=14u;
+%x4=6.5u; top y4=h;
+%z5=(10u,12u);
+%z6=(7.5u,7.5u); z8=z6;
+%z7=(4u,7.5u);
+%z9=(11.5u,2u);
+%z0=(5u,u);
+%penpos1(2u,20);
+%penpos2(.5u,0);
+%penpos3(u,-45);
+%penpos4(.8u,-90);
+%penpos5(1.5u,-180);
+%penpos6(.4u,150);
+%penpos7(.4u,0);
+%penpos8(.4u,210);
+%penpos9(1.5u,-180);
+%penpos0(.3u,20);
+%pickup pencircle;
+%penstroke z1e..z2e..z3e..z4e..z5e..z6e..{up}z7e..z8e..z9e..{up}z0e;
+%labels(range 1 thru 9);
+%endchar;
+%end;
+\stopuseMPgraphic
+\startuseMPgraphic{name2}
+beginfig(5)
+    Phi=(1+sqrt5)/2;
+    w=100;
+    h=Phi*w;
+    y1=y6=0;
+    y3=y4=h;
+    y2=y5;
+    x1=x2=x3=0;
+    x4=Phi*x5=x6=w;
+    (y3-y2)=Phi*(y2-y1);
+
+    pickup pensquare xscaled 30 yscaled 4 rotated 30; 
+    draw z1..z6..z2 withcolor .8white;
+    draw z3..z4 withcolor .6white;
+    draw z2..z3 withcolor .4white;
+    %labels(range 1 thru 6);
+endfig;
+%labels(range 1 thru 6);
+%for i=1 upto 5:
+    %draw z[i]
+    %label.top(decimal(i), z[i]);
+%endfor
+%showit; shipit; end
+
+
+
+%beginfig(9)
+    %pair A, B, C;
+    %A:=(0,0); B:=(1cm,0); C:=(0,1cm);
+    %draw A--B--C--cycle;
+    %draw A--B withpen pencircle scaled 2bp;
+  
+%endfig;
+
+
+draw (0, 0)--(350, 275);
+\stopuseMPgraphic
+
+\useMPgraphic{name}
+\useMPgraphic{name2}
+
+
+
+\stoptext

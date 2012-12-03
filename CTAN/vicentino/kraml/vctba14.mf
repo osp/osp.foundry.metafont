@@ -1,0 +1,18 @@
+% VCT - Vicentino Twist (twisted cursive)
+% w. kraml, 1991
+
+mode_setup;
+
+boolean modern, twisted, bold;
+  modern := true;
+  twisted := true;
+  bold := true;
+
+% metrics
+size#:=14pt#;               % design size
+
+input vcaltdri;
+
+% finis amen
+end;
+

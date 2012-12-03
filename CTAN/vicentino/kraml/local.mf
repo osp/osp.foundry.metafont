@@ -1,0 +1,160 @@
+%
+% local.mf
+%
+
+%
+% Define modes
+%
+mode_def hplaser =     % HP LaserJet+
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=300;
+ blacker:=0;           % The LaserJet is black enough
+ fillin:=.2;           % and it tends to fill in diagonals
+ o_correction:=.6;     % 
+ enddef;
+
+mode_def kyocera =     % Kyocera F-1010
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=300;
+ blacker:=0;           % The Kyocera is black enough
+ fillin:=.2;           % and it tends to fill in diagonals
+ o_correction:=.6;     %
+ enddef;
+
+mode_def epsonfx =     % Epson FX-80
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=240;
+ blacker:=0;           % don't make the pens any blacker
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.2;     % but suppress most overshoots
+ aspect_ratio:=9/10;   % 216 dots/inch vertical
+ enddef;
+
+mode_def epsonmx =     % Epson MX-80
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=120;
+ blacker:=0;           % don't make the pens any blacker
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.2;     % but suppress most overshoots
+ aspect_ratio:=9/5;    % 216 dots/inch vertical
+ enddef;
+
+mode_def lqhires =     % NEC-P6 high resolution (360x360)
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=360;
+ blacker:=0;           % don't make the pens any blacker
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.4;     % but suppress most overshoots
+ enddef;
+
+mode_def lqmedres =    % LQ-1500, NEC-P6 medium resolution (360x180)
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=360;
+ blacker:=0;           % 0.3 avoids `holes'
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.1;     % but suppress most overshoots
+ aspect_ratio:=1/2;    % 180 dots/inch vertical
+ enddef;
+
+mode_def lqmedresl =   % LQ-1500, NEC-P6 medium resolution (180x360)
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=180;
+ blacker:=0;           % 0.3 avoids `holes'
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.1;     % but suppress most overshoots
+ aspect_ratio:=2;      % 360 dots/inch vertical
+ enddef;
+
+mode_def lqlores =     % LQ-1500, NEC-P6 low resolution (180x180)
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=180;
+ blacker:=0;           % don't make the pens any blacker
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.1;     % but suppress most overshoots
+ enddef;
+
+mode_def itoh =        % C.ITOH 8510A (160x144)
+ proofing:=0;          % no, we're not making proofs
+ fontmaking:=1;        % yes, we are making a font
+ tracingtitles:=0;     % no, don't show titles in the log
+ pixels_per_inch:=160;
+ blacker:=0;           % don't make the pens any blacker
+ fillin:=0;            % and don't compensate for fillin
+ o_correction:=.1;     % but suppress most overshoots
+ aspect_ratio:=9/10;   % 144 dots/inch vertical
+ enddef;
+
+%
+% Select default mode
+%
+localfont:=hplaser;
+
+
+%
+% Here are macros for Xerox-world font info:
+%
+
+def font_family expr s =  % string s names the font family, e.g., "CMR"
+ headerbyte 49: BCPL_string(s,20);
+ special "identifier "&s enddef;
+def coding_scheme expr s = % string s names the scheme, e.g. "TEX TEXT"
+ headerbyte 9: BCPL_string(s,40);
+ special "codingscheme "&s enddef;
+def font_face_byte expr x = % integer x gives the family member number,
+ headerbyte 72: x;          % which should be between 0 and 255
+ special "fontfacebyte"; numspecial x enddef;
+
+def BCPL_string(expr s,n)= % string s becomes an n-byte BCPL string
+ for l:=if length(s)>=n: n-1 else: length(s) fi: l
+  for k:=1 upto l: , substring (k-1,k) of s endfor
+  for k:=l+2 upto n: , 0 endfor endfor enddef;
+
+Xerox_world:=1;    % users can say `if known Xerox_world:...fi'
+
+inner end;
+def bye=
+ if fontmaking>0: font_family font_identifier_;
+  coding_scheme font_coding_scheme_;
+  font_face_byte max(0,254-round 2designsize); fi
+ tracingstats:=1;  % at least for now we want this
+ end
+ enddef;
+
+outer bye,end;
+
+
+%
+% Patch plain base (kill bugs)
+%
+def drawdot expr z = if unknown currentpen_path: def_pen_path_ fi
+ addto_currentpicture contour
+  currentpen_path shifted (z.t_) withpen penspeck enddef;
+
+%
+% This has been fixed in plain 1.7
+%
+%vardef cutoff(expr z,theta) =
+% interim autorounding := 0; interim smoothing := 0;
+% addto pic_ doublepath z.t_ withpen currentpen;
+% addto pic_ contour
+%  (cut_ scaled (1+max(pen_lft,pen_rt,pen_top/aspect_ratio,pen_bot/aspect_ratio))
+%   rotated theta shifted z.t_);
+% cull pic_ keeping (2,2) withweight -default_wt_;
+% addto currentpicture also pic_;
+% pic_:=nullpicture enddef;

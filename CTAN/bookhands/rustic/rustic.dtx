@@ -1,0 +1,3778 @@
+% \iffalse meta-comment
+%
+% rustic.dtx
+% Copyright 1999 Peter R. Wilson
+%
+% This program is provided under the terms of the
+% LaTeX Project Public License distributed from CTAN
+% archives in directory macros/latex/base/lppl.txt.
+%
+% Author: Peter Wilson (CUA) (now at: peter.r.wilson@boeing.com)
+% 
+% If you do not have the docmfp package (available from CTAN in
+% tex-archive/macros/latex/contrib/supported), comment out the
+% \usepackage{docmfp} line below and uncomment the line following it. 
+% 
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{docmfp}
+%%%%%% \providecommand{\DescribeVariable}[1]{} \newenvironment{routine}[1]{}{}
+\EnableCrossrefs
+\CodelineIndex
+\setcounter{StandardModuleDepth}{1}
+\begin{document}
+  \DocInput{rustic.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+% \CheckSum{137}
+%
+% \DoNotIndex{\',\.,\@M,\@@input,\@addtoreset,\@arabic,\@badmath}
+% \DoNotIndex{\@centercr,\@cite}
+% \DoNotIndex{\@dotsep,\@empty,\@float,\@gobble,\@gobbletwo,\@ignoretrue}
+% \DoNotIndex{\@input,\@ixpt,\@m}
+% \DoNotIndex{\@minus,\@mkboth,\@ne,\@nil,\@nomath,\@plus,\@set@topoint}
+% \DoNotIndex{\@tempboxa,\@tempcnta,\@tempdima,\@tempdimb}
+% \DoNotIndex{\@tempswafalse,\@tempswatrue,\@viipt,\@viiipt,\@vipt}
+% \DoNotIndex{\@vpt,\@warning,\@xiipt,\@xipt,\@xivpt,\@xpt,\@xviipt}
+% \DoNotIndex{\@xxpt,\@xxvpt,\\,\ ,\addpenalty,\addtolength,\addvspace}
+% \DoNotIndex{\advance,\Alph,\alph}
+% \DoNotIndex{\arabic,\ast,\begin,\begingroup,\bfseries,\bgroup,\box}
+% \DoNotIndex{\bullet}
+% \DoNotIndex{\cdot,\cite,\CodelineIndex,\cr,\day,\DeclareOption}
+% \DoNotIndex{\def,\DisableCrossrefs,\divide,\DocInput,\documentclass}
+% \DoNotIndex{\DoNotIndex,\egroup,\ifdim,\else,\fi,\em,\endtrivlist}
+% \DoNotIndex{\EnableCrossrefs,\end,\end@dblfloat,\end@float,\endgroup}
+% \DoNotIndex{\endlist,\everycr,\everypar,\ExecuteOptions,\expandafter}
+% \DoNotIndex{\fbox}
+% \DoNotIndex{\filedate,\filename,\fileversion,\fontsize,\framebox,\gdef}
+% \DoNotIndex{\global,\halign,\hangindent,\hbox,\hfil,\hfill,\hrule}
+% \DoNotIndex{\hsize,\hskip,\hspace,\hss,\if@tempswa,\ifcase,\or,\fi,\fi}
+% \DoNotIndex{\ifhmode,\ifvmode,\ifnum,\iftrue,\ifx,\fi,\fi,\fi,\fi,\fi}
+% \DoNotIndex{\input}
+% \DoNotIndex{\jobname,\kern,\leavevmode,\let,\leftmark}
+% \DoNotIndex{\list,\llap,\long,\m@ne,\m@th,\mark,\markboth,\markright}
+% \DoNotIndex{\month,\newcommand,\newcounter,\newenvironment}
+% \DoNotIndex{\NeedsTeXFormat,\newdimen}
+% \DoNotIndex{\newlength,\newpage,\nobreak,\noindent,\null,\number}
+% \DoNotIndex{\numberline,\OldMakeindex,\OnlyDescription,\p@}
+% \DoNotIndex{\pagestyle,\par,\paragraph,\paragraphmark,\parfillskip}
+% \DoNotIndex{\penalty,\PrintChanges,\PrintIndex,\ProcessOptions}
+% \DoNotIndex{\protect,\ProvidesClass,\raggedbottom,\raggedright}
+% \DoNotIndex{\refstepcounter,\relax,\renewcommand,\reset@font}
+% \DoNotIndex{\rightmargin,\rightmark,\rightskip,\rlap,\rmfamily,\roman}
+% \DoNotIndex{\roman,\secdef,\selectfont,\setbox,\setcounter,\setlength}
+% \DoNotIndex{\settowidth,\sfcode,\skip,\sloppy,\slshape,\space}
+% \DoNotIndex{\symbol,\the,\trivlist,\typeout,\tw@,\undefined,\uppercase}
+% \DoNotIndex{\usecounter,\usefont,\usepackage,\vfil,\vfill,\viiipt}
+% \DoNotIndex{\viipt,\vipt,\vskip,\vspace}
+% \DoNotIndex{\wd,\xiipt,\year,\z@}
+%
+% \changes{v1.0}{1999/05/01}{First public release}
+% \changes{v1.0a}{2001/01/02}{Fixed missing * in .fd files}
+%
+% ^^A \def\fileversion{v1.0}
+% ^^A \def\filedate{1999/05/01}
+% \def\fileversion{v1.0a}
+% \def\filedate{2001/01/02}
+% \newcommand*{\Lpack}[1]{\textsf {#1}}           ^^A typeset a package
+% \newcommand*{\Lopt}[1]{\textsf {#1}}            ^^A typeset an option
+% \newcommand*{\file}[1]{\texttt {#1}}            ^^A typeset a file
+% \newcommand*{\Lcount}[1]{\textsl {\small#1}}    ^^A typeset a counter
+% \newcommand*{\pstyle}[1]{\textsl {#1}}          ^^A typeset a pagestyle
+% \newcommand*{\Lenv}[1]{\texttt {#1}}            ^^A typeset an environment
+% \newcommand*{\AD}{\textsc{ad}}
+%
+% \title{The \Lpack{rustic} fonts\thanks{This
+%        file has version number \fileversion, last revised
+%        \filedate.}}
+%
+% \author{%
+% Peter Wilson\\
+% Catholic University of America \\
+% Now at \texttt{peter.r.wilson@boeing.com}
+% }
+% \date{\filedate}
+% \maketitle
+% \begin{abstract}
+%    The \Lpack{rustic} and \Lpack{allrust} packages provide a set of 
+% Metafont Roman Rustic book-hands 
+% as used
+% for manuscripts in the 1st to the 6th century. This is one in a series
+% of manuscript fonts.
+% \end{abstract}
+% \tableofcontents
+%
+% \StopEventually{}
+%
+% 
+%
+% \section{Introduction}
+%
+%    The \Lpack{rustic} and \Lpack{allrust} packages provide 
+% a Metafont~\cite{METAFONT} version
+% of the Roman Rustic manuscript book-hand that was in use between about the
+% first and sixth centuries~\AD. It is part of a project to provide fonts
+% covering the major manuscript hands between the first century~\AD{} and
+% the invention of printing. The principal resources used in this project
+% are listed in the Bibliography.
+%
+% This manual is typeset according to the conventions of the
+% \LaTeX{} \textsc{docstrip} utility which enables the automatic
+% extraction of the \LaTeX{} macro source files~\cite{GOOSSENS94}.
+% The \Lpack{docmfp} package is used for documenting the Metafont portions
+% of the distribution~\cite{DOCMFP}.
+%
+%    Section~\ref{sec:usc} describes the usage of the package.
+% Commented code for the fonts is in Sections~\ref{sec:mf} and~\ref{sec:fd}
+% and source code for the packages is in Section~\ref{sec:code}.
+%
+% \subsection{Manuscript book-hands}
+%
+% Before the invention of printing all books were written by hand. The book-hands
+% used by the scribes and copyists for the manuscripts changed as time 
+% went on. Table~\ref{tab:1} lists some of the common book-hands which were used
+% between the 1st and 15th centuries. The later book-hands formed the basis of the
+% fonts used by the early printers, which in turn form the basis of the printing
+% fonts in use today.
+%
+%    The manuscript book-hands were written with a broad nibbed reed or quill
+% pen. Among the distinguishing characteristics of a hand, apart from the 
+% actual shape of the letters, are the angle of the pen (which controls the
+% variation between thick and thin strokes) and the height of a letter compared
+% to the width of the nib. The lower the ratio of the letter height to nib
+% width, the more condensed is the script. The scripts also varied in their
+% typical height. 
+%
+%    Table~\ref{tab:1} gives an `average' x-height for each
+% script, which I obtained by measuring a sample of photographs of
+% manuscripts written in the various hands. About a dozen examples
+% of each book-hand were measured. This figure should not be taken too
+% seriously.
+%
+%    There was not a sharp division between the use of one hand and another.
+% Many manuscripts exhibit a variety of hands in the same document. For example,
+% the scribe writing in an Uncial hand may have used Roman Rustic letters
+% for capitals. Usually the same pen was used for the two different scripts.
+%
+%    Generally speaking, as a hand got older it became more embelished and
+% calligraphic, and 
+% therefore took longer to write. As this happened a new hand would appear that
+% was faster, and which would eventually make the earlier one obsolete.
+%
+%    Many of the book-hands were single-cased; that is, they did not have an
+% upper- and lower-case as we do nowadays in Western scripts. On the other
+% hand, a script might be majuscule or minuscule. A \textit{majuscule} script
+% is one, like our upper-case, where the letters are drawn between two lines
+% and are of a uniform height with no ascenders or descenders. 
+% A \textit{minuscule} script, like our lower-case, is drawn between four lines 
+% and has ascenders and  descenders.
+%
+% \begin{table}
+% \centering
+% \caption{The main manuscript book-hands} \label{tab:1}
+% \begin{tabular}{lccccc} \hline
+% Name                  & Century  & x-height & Height     & Pen  & Normalised \\
+%                       &          & (mm)   & (nib widths) & angle & height  \\ \hline
+% Roman Rustic          & 1--6     & 5.7    & 4--6         & 45     & 1.90 \\
+% Uncial                & 3--6     & 4.1    & 4--5         & 30     & 1.37 \\
+% Artificial Uncial     & 6--10    & 4.2    & 3--6         & 10     & 1.40 \\
+% Half Uncial           & 3--9     & 3.2    & 3--6         & 20--30 & 1.07 \\
+% Insular majuscule     & 6--9     & 4.2    & 5            & 0--20  & 1.40 \\
+% Insular minuscule     & 6 onward & 4.1    & 5--6         & 45--70 & 1.37 \\
+% Carolingian minuscule & 8--12    & 3.0    & 3--5         & 45     & 1.00 \\
+% Early Gothic          & 11--12   & 3.8    & 4--6         & 20--45 & 1.27 \\
+% Gothic Textura        & 13--15   & 3.9    & 3--5         & 30--45 & 1.30 \\
+% Gothic Prescius       & 13 onward & 3.3   & 4--5         & 45     & 1.10 \\
+% Rotunda               & 13--15   & 3.2    & 4--6         & 30     & 1.07 \\
+% Humanist minuscule    & 14 onward & 3.0   & 4--5         & 30--40 & 1.00 \\ \hline
+% \end{tabular}
+% \end{table}
+%
+%    During the period under consideration arabic numerals were effectively
+% not used. At the beginning they were unknown and even though some knew of
+% them towards the end, the glyphs used for them are not recognisable ---
+% to me they look somewhat like cryllic letters --- and each locality and time
+% had its own highly individualistic rendering. The general rule when using
+% one of these book-hands is to write all numbers using roman numerals.
+%
+%    In the first century punctuation was virtually unknown, and typically there
+% would not even be any additional space between individual words, never mind
+% denoting ends of sentences. Sometimes a dot at mid-height would be used as
+% a word seperator, or to mark off the end of a paragraph. Effectively a text
+% was a continuous stream of letters. By the time that printing was invented,
+% though, all of our modern punctuation marks were being used.
+%
+%    Among all these manuscript hands, the Carolingian minuscule is the
+% most important as our modern fonts are based on its letter shapes, and it is
+% also at this point in time where the division occured between the black letter
+% scripts as used even today in Germany, and the lighter fonts used elesewhere.
+% The Rotunda and Humanist minuscule hands were developed in Italy and were
+% essentially a rediscovery of the Carolingian minusucle. Guthenberg took the
+% Gothic scripts as the model for his types. Later printers, 
+% such as Nicholas Jenson of Venice,
+% took the Humanist scripts as their models.
+%
+%
+% \subsection{The Roman Rustic script}
+%
+%    The Roman Rustic hand, which is a majuscule script, was in use for some five 
+% centuries until it was suceeded by the Uncial book-hands. Usually the
+% lettering in a manuscript was all one size. If the scribe felt the need
+% for `capital' letters then, using the same pen, would write a slightly larger
+% letter.
+% During the period when the
+% script was used the alphabet only had 23 letters. I have included
+% the missing J, U and W.
+%
+%    Arabic numerals were unknown at this time, so all numbers were written
+% using the roman numbering system. I have provided Roman Rustic versions of
+% the arabic digits.
+%
+%    Punctuation was non-existant. A dot at mid-height might be used as
+% a word seperator, but that was all. Paragraphs had no indentation, neither
+% was there any extra vertical space between paragraphs. Essentially, the
+% script ran continuously with no spaces, even between words.
+%
+%    The `leading' --- the amount of white space between lines --- was about
+% the same height as the letters.
+%
+%
+% \section{The \Lpack{rustic} and \Lpack{allrust} package} \label{sec:usc}
+%
+%     The Roman Rustic font family is called |rust|. The font is supplied in both
+% OT1 and T1 encodings.
+%
+% \subsection{The \Lpack{rustic} package}
+%
+% This is intended for the occasions when some short pieces of text have to be
+% written in Roman Rustic while the majority of the document is in another font.
+% The normal baselineskips are used.
+%
+% \DescribeMacro{\rustfamily}
+%    The |\rustfamily| declaration starts typesetting with the Roman Rustic fonts.
+% Use of the Rustic font will continue until either there is another |\...family|
+% declaration or the current group (e.g., environment) is closed.
+%
+% \DescribeMacro{\textrust}
+%    The command |\textrust{|\meta{text}|}| will typeset \meta{text} using the
+% Roman Rustic fonts.
+%
+% \subsection{The \Lpack{allrust} package}
+%
+%    This package is for when the entire document will be typeset with the
+% Roman Rustic font. The baselineskips are set to those appropriate to the
+% book-hand. 
+%
+%    This is a minimalist package. Apart from declaring Roman Rustic to be the
+% default font and setting the baselineskips appropriately, it makes no other
+% alterations. 
+% Vertical spacing
+% before and after section titles and before and after lists, etc., will be
+% too small as the \LaTeX{} design assumes a font comparable in size to
+% normal printing fonts, and the book-hand is much taller.
+% To capture more of the flavour of the time, all numbers
+% should be written using roman numerals. 
+% The \Lpack{romannum} package~\cite{ROMANNUM}
+% can be used so that \LaTeX{} will typeset the numbers that it generates,
+% like sectioning or caption numbers, using roman numerals instead of arabic 
+% digits. 
+%
+% \DescribeMacro{\cmrfamily}
+% \DescribeMacro{\textcmr}
+% \DescribeMacro{\cmssfamily}
+% \DescribeMacro{\textcmss}
+% \DescribeMacro{\cmttfamily}
+% \DescribeMacro{\textcmtt}
+%    The |...family| declarations start typesetting with the Computer Modern Roman
+% (|\cmrfamily|), the Computer Modern Sans (|\cmssfamily|), and the Computer
+% Modern Typewriter (|\cmttfamily|) font families. The |\textcm..{|\meta{text}|}|
+% commands will typeset \meta{text} in the corresponding Computer Modern font.
+%
+%    The \Lpack{allrust} package automatically loads the \Lpack{rustic} package,
+% so the rustic font commands are available if necessary.
+%
+%
+%
+% \section{The Metafont code} \label{sec:mf}
+%
+%
+%    As previously noted, this work is part of a larger project to provide
+% fonts covering the main manuscript book-hands. As such, one of the
+% aims is to produce a coordinated set of fonts, especially as multiple
+% hands might be used in a single document. 
+%
+%    Noting that the hands tend to be somewhat larger than the typical 10pt
+% size (where the x-height is approximately 1.5mm) used for modern books, 
+% I have also designed the fonts
+% at a larger than normal size, then applied some non-linear factors when reducing
+% them down to a 10pt size.
+%    Further, I have used the height of the Carolingian minuscule as a 
+% normalising factor when deciding on the absolute height of any particular
+% script. The x-height of the Carolingian font is made equal to the
+% x-height of the Computer Modern Roman (CMR) font.
+%
+%    Modern fonts are effectively drawn. That is, the outline of the letter is
+% drawn carefully and the center is filled with ink. This is shown to good
+% effect in the Metafont code for the Computer Modern fonts~\cite{CM}.
+% In contrast, the manuscript letters were inked by single pen strokes in
+% a calligraphic manner. I have tried to repeat this calligraphic style
+% in the Metafont code.
+%
+%    As much as possible I have tried to use parameter values from the
+% Computer Modern Roman (CMR) fonts in order to reduce possible
+% infelicities if the CM and manuscript fonts are used together. However,
+% few of the CMR parameters are applicable to the calligraphic style.
+%
+%
+% \subsection{The parameter file}
+%
+%    We deal with the parameter files first, and start by announcing
+% what they are for. The Rustic font comes in three sizes and also as a normal
+% and a bold font.
+%    \begin{macrocode}
+%<*base7|base10|base17|base7b|base10b|base17b>
+%<base7>%%% RUST7.MF    Roman Rustic at 7 point design size.
+%<base10>%%% RUST10.MF  Roman Rustic at 10 point design size.
+%<base17>%%% RUST17.MF  Roman Rustic at 17 point design size.
+%<base7b>%%% RUSTB7.MF    Roman Rustic Bold at 7 point design size.
+%<base10b>%%% RUSTB10.MF  Roman Rustic Bold at 10 point design size.
+%<base17b>%%% RUSTB17.MF  Roman Rustic Bold at 17 point design size.
+%
+%    \end{macrocode}
+%    Parameters from CMR are used as much as possible. We also
+% make sure that \Lpack{cmbase} is loaded as well as plain Metafont.
+%    \begin{macrocode}
+if unknown cmbase: input cmbase fi
+
+%<base7>font_identifier:="RUST"; font_size 7pt#;
+%<base10>font_identifier:="RUST"; font_size 10pt#;
+%<base17>font_identifier:="RUST"; font_size 17.28pt#;
+%<base7b>font_identifier:="RUSTB"; font_size 7pt#;
+%<base10b>font_identifier:="RUSTB"; font_size 10pt#;
+%<base17b>font_identifier:="RUSTB"; font_size 17.28pt#;
+
+%    \end{macrocode}
+%
+% \DescribeVariable{jutstretch}
+%    The scaling for minuscule serifs wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> jutstretch:=1.19; 
+%<base10|base10b> jutstretch:=1.152; 
+%<base17|base17b> jutstretch:=1.0;
+%    \end{macrocode}
+%
+% \DescribeVariable{stemstretch}
+%    The scaling for minuscule stem widths wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> stemstretch:=1.50;
+%<base10|base10b> stemstretch:=1.31;
+%<base17|base17b> stemstretch:=1.0;
+%    \end{macrocode}
+%
+% \DescribeVariable{caprat}
+%    The scaling for `capitals' wrt `lowercase'. This is pretty much a guess.
+%    \begin{macrocode}
+ caprat:=1.2;          % ratio of capital height to minuscule height
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_jutstretch}
+%    Scaling for majuscule serifs wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> cap_jutstretch:=1.3;   
+%<base10|base10b> cap_jutstretch:=1.2;   
+%<base17|base17b> cap_jutstretch:=1.0;   
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_stemstretch}
+%    Scaling for majuscule stem width wrt 17pt size.
+%    \begin{macrocode}
+%<base7|base7b> cap_stemstretch:=1.45;  
+%<base10|base10b> cap_stemstretch:=1.31;  
+%<base17|base17b> cap_stemstretch:=1.0;  
+%    \end{macrocode}
+%
+% \DescribeVariable{bfudge}
+%    Letter width scaling for bold font wrt normal font.
+%    \begin{macrocode}
+%<base7|base10|base17> bfudge:=1.0;
+%<base7b|base10b|base17b> bfudge:=1.2;
+%    \end{macrocode}
+%
+% \DescribeVariable{szfudge}
+%    Width scaling wrt 17pt size letter width.
+%    \begin{macrocode}
+%<base7|base7b> szfudge:=1.18; 
+%<base10|base10b> szfudge:=1.0; 
+%<base17|base17b> szfudge:=1.0; 
+%    \end{macrocode}
+%
+% \DescribeVariable{hstretch}
+%    Horizontal stretching factor.
+%    \begin{macrocode}
+ hstretch:=szfudge*bfudge;
+%    \end{macrocode}
+%
+% \DescribeVariable{carol_height}
+%    The x-height of the Carolingian minuscule font.
+%    \begin{macrocode}
+%<base7|base7b> carol_height#:=108.5/36pt#; 
+%<base10|base10b> carol_height#:=155/36pt#; 
+%<base17|base17b> carol_height#:=268/36pt#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{vstretch}
+%    The height of this font wrt the Carolingian font.
+%    \begin{macrocode}
+ vstretch:=1.9;   
+
+%    \end{macrocode}
+%
+% \DescribeVariable{x_height} 
+%    The x-height of lower case letters. Scaled from the Carolingian font.
+%    \begin{macrocode}
+ x_height#:=vstretch*carol_height#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{thickfudge}
+%    The reciprocal of the font height in nib widths. Normal font height
+% is 6 nib widths and the bold font height is 4.5 nib widths.
+%    \begin{macrocode}
+%<base7|base10|base17> thickfudge:=1/6;     
+%<base7b|base10b|base17b> thickfudge:=1/4.5;     
+%    \end{macrocode}
+%
+% \DescribeVariable{thinfudge}
+%    The nib sharpness.
+%    \begin{macrocode}
+thinfudge:=1/6;      
+%    \end{macrocode}
+%
+% \DescribeVariable{thick}
+%    The maximum nib width. 
+% That is, the width of the thickest line that can be penned.
+%    \begin{macrocode}
+thick#:=stemstretch*thickfudge*x_height#;    % max pen breadth
+%    \end{macrocode}
+%
+% \DescribeVariable{thin}
+%    The nib thinness. 
+% That is, the width of the thinnest line that can be penned.
+%    \begin{macrocode}
+thin#:=thinfudge*thick#;  
+%    \end{macrocode}
+%
+% \DescribeVariable{pangle}
+%  The pen angle (in degrees).
+%    \begin{macrocode} 
+pangle:=45;                  % pen angle
+%    \end{macrocode}
+%
+% \DescribeVariable{u}
+%    The unit width. The CMR values are used.
+%    \begin{macrocode}
+%<base7> u#:=15.5/36pt#;
+%<base7b> u#:=17.9/36pt#;  
+%<base10> u#:=20/36pt#;  
+%<base10b> u#:=23/36pt#;  
+%<base17> u#:=32.5/36pt#;  
+%<base17b> u#:=37/36pt#;  
+%    \end{macrocode}
+%
+% \DescribeVariable{width_adj}
+% \DescribeVariable{serif_fit}
+% \DescribeVariable{cap_serif_fit}
+% \DescribeVariable{letter_fit}
+%    The majority of these parameters and values are constant.
+% They are for fine adjustements of characters. The CM values are used.
+%    \begin{macrocode}
+ width_adj#:=0pt#;         % width adjustment for certain characters
+ serif_fit#:=0pt#;         % extra sidebar near lowercase serifs
+%<base7|base7b> cap_serif_fit#:=3.5/36pt#;  % extra sidebar near uppercase serifs
+%<base10|base10b> cap_serif_fit#:=5/36pt#;  % extra sidebar near uppercase serifs
+%<base17|base17b> cap_serif_fit#:=8/36pt#;  % extra sidebar near uppercase serifs
+%<base7|base7b> letter_fit#:=0pt#;        % extra space added to all sidebars
+%<base10|base10b> letter_fit#:=0pt#;        % extra space added to all sidebars
+%<base17|base17b> letter_fit#:=-0.1pt#;        % extra space added to all sidebars
+
+%    \end{macrocode}
+%
+%
+% \DescribeVariable{asc_height} 
+%    The height of lower case ascenders.
+%    \begin{macrocode}
+  asc_height#:=6/5x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{desc_depth} 
+%    The depth of lower case descenders (the tail of the Q).
+%    \begin{macrocode}
+  desc_depth#:=2/3thick#;
+%    \end{macrocode}
+%
+% \DescribeVariable{fig_height} 
+%    The height of numerals. Make these midway between normal and capital
+% letters.
+%    \begin{macrocode}
+ fig_height#:=(0.5[1,caprat])*x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{fig_width} 
+%    The width of numerals. All numerals are the same width.
+%    \begin{macrocode}
+ fig_width#:=hstretch*(3/5x_height#);
+%    \end{macrocode}
+%
+% \DescribeVariable{cap_height} 
+%    The height of capital letters.
+%    \begin{macrocode}
+ cap_height#:=caprat*asc_height#;        % height of caps
+%    \end{macrocode}
+%
+% \DescribeVariable{body_height} 
+%    The height of the tallest character.
+%    \begin{macrocode}
+ body_height#:=caprat*asc_height#;    
+%    \end{macrocode}
+%
+% \DescribeVariable{body_depth} 
+%    The depth of the lowest character.
+%    \begin{macrocode}
+ body_depth#:=caprat*desc_depth#;    
+%    \end{macrocode}
+%
+% \DescribeVariable{half_height} 
+%    Half the normal letter height.
+%    \begin{macrocode}
+ half_height#:=1/2x_height#;    % half the height of x height letters
+
+%    \end{macrocode}
+%
+% \DescribeVariable{side}
+%    We might be using a square for the character design.
+%    \begin{macrocode}
+side#:=x_height#;     
+%    \end{macrocode}
+%
+%
+% \DescribeVariable{rule_thickness}
+%    Thickness of rules (in math symbols). The CMR values are used.
+%    \begin{macrocode}
+%<base7|base7b> rule_thickness#:=.34pt#; 
+%<base10|base10b> rule_thickness#:=.4pt#; 
+%<base17|base17b> rule_thickness#:=.6pt#; 
+
+%    \end{macrocode}
+%
+% \DescribeVariable{jutfudge}
+%    Controls the protrusion of serifs.
+%    \begin{macrocode}
+jutfudge:= 5/8; 
+%    \end{macrocode}
+%
+% \DescribeVariable{jut} 
+%    The lowercase serif protrusion.
+%    \begin{macrocode}
+jut#:=jutstretch*jutfudge*thick#; 
+%    \end{macrocode}
+%
+% \DescribeVariable{hookjut} 
+%    The horizontal protrusion of hook serifs.
+%    \begin{macrocode}
+hookjut#:=1/2jut#;
+%    \end{macrocode}
+%
+% \DescribeVariable{footjut} 
+%    Half the horizontal width of a foot stroke, assuming vertical ends.
+%    \begin{macrocode}
+footjut#:=2/20x_height#;
+%    \end{macrocode}
+%
+% \DescribeVariable{extra_fhjut} 
+%    Half the extra horizontal width of a foot or head stroke, taking sloped
+% ends into account. Thus the maximum overall horizontal width is 
+% |2(footjut+extra_fhjut)|.
+%    \begin{macrocode}
+extra_fhjut#:=1/3thick#;
+%    \end{macrocode}
+%
+% \DescribeVariable{stem_offset} 
+%    The x offset of the center of a left (stem + foot) from the left of the 
+% character box.
+%    \begin{macrocode}
+stem_offset#:=8/12thick#+thin#;
+%    \end{macrocode}
+%
+% \DescribeVariable{srad}
+%    |srad| with |0 < srad < 1| controls the serif radius.
+%    \begin{macrocode}
+srad:=0.5;   
+%    \end{macrocode}
+%
+% \DescribeVariable{wiggle}
+%    Controls the amount of wiggle in a |squiggle|, with |0 <= wiggle <1|.
+%    \begin{macrocode}
+wiggle:= 0.05;
+%    \end{macrocode}
+%
+% \DescribeVariable{bowoff}
+%    Controls the amount of bow in a |bow|, with |0 <= bowoff <1|.
+%    \begin{macrocode}
+bowoff:= 0.05;
+%    \end{macrocode}
+%
+% \DescribeVariable{o}
+%    Amount of overshoot for curves (as in an `o'). Use CMR values.
+%    \begin{macrocode} 
+%<base7|base7b> o#:=5/36pt#;   
+%<base10|base10b> o#:=8/36pt#;   
+%<base17|base17b> o#:=10/36pt#;   
+
+%    \end{macrocode}
+%
+% \DescribeVariable{thick_tltobr}
+%    A vector of the slope of thick diagonals from the top left point to the
+% bottom right point. Use as:
+% |ztl-zbr = whatever*thick_tltobr|.
+%    \begin{macrocode} 
+pair thick_tltobr;
+thick_tltobr:=(-2,5);
+
+%    \end{macrocode}
+%
+% \DescribeVariable{slant}
+% |slant| is the amount the font slopes to the right. 
+%    \begin{macrocode}
+slant:=0;      % tilt ratio $(\Delta x/\Delta y)$
+
+%    \end{macrocode}
+% 
+% \DescribeVariable{monospace} 
+%    We are generating a variable-width font.
+%    \begin{macrocode}
+monospace:=false;    % should all characters have the same width?
+
+%    \end{macrocode}
+%
+% \DescribeVariable{dot_size}
+%    The size of (punctuation) dots.
+%    \begin{macrocode}
+dot_size#:=5thin#;   % size of dots
+%    \end{macrocode}
+%
+% \DescribeVariable{comma_width}
+%    The horizontal width of a comma.
+%    \begin{macrocode}
+comma_width#:=2.5dot_size#; 
+
+%    \end{macrocode}
+%
+%    Finally, call the driver file for the font.
+%    \begin{macrocode} 
+generate rusttitle      %% switch to the driver file
+
+%    \end{macrocode}
+%
+%    The end of this code section.
+%    \begin{macrocode}
+%</base7|base10|base17|base7b|base10b|base17b>
+%    \end{macrocode}
+%
+%
+% \subsection{The driver file}
+%
+%    The driver file sets up the font parameters and also contains
+% the macros used in the definition of the characters.
+%
+%    \begin{macrocode}
+%<*mfd>
+% This is RUSTTITLE.MF for the Roman Rustic font.
+% This makes a short font.
+% This file also contains special macros universally needed in the 
+% font but either not in the cmbase.mf file or modifications of these.
+%
+%    \end{macrocode}
+%
+% \begin{routine}{makebox}
+%    This is a new version of the \Lpack{cmbase.mf} |makebox| macro.
+% Essentially, as we are only generating a single case font, we don't
+% need all the horizontals for the CMR characters.
+%
+%    \begin{macrocode}
+% A new version of cmbase.mf makebox macro
+def makebox(text rule) =
+  for y=0,half_height,cap_height,body_height,x_height,-desc_depth,-body_depth:
+    rule((l,y)t_,(r,y)t_); endfor  % horizontals
+  for x=l,r: rule((x,-body_depth)t_,(x,body_height)t_); endfor % verticals
+  for x=u*(1+floor(1/u)) step u until r-1:
+    rule((x,-body_depth)t_,(x,body_height)t_); endfor         % more verticals
+  if charic<>0:
+    rule((r+charic*pt,h.o_),(r+charic*pt,.5h.o_)); fi  % italic correction
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{proofpcbb}
+%    The macro |proofpcbb(S, xoff, yoff)| draws crosses at the corners of the
+% square, and at the bottom and top midpoints, where the point |zS| is at
+% position |(xoff,yoff)| in the square. 
+%    \begin{macrocode}
+
+% A macro to delineate a letter's bounding square in proof mode.
+% Point z$ is at (xoff,yoff) in the bounding square.
+def proofpcbb(suffix $)(expr xoff, yoff) =
+if proofing > 0:
+  x$bl = x$ - xoff; y$bl = y$ - yoff;         % Bottom Left Hand Corner
+  z$br = (x$bl+side, y$bl);                   % BRHC
+  z$tr = (x$bl+side, y$bl+side);              % TRHC
+  z$tl = (x$bl, y$bl+side);                   % TLHC
+  z$bc = 1/2[z$bl,z$br]; z$tc = 1/2[z$tl,z$tr];  % horizontal mid points
+  pair hc, vc;
+  hc = (2u,0); vc = (0,2u);
+  pickup pensquare scaled 2;
+  for s = z$bl, z$br, z$tr, z$tl, z$bc, z$tc:
+    draw s-hc--s+hc;
+    draw s-vc--s+vc;
+  endfor
+fi
+enddef;
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+% \begin{routine}{rustic_font_setup}
+%    This macro contains the set up for the fonts.
+%    \begin{macrocode}
+ 
+def rustic_font_setup= 
+  define_pixels(side,half_height,carol_height,comma_width);
+  define_pixels(u,dot_size,letter_size,cap_height,width_adj,serif_fit,
+                cap_serif_fit,jut,cap_jut);
+  define_pixels(hookjut,footjut,stem_offset,extra_fhjut,fig_width);
+  define_whole_pixels(letter_fit);
+  define_whole_vertical_pixels(body_height,asc_height,cap_height,x_height,
+                               desc_depth,body_depth,fig_height);
+  define_corrected_pixels(o);
+  define_blacker_pixels(thick,thin);
+  let adjust_fit = normal_adjust_fit;
+%    \end{macrocode}
+% \DescribeVariable{stylus}
+%  The pen for drawing the thinnest lines is |stylus|.
+%    \begin{macrocode}
+  pickup pencircle scaled thin;
+  stylus:=savepen;
+%    \end{macrocode}
+% \DescribeVariable{quill}
+%  The normal calligraphic pen is |quill|.
+%    \begin{macrocode}
+  pickup pencircle xscaled thick yscaled thin rotated pangle;
+  quill:=savepen;
+%    \end{macrocode}
+% \DescribeVariable{bowpen}
+%  The pen for drawing a bow is |bowpen|.
+%    \begin{macrocode}
+  pickup pencircle xscaled thick yscaled thin rotated ((1/2(pangle+90)));
+  bowpen:=savepen;
+  numeric pcshiftx#; % x value of LHS of box wrt origin of char box
+  define_pixels(pcshiftx);
+  numeric sqxside#;   % x size of the square
+  numeric sqyside#;   % y size of the square
+  define_pixels(sqxside,sqyside);
+
+enddef; % end of rustic_font_setup
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \DescribeVariable{ductus}
+% A boolean to control drawing the ductus (TRUE) or the full letter (FALSE).
+%    \begin{macrocode}
+boolean ductus;
+ductus:=false;
+%    \end{macrocode}
+%
+% \DescribeVariable{pdir}
+% The vector corresponding to the pen angle.
+%    \begin{macrocode}
+pair pdir; pdir=dir(pangle);
+%    \end{macrocode}
+%
+% \DescribeVariable{ppdir}
+% The vector that is perpendicular (anticlockwise) to the pen angle.
+%    \begin{macrocode}
+pair ppdir; ppdir=dir(pangle+90);
+%    \end{macrocode}
+%
+% \begin{routine}{draw_rusticstem}
+% A macro to draw a rustic thin vertical stem.
+% |draw_rusticstem(1,2)| draws the stem with top at |z1| and bottom at |z2|.
+%    \begin{macrocode}
+
+def draw_rusticstem(suffix $, $$)=
+  numeric alpha, beta; alpha:=0.5thick;
+  beta:=60;      % the ending angle
+  pair rustic[];
+  xpart rustic1=x$$; ypart rustic1=y$$+alpha*sind(beta);
+  z$a=1/2[z$,rustic1];
+  z$b=2/3[z$,rustic1];
+  z$c=5/6[z$,rustic1];
+  z$d=rustic1;
+  z$ar=z$a shifted (alpha*up); z$al=z$a shifted (alpha*down);
+
+  rustic2:=z$b shifted (alpha*right);
+  z$br=rustic2 rotatedaround(z$b,1/4[90,beta]); z$bl=z$br rotatedaround(z$b,180);
+
+  rustic2:=z$c shifted (alpha*right);
+  z$cr=rustic2 rotatedaround(z$c,1/2[90,beta]); z$cl=z$cr rotatedaround(z$c,180);
+
+  rustic2:=z$d shifted (alpha*right);
+%%  z$dr=rustic2 rotatedaround(z$d,60); z$dl=z$dr rotatedaround(z$d,180);
+  rustic3=rustic2 rotatedaround(z$d,beta);
+  x$dr=xpart rustic3; y$dr=ypart rustic3 - thin;
+  z$dl=z$dr rotatedaround(z$d,180);
+  pen oldpen; oldpen:=currentpen;
+  pickup stylus;
+  draw z$--z$al;
+%%  filldraw z$ar..z$br..z$cr..z$dr--z$dl..z$cl..z$bl..z$al--cycle;
+  filldraw z$ar..z$br..z$cr..z$dr--z$dl..z$bl..z$al--cycle;
+  pickup oldpen;
+%%  labels($a,$al,$ar,$b,$bl,$br,$c,$cl,$cr,$dl,$dr);
+  labels($a,$b,$c,$d,$dl,$dr);
+enddef; % end of draw_rusticstem
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_hserif}
+% A macro to draw a hooked serif. |draw_hserif(1,2,f)| uses the |stylus| pen to
+% draw a serif of extent |hookjut| at |z1| to the left of the line from |z2| 
+% to |z1|. The
+% radius is controlled by |f|, where $0<f<1$. The `stem' from |z1| to |z2|
+% starts at the point |z1a|.
+%    \begin{macrocode}
+
+def draw_hserif(suffix $, $$)(expr fr)=
+  pen oldpen; oldpen:=currentpen;
+  numeric beta, ajut, bjut;
+%    \end{macrocode}
+% |fr| and |beta| control the serif radius.
+%    \begin{macrocode}
+  beta=1-fr;
+  ajut=fr*jut; bjut=beta*jut;
+%    \end{macrocode}
+% 
+% 
+% 
+% 
+% 
+%    \begin{macrocode}
+  pair rustic;
+  numeric tn, ang; ang:=70;
+  tn:=(sind ang)/(cosd ang);
+  x$g=x$-hookjut; y$g=y$-(hookjut*tn); % the tip
+  x$f=x$; y$f=y$g;                     % on the stem
+  pickup stylus;
+%%  filldraw z$g{dir(ang)}..{down}z$f--z$--cycle;
+  draw z$g--z$;
+  pickup oldpen;
+  labels($f,$g);
+enddef; % end of draw_hserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_footstem}
+% A macro to draw a rustic stem and its foot. 
+% |draw_footstem(1,2)| uses the current pen to draw
+% the rustic stem with its top at |z1| and a foot at the point |z2|, 
+% where |z2| is at the bottom of the foot.
+% The width of the foot is twice the (global) value of |footjut|.
+%    \begin{macrocode}
+
+def draw_footstem(suffix $, $$)=
+  draw_rusticstem($, $$);
+  x$$fl=x$dl; bot y$$fl= y$$;
+  x$$fr=x$$fl+2footjut; y$$fr=y$$fl;
+  draw_squiggle($$fl,$$fr,wiggle,srad);
+  labels($$fl,$$fr);
+enddef; % end of draw_footstem
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_foot}
+% A macro to draw a foot. |draw_foot(1)| uses the current pen to draw
+% a foot at the point |z1|, where |z1| is at the bottom center of the foot.
+% The width of the foot is twice the (global) value of |footjut|.
+%    \begin{macrocode}
+
+def draw_foot(suffix $)=
+  x$fl=x$-footjut; bot y$fl= y$;
+  x$fr-x$=x$-x$fl; y$fr=y$fl;
+  draw_squiggle($fl,$fr,wiggle,srad);
+  labels($fl,$fr);
+enddef; % end of draw_foot
+
+%    \end{macocode}
+% \end{routine}
+%
+% \begin{routine}{draw_head}
+% A macro to draw a head squiggle. |draw_head(1)| uses the current pen to draw
+% a head at the point |z1|, where |z1| is at the top center of the head.
+% The width of the head is twice the (global) value of |footjut|.
+%    \begin{macrocode}
+
+def draw_head(suffix $)=
+  x$hl=x$-footjut; top y$hl= y$;
+  x$hr-x$=x$-x$hl; y$hr=y$hl;
+  draw_squiggle($hl,$hr,wiggle,srad);
+  labels($hl,$hr);
+enddef; % end of draw_head
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_bow}
+% A macro to draw a bow. |draw_bow(1,2,f)| uses the |bowpen| to draw a bowed
+% line from |z1| to |z2|. The midpoint of the bowed line is offest by an
+% amount |f*l| perpendicular to the line joining |z1| to |z2|, where |l|
+% is the distance between |z1| and |z2|.
+%    \begin{macrocode}
+
+def draw_bow(suffix $, $$)(expr fr)=
+  pen oldpen; oldpen:=currentpen;
+  z$bm=1/2[z$,z$$];
+  l:=length(z$-z$$);
+  bdir:=angle(z$-z$$);
+%%  z$bo=z$bm shifted (fr*l*dir(bdir+90));
+  z$bo=z$bm shifted (fr*l*dir(bdir-90));
+  pickup bowpen;
+  draw z$..z$bo..z$$;
+  pickup oldpen;
+  labels($bm,$bo);
+enddef;  % end of draw_bow
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_squiggle}
+% A macro to draw a squiggle. |draw_squiggle(1,2,w,f)| draws a squiggle from
+% |z1| to |z2| (z1 assumed to be at the left of z2), with |w| amount of
+% wiggle and |f| controlling the serif radius.
+%    \begin{macrocode}
+
+def draw_squiggle(suffix $, $$)(expr w, fr)=
+  z$si=1/4[z$,z$$];  z$sii=3/4[z$,z$$];
+  l:=length(z$-z$$);
+  bdir:=angle(z$-z$$);
+%%  z$sio=z$si shifted (w*l*dir(bdir+90));
+%%  z$siio=z$sii shifted (w*l*dir(bdir-90));
+  z$sio=z$si shifted (w*l*dir(bdir-90));
+  z$siio=z$sii shifted (w*l*dir(bdir+90));
+  draw z$..z$sio..z$siio..z$$;    % the squiggle
+%%  draw_serif($,$$,fr);
+%%  draw_serif($$,$,fr);
+  labels($sio,$siio);
+enddef;  % end of draw_squiggle
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_serif}
+% A macro to draw a serif. |draw_serif(1,2,f)| uses the current pen to
+% draw a serif of extent |jut| at |z1| to the left of the line from |z2| 
+% to |z1|. The
+% radius is controlled by |f|, where $0<f<1$. The `stem' from |z1| to |z2|
+% starts at the point |z1a|.
+%    \begin{macrocode}
+
+def draw_serif(suffix $, $$)(expr fr)=
+  numeric beta, ajut, bjut;
+%    \end{macrocode}
+% |fr| and |beta| control the serif radius.
+%    \begin{macrocode}
+  beta=1-fr;
+  ajut=fr*jut; bjut=beta*jut;
+%    \end{macrocode}
+% The points |$c|, |$b| and |$a| define the serif. For a top (bottom) serif
+% the leftmost (rightmost) point is 
+% |$c| and |$a| is on the stem. |$a| is moved from |$| towards |$$| by the 
+% distance |ajut|, and the other points are calculated from this. If the stem
+% is not vertical, then we have to rotate |$b| to match.
+%    \begin{macrocode}
+  pair vec[]; vec1=unitvector(z$$-z$);
+  vec2=ajut*vec1;
+  z$a=z$ shifted vec2;
+  z$b=z$a rotatedaround (z$,-90);
+  boolean top_serif;
+  if y$>y$$:
+    top_serif := true;
+    z$c=z$b shifted (-bjut*pdir);
+  else:
+    if y$=y$$:
+      if x$<x$$:
+        top_serif := true;
+        z$c=z$b shifted (-bjut*pdir);
+      else:
+        top_serif := false;
+        z$c=z$b shifted (bjut*pdir);
+      fi
+    else:
+      top_serif:=false;
+      z$c=z$b shifted (bjut*pdir);
+    fi
+  fi
+%    \end{macrocode}
+% Draw the parts, and finish off.
+%    \begin{macrocode}
+  if top_serif:
+    draw z$c--z$b{pdir}..{z$$-z$}z$a;    % the serif
+  else:
+    draw z$c--z$b{-pdir}..{z$$-z$}z$a;
+  fi
+  labels($a,$b,$c);
+enddef; % end of draw_serif
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_istem}
+%  A macro to draw the shape of an i. |draw_istem(1,2,f)| draws a stem whose
+% top is at |z1| and bottom at |z2|. It draws with the current pen and the serifs
+% are of extent |jut|. The serif radius is controlled by |f|, with $0<f<1$.
+%    \begin{macrocode}
+
+def draw_istem(suffix $, $$)(expr fr)=
+  draw_serif($, $$, fr);  % top serif
+  draw_serif($$, $, fr);  % bottom serif
+  draw z$a--z$$a;  % the stem
+enddef; % end of draw_istem
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_tlserif}
+%  A macro to draw a top left serif. |draw_tlserif(1,2,f)| draws a serif on top
+% of a stem whose absolute 
+% top is at |z1| and bottom at |z2|. It draws with the current pen and the serif
+% is of extent |jut|. It also draws the stem to the point |z2|. The serif
+% radius is controlled by |f|, with $0<f<1$.
+%    \begin{macrocode}
+
+def draw_tlserif(suffix $, $$)(expr fr)=
+  draw_serif($, $$, fr);  % the serif
+  draw z$a--z$$;                       % the stem
+enddef; % end of draw_tlserif
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+%
+% \begin{routine}{draw_pdot}
+%  A macro to draw a period dot.
+% |draw_pdot(1,sz)| uses |stylus| to draw a dot centered at |z1| of overall size |sz|.
+%    \begin{macrocode}
+
+def draw_pdot(suffix $)(expr sz)=
+%    \end{macrocode}
+% Draw a square rotated 45 degrees.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$ shifted (0.5sz*up);
+  z$u = z$s shifted (sz*right);
+  z$v = z$t shifted (sz*down);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_pdot
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_pcomma}
+%  A macro to draw a period comma.
+% |draw_pcomma(1,t,w)| draws a comma placed at |z1| (the top), line width is |t|
+% and bottom of line is |w| horizontally from |z1|. The pen is |stylus|.
+%    \begin{macrocode}
+
+def draw_pcomma(suffix $)(expr sz, ar)=
+%    \end{macrocode}
+% Draw a line of at |z$| of width |sz| sloping back and down at 45 degrees
+% for a total width of |ar|.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$s shifted (sz*right);
+  x$v=x$s-ar; y$v=y$s-ar;
+  z$u = z$v shifted (sz*right);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_pcomma
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{draw_plq}
+%  A macro to draw a period left quote.
+% |draw_pcomma(1,t,w)| draws a left quote placed at |z1| (the top), line width is |t|
+% and bottom of line is |w| horizontally from |z1|.
+%    \begin{macrocode}
+
+def draw_plq(suffix $)(expr sz, ar)=
+%    \end{macrocode}
+% Draw a line of at |z$| of width |sz| sloping forward and down at 45 degrees
+% for a total width of |ar|.
+%    \begin{macrocode}
+  z$s = z$ shifted (0.5sz*left);
+  z$t = z$s shifted (sz*right);
+  x$v=x$s+ar; y$v=y$s-ar;
+  z$u = z$v shifted (sz*right);
+  pickup stylus;
+  filldraw z$s--z$t--z$u--z$v--cycle;
+  labels($s,$t,$u,$v);
+enddef; % end of draw_plq
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%    Set the mode and font setup.
+%    \begin{macrocode}
+ 
+font_coding_scheme:="ASCII minuscules and punctuation";
+mode_setup; 
+rustic_font_setup;
+
+%    \end{macrocode}
+%
+%
+%    We generate letters, together with some punctuation and
+% analphabetics.
+%    \begin{macrocode}
+ 
+input rustl;        % normal letters
+input rustu;        % capital letters
+input rustdig;      % arabic digits
+input rustpunct;    % punctuation
+input rustlig;      % the several dashes
+%%%%input rustp;        % ampersand and ?mark
+
+%    \end{macrocode}
+%
+% Finally, do the uppercase ligtable.
+%
+%    \begin{macrocode}
+ 
+font_slant slant; font_x_height x_height#;
+if monospace: font_normal_space 9u#; % no stretching or shrinking
+ font_quad 18u#;
+ font_extra_space 9u#;
+else: font_normal_space 6u#+2letter_fit#;
+ font_normal_stretch 3u#; font_normal_shrink 2u#;
+ font_quad 18u#+4letter_fit#;
+ font_extra_space 2u#;
+ k#:=-.5u#; kk#:=-1.5u#; kkk#:=-2u#; % three degrees of kerning
+%% ligtable "P": "T": "Y": "A" kern kk#;
+%% ligtable "F": "V": "W": "A" kern if serifs: kkk# else: kk#fi,
+%%  "K": "X": "O" kern k#, "C" kern k#, "G" kern k#, "Q" kern k#;
+%% ligtable "O": "D": "X" kern k#, "W" kern k#, "A" kern k#,
+%%   "V" kern k#, "Y" kern k#;
+%% ligtable "A": if serifs: "R": fi
+%%  "C" kern k#, "O" kern k#, "G" kern k#, "U" kern k#, "Q" kern k#,
+%%  "L": "T" kern kk#, "Y" kern kkk#, "V" kern kk#, "W" kern kkk#;
+%%ligtable "I": "I" kern -k#; % Richard III
+fi
+
+bye.
+
+%</mfd>
+%    \end{macrocode}
+%
+% \subsection{The code for normal letters}
+%
+%    The following code is for the normal alphabetic characters.
+%
+%    \begin{macrocode}
+%<*min>
+% RUSTL.MF Program file for normal rustic letters
+%
+
+
+%    \end{macrocode}
+%
+%
+% \begin{routine}{a}
+% The letter `a'.
+%    \begin{macrocode}
+cmchar "Rustic letter a";
+beginchar("a", 2u#+hstretch*(4/5x_height#+jut#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% right leg
+z1-z2=whatever*thick_tltobr;
+top y1=h;
+rt x2=w-pcshiftx-jut; bot y2=0;
+% for the left leg
+z3=9/10[z2,z1];
+x4=pcshiftx+footjut+extra_fhjut; bot y4=0;
+% code for foot
+x7=x4; y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);           % right leg
+draw_bow(3,4,bowoff);           % left leg
+draw_foot(7);                   % left leg foot
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "a"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{b}
+% The letter `b'. This is a tall letter
+%    \begin{macrocode}
+cmchar "Rustic letter b";
+beginchar("b", 2u#+hstretch*(7/10x_height#), 11/10x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u+hookjut+thin;
+pickup quill;
+% stem
+x1=x2=pcshiftx;
+y1=h; y2=0;
+% bottom bowl
+rt x3=x1; bot y3=thin;
+rt x5=w-u; y5 = 1/6h;
+x4=0.4[x2,x5]; y4=0;
+lft x6=x2; y6=2/3h; 
+% top bowl
+z7=z6;
+x8=0.25[x4,x5]; top y8=y1;
+x9=0.5[x1,x8]; bot y9=h;
+z10=z1;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);                                 % the stem
+draw z3..z4{right}..z5..{dir(pangle+90)}z6;         % bottom bowl
+draw z7{pdir}..z8{up}..z9{left}..z10;                 % top bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "b"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{c}
+% The letter `c'.
+%    \begin{macrocode}
+cmchar "Rustic letter c";
+beginchar("c", 2u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=pcshiftx+sqxside; y1=y3=h/2;
+x2=x4=w/2; top y2=h; bot y4=0;
+rt x5= rt x6=w-pcshiftx;
+top y5=1/5h; 
+top y6=4/5h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z5{-pdir}..{left}z4..z1..z2..z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "c"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{d}
+% The letter `d'.
+%    \begin{macrocode}
+cmchar "Rustic letter d";
+beginchar("d", 2u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=pcshiftx+hookjut+thin;
+top y1=h; y2=0;
+% bowl
+rt x3=x1; bot y3=thin;
+rt x5=w-u; y5 = 2/5h; 
+x4=0.4[x2,x5]; y4=0;
+x6=x1; top y6=h; 
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw z3..z4{right}..z5{up}..z6;  % bowl
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,100);
+endchar; % end "d"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{e}
+% The letter `e'.
+%    \begin{macrocode}
+cmchar "Rustic letter e";
+beginchar("e", 2u#+hstretch*(4/10x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% top bar
+rt x3=x1; x4=w-u;
+top y3=top y4=h;
+% middle bar
+x5=x3; x6=x4;
+y5=y6=3/5h;
+% foot
+x7=x3; x8=x4;
+bot y7= bot y8=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw_squiggle(3,4,wiggle,srad);  % top bar
+draw_squiggle(5,6,wiggle,srad);  % middle bar
+draw_squiggle(7,8,wiggle,srad);  % bottom bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "e"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{f}
+% The letter `f'. This is a tall letter
+%    \begin{macrocode}
+cmchar "Rustic letter f";
+beginchar("f", 2u#+hstretch*(4/10x_height#), 6/5x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u +stem_offset;
+pickup quill;
+% stem
+x1=x2=pcshiftx;
+top y1=h; y2=0;
+% top bar
+x3=x1; x4=w-u;
+top y3=top y4=h;
+% middle bar
+x5=x3; x6=x4;
+y5=y6=2/3h;
+% foot
+x7=x3; x8=x4;
+bot y7= bot y8=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % stem
+draw_squiggle(3,4,wiggle,srad);  % top bar
+draw_squiggle(5,6,wiggle,srad);  % middle bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "f"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{g}
+% The letter `g'. Like a `c' but bottom curls inwards.
+%    \begin{macrocode}
+cmchar "Rustic letter g";
+beginchar("g", 2u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=pcshiftx+sqxside; y1=y3=h/2;
+x2=x4=w/2; top y2=h; bot y4=0;
+rt x5= rt x6=w-pcshiftx;
+top y5=1/5h; 
+top y6=4/5h;
+lft x7=w/2; y7=h/2;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z7..z5{down}..{left}z4..z1..z2..z6;  % the bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "g"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{h}
+% The letter `h'.
+%    \begin{macrocode}
+cmchar "Rustic letter h";
+beginchar("h", 2u#+hstretch*(4/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+y100 = sqyside/2; x100 = pcshiftx+y100;  % square center
+pickup quill;
+% left stem and foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+% bar
+y5=y6=7/10h;
+lft x5=pcshiftx; rt x6=w-pcshiftx;
+% right stem
+rt x7=w-pcshiftx; top y7=h;
+x8=x7; bot y8=0;
+x9=x8-2thin; y9=0.5[y8,y7];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);              % left stem
+draw_hserif(1,2,srad);           % its serif
+draw_squiggle(5,6,wiggle,srad);  % the bar
+draw z7..z9..z8;                 % right stem
+ductus:=false;
+penlabels(1,1',2,2',3,4,5,6,7,7',8,8',99,99',100);
+endchar; % end "h"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{i}
+% The letter i.
+%    \begin{macrocode}
+cmchar "Rustic letter i";
+beginchar("i", 2u#+hstretch*(2footjut#+hookjut#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);               % stem and foot
+draw_hserif(1,2,srad);            % serif
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "i"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{j}
+% The letter `j'. This letter was not in the script, it being a later invention.
+%    \begin{macrocode}
+cmchar "Rustic letter j";
+beginchar("j", 4u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := 3u;
+pickup quill;
+% stem
+x1=x2=pcshiftx+2/3(w-4u);
+y1=h; y2=0;
+% top bar
+rt x4=w-u; top y4=h;
+x1-x3 = x4-x1; y3=y4;
+% bowl
+rt x5 = lft x3;
+top y5=2/5h;
+x7=x2; bot y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);              % stem
+draw_squiggle(3,4,wiggle,srad);    % top bar
+draw z7{left}..{pdir}z5;           % bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "j"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{k}
+% The letter `k'.
+%    \begin{macrocode}
+cmchar "Rustic letter k";
+beginchar("k", 2u#+hstretch*(x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the stem and its foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+lft x13=pcshiftx; bot y13=0;
+x2-x13=x14-x2; y14=y13;
+% upper diagonal and its top
+x3=x1; y3=h/2;
+x4=x1+y3; top y4=h;
+x5=x4-jut; x6-x4=x4-x5;
+top y5=top y6=h;
+x24=x4; y24=h;
+% bottom leg
+lft x7=x3; bot y7=y3;
+rt x9=w-pcshiftx; bot y9=0;
+x8=0.5[x7,x9]; y8=0.7[y7,y9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);             % the stem
+draw_hserif(1,2,srad);            % its serif
+draw z3--z4;                      % upper diagonal
+draw_head(24);
+draw z7..z8..z9;                  % bottom leg
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "k"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{l}
+% The letter `l'. This is a tall letter.
+%    \begin{macrocode}
+cmchar "Rustic letter l";
+beginchar("l", 2u#+hstretch*(1/2x_height#), 6/5x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u+hookjut;
+pickup quill;
+x1=x2=pcshiftx+thin+hookjut;
+y1=h; y2=0;
+rt x3=x1; rt x4=w-u;
+bot y3= bot y4=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw_hserif(1,2,srad);           % serif
+draw_squiggle(3,4,wiggle,srad);  % foot
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "l"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{m}
+% The letter `m'. Like 2 As stuck together.
+%    \begin{macrocode}
+cmchar "Rustic letter m";
+beginchar("m", 2u#+hstretch*(6/5x_height#+jut#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% right a thick diag
+z11-z12=whatever*thick_tltobr;
+rt x12=w-pcshiftx-jut; bot y12=0;
+top y11=h;
+% left a thin diag
+pickup bowpen;
+x4=pcshiftx+footjut+extra_fhjut; bot y4=thin;
+z3=9/10[z2,z1];
+pickup quill;
+x7=x4; y7=0;   % for the foot
+% the two thin diags are parallel, and just shifted horizontally
+z13=9/10[z12,z11];
+z3-z4=z13-z14; y4=y14;
+% similarly for the two thick diags
+z1-z2=z11-z12; % y2=y12;
+x12-x2=1/3w;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+% draw left a
+draw_istem(1,2,srad);           % right leg
+draw_bow(3,4,bowoff);           % left leg
+draw_foot(7);                   % left leg foot
+% draw right a
+draw_istem(11,12,srad);
+draw_bow(13,14,bowoff);
+ductus:=false;
+penlabels(1,2,3,4,5,6,11,12,13,14,100);
+endchar; % end "m"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{n}
+% The letter `n'. 
+%    \begin{macrocode}
+cmchar "Rustic letter n";
+beginchar("n", 2u#+hstretch*(9/10x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left stem and foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+% right stem
+x5=x6=w-u-hookjut-thin;
+y5=y1; y6=y2;
+% diagonal
+x7=x1; y7=h;
+x9=x6; bot y9=0;
+x8=0.5[x7,x9]; y8=0.6[y7,y9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % left stem
+draw_rusticstem(5,6);            % right stem
+draw_hserif(5,6,srad);           % its serif
+draw z7..z8..z9;                 % diagonal
+draw_serif(9,8,srad);            % its bottom serif
+ductus:=false;
+penlabels(1,2,5,6,7,8,9,100);
+endchar; % end "n"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{o}
+% The letter `o'.
+%    \begin{macrocode}
+cmchar "Rustic letter o";
+beginchar("o", 2u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "o"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{p}
+% The letter `p'.
+%    \begin{macrocode}
+cmchar "Rustic letter p";
+beginchar("p", 2u#+hstretch*(5/10x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem and foot
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% bowl
+lft x7=x2; y7=1/2h;  % y7=2/3h;
+rt x8=w-pcshiftx; top y8=y1;
+z10=z1;
+x9=0.5[x1,x8]; y9=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);                    % stem
+draw z7{pdir}..z8{up}..z9{left}..z10;    % top bowl
+ductus:=false;
+penlabels(1,2,7,8,9,10,100);
+endchar; % end "p"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{q}
+% The letter `q'. 
+%    \begin{macrocode}
+cmchar "Rustic letter q";
+beginchar("q", 2u#+hstretch*(3/5x_height#), x_height#, 2/3thick#);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the O shape
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+% the tail
+path p;
+p = z4{right}..{up}z3;
+z5 = directionpoint pdir of p;
+x7= x4+w/2; top y7=0;
+x6=0.5[x5,x7]; y6=y7;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;  % O shape
+draw z5..z6..z7;             % the tail
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,6',7,100);
+endchar; % end "q"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{r}
+% The letter `r'.
+%    \begin{macrocode}
+cmchar "Rustic letter r";
+beginchar("r", 2u#+hstretch*(4/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+numeric alpha, beta;
+alpha:=thin*(xpart pdir); beta:=thin*(ypart pdir);
+pickup quill;
+% stem
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% bowl
+lft x7=x2; bot y7=1/2h;
+rt x8=5/8w; top y8=y1;
+z10=z1;
+x9=0.5[x1,x8]; y9=h;
+% leg
+z11=z7 shifted (thin*pdir);
+rt x13=w-pcshiftx; bot y13=0;
+x12=0.5[x11,x13]; y12=0.7[y11,y13];
+% points defining the leg profile
+x11l=lft x11 + alpha; y11l=bot y11 + beta;
+x11r= rt x11 - alpha; y11r=top y11 - beta;
+x12l=0.6[lft x12, x12]; y12l=0.6[bot y12, y12];
+x12r=0.6[rt x12, x12];  y12r=0.6[top y12, y12];
+x14=w-pcshiftx-thin; y14=thin;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);                       % stem and foot
+draw z7{pdir}..z8{up}..z9{left}..z10;     % bowl
+pickup stylus;                            % drawing the leg
+filldraw z11l..z12l..{right}z14 & z14{left}..z12r..z11r--cycle;
+ductus:=false;
+penlabels(1,2,7,8,9,10,11,12,14,100);
+endchar; % end "r"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{s}
+% The letter `s'.
+%    \begin{macrocode}
+cmchar "Rustic letter s";
+beginchar("s", 2u#+hstretch*(3/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% for the foot
+lft x7=pcshiftx+extra_fhjut; bot y7=0;
+% the S curve
+rt x1=w-pcshiftx; top y1=h-thin;
+lft x3=pcshiftx+extra_fhjut; y3=0.75h;
+x4=0.5[x1,x3]; y4=0.5[y3,y5];
+x2=x4; top y2=h;
+x5=x1; y5=0.3h;
+x6=0.75w; bot y6=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{left}..z3{down}..z4..z5{down}..{-pdir}z6;  % S curve
+draw_squiggle(7,6,wiggle,srad);                       % base
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "s"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{t}
+% The letter `t'.
+%    \begin{macrocode}
+cmchar "Rustic letter t";
+beginchar("t", 2u#+hstretch*(2/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=w/2;
+y1=h; y2=0;
+lft x3=pcshiftx; top y3=h;
+rt x4=w-pcshiftx; y4=y3;
+rt x5=x2; bot y5= bot y6=0;
+rt x6=w-pcshiftx;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % the stem
+draw_squiggle(3,4,wiggle,srad);  % the top crossbar
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "t"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{u}
+% The letter `u'. This is a modern version as the font did not have a U.
+%    \begin{macrocode}
+cmchar "Rustic letter u";
+beginchar("u", 2u#+hstretch*(4/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the right stem
+x5=x6=w-pcshiftx-hookjut-thin; y5=h; y6=-thin;
+% left stem and bowl
+lft x1= lft x2=pcshiftx+jut;
+top y1=h; y2=2thick;
+x3=0.5[x1,x5]; bot y3=0;
+rt x4=x5; bot y4=0.25thick;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(5,6);                       % right stem
+draw_hserif(5,6,srad);                      % its serif
+draw_tlserif(1,2,srad);                     % left stem and serif
+draw z2{down}..z3{right}..{pdir}z4;         % the bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,16,100);
+endchar; % end "u"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{v}
+% The letter `v'. 
+% if you prefer).
+%    \begin{macrocode}
+cmchar "Rustic letter v";
+beginchar("v", 2u#+hstretch*(x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left side
+z1-z2=whatever*thick_tltobr;
+lft x1=pcshiftx+jut; top y1=h;
+bot y2=0;
+% right side
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut; top y3=h;
+pickup quill;
+x4=lft x2; y4=0;
+x5=x3; y5=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);      % left part
+draw_bow(3,4,bowoff); % right part
+draw_head(5);         % and its head
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "v"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{w}
+% The letter `w'. This is a modern version as the font did not have a W.
+%    \begin{macrocode}
+cmchar "Rustic letter w";
+beginchar("w", 2u#+hstretch*(8/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left thick diagonal
+z1-z2=whatever*thick_tltobr;
+lft x1=pcshiftx+jut; top y1=h; bot y2=0;
+% right thin diagonal
+pickup bowpen;
+x13=w-pcshiftx-footjut-extra_fhjut; top y13=h-thin;
+x23=x13; y23=h;  % for the head
+bot y14=thin;
+pickup quill;
+% right thick diagonal
+z11-z12=z1-z2;
+x12-x2=1/3w; y12=y2;
+% left thin diagonal
+z3-z4=z13-z14;
+x4=x2;
+x14=x12;
+y3=y13;
+
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);       % left and right thick diags
+draw_istem(11,12,srad);
+draw_bow(3,4,bowoff);       % left thin diag
+draw_bow(13,14,bowoff);     % right thin diag
+draw_head(23);              % its head
+ductus:=false;
+penlabels(1,2,3,4,11,12,13,14,23,100);
+endchar; % end "w"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{x}
+% The letter `x'.
+%    \begin{macrocode}
+cmchar "Rustic letter x";
+beginchar("x", 2u#+hstretch*(9/10x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% thick diagonal
+lft x1=pcshiftx+jut; top y1=h;
+rt x2= w-pcshiftx-jut; bot y2=0;
+% thin diagonal
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut-thin; top y3=h;
+x4=pcshiftx+footjut+extra_fhjut+thin; bot y4=0;
+x7=x3; y7=h;
+x8=x4; y8=0;
+pickup quill;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);            % thick diagonal
+draw_bow(3,4,bowoff);            % thin diagonal
+draw_head(7);                    % its head
+draw_foot(8);                    % its foot
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "x"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{y}
+% The letter `y'. 
+%    \begin{macrocode}
+cmchar "Rustic letter y";
+beginchar("y", 2u#+hstretch*(4/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left side
+lft x1=pcshiftx+jut; top y1=h;
+x2=1/2w; bot y2=1/3h;
+% right side
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut; top y3=h;
+lft x4=x2; bot y4=y2;
+pickup quill;
+x5=x3; y5=h;
+% leg
+x7=x2; y7=y2;
+x8=x7; y8=0;
+pickup bowpen;
+x10=lft x8; x11=rt x8;
+pickup stylus;
+bot y10= bot y11=thin;
+pickup quill;
+%% ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);     % left stroke
+draw_bow(3,4,bowoff);     % right stroke
+draw_head(5);             % its head
+draw_foot(8);             % the foot
+pickup stylus;            % the leg
+filldraw z7--z10--z11--cycle;
+ductus:=false;
+penlabels(1,2,3,4,5,7,8,9,100);
+endchar; % end "y"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{z}
+% The letter `z'.
+%    \begin{macrocode}
+cmchar "Rustic letter z";
+beginchar("z", 2u#+hstretch*(4/5x_height#), x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% bottom stroke
+lft x4=pcshiftx; bot y4=0;
+rt x6=w-pcshiftx; y6=y4;
+% top stroke
+x1=x4; top y1=h;
+rt x3 =7/8w-pcshiftx; y3=y1;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_squiggle(1,3,1/2wiggle,srad);    % top stroke
+draw_squiggle(4,6,1/2wiggle,srad);    % bottom stroke
+% the diagonal
+pickup stylus;
+draw z4--z3;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "z"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%    The end of this file
+%    \begin{macrocode} 
+%</min>
+%    \end{macrocode}
+%
+%
+% \subsection{The code for capitals}
+%
+%    Roman Rustic `capitals' were drawn with the same pen as for the normal
+% text, the letters were merely drawn slightly larger.
+%
+%    \begin{macrocode}
+%<*maj>
+% RUSTU.MF Program file for Roman Rustic `capitals'
+%
+
+%    \end{macrocode}
+%
+%
+% \begin{routine}{A}
+% The letter `A'.
+%    \begin{macrocode}
+cmchar "Rustic letter A";
+beginchar("A", 2u#+caprat*hstretch*(4/5x_height#+jut#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% right leg
+z1-z2=whatever*thick_tltobr;
+top y1=h;
+rt x2=w-pcshiftx-jut; bot y2=0;
+% for the left leg
+z3=9/10[z2,z1];
+x4=pcshiftx+footjut+extra_fhjut; bot y4=0;
+% code for foot
+x7=x4; y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);           % right leg
+draw_bow(3,4,bowoff);           % left leg
+draw_foot(7);                   % left leg foot
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "A"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{B}
+% The letter `B'. This is a tall letter
+%    \begin{macrocode}
+cmchar "Rustic letter B";
+beginchar("B", 2u#+caprat*hstretch*(7/10x_height#), caprat*(11/10x_height#), 0);
+adjust_fit(0,0);
+pcshiftx := u+hookjut+thin;
+pickup quill;
+% stem
+x1=x2=pcshiftx;
+y1=h; y2=0;
+% bottom bowl
+rt x3=x1; bot y3=thin;
+rt x5=w-u; y5 = 1/6h; 
+x4=0.4[x2,x5]; y4=0;
+lft x6=x2; y6=2/3h; 
+% top bowl
+z7=z6;
+x8=0.25[x4,x5]; top y8=y1;
+x9=0.5[x1,x8]; bot y9=h;
+z10=z1;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);                                 % the stem
+draw z3..z4{right}..z5..{dir(pangle+90)}z6;         % bottom bowl
+draw z7{pdir}..z8{up}..z9{left}..z10;                 % top bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "B"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{C}
+% The letter `C'.
+%    \begin{macrocode}
+cmchar "Rustic letter C";
+beginchar("C", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=pcshiftx+sqxside; y1=y3=h/2;
+x2=x4=w/2; top y2=h; bot y4=0;
+rt x5= rt x6=w-pcshiftx;
+top y5=1/5h; 
+top y6=4/5h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z5{-pdir}..{left}z4..z1..z2..z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "C"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{D}
+% The letter `D'.
+%    \begin{macrocode}
+cmchar "Rustic letter D";
+beginchar("D", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=pcshiftx+hookjut+thin;
+top y1=h; y2=0;
+% bowl
+rt x3=x1; bot y3=thin;
+rt x5=w-u; y5 = 2/5h; 
+x4=0.4[x2,x5]; y4=0;
+x6=x1; top y6=h; 
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw z3..z4{right}..z5{up}..z6;  % bowl
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,100);
+endchar; % end "D"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{E}
+% The letter `E'.
+%    \begin{macrocode}
+cmchar "Rustic letter E";
+beginchar("E", 2u#+caprat*hstretch*(4/10x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% top bar
+rt x3=x1; x4=w-u;
+top y3=top y4=h;
+% middle bar
+x5=x3; x6=x4;
+y5=y6=3/5h;
+% foot
+x7=x3; x8=x4;
+bot y7= bot y8=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw_squiggle(3,4,wiggle,srad);  % top bar
+draw_squiggle(5,6,wiggle,srad);  % middle bar
+draw_squiggle(7,8,wiggle,srad);  % bottom bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "E"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{F}
+% The letter `F'. This is a tall letter
+%    \begin{macrocode}
+cmchar "Rustic letter F";
+beginchar("F", 2u#+caprat*hstretch*(4/10x_height#), caprat*(6/5x_height#), 0);
+adjust_fit(0,0);
+pcshiftx := u +stem_offset;
+pickup quill;
+% stem
+x1=x2=pcshiftx;
+top y1=h; y2=0;
+% top bar
+x3=x1; x4=w-u;
+top y3=top y4=h;
+% middle bar
+x5=x3; x6=x4;
+y5=y6=2/3h;
+% foot
+x7=x3; x8=x4;
+bot y7= bot y8=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % stem
+draw_squiggle(3,4,wiggle,srad);  % top bar
+draw_squiggle(5,6,wiggle,srad);  % middle bar
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "F"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{G}
+% The letter `G'. Like a `C' but bottom curls inwards.
+%    \begin{macrocode}
+cmchar "Rustic letter G";
+beginchar("G", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=pcshiftx+sqxside; y1=y3=h/2;
+x2=x4=w/2; top y2=h; bot y4=0;
+rt x5= rt x6=w-pcshiftx;
+top y5=1/5h; 
+top y6=4/5h;
+lft x7=w/2; y7=h/2;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z7..z5{down}..{left}z4..z1..z2..z6;  % the bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "G"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{H}
+% The letter `H'.
+%    \begin{macrocode}
+cmchar "Rustic letter H";
+beginchar("H", 2u#+caprat*hstretch*(4/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+y100 = sqyside/2; x100 = pcshiftx+y100;  % square center
+pickup quill;
+% left stem and foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+% bar
+y5=y6=7/10h;
+lft x5=pcshiftx; rt x6=w-pcshiftx;
+% right stem
+rt x7=w-pcshiftx; top y7=h;
+x8=x7; bot y8=0;
+x9=x8-2thin; y9=0.5[y8,y7];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);              % left stem
+draw_hserif(1,2,srad);           % its serif
+draw_squiggle(5,6,wiggle,srad);  % the bar
+draw z7..z9..z8;                 % right stem
+ductus:=false;
+penlabels(1,1',2,2',3,4,5,6,7,7',8,8',99,99',100);
+endchar; % end "H"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{I}
+% The letter I.
+%    \begin{macrocode}
+cmchar "Rustic letter I";
+beginchar("I", 2u#+caprat*hstretch*(2footjut#+hookjut#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);               % stem and foot
+draw_hserif(1,2,srad);            % serif
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "I"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{J}
+% The letter `J'. This letter was not in the script, it being a later invention.
+%    \begin{macrocode}
+cmchar "Rustic letter J";
+beginchar("J", 4u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := 3u;
+pickup quill;
+% stem
+x1=x2=pcshiftx+2/3(w-4u);
+y1=h; y2=0;
+% top bar
+rt x4=w-u; top y4=h;
+x1-x3 = x4-x1; y3=y4;
+% bowl
+rt x5 = lft x3;
+top y5=2/5h;
+x7=x2; bot y7=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);              % stem
+draw_squiggle(3,4,wiggle,srad);    % top bar
+draw z7{left}..{pdir}z5;           % bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "J"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{K}
+% The letter `K'.
+%    \begin{macrocode}
+cmchar "Rustic letter K";
+beginchar("K", 2u#+caprat*hstretch*(x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the stem and its foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+lft x13=pcshiftx; bot y13=0;
+x2-x13=x14-x2; y14=y13;
+% upper diagonal and its top
+x3=x1; y3=h/2;
+x4=x1+y3; top y4=h;
+x5=x4-jut; x6-x4=x4-x5;
+top y5=top y6=h;
+x24=x4; y24=h;
+% bottom leg
+lft x7=x3; bot y7=y3;
+rt x9=w-pcshiftx; bot y9=0;
+x8=0.5[x7,x9]; y8=0.7[y7,y9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);             % the stem
+draw_hserif(1,2,srad);            % its serif
+draw z3--z4;                      % upper diagonal
+draw_head(24);
+draw z7..z8..z9;                  % bottom leg
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,100);
+endchar; % end "K"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{L}
+% The letter `L'. This is a tall letter.
+%    \begin{macrocode}
+cmchar "Rustic letter L";
+beginchar("L", 2u#+caprat*hstretch*(1/2x_height#), caprat*(6/5x_height#), 0);
+adjust_fit(0,0);
+pcshiftx := u+hookjut;
+pickup quill;
+x1=x2=pcshiftx+thin+hookjut;
+y1=h; y2=0;
+rt x3=x1; rt x4=w-u;
+bot y3= bot y4=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(1,2);            % stem
+draw_hserif(1,2,srad);           % serif
+draw_squiggle(3,4,wiggle,srad);  % foot
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "L"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{M}
+% The letter `M'. Like 2 As stuck together.
+%    \begin{macrocode}
+cmchar "Rustic letter M";
+beginchar("M", 2u#+caprat*hstretch*(6/5x_height#+jut#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% right a thick diag
+z11-z12=whatever*thick_tltobr;
+rt x12=w-pcshiftx-jut; bot y12=0;
+top y11=h;
+% left a thin diag
+pickup bowpen;
+x4=pcshiftx+footjut+extra_fhjut; bot y4=thin;
+z3=9/10[z2,z1];
+pickup quill;
+x7=x4; y7=0;   % for the foot
+% the two thin diags are parallel, and just shifted horizontally
+z13=9/10[z12,z11];
+z3-z4=z13-z14; y4=y14;
+% similarly for the two thick diags
+z1-z2=z11-z12; % y2=y12;
+x12-x2=1/3w;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+% draw left a
+draw_istem(1,2,srad);           % right leg
+draw_bow(3,4,bowoff);           % left leg
+draw_foot(7);                   % left leg foot
+% draw right a
+draw_istem(11,12,srad);
+draw_bow(13,14,bowoff);
+ductus:=false;
+penlabels(1,2,3,4,5,6,11,12,13,14,100);
+endchar; % end "M"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{N}
+% The letter `N'. 
+%    \begin{macrocode}
+cmchar "Rustic letter N";
+beginchar("N", 2u#+caprat*hstretch*(9/10x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left stem and foot
+x1=x2=pcshiftx+stem_offset;
+y1=h; y2=0;
+% right stem
+x5=x6=w-u-hookjut-thin;
+y5=y1; y6=y2;
+% diagonal
+x7=x1; y7=h;
+x9=x6; bot y9=0;
+x8=0.5[x7,x9]; y8=0.6[y7,y9];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % left stem
+draw_rusticstem(5,6);            % right stem
+draw_hserif(5,6,srad);           % its serif
+draw z7..z8..z9;                 % diagonal
+draw_serif(9,8,srad);            % its bottom serif
+ductus:=false;
+penlabels(1,2,5,6,7,8,9,100);
+endchar; % end "N"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{O}
+% The letter `O'.
+%    \begin{macrocode}
+cmchar "Rustic letter O";
+beginchar("O", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "O"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{P}
+% The letter `P'.
+%    \begin{macrocode}
+cmchar "Rustic letter P";
+beginchar("P", 2u#+caprat*hstretch*(5/10x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem and foot
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% bowl
+lft x7=x2; y7=1/2h;  % y7=2/3h;
+rt x8=w-pcshiftx; top y8=y1;
+z10=z1;
+x9=0.5[x1,x8]; y9=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);                    % stem
+draw z7{pdir}..z8{up}..z9{left}..z10;    % top bowl
+ductus:=false;
+penlabels(1,2,7,8,9,10,100);
+endchar; % end "P"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{Q}
+% The letter `Q'. 
+%    \begin{macrocode}
+cmchar "Rustic letter Q";
+beginchar("Q", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 
+                                                   caprat*(2/3thick#));
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the O shape
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+% the tail
+path p;
+p = z4{right}..{up}z3;
+z5 = directionpoint pdir of p;
+x7= x4+w/2; top y7=0;
+x6=0.5[x5,x7]; y6=y7;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;  % O shape
+draw z5..z6..z7;             % the tail
+ductus:=false;
+penlabels(0,1,2,3,4,5,6,6',7,100);
+endchar; % end "Q"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{R}
+% The letter `R'.
+%    \begin{macrocode}
+cmchar "Rustic letter R";
+beginchar("R", 2u#+caprat*hstretch*(4/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+numeric alpha, beta;
+alpha:=thin*(xpart pdir); beta:=thin*(ypart pdir);
+pickup quill;
+% stem
+x1=x2=pcshiftx+stem_offset;
+top y1=h; y2=0;
+% bowl
+lft x7=x2; bot y7=1/2h;
+rt x8=5/8w; top y8=y1;
+z10=z1;
+x9=0.5[x1,x8]; y9=h;
+% leg
+z11=z7 shifted (thin*pdir);
+rt x13=w-pcshiftx; bot y13=0;
+x12=0.5[x11,x13]; y12=0.7[y11,y13];
+% points defining the leg profile
+x11l=lft x11 + alpha; y11l=bot y11 + beta;
+x11r= rt x11 - alpha; y11r=top y11 - beta;
+x12l=0.6[lft x12, x12]; y12l=0.6[bot y12, y12];
+x12r=0.6[rt x12, x12];  y12r=0.6[top y12, y12];
+x14=w-pcshiftx-thin; y14=thin;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);                       % stem and foot
+draw z7{pdir}..z8{up}..z9{left}..z10;     % bowl
+pickup stylus;                            % drawing the leg
+filldraw z11l..z12l..{right}z14 & z14{left}..z12r..z11r--cycle;
+ductus:=false;
+penlabels(1,2,7,8,9,10,11,12,14,100);
+endchar; % end "R"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{S}
+% The letter `S'.
+%    \begin{macrocode}
+cmchar "Rustic letter S";
+beginchar("S", 2u#+caprat*hstretch*(3/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% for the foot
+lft x7=pcshiftx+extra_fhjut; bot y7=0;
+% the S curve
+rt x1=w-pcshiftx; top y1=h-thin;
+lft x3=pcshiftx+extra_fhjut; y3=0.75h;
+x4=0.5[x1,x3]; y4=0.5[y3,y5];
+x2=x4; top y2=h;
+x5=x1; y5=0.3h;
+x6=0.75w; bot y6=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{left}..z3{down}..z4..z5{down}..{-pdir}z6;  % S curve
+draw_squiggle(7,6,wiggle,srad);                       % base
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "S"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{T}
+% The letter `T'.
+%    \begin{macrocode}
+cmchar "Rustic letter T";
+beginchar("T", 2u#+caprat*hstretch*(2/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=w/2;
+y1=h; y2=0;
+lft x3=pcshiftx; top y3=h;
+rt x4=w-pcshiftx; y4=y3;
+rt x5=x2; bot y5= bot y6=0;
+rt x6=w-pcshiftx;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);            % the stem
+draw_squiggle(3,4,wiggle,srad);  % the top crossbar
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "T"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{U}
+% The letter `U'. This is a modern version as the font did not have a U.
+%    \begin{macrocode}
+cmchar "Rustic letter U";
+beginchar("U", 2u#+caprat*hstretch*(4/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the right stem
+x5=x6=w-pcshiftx-hookjut-thin; y5=h; y6=-thin;
+% left stem and bowl
+lft x1= lft x2=pcshiftx+jut;
+top y1=h; y2=2thick;
+x3=0.5[x1,x5]; bot y3=0;
+rt x4=x5; bot y4=0.25thick;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_rusticstem(5,6);                       % right stem
+draw_hserif(5,6,srad);                      % its serif
+draw_tlserif(1,2,srad);                     % left stem and serif
+draw z2{down}..z3{right}..{pdir}z4;         % the bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,11,16,100);
+endchar; % end "U"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{V}
+% The letter `V'. 
+% if you prefer).
+%    \begin{macrocode}
+cmchar "Rustic letter V";
+beginchar("V", 2u#+caprat*hstretch*(x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left side
+z1-z2=whatever*thick_tltobr;
+lft x1=pcshiftx+jut; top y1=h;
+bot y2=0;
+% right side
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut; top y3=h;
+pickup quill;
+x4=lft x2; y4=0;
+x5=x3; y5=h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);      % left part
+draw_bow(3,4,bowoff); % right part
+draw_head(5);         % and its head
+ductus:=false;
+penlabels(1,2,3,4,5,100);
+endchar; % end "V"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{W}
+% The letter `W'. This is a modern version as the font did not have a W.
+%    \begin{macrocode}
+cmchar "Rustic letter W";
+beginchar("W", 2u#+caprat*hstretch*(8/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left thick diagonal
+z1-z2=whatever*thick_tltobr;
+lft x1=pcshiftx+jut; top y1=h; bot y2=0;
+% right thin diagonal
+pickup bowpen;
+x13=w-pcshiftx-footjut-extra_fhjut; top y13=h-thin;
+x23=x13; y23=h;  % for the head
+bot y14=thin;
+pickup quill;
+% right thick diagonal
+z11-z12=z1-z2;
+x12-x2=1/3w; y12=y2;
+% left thin diagonal
+z3-z4=z13-z14;
+x4=x2;
+x14=x12;
+y3=y13;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);       % left and right thick diags
+draw_istem(11,12,srad);
+draw_bow(3,4,bowoff);       % left thin diag
+draw_bow(13,14,bowoff);     % right thin diag
+draw_head(23);              % its head
+ductus:=false;
+penlabels(1,2,3,4,11,12,13,14,23,100);
+endchar; % end "W"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{X}
+% The letter `X'.
+%    \begin{macrocode}
+cmchar "Rustic letter X";
+beginchar("X", 2u#+caprat*hstretch*(9/10x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% thick diagonal
+lft x1=pcshiftx+jut; top y1=h;
+rt x2= w-pcshiftx-jut; bot y2=0;
+% thin diagonal
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut-thin; top y3=h;
+x4=pcshiftx+footjut+extra_fhjut+thin; bot y4=0;
+x7=x3; y7=h;
+x8=x4; y8=0;
+pickup quill;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);            % thick diagonal
+draw_bow(3,4,bowoff);            % thin diagonal
+draw_head(7);                    % its head
+draw_foot(8);                    % its foot
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,100);
+endchar; % end "X"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{Y}
+% The letter `Y'. 
+%    \begin{macrocode}
+cmchar "Rustic letter Y";
+beginchar("Y", 2u#+caprat*hstretch*(4/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% left side
+lft x1=pcshiftx+jut; top y1=h;
+x2=1/2w; bot y2=1/3h;
+% right side
+pickup bowpen;
+x3=w-pcshiftx-footjut-extra_fhjut; top y3=h;
+lft x4=x2; bot y4=y2;
+pickup quill;
+x5=x3; y5=h;
+% leg
+x7=x2; y7=y2;
+x8=x7; y8=0;
+pickup bowpen;
+x10=lft x8; x11=rt x8;
+pickup stylus;
+bot y10= bot y11=thin;
+pickup quill;
+%% ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_istem(1,2,srad);     % left stroke
+draw_bow(3,4,bowoff);     % right stroke
+draw_head(5);             % its head
+draw_foot(8);             % the foot
+pickup stylus;            % the leg
+filldraw z7--z10--z11--cycle;
+ductus:=false;
+penlabels(1,2,3,4,5,7,8,9,100);
+endchar; % end "Y"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{Z}
+% The letter `Z'.
+%    \begin{macrocode}
+cmchar "Rustic letter Z";
+beginchar("Z", 2u#+caprat*hstretch*(4/5x_height#), caprat*x_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% bottom stroke
+lft x4=pcshiftx; bot y4=0;
+rt x6=w-pcshiftx; y6=y4;
+% top stroke
+x1=x4; top y1=h;
+rt x3 =7/8w-pcshiftx; y3=y1;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_squiggle(1,3,1/2wiggle,srad);    % top stroke
+draw_squiggle(4,6,1/2wiggle,srad);    % bottom stroke
+% the diagonal
+pickup stylus;
+draw z4--z3;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "Z"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+%
+%    The end of this file
+%    \begin{macrocode} 
+%</maj>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{The punctuation file}
+%
+% The main punctuation marks are defined in this file.
+%
+%    \begin{macrocode}
+%<*punct>
+% RUSTPUNCT.MF This file contains punctuation marks
+
+%    \end{macrocode}
+%
+%
+% \begin{routine}{,}
+%    The `,' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Comma";
+beginchar(",",2u#+hstretch*(comma_width#+dot_size#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=h/2;
+draw_pcomma(1,dot_size,comma_width);
+penlabels(1); 
+endchar; % end of ","
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{.}
+%    The `.' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Period";
+beginchar(".",2u#+hstretch*(dot_size#),x_height#,0);
+pcshiftx:=u;
+x1=w/2; y1=h/2;
+draw_pdot(1,dot_size);
+penlabels(1); 
+endchar; % end of "."
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{:}
+%    The `:' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Colon";
+beginchar(":",2u#+hstretch*(dot_size#),x_height#,0);
+pcshiftx:=u;
+x1=x2=w/2; y1=2/3h; y2=1/3h;
+draw_pdot(1,dot_size);
+draw_pdot(2,dot_size);
+penlabels(1,2); 
+endchar; % end ":"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{;}
+%    The `;' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Semicolon";
+beginchar(";",2u#+hstretch*(comma_width#+dot_size#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=x2=w-pcshiftx-(0.5hstretch*dot_size); y1=2/3h; y2=1/3h;
+draw_pdot(1,dot_size);
+draw_pcomma(2,dot_size,comma_width);
+penlabels(1,2); 
+endchar; % end of ";"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{'}
+%    The `'' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Apostrophe";
+beginchar("'",2u#+hstretch*(comma_width#+dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=h;
+draw_pcomma(1,dot_size,comma_width);
+penlabels(1); 
+endchar;  % end of "'"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{`}
+%    The ``' character.
+%    \begin{macrocode}
+
+cmchar "Rustic Reverse apostrophe";
+beginchar("`",2u#+hstretch*(comma_width#+dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=pcshiftx+(0.5hstretch*dot_size); y1=h;
+draw_plq(1,dot_size,comma_width);
+penlabels(1); 
+endchar;  % end of "`"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% The end of this file.
+%    \begin{macrocode}
+%</punct>
+%    \end{macrocode}
+%
+%
+% \subsection{The ligatures and dashes file}
+%
+%    The ligatured punctuation marks and dashes are defined in this file.
+%    \begin{macrocode}
+%<*lig>
+% RUSTLIG.MF Roman Rustic ligatured punctation and dashes
+
+%    \end{macrocode}
+%  First the ligtables.
+%    \begin{macrocode}
+
+ligtable "`": "`"=:oct"134";
+ligtable "'": "'"=:oct"042"; %% , "?" kern 2u#, "!" kern 2u#;
+
+ligtable "-": "-"=:oct"173";
+ligtable oct"173": "-"=:oct"174";
+
+%    \end{macrocode}
+%
+% \begin{routine}{''}
+%   The `''' ligature.
+%    \begin{macrocode}
+
+cmchar "Rustic closing quotes";
+beginchar(oct"042",2u#+hstretch*(comma_width#+3dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=w-pcshiftx-(0.5hstretch*dot_size); y1=y2=h;
+x2=x1-(2hstretch*dot_size);
+draw_pcomma(1,dot_size,comma_width);  % right
+draw_pcomma(2,dot_size,comma_width);  % left
+penlabels(1,2); 
+endchar; % end of "''"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{``}
+%   The ```' ligature.
+%    \begin{macrocode}
+
+cmchar "Rustic opening quotes";
+beginchar(oct"134",2u#+hstretch*(comma_width#+3dot_size#),4/3x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u;
+x1=pcshiftx+(0.5hstretch*dot_size); y1=y2=h;
+x2=x1+(2hstretch*dot_size);
+draw_plq(1,dot_size,comma_width); % left
+draw_plq(2,dot_size,comma_width); % right
+penlabels(1,2); 
+endchar; % end of "``"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{-}
+%   The `-' character.
+%    \begin{macrocode}
+
+cmchar "Rustic hyphen";
+beginchar("-",u#+hstretch*(0.8x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u/2;
+pickup quill;
+lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+draw z1--z2;  % bar
+penlabels(1,2); 
+endchar; % end of "-"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{--}
+%   The -- ligature. 
+%    \begin{macrocode}
+
+cmchar "Rustic en dash";
+beginchar(oct"173",u#+hstretch*(x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u/2;
+pickup quill;
+lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+draw z1--z2;  % bar
+penlabels(1,2); 
+endchar; % end of "--"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{---}
+%   The `---' ligature. The em dash is twice the width of the en dash.
+%    \begin{macrocode}
+
+cmchar "Rustic em dash";
+beginchar(oct"174",u#+hstretch*(2x_height#),x_height#,0);
+adjust_fit(0,0);
+pcshiftx:=u/2;
+pickup quill;
+lft x1 = pcshiftx; rt x2=w-pcshiftx; y1=y2=h/2;
+draw z1--z2;  % bar
+penlabels(1,2); 
+endchar; % end of "---"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% The end of this file.
+%    \begin{macrocode}
+%</lig>
+%    \end{macrocode}
+%
+% \subsection{The digits file}
+%
+%    These are arabic digits in the style of the book-hand. They are a modern
+% invention.
+%
+%    \begin{macrocode}
+%<*dig>
+% RUSTDIG.MF Program file for Roman Rustic `digits'
+%
+
+%    \end{macrocode}
+% 
+% \begin{routine}{1}
+% The digit `1'.
+%    \begin{macrocode}
+cmchar "Rustic digit 1";
+beginchar("1", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+x1=x2=w/2;
+y1=h; y2=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);               % stem and foot
+draw_hserif(1,2,srad);            % serif
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "1"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{2}
+% The digit `2'. This is like a stemless B.
+%    \begin{macrocode}
+cmchar "Rustic digit 2";
+beginchar("2", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% stem
+lft x1=pcshiftx; top y1=h-2thin;
+x2=1/2w; top y2= h;
+rt x3=w-pcshiftx; y3=3/4h;
+% squiggle
+x5=pcshiftx+extra_fhjut; bot y5=0;
+x6=w-pcshiftx-extra_fhjut; y6=y5;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z3{down}..{-pdir}z5;    % curve
+draw_squiggle(5,6,wiggle,srad);             % foot
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "2"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{3}
+% The digit `3'. This is like a stemless B.
+%    \begin{macrocode}
+cmchar "Rustic digit 3";
+beginchar("3", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% x values
+lft x3=pcshiftx; x10=x3;
+rt x5=w-pcshiftx; x8=x5-3thin;
+x4=0.5[x3,x5];
+x9=0.5[x10,x8];
+lft x6=pcshiftx+extra_fhjut; x7=x6;
+% y values
+bot y3=thin; top y10=h-2thin;
+y6=0.5[y3,y10]; y7=y6;
+bot y4=-thin; top y9=h+thin;
+y5=0.5[y3,y6];
+y8=11/12[y7,y10];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+%%draw_rusticstem(1,2);                                 % the stem
+draw z3..z4{right}..z5{up}...{-pdir}z6;                 % bottom bowl
+draw z7{pdir}..z8{up}..z9{left}..z10;                   % top bowl
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,8,9,10,100);
+endchar; % end "3"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{4}
+% The digit `4'.
+%    \begin{macrocode}
+cmchar "Rustic digit 4";
+beginchar("4", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% the stem
+x1=x2=w-pcshiftx-footjut-extra_fhjut;
+y1=h; y2=0;
+% the crossbar
+x3=pcshiftx+extra_fhjut; y3=0.33h;
+x4=w-pcshiftx-extra_fhjut; y4=y3;
+% the thin diagonal
+x5=lft x3; y5=bot y3+thin;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_footstem(1,2);               % stem and foot
+%%draw_hserif(1,2,srad);            % serif
+draw_squiggle(3,4,wiggle,srad);   % squiggle
+pickup stylus;
+draw z5{pdir}..z1;                % thin diagonal
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "4"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+%
+% \begin{routine}{5}
+% The digit `5'.
+%    \begin{macrocode}
+cmchar "Rustic digit 5";
+beginchar("5", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% for the foot
+lft x7=pcshiftx+extra_fhjut; bot y7=0;
+% for the top
+rt x1=w-pcshiftx-extra_fhjut; top y1=h;
+lft x2=pcshiftx+extra_fhjut; y2=y1;
+
+% the S curve
+x3=x2; y3=0.5h;
+x4=0.5[x1,x3]; y4=0.5[y3,y5];
+rt x5=w-pcshiftx; y5=0.3h;
+x6=0.75w; bot y6=0;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_squiggle(2,1,wiggle,srad);            % top squiggle
+draw z3{pdir}..z5{down}..{-pdir}z6;        % curve
+draw_squiggle(7,6,wiggle,srad);            % base
+pickup stylus;
+draw z2--z3;                               % vertical
+ductus:=false;
+penlabels(1,2,3,4,5,6,7,100);
+endchar; % end "5"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{6}
+% The digit `6'.
+%    \begin{macrocode}
+cmchar "Rustic digit 6";
+beginchar("6", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+rt x1=w-pcshiftx; top y1=h-2thin;
+x2=1/2w; top y2= h;
+lft x3=pcshiftx; y3=1/2h;
+x4=x2; bot y4=0;
+rt x5=w-pcshiftx; y5=1/4h;
+lft x6=rt x3; bot y6=y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{left}..z3{down}..z4{right}..z5{up}..{-pdir}z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "6"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% \begin{routine}{7}
+% The digit `7'.
+%    \begin{macrocode}
+cmchar "Rustic digit 7";
+beginchar("7", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+% top bar
+x1=pcshiftx+extra_fhjut;
+x2=w-pcshiftx-extra_fhjut;
+top y1=top y2=h;
+% bowed leg
+rt x4=w-pcshiftx-3thin; bot y4=0;
+x3=0.5[x2,x4]-2thin; y3=0.5[y2,y4];
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw_squiggle(1,2,wiggle,srad);
+draw z2..z3..z4;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "7"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{8}
+% The digit `8'.
+%    \begin{macrocode}
+cmchar "Rustic digit 8";
+beginchar("8", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx-o; rt x3=w-pcshiftx; y1=y3=3/4h;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+x5=x2; y5=h/2;
+x11=x1+o; x13=x3+o; y11=y13=1/4h;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z5..z11..z4..z13..z5..cycle;
+ductus:=false;
+penlabels(1,2,3,4,5,11,13,100);
+endchar; % end "8"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{9}
+% The digit `9'.
+%    \begin{macrocode}
+cmchar "Rustic digit 9";
+beginchar("9", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; bot y1=2thin;
+x2=1/2w; bot y2= 0;
+rt x3=w-pcshiftx; y3=1/2h;
+x4=x2; top y4=h;
+lft x5=pcshiftx; y5=3/4h;
+rt x6=lft x3; top y6=y3;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2{right}..z3{up}..z4{left}..z5{down}..{pdir}z6;
+ductus:=false;
+penlabels(1,2,3,4,5,6,100);
+endchar; % end "9"
+
+%    \end{macrocode}
+% \end{routine}
+%
+% \begin{routine}{0}
+% The digit `0'.
+%    \begin{macrocode}
+cmchar "Rustic digit 0";
+beginchar("0", 2u#+fig_width#, fig_height#, 0);
+adjust_fit(0,0);
+pcshiftx := u;
+pickup quill;
+lft x1=pcshiftx; rt x3=w-pcshiftx; y1=y3=h/2;
+x2=x4=w/2; top y2=h+o; bot y4=-o;
+%%ductus:=true;
+if ductus:
+  pickup stylus;
+fi
+draw z1..z2..z3..z4..cycle;
+ductus:=false;
+penlabels(1,2,3,4,100);
+endchar; % end "0"
+
+%    \end{macrocode}
+% \end{routine}
+%
+%
+% The end of this file.
+%    \begin{macrocode}
+%</dig>
+%    \end{macrocode}
+%
+%
+% \section{The font definition files} \label{sec:fd}
+%
+%    The font comes in normal and bold weights only.
+%
+%    \begin{macrocode}
+%<*fdot1>
+\DeclareFontFamily{OT1}{rust}{}
+%%  \DeclareFontShape{OT1}{rust}{m}{n}{ <-> rust10 }{} 
+  \DeclareFontShape{OT1}{rust}{m}{n}{ <-8.5> rust7 <8.5-15> rust10 <15-> rust17 }{} 
+  \DeclareFontShape{OT1}{rust}{m}{sl}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{OT1}{rust}{m}{it}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{OT1}{rust}{m}{sc}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{OT1}{rust}{m}{u}{ <-> sub * rust/m/n }{}
+%%  \DeclareFontShape{OT1}{rust}{bx}{n}{ <-> rustb10 }{}
+  \DeclareFontShape{OT1}{rust}{bx}{n}{ <-8.5> rustb7 <8.5-15> rustb10 <15-> rustb17 }{}
+  \DeclareFontShape{OT1}{rust}{bx}{it}{ <-> sub * rust/bx/n }{}
+  \DeclareFontShape{OT1}{rust}{bx}{sl}{ <-> sub * rust/bx/n }{}
+  \DeclareFontShape{OT1}{rust}{b}{n}{ <-> sub * rust/bx/n }{}
+%</fdot1>
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%<*fdt1>
+\DeclareFontFamily{T1}{rust}{}
+  \DeclareFontShape{T1}{rust}{m}{n}{ <-8.5> rust7 <8.5-15> rust10 <15-> rust17 }{}
+  \DeclareFontShape{T1}{rust}{m}{sl}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{T1}{rust}{m}{it}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{T1}{rust}{m}{sc}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{T1}{rust}{m}{u}{ <-> sub * rust/m/n }{}
+  \DeclareFontShape{T1}{rust}{bx}{n}{ <-8.5> rustb7 <8.5-15> rustb10 <15-> rustb17 }{}
+  \DeclareFontShape{T1}{rust}{bx}{it}{ <-> sub * rust/bx/n }{}
+  \DeclareFontShape{T1}{rust}{bx}{sl}{ <-> sub * rust/bx/n }{}
+  \DeclareFontShape{T1}{rust}{b}{n}{ <-> sub * rust/bx/n }{}
+%</fdt1>
+%    \end{macrocode}
+%
+% \section{The \Lpack{rustic} and \Lpack{allrust} package code} \label{sec:code}
+%
+% \subsection{The \Lpack{rustic} code}
+%
+%    The \Lpack{rustic} package is intended for use when typesetting examples
+% of the book-hand in a document that is otherwise typeset in normal fonts.
+%
+%    Announce the name and version of the package, which requires
+% \LaTeXe{}.
+%    \begin{macrocode}
+%<*usc>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rustic}[1999/05/01 v1.0 package for Roman Rustic fonts]
+%    \end{macrocode}
+%
+% \begin{macro}{\Tienc}
+%  A  macro for testing the value of |\encodingdefault|.
+%    \begin{macrocode}
+\providecommand{\Tienc}{T1}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\rustfamily}
+%    Selects the Roman Rustic font family in either T1 or OT1 encoding.
+%    \begin{macrocode}
+\ifx\Tienc\encodingdefault
+  \newcommand{\rustfamily}{\usefont{T1}{rust}{m}{n}}
+\else
+  \newcommand{\rustfamily}{\usefont{OT1}{rust}{m}{n}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textrust}
+%    Text command for the Roman Rustic font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textrust}{\rustfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+%    The end of this package.
+%    \begin{macrocode}
+%</usc>
+%    \end{macrocode}
+%
+% \subsection{The \Lpack{allrust} code}
+%
+%    The \Lpack{allrust} package is intended for use when the entire document
+% will be typeset in the book-hand. This is a minimal package. Because the
+% book-hand should not contain arabic digits a fuller package would redefine
+% anything numbered in \LaTeX{} to use roman instead of arabic numbering.
+% Also, because of the large |\baselineskip| many other aspects of \LaTeX{}
+% to do with vertical positioning should also be redefined. 
+%
+%
+%    Announce the name and version of the package, which requires
+% \LaTeXe{}. It also uses the \Lpack{rustic} package.
+%    \begin{macrocode}
+%<*uscall>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{allrust}[1999/05/01 v1.0 package for all Roman Rustic fonts]
+\RequirePackage{rustic}
+%    \end{macrocode}
+%
+% \begin{macro}{\Tienc}
+%  A  macro for testing the value of |\encodingdefault|.
+%    \begin{macrocode}
+\providecommand{\Tienc}{T1}
+%    \end{macrocode}
+% \end{macro}
+%
+%  Redefine the default fonts to be Roman Rustic, which has only one family 
+% member.
+% \begin{macro}{\rmdefault}
+% \begin{macro}{\sfdefault}
+% \begin{macro}{\ttdefault}
+%    \begin{macrocode}
+\renewcommand{\rmdefault}{rust}
+\renewcommand{\sfdefault}{rust}
+\renewcommand{\ttdefault}{rust}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% The `leading' in the book-hand is the same as the |x-height|, which is much
+% greater than for the CMR fonts. I have borrowed code from Frank Jensen's
+% \Lpack{beton} package~\cite{BETON} to do this.
+%
+% \begin{macro}{\rustic@baselineskip@table}
+% A table of the normal font sizes and the corresponding baselineskip.
+%    \begin{macrocode}
+\newcommand{\rustic@baselineskip@table}{%
+  <\@vpt>9.5%
+  <\@vipt>11.4%
+  <\@viipt>13.3%
+  <\@viiipt>15.2%
+  <\@xpt>19%
+  <\@xipt>20.9%
+  <\@xiipt>22.8%
+  <\@xivpt>27.36%
+  <\@xviipt>23.3%
+  <\@xxpt>38%
+  <\@xxvpt>47.5}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\rustic@new@setfontsize}
+%  This is a macro that replaces the |\@setfontsize| macro which is called by
+% the font size changing commands.
+%    \begin{macrocode}
+\newcommand{\rustic@new@setfontsize}[3]{%
+  \edef\@tempa{\def\noexpand\@tempb####1<#2}%
+  \@tempa>##2<##3\@nil{\def\rustic@baselineskip@value{##2}}%
+  \edef\@tempa{\noexpand\@tempb\rustic@baselineskip@table<#2}%
+  \@tempa><\@nil
+  \ifx\rustic@baselineskip@value\@empty
+    \def\rustic@baselineskip@value{#3}%
+  \fi
+  \rustic@old@setfontsize{#1}{#2}\rustic@baselineskip@value}
+%    \end{macrocode}
+% \end{macro}
+%
+% We had better give an author a means of using The Computer Modern fonts
+% if necessary.
+%
+% \begin{macro}{\cmrfamily}
+% \begin{macro}{\cmssfamily}
+% \begin{macro}{\cmttfamily}
+%    These macros select the Computer Modern Roman, Sans, and Typewriter 
+% font families in either the T1 or OT1 encodings.
+%    \begin{macrocode}
+\ifx\Tienc\encodingdefault
+  \providecommand{\cmrfamily}{\usefont{T1}{cmr}{m}{n}}
+  \providecommand{\cmssfamily}{\usefont{T1}{cmss}{m}{n}}
+  \providecommand{\cmttfamily}{\usefont{T1}{cmtt}{m}{n}}
+\else
+  \providecommand{\cmrfamily}{\usefont{OT1}{cmr}{m}{n}}
+  \providecommand{\cmssfamily}{\usefont{OT1}{cmss}{m}{n}}
+  \providecommand{\cmttfamily}{\usefont{OT1}{cmtt}{m}{n}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\textcmr}
+%    Text command for the Computer Modern Roman font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmr}{\cmrfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textcmss}
+%    Text command for the Computer Modern Sans font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmss}{\cmssfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\textcmtt}
+%    Text command for the Computer Modern Typewriter font family.
+%    \begin{macrocode}
+\DeclareTextFontCommand{\textcmtt}{\cmttfamily}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% At the start of the document, change the |\@setfontsize| macro and call
+% the normal font to implement the change.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \let\rustic@old@setfontsize=\@setfontsize
+  \let\@setfontsize=\rustic@new@setfontsize}
+\AtBeginDocument{\normalsize}
+%    \end{macrocode}
+%
+%
+%    The end of this package.
+%    \begin{macrocode}
+%</uscall>
+%    \end{macrocode}
+%
+%
+% \bibliographystyle{alpha}
+% \renewcommand{\refname}{Bibliography}
+% \begin{thebibliography}{GMS94a}
+% \addcontentsline{toc}{section}{\refname}
+%
+% \bibitem[And69]{ANDERSON69}
+% Donald M.~Anderson.
+% \newblock {\em The Art of Written Forms: The Theory and Practice of Calligraphy}.
+% \newblock Holt, Rinehart and Winston, 1969.
+%
+% \bibitem[Bol95]{BOLOGNA95}
+% Giulia Bologna.
+% \newblock {\em Illuminated Manuscripts: The Book before Gutenberg}.
+% \newblock Crescent Books, 1995.
+%
+% \bibitem[Day95]{DAY95}
+% Lewis F.~Day.
+% \newblock {\em Alphabets Old \& New}.
+% \newblock (3rd edition originally published by B.~T.~Batsford, 1910) 
+% \newblock Senate, 1995.
+%
+% \bibitem[Dro80]{DROGIN80}
+% Marc Drogin.
+% \newblock {\em Medieval Calligraphy: Its History and Technique}.
+% \newblock Allenheld, Osmun \& Co., 1980.
+%
+% \bibitem[Dru95]{DRUCKER95}
+% Johanna Drucker.
+% \newblock {\em The Alphabetic Labyrinth}.
+% \newblock Thames \& Hudson, 1995.
+%
+% \bibitem[Fir93]{FIRMAGE93}
+% Richard A.~Firmage.
+% \newblock {\em The Alphabet Abecedarium}.
+% \newblock David R~Goodine, 1993.
+%
+%
+% \bibitem[Har95]{HARRIS95}
+% David Harris.
+% \newblock {\em The Art of Calligraphy}.
+% \newblock DK Publishing, 1995.
+%
+% \bibitem[Jen95]{BETON}
+% Frank Jensen.
+% \newblock {\em The BETON package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1995.
+%
+%
+% \bibitem[Joh71]{JOHNSTON75}
+% Edward Johnston (ed. Heather Child).
+% \newblock {\em Formal Penship and Other Papers}.
+% \newblock Penthalic, 1971.
+%
+% \bibitem[Knu87]{CM}
+% Donald E.~Knuth.
+% \newblock {\em Computer Modern Typefaces}.
+% \newblock Addison-Wesley, 1987.
+%
+% \bibitem[Knu92]{METAFONT}
+% Donald E.~Knuth.
+% \newblock {\em The METAFONTbook}.
+% \newblock Addison-Wesley, 1992.
+%
+%
+% \bibitem[GMS94]{GOOSSENS94}
+% Michel Goossens, Frank Mittelbach, and Alexander Samarin.
+% \newblock {\em The LaTeX Companion}.
+% \newblock Addison-Wesley Publishing Company, 1994.
+%
+% \bibitem[Tho75]{THOMAS75}
+% Alan G.~Thomas.
+% \newblock {\em Great Books and Book Collectors}.
+% \newblock Weidenfield and Nichoson, 1975.
+%
+% \bibitem[Wil99a]{DOCMFP}
+% Peter R.~Wilson.
+% \newblock {\em The DOCMFP Package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1999.
+%
+% \bibitem[Wil99b]{ROMANNUM}
+% Peter R.~Wilson.
+% \newblock {\em The ROMANNUM Package}.
+% \newblock (Available from CTAN in \texttt{macros/latex/contrib/supported}). 
+% \newblock 1999.
+%
+% \end{thebibliography}
+%
+%
+% \Finale
+% \PrintIndex
+%
+\endinput
+
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+
+

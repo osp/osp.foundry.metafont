@@ -1,0 +1,4 @@
+mode_setup; baseh#:=3pt#; upph#:=4pt#; dowh#:=4pt#; basew#:=5pt#;
+            xsc:=0.6pt; ysc:=0.2pt;
+input script.mf;
+end;

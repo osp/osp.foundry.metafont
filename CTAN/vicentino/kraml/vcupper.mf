@@ -1,0 +1,389 @@
+% upper case:
+slant := upperslant;
+currenttransform := identity slanted slant;
+
+beginchar("A", 2.75sw#, ch#, 0); "the letter A";
+pickup lower_pen;
+lft.x1=w-rt.x5=0; x2=1.25tw; w-x4=tw; 
+x3= if modern: .56[x2,x4]
+else: x4-(y3-y4)*upperslant
+fi;
+top.y1=bot.y2=bot.y4=0; top.y3=h; y5=3/4th;
+path p;
+p=z1{right}..z2..tension3..z3---z4...{dir35}z5;
+draw if modern: subpath(0.5,3.37) of fi p;
+z7=(subpath(2,3) of p) horintersection 1/3h;
+y6=y7; rt.x6=x2+.25s;
+draw if modern: subpath(0.18,1) of fi z6..z7;
+end_char;
+
+beginchar("B", 2.25sw#, ch#, 0); "the letter B";
+pickup lower_pen;
+x1=x2+tw=1.5tw; x3=w-2.35tw; x4=.53[x2,x3];
+x1'=x1''=tw; y1'=h-4.5th; y1''=4.5th;
+top.y1=h; y2=-th; top.y3=h; y4=.56h; bot.y5=0;
+z5=(z1''{down}...z2{dir215}) horintersection y5;
+path curve; 
+curve=z1{dir215}...z1'{down}..z1''{down}..z5..z2{dir215}
+      ..z3{right}..{left}z4 & z4{right}..tension.75..{dir155}z5;
+
+draw subpath(0.1,3) of curve;
+draw if modern: subpath(4.9,7) else: subpath(4.87,7) fi of curve;
+end_char;
+
+beginchar("C", 2.75sw#, ch#, 0); "the letter C";
+pickup lower_pen;
+lft.x1=0; x4=tw; x2-3s=x3-2s=x5=w/2; x6=w-.5tw;
+y1=y2=.7h; y3=h; y5=0; y6=1.5th; y4=.5h;
+path curve;
+curve=z1{dir35}..tension.9..z2{dir35}..tension.85..z3{left}..z4..z5{right}..z6;
+draw if modern: subpath(1.25,5) else: subpath(1,5) fi of curve;
+end_char;
+
+beginchar("D", 2.5sw#, ch#,0); "the letter D";
+pickup lower_pen;
+x1=x2+tw=x1'+.5tw; x3=x1+1.1tw; rt.x4=w-.25s;
+x1'=x1''=1.1tw; y1'=h-4.25th; y1''=4.25th;
+top.y1=h; y2=-th; top.y3=h; y4=.53h; bot.y5=0;
+z5=(z1''{down}...z2{dir215}) horintersection y5;
+lft.z3'=(.1s, h-th);
+path stem, curve; 
+stem=z1{dir215}...z1'{down}..z1''{down}..z5;
+curve=z3'{dir36}..z1..z3...z4{down}..tension.85..{dir164}z5;
+draw stem;
+draw if modern: subpath(.25,4) of fi curve;
+end_char;
+
+beginchar("E", 2.5sw#, ch#, 0); "the letter E";
+pickup lower_pen;
+lft.x1=0; x4=tw; x2-3s=x3-2s=x5=w/2; x6=w-.5tw;
+y1=y2=.7h; y3=h; y5=0; y6=1.5th; y4=.5h;
+path curve;
+curve=z1{dir35}..tension.9..z2{dir35}..tension.85..z3{left}..z4..z5{right}..z6;
+draw if modern: subpath(1.25,5) else: subpath(1.15,5) fi of curve;
+y7=y8; x7=.5tw; y7=.52h;
+x8=w-1.25tw;
+draw z7--z8;
+end_char;
+
+beginchar("F", 2.5sw#, ch#, 0); "the letter F";
+pickup lower_pen;
+x1=x2=.475w; y2=0;
+lft.x3=0; y3=-2/3dh; top.y1=h;
+path p;
+p=z1..z2{down}...{dir150}z3;
+lft.x4=.2tw; x5=.26w; x6=.8w; rt.x7=w-.1s;
+y4=h-4.5th; top.y5+.15s=top.y6=h; y7=h; 
+path curve; 
+curve=z4{dir125}..z5..tension1.25..z1---z6...z7;
+draw if modern: subpath(0,1.7) of fi p;
+draw if modern: subpath(.6,3.65) of fi curve;
+y7'=y8;
+x7'=w/3; y7'=.55[y3,y1];
+x8=w-.77tw;
+draw if modern: subpath(.09,.9) of fi (z7'--z8);
+end_char;
+
+beginchar("G", 2.75sw#, ch#, 0); "the letter G";
+pickup lower_pen;
+lft.x1=0; x4=3/4tw; x2-3s=x3-2s=x5=w/2; x6=w-.7tw;
+x8=x6; x7-s=w/2;
+y7=y8-.18th=2/3xh;
+y1=y2=.7h; y3=h; y5=0; y6=1.5th; y4=.48h;
+path curve, second;
+curve=z1{dir35}..tension.9..z2{dir35}..tension.85..z3{left}..z4..z5{right}..z6;
+second= z7{dir14}...z8 softjoin z8{dir260}..{down}z6;
+draw if modern: subpath(1.3,5) else: subpath(1.15,5) fi of curve;
+draw second;
+end_char;
+
+beginchar("H", 2.65sw#, ch#, 0); "the letter H";
+pickup lower_pen;
+x1=x2=x3+.75s=1.5tw; y2=3th;
+bot.y3=0; top.y1=h;
+y1'=h-1.25th; z1-z1'=whatever*dir25;
+path p,q;
+p=z1'..tension11..z1{down}..z2{down}...{dir200}z3;
+draw if modern: subpath(.75,2.95) of fi p;
+rt.x4=w-1/3s; x5+1/2s=x6=w-1.2tw; rt.x7=w-.5s;
+top.y4=h; y5=.52h; bot.y6=0; y7=th;
+q=z4{dir169}...z5{down}...{right}z6...{dir35}z7;
+draw if modern: subpath(.12,2.2) of fi q;
+y8=y5; x8=.8tw; draw if modern: subpath(.05,1) of fi (z8--z5);
+if not.modern: 
+cap_bot_serif(x2);
+fi
+end_char;
+
+beginchar("I", 1.5sw#, ch#, 0); "the letter I";
+pickup lower_pen;
+x1=x2=x3+.75s=w/2 +.25s; y2=3th;
+bot.y3=0; top.y1=h;
+path p;
+p=z1..z2{down}...{dir200}z3;
+draw if modern: subpath(0,1.95) of fi p;
+if not.modern: 
+cap_top_serif(x2,1.18tw);
+cap_bot_serif(x2);
+fi
+end_char;
+
+beginchar("J", 1.5sw#, ch#, 0); "the letter J";
+pickup lower_pen;
+x1=x2=w/2 +.25s; y2=0; rt.x3=-s;
+y3=-2/3dh; top.y1=h;
+path p;
+p=z1..z2{down}...{dir150}z3;
+draw if modern: subpath(0,1.95) of fi p;
+if not.modern: 
+cap_top_serif(x2,1.18tw);
+fi
+end_char;
+
+beginchar("K", 2.5sw#, ch#, 0); "the letter K";
+pickup lower_pen;
+x1=x2=x3+.75s=1.5tw; y2=3th;
+bot.y3=0; top.y1=h;
+y1'=h-1.25th; z1-z1'=whatever*dir25;
+path p;
+p=z1'..tension11..z1{down}..z2{down}...{dir200}z3;
+draw if modern: subpath(0.7,2.95) of fi p;
+pickup lower_pen;
+x4=w-tw; lft.x5=rt.x2; x6=w+1.5tw;
+y4=h; y5=.53h; y6=-1.33th;
+path q;
+q=z4{dir-80}..{dir225}z5 & z5{dir-49}..tension if modern: 1.4 else: 1.2 fi
+        ..{dir35}z6;
+draw if modern: subpath(0.04,1.66) of fi q;
+if not.modern:
+cap_bot_serif(x2);
+fi
+end_char;
+
+beginchar("L", 2.25sw#, ch#, 0); "the letter L";
+pickup lower_pen;
+x3'-.5s=x4'=1.1tw; x2-s=x3=w/2+1s; lft.x5=0.5s; x6=w-.5tw; x6'=w-2tw;
+y2=.7h; y3=h; y5=bot.y5'=bot.y6'=0; 
+y6=1.5th; y4'=2th; y3'=h-2.5th;
+path p, q;
+p=z2{dir35}..z3{left}..tension.95..z3'..
+      tension if modern: 1.9 else: 1.5 fi ..z4'..z5{dir205};
+z5'=p horintersection y5';
+q = z5'{dir if modern: 10 else: 15 fi}..z6'{right}..{dir80}z6;
+draw if modern: subpath(1.33,3.8) else: subpath(0,4) fi of p;
+draw if modern: subpath(0,1.8) of fi q;
+labels(3',4');
+end_char;
+
+beginchar("M", 3.5sw#, ch#, 0); "the letter M";
+pickup lower_pen;
+lft.x1=.1s; x3=w/2+1/4s; x2-.5s=w-x4=1.8tw; rt.x6=w-.15s; x5=w-tw;  
+bot.y1=0; bot.y3=
+bot.y5=0; y6=th; top.y2=y4=h;
+x1'=1.15tw; y1'=th;
+z2'=(1.3tw,h);
+path p,q;
+p = z1{dir-55}..z1'..tension1.4..{dir78}z2;
+q = z2'{dir40}.. z2{dir-62}..tension if modern: 1.9 else: 1.7 fi ..z3{down}
+    & z3{dir89}..tension1.15..z4{dir70}
+    & z4{dir280}..tension if modern: 6 else: 5 fi ..z5{right}..z6;
+draw if modern: subpath(.36,2) of fi p;
+draw if modern: subpath(.8,4.3) of fi q;
+end_char;
+
+beginchar("N", 2.75sw#, ch#, 0); "the letter N";
+pickup lower_pen;
+lft.x1=.2s; x4=w; x2=1.5tw; x3=w-1.2tw;
+bot.y1=0; bot.y3=.66s; top.y2=y4=h+.1s;
+x1'=1.25tw; y1'=.5th; z2'=(.75tw,h);
+bot.rt.z3'=(w,0); z4'=(w-1.15tw, h-1.2th);
+path p,m,mt,q;
+p = z1{dir-56}..z1'...{up}z2 ;
+q = z3{dir96}..tension2..z4'...{dir-22}z4;
+m = z2'{dir40} .. z2{dir-55}..tension if modern: 1.15 else: 1.05 fi ..z3
+    ..{dir30}z3';
+draw if modern: subpath(.67,2) of fi p;
+draw if modern: subpath(.83,2.5) of fi m;
+draw if modern: subpath(0,1.4) of fi q;
+end_char;
+
+beginchar("O", 2.75sw#, ch#, 0); "the letter O";
+pickup lower_pen;
+numeric dev; dev=3/4s;
+rt.x1=w-s; lft.x3=s; 
+x2-dev=x4+dev=w/2; 
+y1-dev=y3+dev=.52h;
+top.y2=h; bot.y4=0;
+draw superellipse(z1,z2,z3,z4,.74);
+end_char;
+
+beginchar("P", 2.25sw#, ch#, 0); "the letter P";
+pickup lower_pen;
+x1=x2=x3+.75s=1.5tw; y2=3th;
+bot.y3=0; top.y1=h;
+path p;
+p=z1..z2{down}...{dir200}z3;
+lft.x4=.1s; x5=.55w; x6=w-.6tw; lft.x7=rt.x1+.1s;
+y4=h-th; top.y5=h; y6=.74h; y7=.45h;
+path curve; 
+curve=z4{dir36}..z1..z5..{down}z6..{dir158}z7;
+draw p;
+draw if modern: subpath(.55,4) of fi curve;
+if not.modern: 
+cap_bot_serif(x2);
+fi
+end_char;
+
+beginchar("Q", 2.75sw#, ch#, 0); "the letter Q";
+pickup lower_pen;
+numeric dev; dev=3/4s;
+rt.x1=w-s; lft.x3=s; 
+x2-dev=x4+dev=w/2; 
+y1-dev=y3+dev=.52h;
+top.y2=h; bot.y4=0;
+path p,q;
+p=superellipse(z1,z2,z3,z4,.74);
+z5 = (1.2tw,-th); z4'=(x4,0);
+z6 = (w+1.5tw,-1.33th); q=z5{dir30}..z4'{right}..{dir35}z6;
+draw p; draw if modern: subpath(.35,1.7) of fi q;
+end_char;
+
+beginchar("R", 2.5sw#, ch#, 0); "the letter R";
+pickup lower_pen;
+x1=x2=x3+.75s=1.5tw; y2=3th;
+bot.y3=0; top.y1=h;
+path p;
+p=z1..z2{down}...{dir200}z3;
+lft.x4=0; x5=.55w; x6=w-1.33tw; lft.x7=rt.x1+.1s;
+y4=h-th; top.y5=h; y6=.77h; y7=.52h;
+x9=w+ if twisted: .3 else: 1.5 fi tw; 
+y9=if twisted: 1.95th else: -1.33th fi; 
+x7'= if twisted:.5 else:.36 fi[x7,x9];
+y7'= if twisted: .77 else:.36 fi[y7,y9];
+path curve; 
+curve=z4..z1..z5..{down}z6..z7 & z7{dir-10}..if modern: tension.8.. fi
+      z7'..if twisted: tension.77..{dir85} else:{dir36} fi z9;
+draw p;
+draw if modern: if twisted: subpath(.55,5.7) else: subpath(.55,5.4) fi of fi 
+curve;
+if not.modern: cap_bot_serif(x2); fi
+end_char;
+
+beginchar("S", 2.35sw#, ch#, 0); "the letter S";
+pickup lower_pen;
+x1=x2=w/2; if modern: top. else: fi y1=h; bot.y2=0;
+x3=1.25tw; rt.x4=w-.5s; y3=.78h; y4=.3h;
+x5=w-1.2tw; lft.x6=0.75s; y5=y3+1.15th; y6=y4-1.75th;
+path trial,p;
+trial = z3{down}..tension1.1..{down}z4;
+z7 = trial intersectionpoint (z6{up}..{up}z5);
+p = z7..tension1.3..z5..z1{left}..z3{down}..tension1.1..
+z4{down}..z2{left}..z6..tension2.5..cycle;
+draw subpath if modern:(.77,6.11) else: (.75,6.23) fi of p;
+end_char;
+
+beginchar("T", 2.5sw#, ch#, 0); "the letter T";
+pickup lower_pen;
+x1=x2=x3+.75s=.56w; y2=3th;
+bot.y3=0; top.y1=h;
+path p;
+p=z1..z2{down}...{dir200}z3;
+lft.x4=.2tw; x5=.26w; x6=.8w; rt.x7=w-.1s;
+y4=h-4.5th; top.y5+.15s=top.y6=h; y7=h; 
+path curve; 
+curve=z4{dir125}..z5..tension1.25..z1---z6...z7;
+draw p;
+draw if modern: subpath(.62,3.53) of fi curve;
+if not.modern: 
+cap_bot_serif(x2);
+fi
+end_char;
+
+beginchar("U", 2.6sw#, ch#, 0); "the letter U";
+pickup lower_pen;
+x3=2.1tw; x4=x5=w-1.1tw; x1=if modern: 1.5 else:2 fi tw; rt.x6=w;
+lft.x1'=s; y1'=.4h;
+top.y4=h; bot.y3=bot.y5=0;
+top.y1=h; y6=1.25th;
+x4'=x4-.25s; y4'=xh-s;
+y2'=h-.85th; z4-z2'=whatever*dir22;
+path lstem, rstem;
+lstem=z1..{down}z1'..z3{right}..tension1.2..{dir80}z4';
+rstem=z2'..tension11..z4{down}..z4'..tension5.5..z5{right}..
+            tension1.2..{dir36}z6;
+draw lstem;
+draw if modern: subpath(.67,3.3) of fi rstem;
+if not.modern: cap_top_serif(x1-.2tw,.2tw); fi
+labels(4');
+end_char;
+
+beginchar("V", 2.6sw#, ch#, 0); "the letter V";
+pickup lower_pen;
+x4-x5=.85tw;
+x1=if modern:1.25 else: 2 fi tw; rt.x4=w-.85tw; x3=1/3[x1,x4];
+top.y4=h; top.y1=h; y5=h-1.5th; bot.y3=0;
+path stem;
+stem =z1{dir200}..tension3..
+     z3{right}..tension2.5..z4{left}..tension1.5..z5;
+draw if modern: subpath(0,2.1) of fi stem;
+if not.modern: cap_top_serif(x1-.2tw,.2tw); fi
+end_char;
+
+beginchar("W", 3.25sw#, ch#, 0); "the letter W";
+pickup lower_pen;
+x7-x8=.9tw;
+x1=if modern:1.25 else: 2 fi tw; rt.x7=w-.85tw; x3=1/3[x1,x4];
+x7-x4=x6-x3=x4-x1;
+top.y7=top.y1=h; y8=h-1.5th; bot.y3=bot.y6=0; y4=xh+s;
+path lstem, rstem;
+lstem=z1{dir200}..tension3..
+    z3{right}..tension2.25..z4{dir125}; 
+rstem=z4{dir-10}..tension6..z6{right}..tension2.5..z7{left}..tension1.5..z8;
+draw if modern: subpath(0,2.9) of fi lstem;
+draw if modern: subpath(0.1,2.15) of fi rstem;
+if not.modern: cap_top_serif(x1-.2tw,.2tw); fi
+end_char;
+
+beginchar("X", 2.65sw#, ch#, 0); "the letter X";
+pickup lower_pen;
+x1=1.3tw; lft.x5=.5s; x6=1tw; lft.x1'=.275tw;
+x7=w-1.25tw; rt.x8=w-s; rt.x4=w-1/3s; x3=w-1.25tw;
+top.y7=h; top.y1=h; y8=h-1.25th; y1'=h-th;
+y5=y4=1.25th; 0=bot.y6=bot.y3;
+path nwso, swno;
+nwso=z1'..z1{right}..tension if modern:8 else: 6 fi
+      ..{right}z3...{dir35}z4;
+swno=z5..tension2..z6{right}..tension2.5..{right}z7...{dir-65}z8;
+draw if modern: subpath(.7,2.3) of fi nwso;
+draw if modern: subpath(.8,2.2) of fi swno;
+end_char;
+
+beginchar("Y", 2.5sw#, ch#, 0); "the letter Y";
+pickup lower_pen;
+x2=w/2; lft.x1=w-rt.x3=.25s;
+bot.y2=0; top.y1=top.y3=h;
+z8=(x2,.4xh);
+path lp,rp;
+lp=z1{dir35}..tension1.625..{dir267}z8---z2;
+rp=z8{up}..tension1.45..{dir-20}z3;
+draw if modern: subpath(.08,2) of fi lp;
+draw if modern: subpath(0,.9) of fi rp;
+if not.modern: cap_bot_serif(x2); fi
+end_char;
+
+beginchar("Z", 2.35sw#, ch#, 0); "the letter Z";
+pickup lower_pen;
+lft.x1=lft.x4=0.25tw; rt.x3+1/3tw=w; 
+x2=1.25tw; 
+top.y2=top.y3=h; y1=h-1.5th; bot.y4=0;
+z6=(w+1.5tw, -1.33th);
+path stem;
+stem=z1{dir38}...z2..
+     if modern: tension 1.2 else: tension.85 fi ..
+     {dir40}z3 &  z3..tension6.. {dir265}z4 &
+     z4{dir35}..{dir35}z6;
+draw if modern: subpath(.25,3.77) of fi stem;
+y7=y8=.55h; x7+.75tw=x8-.925tw=w/2;
+draw z7--z8;
+end_char;
+

@@ -1,0 +1,258 @@
+% \iffalse
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[latin1]{inputenc}
+\usepackage{frcursive,url}
+\title{French Cursive for \LaTeX}
+\author{Emmanuel \textsc{Beffara}\\\url{manu@beffara.org}}
+\date{version 1.2, February 2nd, 2004}
+\begin{document}
+\DocInput{frcursive.dtx}
+\end{document}
+%</driver>
+% \fi
+% \maketitle
+%
+% \section{Presentation}
+%
+% French Cursive is a cursive hand-writing font family. Its design is based on
+% the French academic tradition for running-hand. The base shape is upright
+% with lightly contrasted stems and hairlines. All lowercase letters are
+% connected, but most uppercase are independent.
+%   \vspace{-3ex}
+% \begin{center}
+%   \newcommand{\exmpl}[2]{%
+%     #1&\cursive#2\relax The quick brown fox jumps over the lazy dog.}
+%   \linespread{1.5}\selectfont
+%   \begin{tabular}{ll}
+%     style & example \\ \hline \noalign{\smallskip}
+%     \exmpl{regular}{} \\
+%     \exmpl{bold-extended}{\bfseries} \\
+%     \exmpl{slanted}{\slshape} \\
+%     \exmpl{calligraphic}{\calseries} \\
+%     \exmpl{fixed-thickness}{\ftseries} \\
+%     wide & \cursive\wideseries The quick brown fox jumps \dots \\
+%     \exmpl{academic}{\acadshape}
+%   \end{tabular}
+% \end{center}
+% The extra styles come with associated macros:
+% \begin{center}
+%   \begin{tabular}{lll}
+%     style & environment & local macro \\ \hline
+%     cursive & \texttt{cursive} & \texttt{\string\textcursive} \\
+%     calligraphic & \texttt{calseries} & \texttt{\string\textcal} \\
+%     fixed-thickness & \texttt{ftseries} & \texttt{\string\textft} \\
+%     wide & \texttt{wideseries} & \texttt{\string\textwide} \\
+%     academic & \texttt{acadshape} & \texttt{\string\textacad} \\
+%   \end{tabular}
+% \end{center}
+%
+% For a given design size, the choice was made to make the base height (1\,ex)
+% equal to the one for Computer Modern faces, \mbox{i.e.} small letters like
+% ``a'' have the same height in both fonts at 10pt (namely $155/36$ points).
+% As you can see, the ascending and descending loops are larger than the
+% largest letters in Computer Modern and other roman fonts. For this reason,
+% the space between lines has to be augmented a lot. We must actually use a
+% |\linespread| value of $3/2$ in paragraphs that contain cursive text.
+%
+% Inter-letter links are inserted using a complex ligature system. Since
+% ligatures are incompatible with \TeX's way of composing accented letters,
+% all accented letters have to be provided by the font itself, therefore the
+% encoding used is T1. Though technically the font can be used in standard OT1
+% encoding, this is only suitable if no accented character is to be used,
+% therefore OT1 encoding is not the default.
+%
+% \section{Interface}
+%
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{frcursive}
+  [2004/02/01 v1.2 support package for French Cursive]
+%    \end{macrocode}
+%
+% \subsection{Package options}
+%
+% \begin{macro}{OT1}
+% The default encoding used for the font is T1, but we provide the option
+% ``OT1'' to use this encoding instead.
+%    \begin{macrocode}
+\newcommand{\frcursive@enc}{T1}
+\DeclareOption{OT1}{%
+  \renewcommand{\frcursive@enc}{OT1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{default}
+% By default we don't change the font for the whole document. However, one
+% might want to typeset a whole text in French Cursive. For this purpose, we
+% provide the option ``default''. We must delay the redefinition of the
+% default face in order to take care of these encoding issues.
+%    \begin{macrocode}
+\newif\if@frcursive@default
+\@frcursive@defaultfalse
+\DeclareOption{default}{%
+  \@frcursive@defaulttrue}
+%    \end{macrocode}
+% \end{macro}
+%
+% These are the only options we provide.
+%    \begin{macrocode}
+\ProcessOptions\relax
+%    \end{macrocode}
+%
+% Now we can change fonts if asked for it.
+%    \begin{macrocode}
+\if@frcursive@default
+\renewcommand{\rmdefault}{frc}
+\linespread{1.5}
+\RequirePackage[T1]{fontenc}
+\fi
+%    \end{macrocode}
+%
+%
+% \subsection{Macros}
+%
+% \begin{macro}{\cursive}
+% The main macro we define is obviously the one that switches to cursive font.
+% What it has to do is change the font family and encoding, and also change
+% the line spread, because letters in French Cursive are larger. We define
+% this as an environment because it can be used either in plain \TeX\ style as
+% |{\cursive |\emph{text}|}| or as a \LaTeX\ environment.
+%    \begin{macrocode}
+\newenvironment{cursive}{%
+  \fontencoding{\frcursive@enc}%
+  \fontfamily{frc}%
+  \linespread{1.5}%
+  \selectfont}{%
+  \par}
+%    \end{macrocode}
+% For the sake of completeness, we provide the alternative form for short
+% cursive texts as |\textcursive{|\emph{text}|}|:
+%    \begin{macrocode}
+\newcommand{\textcursive}[1]{{\cursive#1}}
+%    \end{macrocode}
+% However, take care that the effect of the |\linespread| macro only appears
+% when changing paragraphs, which means that the |\par| must appear inside the
+% group where |\cursive| is used. That is why we put it at the end of the
+% |cursive| environment.
+% \end{macro}
+%
+% \begin{macro}{\calseries}
+% \begin{macro}{\textcal}
+% One of the variants of the typeface is called ``calligraphic''. It is a
+% series like ``medium'' and ``bold'', with strong stems and thing hairlines.
+% We thus provide a macro to use this series. Using this macro when not using
+% the \texttt{frc} family will not work.
+%    \begin{macrocode}
+\newenvironment{calseries}{\fontseries{cal}\selectfont}{}
+%    \end{macrocode}
+% We also provide a variant of this macro in the style of |\textbf|:
+%    \begin{macrocode}
+\newcommand{\textcal}[1]{{\calseries#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\ftseries}
+% \begin{macro}{\textft}
+% Another variant is called ``fixed-thickness'', it is also a series like
+% ``medium'' and ``bold'', but with a constant line thickness We provide a
+% macro to use this series. As before, using this macro when not using the
+% \texttt{frc} family will not work.
+%    \begin{macrocode}
+\newenvironment{ftseries}{\fontseries{ft}\selectfont}{}
+\newcommand{\textft}[1]{{\ftseries#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\wideseries}
+% \begin{macro}{\textwide}
+% There is a variant with wide inter-letter links, we declare it a as a new
+% series called ``wide''. This is also specific to French Cursive.
+%    \begin{macrocode}
+\newenvironment{wideseries}{\fontseries{w}\selectfont}{}
+\newcommand{\textwide}[1]{{\wideseries#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\acadshape}
+% \begin{macro}{\textacad}
+% In the same spirit, we now define a pair of macros for accessing the
+% ``academic'' shape, the one with integer height ratios between base height,
+% ascenders and descenders. This also will not work with other font families.
+%    \begin{macrocode}
+\newenvironment{acadshape}{\fontshape{ac}\selectfont}{}
+\newcommand{\textacad}[1]{{\acadshape#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%
+% \subsection{Workbook lines}
+%
+% The following macro is an experimental mechanism for drawing horizontal
+% lines behind cursive text, in the style of children's workbooks.
+% \begin{center}
+%   \cursive\acadshape
+%   \seyes{Here is an example of its behaviour.}
+% \end{center}
+% I took this idea from C. Verchery's typeface family Plum. His approach was
+% to create a version (named Seyes) with the lines in them. Although this
+% would be rather trivial to implement with Metafont, it would not work with
+% \TeX, in particular because of its handling of spaces. Therefore my approach
+% is to put the rules using \TeX\ commands, which also allows, for instance,
+% for changing their color independently of the text.
+%
+% \begin{macro}{\seyesThickness}
+% The default thickness of the rules will be a twentieth of a millimeter,
+% which can be changed be redefining the |\seyesThickness| length:
+%    \begin{macrocode}
+\newlength{\seyesThickness}
+\setlength{\seyesThickness}{0.05mm}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\seyesDefault}
+% The default code for changing colors is contained in |\seyesDefault|, which
+% is empty by default. One can redefine it for instance to |\color{blue}| to
+% make the rules blue.
+%    \begin{macrocode}
+\newcommand{\seyesDefault}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\seyes}
+% The main macro thus takes the text as argument and behaves as a box with
+% this text in it and the lines behind. The width of the box is the one of the
+% text, while its height and depth are the maximal ones in the font. We
+% actually take reference characters to define the height of each line, so
+% that it works with any font. However the result is strange when not using
+% the academic shape of French Cursive.
+%    \begin{macrocode}
+\newsavebox{\seyes@box}
+\newlength{\seyes@ln}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand{\seyes}[2][\seyesDefault]{%
+  \mbox{%
+    \sbox\seyes@box{#2}%
+    #1%
+    \raisebox{-0.5\seyesThickness}{\mbox{%
+      \rlap{\rule{\wd\seyes@box}{\seyesThickness}}%
+      \settoheight\seyes@ln{a}%
+      \rlap{\rule[\seyes@ln]{\wd\seyes@box}{\seyesThickness}}%
+      \settoheight\seyes@ln{d}%
+      \rlap{\rule[\seyes@ln]{\wd\seyes@box}{\seyesThickness}}%
+      \settoheight\seyes@ln{b}%
+      \rlap{\rule[\seyes@ln]{\wd\seyes@box}{\seyesThickness}}%
+      \settodepth\seyes@ln{p}%
+      \rlap{\rule[-\seyes@ln]{\wd\seyes@box}{\seyesThickness}}%
+      \settodepth\seyes@ln{g}%
+      \rlap{\rule[-\seyes@ln]{\wd\seyes@box}{\seyesThickness}}%
+    }}%
+    \usebox\seyes@box}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \Finale

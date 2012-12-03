@@ -1,0 +1,609 @@
+2006-10-13  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* configure.in (PYTHON): bump version.
+
+	* COPYING: GPL.
+
+	* GNUmakefile.in (FILES): add GPL
+
+2006-07-06  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* GNUmakefile.in (srcdir): split CFLAGS assignment. (Julian Gilbey)
+
+2006-06-09  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* mftrace.py: handle comma in glyph-range too.
+
+2006-05-01  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* mftrace.py: indent 4 iso. 8.
+
+2006-04-27  Werner Lemberg  <wl@gnu.org>
+
+	* mftrace.py <top_level>: Don't define `include_dirs' here. 
+	(parse_command_line) <'-I'>: Destination is `include_dirs', not
+	`includes'.
+	(do_file): Define `include_dirs' here.  Copy command line option
+	values properly and append `origdir' before handling encoding files.
+
+2006-04-27  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* mftrace.py (parse_command_line): move options.encoding_file upwards.
+
+2006-04-06  Han-Wen Nienhuys  <hanwen@lilypond.org>
+
+	* mftrace.py (parse_command_line): use optparse iso. getopt.
+	pychecker cleanups. Now probably requires python 2.x.
+
+2006-02-28  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* README.texi (Top): patch for README and manpage too.
+
+	* configure.in (PYTHON): release .19
+
+	* mftrace.py (font_info): --define. patch by
+	Emmanuel.Beffara@pps.jussieu.fr
+
+2006-02-19  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* GNUmakefile.in (CFLAGS): add srcdir support.
+
+2006-01-24  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (find_file): strip the whitespace from output
+	kpsewhich output.
+	(find_file): oops.
+
+2005-10-16  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release 1.1.17
+
+	* README.texi (Top): add Thomas Bushnell BSG.
+
+	* gf2pbm.c (read_GF_char): fix type-punning pointer error.  This
+	fixes GCC4 big-endian -O2 build. Thanks to Thomas Bushnell BSG !
+
+ 2005-08-15  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): 1.1.16
+
+	* mftrace.py (make_outputs): generate <fontname>.pfb not <filename>.pfb
+
+	* configure.in: release 1.1.15
+
+	* mftrace.py (shell_escape_filename): put offending chars in group. 
+
+2005-08-14  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (make_outputs): escape file names with spaces on
+	command line. (Thanks Geoffrey Alan Washburn)
+
+2005-08-01  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (coding_dict): set bindir too.
+
+	* gf2pbm.c: conform to strict aliasing rules (Patch by Stanislav
+	Brabec)
+
+	* GNUmakefile.in: removes explicit rule for CC (Patch by Stanislav
+	Brabec)
+
+2005-07-20  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* README.texi (Top): cs.uu.nl -> xs4all.nl everywhere.
+
+2005-06-07  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* README.texi: doc update by Alexej.
+
+2005-06-06  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in: move test to end.
+	(PYTHON): release 1.1.10
+
+2005-06-04  Alexej Kryukov  <akrioukov@newmail.ru>
+
+	* mftrace.py: Implemented a function (get_afm) which allows to
+	generate AFM files without using fontforge. This function requires
+	ghostscript to be present on user's system and uses the same
+	algorithm, as the t12afm.sh script, distributed with TeXtrace.
+	
+	* mftrace.py: mftrace now tries to access fontforge only if any
+	functions which really require passing the font to fontforge are
+	requested. This functions include rounding to integer (note that
+	it *is* enabled by default), simplifying and autohinting, as well
+	as generating any output formats except PFA or PFB. Otherwise the
+	output is generated directly with t1asm. Note that for generating
+	AFM either fontforge or the built-in get_afm function may be used,
+	depending from the factors listed above.
+	
+	* mftrace.py: The --keep-trying option now causes mftrace to
+	ignore not only potrace/autotrace errors, but also METAFONT errors
+	(in case METAFONT reports an error, but, nevertheless, generates a
+	GF file). This may be useful for processing some buggy fonts in
+	heigh resolutions.
+	
+	* mftrace.py: mftrace now recognizes a special `.notavail' glyph
+	name in encoding files which you may specify via its `--encoding'
+	option.  You may use this name to prevent mftrace from processing
+	any specific glyphs (e. g. because they are blank in the
+	corresponding TeX codepage, so that there is no need to trace
+	them). This name is also automatically inserted into the encoding
+	table used by mftrace during the conversion process, if
+	potrace/autotrace fails to process a specific character. Again, by
+	this way we prevent useless blank characters from appearing in the
+	resulting PostScript output.
+	  
+2005-06-04  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (stat): more verbosity.
+
+2005-04-20  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release 1.1.9
+
+	* GNUmakefile.in (udist): add cvs commit to target.
+
+2005-04-17  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py (make_outputs): Bugfix: do not use global filename.
+	(trace_font): Make --verbose usable by printing character
+	generating commands only once.
+
+2005-04-05  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release 1.1.8
+
+	* mftrace.1: new man page (Julian Gilbey).
+
+	* mftrace.py (find_file): remove --truetype option.
+	
+2005-03-30  Andrey V. Panov  <panov@canopus.iacp.dvo.ru>
+
+	* mftrace.py: add possibility to pass glyph ranges with --glyph
+	option.
+
+2005-03-27  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py: prepend exec_prefix to gf2pbm call.  Patch by Jeff
+	Smith <whydoubt@yahoo.com>
+	
+2005-03-08  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in: detect missing potrace/autotrace.
+	(PYTHON): release 1.1.6
+
+2005-03-06  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (get_fontforge_command): another fix.
+
+2005-03-05  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (check_pfaedit_scripting): whoops, only call
+	fontforge_cmd if nonnull. 
+	(get_fontforge_command): change calling convention: return binary name.
+
+	* configure.in (PYTHON): release 1.1.3
+
+	* mftrace.py (make_outputs): copy if fontforge nonexistent
+	(get_binary): search PATH for fontforge
+
+2005-01-02  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (ec_guess_font_info): handle stretch and weight
+	separately.
+	(guess_fontinfo): default weight Regular. 
+	(ec_guess_font_info): lose "designed at" string.
+	(cm_guess_font_info): change Family to Computer Modern.
+
+	* configure.in (PYTHON): release 1.1.2
+
+	* mftrace.py (ec_guess_font_info): new function
+	(cm_guess_font_info): handle isFixedPitch.
+	(derive_font_name): make fontname similar to Adobe fonts, i.e.
+	Family-QualifierQualifierAbbrv
+
+2004-12-21  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release 1.1.1
+
+	* mftrace.py (option_definitions): add  --no-afm option
+
+2004-12-19  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* GNUmakefile.in (GNUmakefile): Depend on configure
+	(configure): Run ./configure after running autoconf (not
+	config.status, which has old, cached values).
+
+2004-12-19  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): bump version to 1.1.0; release.
+
+	* mftrace.py (to_type1): always create .pfa.raw
+	(make_outputs): generate all outputs in one script. Add SVG output.
+	(glyph_range): use --formats, remove other options. 
+
+2004-12-02  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (make_ttf): call AddExtrema() too.
+
+2004-11-19  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release .35 
+
+	* mftrace.py (abs_path): use lexmarks 1200dpi; ljfour is not
+	neutral
+	(cleanup_font): RoundToInt() only if round_to_int is set 
+	(autotrace_path_to_type1_ops): subtract inv_scale iso. 1. (Andrey
+	V. Panov).
+
+2004-11-06  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (stat): rewrite redirection.
+
+2004-11-05  Han-Wen Nienhuys  <hanwen@xs4all.nl>
+
+	* mftrace.py (stat): redirect stderr.
+	
+2004-08-15  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release .34
+
+	* mftrace.py (cleanup_font): add RoundToInt command.
+
+	* GNUmakefile.in (uninstall): add more targets.
+
+2004-07-16  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py (abs_path): Bugfix: leave empty path entry alone.
+
+2004-07-13  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace (abs_path): Remove debugging code.
+
+2004-07-08  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py (stat): Add cwd to include path before (ugh?)
+	changing to /tmp.
+	(gen_pixel_font): Check for log file before reading it.
+	Make dirs in paths absolute.
+
+2004-06-21  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py: Remove dead --output-base option.  Small cleanups
+	(use TAB for indent, space after comma, not before, space before
+	parentheses, not after, etc).
+
+	* GNUmakefile.in (install): Use install instead of cp.
+
+	* configure.in: Substitute EXEEXT.  Fixes install.
+
+2004-06-11  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* configure.in (PYTHON): release .33
+
+2004-06-11  Andrey V. Panov  <panov@canopus.iacp.dvo.ru>
+
+	* mftrace.py (autotrace_path_to_type1_ops,
+	potrace_path_to_type1_ops): denominator for coordinates is divided
+	by inv_scale. This fixes rounding errors.
+
+2004-06-04  Andrey V. Panov  <panov@canopus.iacp.dvo.ru>
+
+	* mftrace.py: add possibility to pass options to a backend program and not to round 
+	coordinates of control points to integer values.
+
+2004-05-05  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* GNUmakefile.in: patch by Roman Stawski
+	<roman.stawski@fr.adp.com> for cygwin installation.
+
+2004-03-21  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* tfm.py (compose_tfm_number): use long. 
+
+2004-03-08  Werner Lemberg  <wl@gnu.org>
+
+	* mftrace.py: Preserve all PBM and EPS files if keep_temp_dir_p is
+	set.
+
+	* mftrace.1: Updated and revised.
+	
+2004-03-08  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* mftrace.py (check_pfaedit_scripting): fontforge detection
+	bugfix.
+
+2004-03-07  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* mftrace.py (coding_dict): add tetex encodings. 
+
+	* README.texi (Top): more renaming.
+
+	* mftrace.py (fontforge_cmd): add fontforge support.
+
+2004-01-21  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* autogen.sh: remove --prefix=$HOME/usr/pkg/mftrace 
+
+2004-01-16  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* mftrace.py (potrace_path_to_type1_ops): 
+	opps. Init z.y to size_y - off_y. This fixes descender boxes.
+	(potrace_path_to_type1_ops): rewrite, following autotrace model.
+	use rounding as last step.
+
+2004-01-13  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* mftrace.py (cm_guess_font_info): italic angle is -14 / -12 .
+
+2004-01-12  Han-Wen Nienhuys   <hanwen@xs4all.nl>
+
+	* mftrace.py (keep_trying_p): use potrace_scale = 1 to avoid
+	artefacts of rounding.  Thanks to Guenther Spahlinger for this bug
+	report.
+	(get_discrete_dz): new function. Don't accumulate rounding errors.
+	
+
+2003-12-29  Han-Wen Nienhuys   <hanwen@cs.uu.nl>
+
+	* GNUmakefile.in (uninstall): don't use install-sh; it moves,
+	doesn't copy.
+
+2003-12-18  Han-Wen Nienhuys   <hanwen@cs.uu.nl>
+
+	* gf2pbm.c: add header.
+
+2003-12-17  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (potrace_path_to_type1_ops): handle different
+	components correctly
+
+	* GNUmakefile.in (FILES): add & use install-sh
+
+	* gf2pbm.c: use unistd.h for getopt
+
+2003-12-16  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (potrace_path_to_type1_ops): handle empty glyphs
+	correctly
+
+2003-12-14  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (stat): detect tracing program
+	(potrace_path_to_type1_ops): potrace support
+
+2003-09-30  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (do_autotrace_one): return nonzero for failed glyphs.
+
+2003-07-17  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (coding_dict): default to feta-braces10.enc for
+	feta-braces.
+	(coding_dict): revert.
+
+2003-04-20  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (cm_guess_font_info): always define ItalicAngle.
+
+2003-04-19  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (cm_guess_font_info): set family for cmss. 
+	(to_type1): write ItalicAngle to output too. 
+
+2003-04-16  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (cm_guess_font_info): guess info for CM fonts.
+	(guess_fontinfo): put fontinfo generation in a separate function.
+	(gen_unique_id): generate UniqueID by hashing FullName into the
+	free range of the T1 UniqueID space.
+	(to_type1): actually, don't generate UniqueID at all, since it is
+	optional.
+	(cm_guess_font_info): put design size in FullName too.
+	(guess_fontinfo): rename afm to prevent name clashes. 
+
+2003-03-31  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* README.texi (Top): add note about MFINPUTS variable
+
+2003-03-19  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (Font_info.__getitem__): call find_file () for gf_file.
+
+2003-03-13  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (glyph_range): apply --gffile patch from Karl Berry
+	with minor mods.
+
+2003-02-27  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (autotrace_font): gf_fontname support (thanks to Karl
+	Berry)
+	
+2002-11-26  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* GNUmakefile.in: suse patch: use DESTDIR as a prefix. 
+
+2002-11-24  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* .cvsignore: Add.
+
+	* mftrace.py (coding_dict): Add feta-braces, feta-nummer.
+
+2002-11-19  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (to_type1): add version to comment.
+
+2002-11-19  Ralf Stubner <ralf.stubner@physik.uni-erlangen.de>
+
+	* mftrace.py: tell pfaedit to use the kerning data from the TFM
+	file and save the produced AFM file.
+	
+2002-11-16  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (coding_dict): add parmesan encoding.
+
+	* mftrace.py (gen_pixel_font): show error log if MetaFont failed.
+
+2002-10-18  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py (popen, system): Fix for verbose output.
+	(Font_info.set_defaults): Add EncodingScheme.
+
+2002-10-16  Jan Nieuwenhuizen  <janneke@gnu.org>
+
+	* mftrace.py: Use afm to set more sensible font names.  Allow
+	generating multiple fonts from one trace.
+
+	* GNUmakefile.in: Add afm.py.
+
+	* afm.py: New file.
+
+2002-10-10  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.spec.in (Prereq): use %{_mandir}.
+
+	* mftrace.py: don't overwrite encoding file for
+	every next file.
+
+2002-08-21  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py: take multiple arguments.
+
+2002-08-20  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (option_definitions): Patch by Jesse Pavel
+	<jpavel@alum.mit.edu>: don't change bbox or font-matrix for
+	--magnification
+
+
+2002-08-08  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* mftrace.py (make_ttf): add TrueType conversion.
+	(func): add miktex kpathsea support.
+
+	* configure.in: Change name to mftrace.
+
+2002-04-10  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* pktrace.py: add magnification so yinit can be traced.
+	(do_autotrace_one): stop if autotrace is interupted with ^C.
+
+2002-03-24  Han-Wen  <hanwen@cs.uu.nl>
+
+	* pktrace.py (find_file): add -I, --include option for files.
+	Make one function for finding files. 
+
+	* Add feta-music encoding.
+
+2002-03-19  Han-Wen Nienhuys  <hanwen@cs.uu.nl>
+
+	* pktrace.py (cleanup_font): More verbose pfaedit reporting.
+
+	* Change version to 1.0
+
+	* Machinery to guess .enc file from TFM coding string.
+
+	* Doco updates
+
+	* pktrace.spec: RedHat .spec
+
+	* Include working dir into path
+
+	* Allow variable size encodings
+
+	* Man page (Thanks julian)
+
+	* gf2pbm.c: Fix on other-endian (PPC)  machines (Thanks Jan).
+
+	* Support pfaedit -script to simplify and hint font;
+	turned off for now, since pfaedit is not reliable enough yet.
+
+	* Oops. Produce font also  when --verbose is off
+
+	* --glyphs option
+
+	* Even better autotrace bugreporting 
+
+	* Make clean removes tfm.pyc
+
+	* Capture mktextfm output for font location 
+
+	* Don't create NUMBER.pbm when gf2pbm is run with -s 
+
+	* `test' makefile target
+
+	* Handle autotrace fails better, and add --keep-trying option
+
+	* Output PFA by default  
+
+	* Fix -e option
+
+	* Escape fontname in regexp.
+
+	* Run kpsewhich on encoding argument. 
+
+	* Fix permissions on temporary directory.
+
+	* Test output on GhostScript and PostScript printer too (only
+	tried pfaedit before)
+
+	* Fix FontBBox calculation
+
+	* Don't crash on (nearly) empty glyphs
+
+	* Install .pyc  as well.
+
+	* Fix t1asm warning.
+
+
+Release 0.6
+
+	* type1fix.pl: remove. Dump perl dependency.
+
+	* gf2pbm.c: use to dump the bitmap info. Dump pktype dependency. 
+
+	* trace2.ps: removed.  Dump the Ghostscript dependency. 
+
+	* call mktextfm if no TFM found.
+
+	* Big/Little endian fixes. Now gf2pbm works on PowerPC as well.
+
+Release 0.4
+
+	* gf2pbm.c: hack to have robust bitmap extraction.
+
+	* Uninstall target
+
+	* -p bugfix
+
+	* texinfo Readme.
+
+Release 0.3
+
+	* tfm.py: a Python interface to the TeX TFM file format.
+
+	* Use TFM widths for the bounding box. Bugfix for the
+	Y-coordinates of the bbox.
+
+
+Release 0.2
+
+	* Don't read/write dimension file.
+
+	* Read encoding file into python, and only once. This
+reduces tracing time. 
+
+	* For non-existant glyphs, write fake Char String directly.
+
+Release 0.1
+
+	* --pfa option
+
+	* --encoding option
+
+	* Fold t1d2gsx into pktrace.
+
+
+

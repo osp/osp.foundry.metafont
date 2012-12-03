@@ -1,0 +1,92 @@
+% 
+u# := 10pt#;			% specifies the unit who will be used.
+define_pixels(u);	% ?
+
+h=3u;			% define a height variable.
+			% no. that doesn’t work like that.
+
+		
+beginchar("huit", 4u#, 4u#, 2u#); "huit";
+	r=2/8; % rapport entre les boucles du 8
+	z3=(x1,y1*r); % la position verticale de la boucle du bas est égale à celle du … non. hein?
+	z1=(1u,2u);
+	z2=z1 shifted (0,1u);
+	%z3=z1 shifted (0,-1u);
+	
+	pickup pensquare xscaled .2u rotated 15;
+
+	draw z1{dir 125}..z2{right}..z1..{right}z3..{dir 125}z1;
+	
+	z4=z1 shifted (2u,0);
+	z5=z4 shifted (0,1u);
+	z6=z4 shifted (0,-1u);
+	
+	draw z6{right}..z4..z5{right}..z4..cycle;
+	
+	labels(range 1 thru 6);
+endchar;
+
+beginchar("spirale", 4u#, 4u#, 2u#); "spirale";
+	z1=(2u, 2u);
+	z2=z1 scaled 1.25;
+	z4=z1 scaled 2;
+	z3=z1 scaled .75;
+	z5=z1 scaled 0;
+	
+	pickup pencircle xscaled .3u rotated 0;
+	draw z1..z2..z3..z4..z5;
+	
+	labels(range 1 thru 5);
+endchar;
+
+beginchar("test", 4u#, 4u#, 2u#); "test";
+	z[1]=(1u, 1u);
+	z[2]=z1 scaled 2;
+	z[3]=z1 scaled 3;
+	
+	pickup pencircle scaled .05u;
+	%draw z1..z2..z3;
+	draw z1..{up}z2..z3;
+	draw z1..{down}z2..z3;
+	draw z1..{left}z2..z3;
+	draw z1..{right}z2..z3;
+	%draw z1..{dir -45}z2..z3;
+	labels(range 1 thru 3);
+endchar;
+
+beginchar("A", 4u#, 4u#, 2u#);	% ‘bounding box’ of the glyph :
+% (name (unicode?), width, x+ascender height, descender-height)
+"Letter A";
+	% the points of the letter are defined
+	z[1]=(1u,0u);
+	z[2]=z[1]+(1u,h); 
+	z[3]=z[1]+(2u,0);
+	z[4]=(z[1]+z[2])/2;
+	z[5]=(z[2]+z[3])/2;
+	% we choose the pen (and apply some parameters to it)
+	pickup pencircle xscaled 0.1u yscaled 0.1u rotated 0;
+	% we draw the different lines 
+	draw z1..z2;
+	draw z2..z3;
+	draw z4..z5;
+	% optional, it shows the points
+	labels(range 1 thru 5);
+% end of the character
+endchar;
+
+beginchar("B", 4u#, 4u#, 3u#);
+"Letter B";
+	z[1]=(1u,0u);
+	z[2]=z[1]+(0u,h);
+	z[3]=z[2]*0.7;
+	z[4]=(z[2]+z[3])/2+(1u,0u);
+	z[5]=(z[1]+z[3])/2+(1.2u,0u);
+	pickup pencircle xscaled .1u yscaled .3u rotated 0;
+	draw z1..z2;
+	draw z2..z4..z3..z5..z1;
+	labels(range 1 thru 5);
+endchar;
+
+% essential, so metafont knows he finished.
+end;
+

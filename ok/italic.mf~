@@ -1,0 +1,57 @@
+u#:=3pt#;
+define_pixels(u);
+
+% variables — defines the general parameters of the letter
+w = 1u;				% width
+h = u*1.2 = xh*0.8;	% height
+b = 1/3;		% hauteur de barre (1=top, 0=bottom)
+var = 1+2b;
+slant = 1;			% slanted (-1 > backward > 0 > italic > 1)
+pen_size = .3u;
+pen_rotation = 45;
+
+serif = 1;			% 1 or 0;
+serif_ext = .05u; 	% épaisseur des pts extérieurs
+serif_l = .3u; 		% longeur du sérif
+serif_h = .1u; 	% hauteur du point à l'intérieur du fût (attention sensible)
+
+%----------------------------------------------------- 
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+%----------------------------------------------------- a
+beginchar("a",1.6u#,2u#,0u#);"Letter a";
+	x1 - u*slant/4 = x3 = 0;
+	x2 - u*slant/4 = x7 = w*2b;
+	x4*1.5 = x6 = (x1+x2)/2;
+	x5 = x2+u/3;
+	
+	y4 = y5 = y6-h = 0;
+	y1 = y2 = y6/1.5;
+	y3 = (y1+y4)/2;
+	y7 = (y3+y4)/2;
+	
+	pickup pencircle xscaled pen_size yscaled .3pen_size rotated pen_rotation; 
+	draw z1..z6..{down}z2..z7{down}..{right}z5;
+	draw z2{down}..{down}z3..{right}z4..{up}z7;
+	
+	penlabels(1,2,3,4,5,6,7);
+endchar;
+
+
+%-----------------------------------------------------
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+%-----------------------------------------------------
+%beginchar("_",1.6u#,2u#,0u#);"Letter _";
+%pickup pencircle xscaled pen_size rotated pen_rotation; 
+%	labels(range 1 thru _);
+%endchar;
+
+end
+

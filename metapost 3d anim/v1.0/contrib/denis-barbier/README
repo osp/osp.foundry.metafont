@@ -1,0 +1,22 @@
+The files in this directory have been contributed by Denis Barbier.
+
+Sources files: crayon-3d-1.mp,...,crayon-3d-4.mp
+                pointe-b.mp, pointe-d.mp, pointe-g.mp, pointe-h.mp.
+                (these files correspond to animpoly.mp in the standard
+                 distribution)
+
+               All these files have been tested with 3d.mp version 1.0.
+
+Macros: arcenciel.mp, arcenciel2.mp, crayonmine.mp
+
+Animations: gif files
+
+Some of the animations can be seen on
+
+  http://blanche.polytechnique.fr/users/www.barbier/animations.html
+
+
+
+
+Denis Roegel, 9 April 1998
+

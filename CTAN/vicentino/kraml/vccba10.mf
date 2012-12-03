@@ -1,0 +1,19 @@
+% VCCALT - Vicentino Corsiva (humanistische cursive)
+% alternative character set
+% w. kraml, 1991,92
+
+mode_setup;
+
+boolean modern, twisted, bold;
+  modern := false;
+  twisted := false;
+  bold := true;
+
+% metrics
+size#:=10pt#;               % design size
+
+% generate it:
+
+input vcaltdri;
+end;
+

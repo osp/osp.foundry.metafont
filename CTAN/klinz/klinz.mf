@@ -1,0 +1,983 @@
+% (C)opyright 1993 by Karl Guenter Wuensch.
+% This Font has been created by Karl G\"unter W\"unsch
+%                               Eschenstr. 7
+%                               Postbox 101129
+%                               47476 Rheinberg
+%                               Germany
+% (Watch out, the address above lists the new postcode for my postbox
+%  in Rheinberg, valid from 07/01/93 onwards and not before! The old one is
+%  4134).
+% It was created to resemble (but not to be identical) to the publicly
+% available (in TrueType and Type 1) Klingon font. Since I had no means
+% of really using the font in the the mentioned formats I had to do something
+% about that and --- being a TeX-User --- I decided this was the time to
+% learn something about \MF. So if there are some errors contained
+% in here, let me know. My current E-Mail address is: 
+%                hz225wu@unidui.uni-duisburg.de
+%
+% I don't want to make a fuzz of it, but I would like to get any changes you
+% make to this font. So this may be freely copied and distributed under the
+% restriction, that you 
+% a) leave this commentary part including the copyright notice intact
+% b) send me the changes you make to this source so that I can enhance
+%    it further.    
+% 
+% This font contains a full set of upper- and lower-case Klingon characters
+% including some additional things like punctuation, which were designed by 
+% Micaela Pantke. Maybe someone from the Klingon Language Institue could 
+% elaborate about the issue of the additional characters, but I'll use 
+% them anyway.
+%
+% It should be compiled with plain \MF along the lines of the following
+% example (where the mag-part of it may be left out and x stands for anything
+% suitable as magstep (any magstep above 6 or 7 is ignored by some dvi-drivers 
+% I know of): 
+%       mf "\mode:=localfont;" "mag=magstep(x);" input klinz
+% 
+% I used an extensive scheme of ligatures to make the font look nice... Well
+% it looks better than my TrueType example, because this had erratic character
+% spacing and a too short space-length.
+%
+% Anyone who is wondering, why I even defined ligatures between lower- and 
+% upper-case should take a look at the Klingon Dictionary by Mike Okrand. 
+% The (s)he'll see that it is fairly common to have upper- and lower-case 
+% characters mixed in a single word.
+
+% Corner points are the visible edges of the corresponding character, wereas
+% help points are those points on the curve between the corner points whose
+% tangent has the same angle of ascent as the direct line between the corners.
+% (Hint: look at the definition of the macro flex in the \MF book).
+%
+% There are some help points that have been inserted to act like corner points
+% where the direct path is too complicated to be defined in one stroke.
+
+mode_setup;
+
+numeric body_height#, body_depth#, body_width#;
+numeric u#;
+u#=1pt#*scale;
+
+design_size=10;
+actual_size=9;
+scale = actual_size/design_size;
+body_height#=8.33333pt#*scale;
+body_depth#=1.66667pt#*scale;
+body_width#=7.8pt#*scale;
+
+%
+% Smallest size really useable on my printer which is a HP-Deskjet+
+% (resolution 300 dpi). Otherwise some of the distances beween filled
+% areas in the characters get too small. Maybe I will fix this some time 
+% (If I ever correctly understand how the blacker value can be used to
+% do the necessary corrections) but for now you'll have to live with it.
+font_size 11pt#;
+
+define_pixels(body_height);
+t=body_height/3.5*0.97; % Umrechnungsgroesse von meiner Papier-Vorlage auf pt.
+
+%
+% Height and other parameters of upper case and symbols.
+%
+numeric uu#, body_heightu#, body_depthu#, body_witdhu#;
+uu#=1pt#*scaleu;
+
+design_sizeu=10;
+actual_sizeu=11;
+scaleu = actual_sizeu/design_sizeu;
+body_heightu#=8.33333pt#*scaleu;
+body_depthu#=1.66667pt#*scaleu;
+body_widthu#=7.9pt#*scaleu;
+
+define_pixels (body_heightu);
+tu=body_heightu/3.5*0.97; % Umrechnungsgroesse von meiner Papier-Vorlage auf pt.
+
+% Font dimensions 1--7
+
+font_slant 0pt#;
+font_normal_space 0.8body_width#;
+font_normal_stretch body_width#/4;
+font_normal_shrink 1pt#*scaleu;
+font_x_height body_heightu#/2;
+font_quad 2(body_widthu#-2.9pt#*scaleu);
+font_extra_space body_width#/4;
+
+%
+% Definition of the klingon symbol of the empire (might be useful...) 
+%
+ts = 3tu; % size factor for symbols
+
+beginchar ("@", 1.825*body_widthu#, 1.75*body_heightu#, 0.7*body_heightu#); "Klingon imperial symbol";
+z1=(0,-0.55ts); z2=(1ts,-0.2ts); z3=(0.6ts,0.1ts); % corner points
+z4=(1.1ts,-0.2ts); z5=(2.1ts,-0.55ts); z6=(1.45ts,0.1ts); % corner points
+z7=(0.65ts,0.15ts); z8=(1.05ts,-0.125ts); z9=(1.4ts,0.15ts); % corner points
+z10=(1.08ts,2.1ts); z11=(1.02ts,2.1ts); % corner points
+z12=(0.5ts,-0.25ts); z13=(0.35ts,-0.075ts); z14=(1.5ts,-0.4ts); % help points
+z15=(1.75ts,-0.25ts); z16=(1.15ts,1.05ts); z17=(1.05ts,2.125ts); % help points
+z18=(0.95ts,1.05ts); % help points
+pickup pencircle scaled (scaleu*0.23pt);
+draw fullcircle scaled 1.3ts shifted (1.05ts,0.2ts);
+fill flex(z1,z12,z2) & z2--z3 & flex(z3,z13,z1) & cycle;
+fill flex(z4,z14,z5) & flex(z5,z15,z6) & z6--z4 & cycle;
+fill z7--z8 & z8--z9 & flex(z9,z16,z10) & flex(z10,z17,z11) 
+   & flex(z11,z18,z7) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18);
+endchar;
+
+beginchar ("a", body_width#-0.3pt#*scale, body_height#, 0pt#); "Klingon letter a";
+z1=(0,0); z2=(0.55t,0); z3=(3.25t,0); z4=(2.35t,3.5t); % corner points
+z5=(2.1t,3.625t); z6=(0.6t,3.4t); z7=(1.1t,2.3t); % corner points
+z8=(1.625t,0.7t); z9=(1.55t,1.3t); z10=(0.95t,1.5t); % corner points
+z11=(2.5t,1.9t); z12=(1.35t,3.3t); z13=(1.85t,2.7t); % help points
+z14=(1.45t,2.75t); z15=(2.05t,1.1t); z16=(1.0t,2.875t); % help points
+z17=(0.95t,0.3t); z18=(1.565t,1.0t); z19=(1.25t,1.35t); % help points
+z20=(0.75t,0.8t); % Hilfspunkt
+fill z2--z3 & flex(z3,z11,z4) & z4--z5 & flex(z5,z12,z6) 
+   & flex(z6,z16,z7) & flex(z7,z14,z13) & flex(z13,z15,z2) & cycle;
+fill flex(z1,z17,z8) & flex(z8,z18,z9) & flex(z9,z19,z10) 
+   & flex(z10,z20,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+endchar;
+
+beginchar ("b", body_width#-0.6pt#*scale, body_height#, 0pt#); "Klingon letter b";
+z1=(0.7t,0); z2=(2.9t,0); z3=(2.1t,1.7t); z4=(1.7t,0.675t); % corner points
+z5=(0.45t,0.675t); z6=(1.02t,0.8t); z7=(1.65t,0.8t); % corner points
+z8=(3.15t,3.3t); z9=(0.05t,3.6t); % corner points
+z10=(0.65t,0.4t); z11=(2.35t,0.8t); z12=(1.85t,1.5t); % help points
+z13=(1.6t,2.8t); z14=(1.15t,1.55t); z15=(0.15t,3.375t); % help points
+fill z1--z2 & flex(z2,z11,z3) & z3--z4 & z4--z5 & flex(z5,z10,z1) & cycle;
+fill z6--z7 & flex(z7,z12,z8) & flex(z8,z13,z9) & flex(z9,z15,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9);
+endchar;
+
+beginchar ("c", body_width#+0.4pt#*scale, body_height#, body_depth#); "Klingon letter c";
+z1=(0,-0.6t); z2=(3.1t,-0.25t); z3=(3.025t,0.2t); % corner points
+z4=(1.75t,2.3t); z5=(2.125t,2.475t); z6=(3.55t,-0.35t); % corner points
+z7=(2.85t,3.35t); z8=(1.025t,3.625t); % corner points
+z9=(1.45t,-0.05t); z10=(3.05t,0.14t); z11=(1.75t,1.3t); % help points
+z12=(1.95t,2.4t); z13=(2.95t,2.6t); z14=(2.05t,3.0t); % help points
+z15=(0.78t,1.35t); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5)
+  & z5--z6 & flex(z6,z13,z7) & flex(z7,z14,z8) & flex(z8,z15,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("d", body_width#+0.3pt#*scale, body_height#, body_depth#); "Klingon letter d";
+z1=(1.45t,-0.7t); z2=(3.5t,3.4t); z3=(0,3.4t); % corner points
+z4=(0.25t,1.95t); z5=(1.3t,1.95t); % corner points
+z6=(2.0t,1.4t); z7=(0.3t,2.83t); z8=(1.3t,0.5t); % help points
+fill flex(z1,z6,z2) & z2--z3 & flex(z3,z7,z4) & z4--z5 & flex(z5,z8,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8);
+endchar;
+
+beginchar ("e", body_width#-1.1pt#*scale, body_height#, 0pt#); "Klingon letter e";
+z1=(0,0); z2=(2.9t,0); z3=(1.75t,3.6t); z4=(0.55t,1.6t); % corner points
+z5=(2.25t,1.1t); z6=(1.2t,1.3t); z7=(1.55t,2.3t); % help points
+z8=(0.85t,1.15t); % help points
+fill z1--z2 & flex(z2,z5,z3) & flex(z3,z7,z6) & flex(z6,z8,z4) & z4--z1 & cycle;
+penlabels (1,2,3,4,5,6,7);
+endchar;
+
+beginchar ("f", body_width#-0.55pt#*scale, body_height#, 0pt#); "Klingon letter f";
+z1=(0,0); z2=(1.45t,0); z3=(1.05t,3.65t); z4=(1.675t,0); % corner points
+z5=(3.15t,0); z6=(1.25t,3.2t); z7=(1.55t,0.7t); % corner points
+z8=(0.75t,1.6t); z9=(2.65t,1.3t); z10=(1.325t,3.0t); % help points
+z11=(1.25t,2.75t); z12=(1.85t,0.95t); z13=(1.65t,0.4t); % help points
+fill z1--z2 & z2--z3 & flex(z3,z8,z1) & cycle;
+fill z4--z5 & flex(z5,z9,z10,z6) & flex(z6,z11,z12,z7) & flex(z7,z13,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("g", body_width#-1.65pt#*scale, body_height#, 0pt#); "Klingon letter g";
+z1=(0.525t,0); z2=(2.075t,0); z3=(2.65t,2.75t); z4=(2.65t,3.15t); %corner points
+z5=(1.85t,3.6t); z6=(0.65t,1.7t); z7=(1.45t,3.3t); z8=(0,3.3t); %corner points
+z9=(1.45t,1.75t); z10=(2.275t,3.25t); z11=(0.7t,1.35t); % help points
+z12=(0.4t,2.8t); % help point
+fill z1--z2 & flex(z2,z9,z3) & z3--z4 & flex(z4,z10,z5) & flex(z5,z11,z1) & cycle;
+fill z6--z7 & z7--z8 & flex(z8,z12,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("h", body_width#-0.35pt#*scale, body_height#, body_depth#); "Klingon letter h";
+z1=(1.1t,-0.6t); z2=(2.0t,2.45t); z3=(0.55t,1.75t); % corner points
+z4=(0,1.7t); z5=(3.25t,3.35t); z6=(0.95t,3.35t); % corner points
+z7=(1.45t,0.9t); z8=(2.55t,0.9t); z9=(0.8t,2.725t); % help points
+fill flex(z1,z8,z2) & z2--z3 & flex(z3,z7,z1) & cycle;
+fill z4--z5 & z5--z6 & flex(z6,z9,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9);
+endchar;
+
+beginchar ("i", body_width#-0.85pt#*scale, body_height#, body_depth#); "Klingon letter i";
+z1=(1.1t,-0.6t); z2=(2.3t,0); z3=(3.0t,1.4t); % corner points
+z4=(1.675t,1.4t); z5=(0.725t,0); z6=(1.15t,0); % corner points
+z7=(1.2t,3.6t); z8=(0t,1.0t); % corner points
+z9=(1.7t,-0.15t); z10=(2.5t,0.85t); z11=(1.55t,0.65t); % help points
+z12=(1.55t,1.65t); z13=(0.65t,1.825t); z14=(0.4t,0.7t); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & z3--z4 & flex(z4,z11,z1) & cycle;
+fill z5--z6 & flex(z6,z12,z7) & flex(z7,z13,z8) & flex(z8,z14,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("j", body_width#-0.2pt#*scale, body_height#, 0pt#); "Klingon letter j";
+z1=(0.55t,0); z2=(2.25t,0); z3=(2.65t,0.8t); z4=(1.67t, 0.8t); % corner points
+z5=(0,3.6t); z6=(1.75t,1.0t); z7=(3.3t,3.6t); z8=(0.35t,3.4t); % corner points
+z9=(2.35t,0.4t); z10=(0.05t,2.95t); z11=(0.55t,1.1t); % help points
+z12=(2.25t,2.4t); z13=(1.75t,3.3t); % help points
+fill z1--z2 & flex(z2,z9,z3) & z3--z4 & z4--z5 & flex(z5,z10,z11,z1) & cycle;
+fill flex(z6,z12,z7) & flex(z7,z13,z8) & z8--z6 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("k", body_width#-0.6pt#*scale, body_height#, body_depth#); "Klingon letter k";
+z1=(1.6t,-0.7t); z2=(2.1t,2.075t); z3=(1.45t,2.6t); z4=(0.95t,2.2t); % corner points
+z5=(2.2t,2.2t); z6=(3.1t,2.95t); z7=(2.65t,3.4t); z8=(0,3.3t); % corner points
+z9=(1.8t,0.85t); z10=(1.85t,2.3t); z11=(1.35t,2.425t); % help points
+z12=(1.275t,1.2t); z13=(2.5t,2.55t); z14=(2.75t,3.3t); % help points
+z15=(1.4t,3.25t); z16=(1.3t,2.8t); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z1) & cycle;
+fill flex(z5,z13,z6) & flex(z6,z14,z7) & flex(z7,z15,z8) & flex(z8,z16,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("l", body_width#-1.6pt#*scale, body_height#, 0pt#); "Klingon letter l";
+z1=(0.6t,0); z2=(1.525t,0); z3=(0,1.85t); z4=(1.7t,0); % corner points
+z5=(2.7t,0); z6=(1.85t,3.35t); z7=(0.85t,3.6t); % corner points
+z8=(0.65t,2.3t); z9=(0.95t,0.8t); z13=(1.55t,2.35t); % corner points
+z10=(0.55t,1.0t); z11=(1.45t,3.35t); z12=(0.75t,2.9t); % help points
+z14=(1.1t,2.65t); z15=(1.55t,1.3t); z16=(1.4t,0.25t); % help points
+fill z1--z2 & flex(z2,z10,z3) & z3--z1 & cycle; 
+fill z4--z5 & z5--z6 & flex(z6,z11,z7) & flex(z7,z12,z8) & flex(z8,z14,z13)
+  & flex(z13,z15,z9) & flex(z9,z16,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("m", body_width#, body_height#, body_depth#); "Klingon letter m";
+z1=(1.225t,0.3t); z2=(1.6t,2.45t); z3=(0.55t,2.45t); % corner points
+z4=(1.95t,-0.7t); z5=(3.35t,3.4t); z6=(0t,3.4t); % corner points
+z7=(0.45t,2.6t); z8=(1.7t,2.6t); z9=(1.6t,0.5t); % corner points
+z10=(1.35t,1.7t); z11=(0.15t,3.2t); z12=(1.85t,1.7t); % help points
+fill flex(z1,z10,z2) & z2--z3 & z3--z1 & cycle;
+fill z4--z5 & z5--z6 & flex(z6,z11,z7) & z7--z8 & flex(z8,z12,z9) 
+  & z9--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("n", body_width#+0.9pt#*scale, body_height#+0.4pt#*scale, body_depth#); "Klingon letter n";
+turningcheck:=0;
+z1=(0.225t,-0.7t); z2=(2.45t,-0.35t); z3=(0.55t,0.5t); % corner points
+z4=(0,0.85t); z5=(3.85t,-0.7t); z6=(2.85t,3.2t); % corner points
+z7=(1.75t,3.65t); % corner points
+z8=(1.85t,0.05t); z9=(0.5t,-0.15t); z10=(2.05t,1.7t); % help points
+z11=(2.35t,3.35t); z12=(1.2t,2.6t); z13=(1.7t,0.3t); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z9,z1) & cycle; 
+fill flex(z4,z13,z5) & flex(z5,z10,z6) & flex(z6,z11,z7) 
+   & flex(z7,z12,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("o", body_width#-0.55pt#*scale, body_height#, body_depth#); "Klingon letter o";
+z1=(2.45t,-0.7t); z2=(2.0t,2.1t); z3=(3.15t,3.35t); % corner points
+z4=(0.55t,3.35t); z5=(0,2.55t); z6=(1.45t,2.55t); % corner points
+z7=(0.1t,1.55t); % corner points
+z8=(2.5t,0.8t); z9=(2.35t,2.4t); z10=(2.7t,3.1t); % help points
+z11=(0.45t,2.95t); z12=(0.95t,1.9t); z13=(1.35t,1.1t); % help points
+z14=(0.8t,1.35t); z15=(2.1t,0.2t); % help points
+fill flex(z1,z8,z2) & flex(z2,z9,z10,z3) & z3--z4 & flex(z4,z11,z5)
+  & z5--z6 & flex(z6,z12,z7) & flex(z7,z14,z13) & flex(z13,z15,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("p", body_width#-0.3pt#*scale, body_height#, body_depth#); "Klingon letter p";
+z1=(2.25t,-0.7t); z2=(1.85t,3.4t); z3=(0.55t,3.65t); % corner points
+z4=(0t,2.75t); z5=(2.2t,1.1t); z6=(3.25t,3.4t); % corner points
+z7=(2.0t,3.4t); % corner points
+z8=(1.15t,3.45t); z9=(0.35t,3.1t); z10=(1.85t,0.4t); % help points
+z11=(2.45t,2.1t); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z9,z4) & flex(z4,z10,z1) & cycle;
+fill flex(z5,z11,z6) & z6--z7 & z7--z5 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11);
+endchar;
+
+beginchar ("q", body_width#-1.2pt#*scale, body_height#, body_depth#); "Klingon letter q";
+z1=(0.8t,-0.3t); z2=(1.4t,-0.2t); z3=(1.65t,1.05t); % corner points
+z4=(2.85t,3.4t); z5=(0,3.4t); z6=(1.55t,-0.3t); % corner points
+z7=(2.65t,0.2t); z8=(1.95t,1.9t); % corner points
+z9=(1.55t,0.5t); z10=(1.55t,2.3t); z11=(2.25t,0.15t); % help points
+z12=(2.25t,0.7t); z13=(1.75t,0.7t); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z4) & z4--z5 & z5--z1 & cycle;
+fill flex(z6,z11,z7) & flex(z7,z12,z8) & flex(z8,z13,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("r", body_width#-1.9pt#*scale, body_height#, body_depth#); "Klingon letter r";
+z1=(0.45t,0.15t); z2=(1.05t,-0.4t); z3=(2.55t,2.5t); % corner points
+z4=(2.45t,3.4t); z5=(0,3.65t); z6=(1.25t,0); % corner points
+z7=(2.35t,0); z8=(1.65t,1.7t); % corner points
+z9=(0.75t,0); z10=(1.75t,2.35t); z11=(2.5t,2.85t); % help points
+z12=(1.2t,3.2t); z13=(0.4t,2.1t); z14=(2t,0.6t); % help points
+z15=(1.4t,0.75t); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5)
+  & flex(z5,z13,z1) & cycle;
+fill z6--z7 & flex(z7,z14,z8) & flex(z8,z15,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("s", body_width#+1.1pt#*scale, body_height#, body_depth#); "Klingon letter s";
+z1=(0.95t,-0.7t); z2=(3.65t,3.4t); z3=(0,3.4t); % corner points
+z4=(0.55t,1.9t); z5=(1.75t,1.9t); z6=(1.85t,0); % corner points
+z7=(3.85t,0); z8=(3.6t,1.0t); z9=(3.2t,2.0t); % corner points
+z10=(2.65t,1.35t); z11=(1.6t,0.8t); z12=(3.65t,0.3t); % help points
+z13=(3.05t,0.6t); z14=(2.7t,1.1t); z15=(3.25t,0.6t); % help points
+z16=(3.0t,0.9t); z17=(3.18t,1.75t); % help points
+fill flex(z1,z10,z2) & z2--z3 & z3--z4 & z4--z5 & flex(z5,z11,z1) & cycle;
+fill z6--z7 & flex(z7,z12,z8) & flex(z8,z15,z13) & flex(z13,z16,z17,z9) & flex(z9,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
+endchar;
+
+beginchar ("t", body_width#-1.5pt#*scale, body_height#, body_depth#); "Klingon letter t";
+turningcheck:=0;
+z1=(0,0); z2=(1.95t,0); z3=(1.1t,1.825t); % corner points
+z4=(2.45t,-0.7t); z5=(2.75t,2.45t); z6=(2.2t,3.4t); % corner points
+z7=(0.3t,3.4t); z8=(0t,2.6t); % corner points
+z9=(1.5t,1.1t); z10=(0.75t,0.65t); z11=(2.25t,1.45t); % help points
+z12=(2.25t,3.1t); z13=(0.25t,3.05t); z14=(1.15t,2.0t); % help points
+z15=(0.7t,2.45t); z16=(1.65t,1.15t); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z1) & cycle;
+fill flex(z4,z11,z5) & flex(z5,z12,z6) & z6--z7 & flex(z7,z13,z8) 
+  & flex(z8,z15,z14) & flex(z14,z16,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("u", body_width#-1.65pt#*scale, body_height#, body_depth#); "Klingon letter u";
+z1=(0.15t,0.3t); z2=(2.05t,-0.5t); z3=(2.45t,3.4t); % corner points
+z4=(1.0t,3.65t); z5=(0,1.05t); z6=(2.05t,-0.35t); % corner points
+z7=(2.65t,0.85t); z8=(2.4t,1.3t); z9=(1.3t,1.4t); % corner points
+z10=(1.1t,1.4t); z11=(1.45t,3.45t); z12=(0.65t,2.0t); % help points
+z13=(2.15t,0.4t); z14=(1.45t,0.5t); % help points
+fill z1--z2 & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5) 
+  & z5--z1 & cycle;
+fill flex(z6,z13,z7) & z7--z8 & z8--z9 & flex(z9,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("v", body_width#-0.2pt#*scale, body_height#, 0pt#); "Klingon letter v";
+z1=(0,0); z2=(1.6t,0); z3=(1.25t,2.4t); z4=(1.75t,0); % corner points
+z5=(2.85t,0); z6=(3.3t,1.5t); z7=(1.2t,3.65t); % corner points
+z8=(1.55t,1.45t); % corner points
+z9=(0.7t,0.9t); z10=(2.95t,0.6t); z11=(1.25t,3.1t); % help points
+z12=(1.95t,1.7t); % help points
+fill z1--z2 & z2--z3 & flex(z3,z9,z1) & cycle;
+fill z4--z5 & flex(z5,z10,z6) & z6--z7 & flex(z7,z11,z12,z8) & z8--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("w", body_width#-0.2pt#*scale, body_height#, body_depth#); "Klingon letter w";
+z1=(1.65t,-0.7t); z2=(2.95t,1.9t); z3=(3.3t,3.4t); % corner points
+z4=(0,3.4t); z5=(1.8t,-0.1t); z6=(3.2t,1.2t); % corner points
+z7=(2.05t,1.5t); % corner points
+z8=(2.0t,1.9t); z9=(3.05t,2.65t); z10=(0.95t,1.55t); % help points
+z11=(2.5t,0.75t); z12=(2.65t,1.3t); z13=(2.0t,1.3t); % help points
+z14=(1.85t,1.6t); z15=(2.5t,2.1t); % help points
+fill flex(z1,z14,z8) & flex(z8,z15,z2) & flex(z2,z9,z3) & z3--z4 
+  & flex(z4,z10,z1) & cycle;
+fill flex(z5,z11,z6) & flex(z6,z12,z7) & flex(z7,z13,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("x", body_width#-1.1pt#*scale, body_height#, body_depth#); "Klingon letter x";
+z1=(1.25t,-0.7t); z2=(2.9t,2.5t); z3=(2.1t,3.6t); % corner points
+z4=(0,3.3t); z5=(0.25t,2.35t); z6=(1.35t,0.15t); % corner points
+z7=(2.6t,0.15t); z8=(2.05t,1.7t); % corner points
+z9=(1.45t,1.2t); z10=(2.35t,3.1t); z11=(1.0t,3.2t); % help points
+z12=(0.75t,1.9t); z13=(0.7t,-0.1t); z14=(2.15t,0.75t); % help points
+z15=(1.55t,0.9t); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & z4--z5 
+  & flex(z5,z12,z13,z1) & cycle;
+fill z6--z7 & flex(z7,z14,z8) & flex(z8,z15,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("y", body_width#-0.9pt#*scale, body_height#, 0pt#); "Klingon letter y";
+z1=(0.5t,0); z2=(2.45t,0); z3=(2.95t,1.2t); z4=(0.45t,1.2t); % corner points
+z5=(1.55t,2.45t); z6=(3.0t,1.4t); z14=(3.0t,1.45t); % corner points
+z7=(2.25t,3.3t); z8=(1.05t,3.65t); z9=(0,1.3t); % corner points
+z10=(1.05t,2.1t); z11=(2.15t,1.8t); z12=(2.35t,2.3t); % help points
+z13=(1.45t,3.4t); % help points
+fill z1--z2 & z2--z3 & z3--z4 & flex(z4,z10,z5) & flex(z5,z11,z6) 
+  & z6--z14 & flex(z14,z12,z7) & flex(z7,z13,z8) & z8--z9 & z9--z1 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("z", body_width#-1pt#*scale, body_height#, 0pt#); "Klingon letter z";
+z1=(0.55t,0); z2=(2.6t,0); z3=(2.95t,1.05t); z4=(1.25t,1.4t); % corner points
+z5=(1.35t,3.6t); z6=(0,1.0t); z7=(1.4t,1.6t); % corner points
+z8=(2.55t,2.8t); z9=(1.5t,3.1t); % corner points
+z10=(2.65t,0.5t); z11=(1.75t,1.1t); z12=(0.35t,0.65t); % help points
+z13=(1.95t,2.4t); z14=(2.0t,2.9t); % help points
+fill z1--z2 & flex(z2,z10,z3) & flex(z3,z11,z4) & z4--z5 & z5--z6 
+  & flex(z6,z12,z1) & cycle;
+fill flex(z7,z13,z8) & flex(z8,z14,z9) & z9--z7 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("0", body_widthu#-0.95pt#*scaleu, body_heightu#-1.4pt#*scaleu, body_depthu#); "Klingon number 0";
+z1=(1.35tu,-0.7tu); z2=(1.45tu,1.35tu); z3=(2.55tu,2.0tu); % corner points
+z4=(2.95tu,2.7tu); z5=(0,2.7tu); z6=(1.5tu,0.05tu); % corner points
+z7=(1.6tu,1.55tu); % corner points
+z8=(1.8tu,2.1tu); z9=(2.65tu,2.4tu); z10=(0.8tu,1.1tu); % help points
+z11=(2.15tu,1.3tu); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z9,z4) & z4--z5 
+  & flex(z5,z10,z1) & cycle;
+fill flex(z6,z11,z7) & z7--z6 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11);
+endchar;
+
+beginchar ("1", body_widthu#-1.45pt#*scaleu, body_heightu#-1.6pt#*scaleu, body_depthu#); "Klingon number 1";
+z1=(1.25tu,-0.7tu); z2=(2.45tu,2.0tu); z3=(2.75tu,2.8tu); z4=(0,2.8tu); % corner points
+z5=(1.35tu,1.55tu); z6=(1.3tu,0.6tu); z7=(1.7tu,2.2tu); % help points
+z8=(2.5tu,2.3tu); z9=(0.75tu,1.1tu); % help points
+fill flex(z1,z6,z5) & flex(z5,z7,z2) & flex(z2,z8,z3) & z3--z4 
+  & flex(z4,z9,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9);
+endchar;
+
+beginchar ("2", body_widthu#-2.15pt#*scaleu, body_heightu#-1.6pt#*scaleu, body_depthu#); "Klingon number 2";
+z1=(1.75tu,-0.7tu); z2=(2.45tu,2.8tu); z3=(0,2.8tu); % corner points
+z4=(2.2tu,0.5tu); z5=(1.5tu,1.65tu); % help points
+fill flex(z1,z4,z2) & z2--z3 & flex(z3,z5,z1) & cycle;
+penlabels (1,2,3,4,5);
+endchar;
+
+beginchar ("3", body_widthu#-1.7pt#*scaleu, body_heightu#, 0pt#); "Klingon number 3";
+z1=(0,0); z2=(2.65tu,0); z3=(2.25tu,3.65tu); z4=(1.25tu,0.625tu); % corner points
+z5=(0.4tu,0.625tu); z6=(1.25tu,1.25tu); z7=(1.65tu,2.8tu); % corner points
+z8=(0.15tu,2.8tu); % corner points
+z9=(2.05tu,1.25tu); z10=(1.6tu,2.3tu); z11=(0.35tu,0.4tu); % help points
+z12=(1.3tu,1.6tu); z13=(0.95tu,2.2tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z4) & z4--z5 
+  & flex(z5,z11,z1) & cycle;
+fill flex(z6,z12,z7) & z7--z8 & flex(z8,z13,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("4", body_widthu#-1.3pt#*scaleu, body_heightu#-1.3pt#*scaleu, 0pt#); "Klingon number 4";
+turningcheck:=0;
+z1=(0.3tu,0); z2=(2.8tu,0); z3=(0.25tu,3.0tu); z4=(0.5tu,1.3tu); % corner points
+z5=(0,1.0tu); z6=(1.45tu,1.65tu); z7=(2.35tu,2.8tu); % corner points
+z8=(0.55tu,2.8tu); % corner points
+z9=(1.4tu,1.4tu); z10=(0.25tu,2.15tu); z11=(0.45tu,0.95tu); % help points
+z12=(0.25tu,0.55tu); z13=(1.65tu,2.2tu); z14=(1.2tu,1.9tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z4) & flex(z4,z11,z5)
+  & flex(z5,z12,z1) & cycle;
+fill flex(z6,z13,z7) & z7--z8 & flex(z8,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("5", body_widthu#-1.8pt#*scaleu, body_heightu#-1.6pt#*scaleu, body_depthu#); "Klingon number 5";
+z1=(0.6tu,-0.5tu); z2=(2.05tu,2.8tu); z3=(1.05tu,2.8tu); % corner points
+z4=(1.65tu,2.1tu); z5=(1.5tu,1.5tu); z6=(0.75tu,2.2tu); % corner points
+z7=(0.95tu,2.8tu); z8=(0.25tu,2.8tu); z9=(0.5tu,-0.5tu); % corner points
+z10=(2.5tu,1.45tu); z11=(1.65tu,1.8tu); z12=(0.9tu,2.6tu); % help points
+z13=(0,1.95tu); z14=(1.0tu,0.7tu); % help points
+fill flex(z1,z10,z2) & z2--z3 & z3--z4 & flex(z4,z11,z5) & z5--z6 
+  & flex(z6,z12,z7) & z7--z8 & flex(z8,z13,z14,z9) & z9--z1 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("6", body_widthu#-1.3pt#*scaleu, body_heightu#-1.2pt#*scaleu, 0pt#); "Klingon number 6";
+turningcheck:=0;
+z1=(0.95tu,0); z2=(1.95tu,0); z3=(2.8tu,0.6tu); z4=(2.5tu,2.8tu); % corner points
+z5=(1.8tu,3.1tu); z6=(0,0.9tu); z7=(0.95tu,1.95tu); % corner points
+z8=(1.5tu,2.8tu); z9=(0.4tu,2.8tu); z10=(1.55tu,1.1tu); % corner points
+z11=(1.95tu,0.5tu); z12=(1.75tu,2.1tu); z13=(2.05tu,2.9tu); % help points
+z14=(0.95tu,1.8tu); z15=(0.45tu,0.6tu); z16=(1.25tu,2.35tu); % help points
+z17=(0.75tu,2.55tu); z18=(1.35tu,2.3tu); z19=(0.55tu,1.35tu); % help points
+fill z1--z2 & z2--z3 & flex(z3,z11,z10) & flex(z10,z12,z4) & flex(z4,z13,z5)
+  & flex(z5,z18,z14) & flex(z14,z19,z6) & flex(z6,z15,z1) & cycle;
+fill flex(z7,z16,z8) & z8--z9 & flex(z9,z17,z7) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19);
+endchar;
+
+beginchar ("7", body_widthu#-1.5pt#*scaleu, body_heightu#-1.6pt#*scaleu, 0pt#); "Klingon number 7";
+z1=(0.55tu,0); z2=(2.75tu,0); z3=(2.3tu,0.95tu); z4=(2.1tu,2.05tu); % corner points
+z5=(2.05tu,2.8tu); z6=(1.15tu,2.8tu); z7=(0,0.7tu); % corner points 
+z8=(2.45tu,0.4tu); z9=(1.25tu,1.35tu); z10=(1.7tu,0.85tu); % help points
+z11=(1.45tu,2.15tu); z12=(2.05tu,2.35tu); z13=(0.65tu,1.8tu); % help points
+z14=(0.35tu,0.4tu); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z10,z9) & flex(z9,z11,z4) 
+  & flex(z4,z12,z5) & z5--z6 & flex(z6,z13,z7) & flex(z7,z14,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("8", body_widthu#-2.15pt#*scaleu, body_heightu#-1.3pt#*scaleu, body_depthu#); "Klingon number 8";
+z1=(1.45tu,-0.7tu); z2=(2.45tu,0.4tu); z3=(2.25tu,3.05tu); % corner points
+z4=(0,3.15tu); z5=(1.6tu,1.45tu); % corner points
+z6=(1.3tu,0.45tu); z7=(2.15tu,1.85tu); z8=(1.45tu,2.85tu); % help points
+z9=(1.3tu,2.4tu); z10=(0.55tu,0.4tu); % help points
+fill flex(z1,z6,z2) & flex(z2,z7,z3) & flex(z3,z8,z4) & flex(z4,z9,z5) 
+  & flex(z5,z10,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+beginchar ("9", body_widthu#-1.4pt#*scaleu, body_heightu#-1.6pt#*scaleu, body_depthu#); "Klingon number 9";
+z1=(0.75tu,-0.7tu); z2=(1.2tu,2.8tu); z3=(0,2.8tu); % corner points
+z4=(1.65tu,0.1tu); z5=(2.75tu,0.8tu); z6=(2.15tu,0.8tu); % corner points
+z7=(2.75tu,2.8tu); z8=(1.375tu,2.8tu); z9=(1.55tu,2.3tu); % corner points
+z10=(1.45tu,0.75tu); z11=(0.9tu,0.75tu); z12=(2.2tu,0.5tu); % help points
+z13=(2.55tu,1.5tu); z14=(1.85tu,1.7tu); % help points
+fill flex(z1,z10,z2) & z2--z3 & flex(z3,z11,z1) & cycle;
+fill flex(z4,z12,z5) & z5--z6 & flex(z6,z13,z7) & z7--z8 & z8--z9 
+  & flex(z9,z14,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("A", body_widthu#-0.3pt#*scaleu, body_heightu#, 0pt#); "Klingon letter A";
+z1=(0,0); z2=(0.55tu,0); z3=(3.25tu,0); z4=(2.35tu,3.5tu); % corner points
+z5=(2.1tu,3.625tu); z6=(0.6tu,3.4tu); z7=(1.1tu,2.3tu); % corner points
+z8=(1.625tu,0.7tu); z9=(1.55tu,1.3tu); z10=(0.95tu,1.5tu); % corner points
+z11=(2.5tu,1.9tu); z12=(1.35tu,3.3tu); z13=(1.85tu,2.7tu); % help points
+z14=(1.45tu,2.75tu); z15=(2.05tu,1.1tu); z16=(1.0tu,2.875tu); % help points
+z17=(0.95tu,0.3tu); z18=(1.565tu,1.0tu); z19=(1.25tu,1.35tu); % help points
+z20=(0.75tu,0.8tu); % Hilfspunkt
+fill z2--z3 & flex(z3,z11,z4) & z4--z5 & flex(z5,z12,z6) 
+   & flex(z6,z16,z7) & flex(z7,z14,z13) & flex(z13,z15,z2) & cycle;
+fill flex(z1,z17,z8) & flex(z8,z18,z9) & flex(z9,z19,z10) 
+   & flex(z10,z20,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+endchar;
+
+beginchar ("B", body_widthu#-0.6pt#*scaleu, body_heightu#, 0pt#); "Klingon letter B";
+z1=(0.7tu,0); z2=(2.9tu,0); z3=(2.1tu,1.7tu); z4=(1.7tu,0.675tu); % corner points
+z5=(0.45tu,0.675tu); z6=(1.02tu,0.8tu); z7=(1.65tu,0.8tu); % corner points
+z8=(3.15tu,3.3tu); z9=(0.05tu,3.6tu); % corner points
+z10=(0.65tu,0.4tu); z11=(2.35tu,0.8tu); z12=(1.85tu,1.5tu); % help points
+z13=(1.6tu,2.8tu); z14=(1.15tu,1.55tu); z15=(0.15tu,3.375tu); % help points
+fill z1--z2 & flex(z2,z11,z3) & z3--z4 & z4--z5 & flex(z5,z10,z1) & cycle;
+fill z6--z7 & flex(z7,z12,z8) & flex(z8,z13,z9) & flex(z9,z15,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("C", body_widthu#+0.4pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter C";
+z1=(0,-0.6tu); z2=(3.1tu,-0.25tu); z3=(3.025tu,0.2tu); % corner points
+z4=(1.75tu,2.3tu); z5=(2.125tu,2.475tu); z6=(3.55tu,-0.35tu); % corner points
+z7=(2.85tu,3.35tu); z8=(1.025tu,3.625tu); % corner points
+z9=(1.45tu,-0.05tu); z10=(3.05tu,0.14tu); z11=(1.75tu,1.3tu); % help points
+z12=(1.95tu,2.4tu); z13=(2.95tu,2.6tu); z14=(2.05tu,3.0tu); % help points
+z15=(0.78tu,1.35tu); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5)
+  & z5--z6 & flex(z6,z13,z7) & flex(z7,z14,z8) & flex(z8,z15,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("D", body_widthu#+0.3pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter D";
+z1=(1.45tu,-0.7tu); z2=(3.5tu,3.4tu); z3=(0,3.4tu); % corner points
+z4=(0.25tu,1.95tu); z5=(1.3tu,1.95tu); % corner points
+z6=(2.0tu,1.4tu); z7=(0.3tu,2.83tu); z8=(1.3tu,0.5tu); % help points
+fill flex(z1,z6,z2) & z2--z3 & flex(z3,z7,z4) & z4--z5 & flex(z5,z8,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8);
+endchar;
+
+beginchar ("E", body_widthu#-1.1pt#*scaleu, body_heightu#, 0pt#); "Klingon letter E";
+z1=(0,0); z2=(2.9tu,0); z3=(1.75tu,3.6tu); z4=(0.55tu,1.6tu); % corner points
+z5=(2.25tu,1.1tu); z6=(1.2tu,1.3tu); z7=(1.55tu,2.3tu); % help points
+z8=(0.85tu,1.15tu); % help points
+fill z1--z2 & flex(z2,z5,z3) & flex(z3,z7,z6) & flex(z6,z8,z4) & z4--z1 & cycle;
+penlabels (1,2,3,4,5,6,7,8);
+endchar;
+
+beginchar ("F", body_widthu#-0.55pt#*scaleu, body_heightu#, 0pt#); "Klingon letter F";
+z1=(0,0); z2=(1.45tu,0); z3=(1.05tu,3.65tu); z4=(1.675tu,0); % corner points
+z5=(3.15tu,0); z6=(1.25tu,3.2tu); z7=(1.55tu,0.7tu); % corner points
+z8=(0.75tu,1.6tu); z9=(2.65tu,1.3tu); z10=(1.325tu,3.0tu); % help points
+z11=(1.25tu,2.75tu); z12=(1.85tu,0.95tu); z13=(1.65tu,0.4tu); % help points
+fill z1--z2 & z2--z3 & flex(z3,z8,z1) & cycle;
+fill z4--z5 & flex(z5,z9,z10,z6) & flex(z6,z11,z12,z7) & flex(z7,z13,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("G", body_widthu#-1.65pt#*scaleu, body_heightu#, 0pt#); "Klingon letter G";
+z1=(0.525tu,0); z2=(2.075tu,0); z3=(2.65tu,2.75tu); z4=(2.65tu,3.15tu); %corner points
+z5=(1.85tu,3.6tu); z6=(0.65tu,1.7tu); z7=(1.45tu,3.3tu); z8=(0,3.3tu); %corner points
+z9=(1.45tu,1.75tu); z10=(2.275tu,3.25tu); z11=(0.7tu,1.35tu); % help points
+z12=(0.4tu,2.8tu);
+fill z1--z2 & flex(z2,z9,z3) & z3--z4 & flex(z4,z10,z5) & flex(z5,z11,z1) & cycle;
+fill z6--z7 & z7--z8 & flex(z8,z12,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("H", body_widthu#-0.35pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter H";
+z1=(1.1tu,-0.6tu); z2=(2.0tu,2.45tu); z3=(0.55tu,1.75tu); % corner points
+z4=(0,1.7tu); z5=(3.25tu,3.35tu); z6=(0.95tu,3.35tu); % corner points
+z7=(1.45tu,0.9tu); z8=(2.55tu,0.9tu); z9=(0.8tu,2.725tu); % help points
+fill flex(z1,z8,z2) & z2--z3 & flex(z3,z7,z1) & cycle;
+fill z4--z5 & z5--z6 & flex(z6,z9,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9);
+endchar;
+
+beginchar ("I", body_widthu#-0.85pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter I";
+z1=(1.1tu,-0.6tu); z2=(2.3tu,0); z3=(3.0tu,1.4tu); % corner points
+z4=(1.675tu,1.4tu); z5=(0.725tu,0); z6=(1.15tu,0); % corner points
+z7=(1.2tu,3.6tu); z8=(0tu,1.0tu); % corner points
+z9=(1.7tu,-0.15tu); z10=(2.5tu,0.85tu); z11=(1.55tu,0.65tu); % help points
+z12=(1.55tu,1.65tu); z13=(0.65tu,1.825tu); z14=(0.4tu,0.7tu); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & z3--z4 & flex(z4,z11,z1) & cycle;
+fill z5--z6 & flex(z6,z12,z7) & flex(z7,z13,z8) & flex(z8,z14,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("J", body_widthu#-0.2pt#*scaleu, body_heightu#, 0pt#); "Klingon letter J";
+z1=(0.55tu,0); z2=(2.25tu,0); z3=(2.65tu,0.8tu); z4=(1.67tu, 0.8tu); % corner points
+z5=(0,3.6tu); z6=(1.75tu,1.0tu); z7=(3.3tu,3.6tu); z8=(0.35tu,3.4tu); % corner points
+z9=(2.35tu,0.4tu); z10=(0.05tu,2.95tu); z11=(0.55tu,1.1tu); % help points
+z12=(2.25tu,2.4tu); z13=(1.75tu,3.3tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & z3--z4 & z4--z5 & flex(z5,z10,z11,z1) & cycle;
+fill flex(z6,z12,z7) & flex(z7,z13,z8) & z8--z6 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("K", body_widthu#-0.6pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter K";
+z1=(1.6tu,-0.7tu); z2=(2.1tu,2.075tu); z3=(1.45tu,2.6tu); z4=(0.95tu,2.2tu); % corner points
+z5=(2.2tu,2.2tu); z6=(3.1tu,2.95tu); z7=(2.65tu,3.4tu); z8=(0,3.3tu); % corner points
+z9=(1.8tu,0.85tu); z10=(1.85tu,2.3tu); z11=(1.35tu,2.425tu); % help points
+z12=(1.275tu,1.2tu); z13=(2.5tu,2.55tu); z14=(2.75tu,3.3tu); % help points
+z15=(1.4tu,3.25tu); z16=(1.3tu,2.8tu); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z1) & cycle;
+fill flex(z5,z13,z6) & flex(z6,z14,z7) & flex(z7,z15,z8) & flex(z8,z16,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("L", body_widthu#-1.6pt#*scaleu, body_heightu#, 0pt#); "Klingon letter L";
+z1=(0.6tu,0); z2=(1.525tu,0); z3=(0,1.85tu); z4=(1.7tu,0); % corner points
+z5=(2.7tu,0); z6=(1.85tu,3.35tu); z7=(0.85tu,3.6tu); % corner points
+z8=(0.65tu,2.3tu); z9=(0.95tu,0.8tu); z13=(1.55tu,2.35tu); % corner points
+z10=(0.55tu,1.0tu); z11=(1.45tu,3.35tu); z12=(0.75tu,2.9tu); % help points
+z14=(1.1tu,2.65tu); z15=(1.55tu,1.3tu); z16=(1.4tu,0.25tu); % help points
+fill z1--z2 & flex(z2,z10,z3) & z3--z1 & cycle; 
+fill z4--z5 & z5--z6 & flex(z6,z11,z7) & flex(z7,z12,z8) & flex(z8,z14,z13)
+  & flex(z13,z15,z9) & flex(z9,z16,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("M", body_widthu#, body_heightu#, body_depthu#); "Klingon letter M";
+z1=(1.225tu,0.3tu); z2=(1.6tu,2.45tu); z3=(0.55tu,2.45tu); % corner points
+z4=(1.95tu,-0.7tu); z5=(3.35tu,3.4tu); z6=(0tu,3.4tu); % corner points
+z7=(0.45tu,2.6tu); z8=(1.7tu,2.6tu); z9=(1.6tu,0.5tu); % corner points
+z10=(1.35tu,1.7tu); z11=(0.15tu,3.2tu); z12=(1.85tu,1.7tu); % help points
+fill flex(z1,z10,z2) & z2--z3 & z3--z1 & cycle;
+fill z4--z5 & z5--z6 & flex(z6,z11,z7) & z7--z8 & flex(z8,z12,z9) 
+  & z9--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("N", body_widthu#+0.9pt#*scaleu, body_heightu#+0.4pt#*scaleu, body_depthu#); "Klingon letter N";
+z1=(0.225tu,-0.7tu); z2=(2.45tu,-0.35tu); z3=(0.55tu,0.5tu); % corner points
+z4=(0,0.85tu); z5=(3.85tu,-0.7tu); z6=(2.85tu,3.2tu); % corner points
+z7=(1.75tu,3.65tu); % corner points
+z8=(1.85tu,0.05tu); z9=(0.5tu,-0.15tu); z10=(2.05tu,1.7tu); % help points
+z11=(2.35tu,3.35tu); z12=(1.2tu,2.6tu); z13=(1.7tu,0.3tu); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z9,z1) & cycle; 
+fill flex(z4,z13,z5) & flex(z5,z10,z6) & flex(z6,z11,z7) & flex(z7,z12,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("O", body_widthu#-0.55pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter O";
+z1=(2.45tu,-0.7tu); z2=(2.0tu,2.1tu); z3=(3.15tu,3.35tu); % corner points
+z4=(0.55tu,3.35tu); z5=(0,2.55tu); z6=(1.45tu,2.55tu); % corner points
+z7=(0.1tu,1.55tu); % corner points
+z8=(2.5tu,0.8tu); z9=(2.35tu,2.4tu); z10=(2.7tu,3.1tu); % help points
+z11=(0.45tu,2.95tu); z12=(0.95tu,1.9tu); z13=(1.35tu,1.1tu); % help points
+z14=(0.8tu,1.35tu); z15=(2.1tu,0.2tu); % help points
+fill flex(z1,z8,z2) & flex(z2,z9,z10,z3) & z3--z4 & flex(z4,z11,z5)
+  & z5--z6 & flex(z6,z12,z7) & flex(z7,z14,z13) & flex(z13,z15,z1) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("P", body_widthu#-0.3pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter P";
+z1=(2.25tu,-0.7tu); z2=(1.85tu,3.4tu); z3=(0.55tu,3.65tu); % corner points
+z4=(0tu,2.75tu); z5=(2.2tu,1.1tu); z6=(3.25tu,3.4tu); % corner points
+z7=(2.0tu,3.4tu); % corner points
+z8=(1.15tu,3.45tu); z9=(0.35tu,3.1tu); z10=(1.85tu,0.4tu); % help points
+z11=(2.45tu,2.1tu); % help points
+fill z1--z2 & flex(z2,z8,z3) & flex(z3,z9,z4) & flex(z4,z10,z1) & cycle;
+fill flex(z5,z11,z6) & z6--z7 & z7--z5 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11);
+endchar;
+
+beginchar ("Q", body_widthu#-1.2pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter Q";
+z1=(0.8tu,-0.3tu); z2=(1.4tu,-0.2tu); z3=(1.65tu,1.05tu); % corner points
+z4=(2.85tu,3.4tu); z5=(0,3.4tu); z6=(1.55tu,-0.3tu); % corner points
+z7=(2.65tu,0.2tu); z8=(1.95tu,1.9tu); % corner points
+z9=(1.55tu,0.5tu); z10=(1.55tu,2.3tu); z11=(2.25tu,0.15tu); % help points
+z12=(2.25tu,0.7tu); z13=(1.75tu,0.7tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z4) & z4--z5 & z5--z1 & cycle;
+fill flex(z6,z11,z7) & flex(z7,z12,z8) & flex(z8,z13,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("R", body_widthu#-1.9pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter R";
+z1=(0.45tu,0.15tu); z2=(1.05tu,-0.4tu); z3=(2.55tu,2.5tu); % corner points
+z4=(2.45tu,3.4tu); z5=(0,3.65tu); z6=(1.25tu,0); % corner points
+z7=(2.35tu,0); z8=(1.65tu,1.7tu); % corner points
+z9=(0.75tu,0); z10=(1.75tu,2.35tu); z11=(2.5tu,2.85tu); % help points
+z12=(1.2tu,3.2tu); z13=(0.4tu,2.1tu); z14=(2tu,0.6tu); % help points
+z15=(1.4tu,0.75tu); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5)
+  & flex(z5,z13,z1) & cycle;
+fill z6--z7 & flex(z7,z14,z8) & flex(z8,z15,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("S", body_widthu#+1.1pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter S";
+z1=(0.95tu,-0.7tu); z2=(3.65tu,3.4tu); z3=(0,3.4tu); % corner points
+z4=(0.55tu,1.9tu); z5=(1.75tu,1.9tu); z6=(1.85tu,0); % corner points
+z7=(3.85tu,0); z8=(3.6tu,1.0tu); z9=(3.2tu,2.0tu); % corner points
+z10=(2.65tu,1.35tu); z11=(1.6tu,0.8tu); z12=(3.65tu,0.3tu); % help points
+z13=(3.05tu,0.6tu); z14=(2.7tu,1.1tu); z15=(3.25tu,0.6tu); % help points
+z16=(3.0tu,0.9tu); z17=(3.18tu,1.75tu); % help points
+fill flex(z1,z10,z2) & z2--z3 & z3--z4 & z4--z5 & flex(z5,z11,z1) & cycle;
+fill z6--z7 & flex(z7,z12,z8) & flex(z8,z15,z13) & flex(z13,z16,z17,z9) & flex(z9,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
+endchar;
+
+beginchar ("T", body_widthu#-1.5pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter T";
+z1=(0,0); z2=(1.95tu,0); z3=(1.1tu,1.825tu); % corner points
+z4=(2.45tu,-0.7tu); z5=(2.75tu,2.45tu); z6=(2.2tu,3.4tu); % corner points
+z7=(0.3tu,3.4tu); z8=(0tu,2.6tu); % corner points
+z9=(1.5tu,1.1tu); z10=(0.75tu,0.65tu); z11=(2.25tu,1.45tu); % help points
+z12=(2.25tu,3.1tu); z13=(0.25tu,3.05tu); z14=(1.15tu,2.0tu); % help points
+z15=(0.7tu,2.45tu); z16=(1.65tu,1.15tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z10,z1) & cycle;
+fill flex(z4,z11,z5) & flex(z5,z12,z6) & z6--z7 & flex(z7,z13,z8) 
+  & flex(z8,z15,z14) & flex(z14,z16,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar ("U", body_widthu#-1.65pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter U";
+z1=(0.15tu,0.3tu); z2=(2.05tu,-0.5tu); z3=(2.45tu,3.4tu); % corner points
+z4=(1.0tu,3.65tu); z5=(0,1.05tu); z6=(2.05tu,-0.35tu); % corner points
+z7=(2.65tu,0.85tu); z8=(2.4tu,1.3tu); z9=(1.3tu,1.4tu); % corner points
+z10=(1.1tu,1.4tu); z11=(1.45tu,3.45tu); z12=(0.65tu,2.0tu); % help points
+z13=(2.15tu,0.4tu); z14=(1.45tu,0.5tu); % help points
+fill z1--z2 & flex(z2,z10,z3) & flex(z3,z11,z4) & flex(z4,z12,z5) 
+  & z5--z1 & cycle;
+fill flex(z6,z13,z7) & z7--z8 & z8--z9 & flex(z9,z14,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("V", body_widthu#-0.2pt#*scaleu, body_heightu#, 0pt#); "Klingon letter V";
+z1=(0,0); z2=(1.6tu,0); z3=(1.25tu,2.4tu); z4=(1.75tu,0); % corner points
+z5=(2.85tu,0); z6=(3.3tu,1.5tu); z7=(1.2tu,3.65tu); % corner points
+z8=(1.55tu,1.45tu); % corner points
+z9=(0.7tu,0.9tu); z10=(2.95tu,0.6tu); z11=(1.25tu,3.1tu); % help points
+z12=(1.95tu,1.7tu); % help points
+fill z1--z2 & z2--z3 & flex(z3,z9,z1) & cycle;
+fill z4--z5 & flex(z5,z10,z6) & z6--z7 & flex(z7,z11,z12,z8) & z8--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar ("W", body_widthu#-0.2pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter W";
+z1=(1.65tu,-0.7tu); z2=(2.95tu,1.9tu); z3=(3.3tu,3.4tu); % corner points
+z4=(0,3.4tu); z5=(1.8tu,-0.1tu); z6=(3.2tu,1.2tu); % corner points
+z7=(2.05tu,1.5tu); % corner points
+z8=(2.0tu,1.9tu); z9=(3.05tu,2.65tu); z10=(0.95tu,1.55tu); % help points
+z11=(2.5tu,0.75tu); z12=(2.65tu,1.3tu); z13=(2.0tu,1.3tu); % help points
+z14=(1.85tu,1.6tu); z15=(2.5tu,2.1tu); % help points
+fill flex(z1,z14,z8) & flex(z8,z15,z2) & flex(z2,z9,z3) & z3--z4 
+  & flex(z4,z10,z1) & cycle;
+fill flex(z5,z11,z6) & flex(z6,z12,z7) & flex(z7,z13,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("X", body_widthu#-1.1pt#*scaleu, body_heightu#, body_depthu#); "Klingon letter X";
+z1=(1.25tu,-0.7tu); z2=(2.9tu,2.5tu); z3=(2.1tu,3.6tu); % corner points
+z4=(0,3.3tu); z5=(0.25tu,2.35tu); z6=(1.35tu,0.15tu); % corner points
+z7=(2.6tu,0.15tu); z8=(2.05tu,1.7tu); % corner points
+z9=(1.45tu,1.2tu); z10=(2.35tu,3.1tu); z11=(1.0tu,3.2tu); % help points
+z12=(0.75tu,1.9tu); z13=(0.7tu,-0.1tu); z14=(2.15tu,0.75tu); % help points
+z15=(1.55tu,0.9tu); % help points
+fill flex(z1,z9,z2) & flex(z2,z10,z3) & flex(z3,z11,z4) & z4--z5 
+  & flex(z5,z12,z13,z1) & cycle;
+fill z6--z7 & flex(z7,z14,z8) & flex(z8,z15,z6) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("Y", body_widthu#-0.9pt#*scaleu, body_heightu#, 0pt#); "Klingon letter Y";
+z1=(0.5tu,0); z2=(2.45tu,0); z3=(2.95tu,1.2tu); z4=(0.45tu,1.2tu); % corner points
+z5=(1.55tu,2.45tu); z6=(3.0tu,1.4tu); z14=(3.0tu,1.45tu); % corner points
+z7=(2.25tu,3.3tu); z8=(1.05tu,3.65tu); z9=(0,1.3tu); % corner points
+z10=(1.05tu,2.1tu); z11=(2.15tu,1.8tu); z12=(2.35tu,2.3tu); % help points
+z13=(1.45tu,3.4tu); % help points
+fill z1--z2 & z2--z3 & z3--z4 & flex(z4,z10,z5) & flex(z5,z11,z6) 
+  & z6--z14 & flex(z14,z12,z7) & flex(z7,z13,z8) & z8--z9 & z9--z1 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar ("Z", body_widthu#-1pt#*scaleu, body_heightu#, 0pt#); "Klingon letter Z";
+z1=(0.55tu,0); z2=(2.6tu,0); z3=(2.95tu,1.05tu); z4=(1.25tu,1.4tu); % corner points
+z5=(1.35tu,3.6tu); z6=(0,1.0tu); z7=(1.4tu,1.6tu); % corner points
+z8=(2.55tu,2.8tu); z9=(1.5tu,3.1tu); % corner points
+z10=(2.65tu,0.5tu); z11=(1.75tu,1.1tu); z12=(0.35tu,0.65tu); % help points
+z13=(1.95tu,2.4tu); z14=(2.0tu,2.9tu); % help points
+fill z1--z2 & flex(z2,z10,z3) & flex(z3,z11,z4) & z4--z5 & z5--z6 
+  & flex(z6,z12,z1) & cycle;
+fill flex(z7,z13,z8) & flex(z8,z14,z9) & z9--z7 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("'", 2pt#*scaleu, body_heightu#, 0pt#); "Klingon apostrophe '";
+z1=(0.5tu,2.5tu); z2=(0.7tu,3.7tu); z3=(0,3.35tu); % corner points
+z4=(0.7tu,3.2tu); z5=(0.5tu,3.4tu); z6=(0.35tu,2.85tu); % help points
+fill flex(z1,z4,z2) & flex(z2,z5,z3) & flex(z3,z6,z1) & cycle;
+penlabels (1,2,3,4,5,6);
+endchar;
+
+beginchar ("!", 2.6pt#*scaleu, body_heightu#, 0pt#); "Klingon exclamation mark !";
+z1=(0.5tu,0); z2=(0.15tu,1tu); z3=(0,0.55tu); z4=(0.65tu,0.05tu); % corner points
+z5=(1.1tu,2.25tu); z6=(0.4tu,3.7tu); z7=(0.45tu,2tu); z8=(0,1.5tu); % corner points
+z9=(0.3tu,0.4tu); z10=(0.4tu,0.6tu); z11=(0.1tu,0.7tu); % help points
+z12=(0.5tu,2.4tu); z13=(0,2.25tu); z14=(0.3tu,1.7tu); z15=(0.45tu,1.1tu); % help points
+fill flex(z1,z10,z2) & flex(z2,z11,z3) & flex(z3,z9,z1) & cycle;
+fill z4--z5 & flex(z5,z12,z6) & flex(z6,z13,z7) & flex(z7,z14,z8) 
+  & flex(z8,z15,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+endchar;
+
+beginchar ("?", 2.6pt#*scaleu, body_heightu#, body_depthu#); "Klingon question mark ?";
+z1=(0.8tu,-0.7tu); z2=(0.35tu,0.6tu); z3=(0,-0.1tu); z4=(0.7tu,0); % corner points
+z5=(0.4tu,1.75tu); z6=(0.3tu,3.6tu); z7=(0.1tu,2.0tu); % corner points
+z8=(0.4tu,-0.4tu); z9=(0.2tu,0.2tu); z10=(0.95tu,1.15tu); % help points
+z11=(1.1tu,2.3tu); z12=(0.55tu, 2.55tu); % help points
+fill z1--z2 & flex(z2,z9,z3) & flex(z3,z8,z1) & cycle;
+fill flex(z4,z10,z5) & flex(z5,z11,z6) & flex(z6,z12,z7) & z7--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar (",", 1.65pt#*scaleu, 3pt#*scaleu, body_depthu#); "Klingon comma ,";
+z1=(0.25tu,-0.5tu); z2=(0.7tu,0.9tu); z3=(0,0.15tu); % corner points
+z4=(0.6tu,0.05tu); z5=(0.45tu,0.4tu); z6=(0.2tu,-0.1tu); % help points
+fill flex(z1,z4,z2) & flex(z2,z5,z3) & flex(z3,z6,z1) & cycle;
+penlabels (1,2,3,4,5,6);
+endchar;
+
+beginchar (".", 1.65pt#*scaleu, 5pt#*scaleu, body_depthu#); "Klingon dot .";
+z1=(0.25tu,-0.5tu); z2=(0.7tu,0.9tu); z3=(0,0.15tu); % corner points
+z7=(0,0.3tu); z8=(0.65tu,1.2tu); z9=(0,1.7tu); % corner points
+z4=(0.6tu,0.05tu); z5=(0.45tu,0.4tu); z6=(0.2tu,-0.1tu); % help points
+z10=(0.4tu,0.6tu); z11=(0.25tu,1.3tu); z12=(0.1tu,0.95tu); % help points
+fill flex(z1,z4,z2) & flex(z2,z5,z3) & flex(z3,z6,z1) & cycle;
+fill flex(z7,z10,z8) & flex(z8,z11,z9) & flex(z9,z12,z7) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12);
+endchar;
+
+beginchar (";", 2.65pt#*scaleu, 5pt#*scaleu, body_depthu#); "Klingon semicolon ;";
+z1=(0.3tu,-0.6tu); z2=(0.5tu,1.3tu); z3=(0,0.7tu); % corner points
+z4=(0.55tu,0); z5=(1.15tu,0.7tu); z6=(0.6tu, 1.3tu); % corner points
+z7=(0.4tu,0); z8=(0.5tu,0.75tu); z9=(0.3tu,1tu); % help points
+z10=(0.2tu,0.1tu); z11=(0.8tu,0.35tu); z12=(0.7tu,0.75tu); % help points
+z13=(0.55tu,0.2tu); % help points
+fill flex(z1,z7,z8,z2) & flex(z2,z9,z3) & flex(z3,z10,z1) & cycle;
+fill flex(z4,z11,z5) & z5--z6 & flex(z6,z12,z13,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar;
+
+beginchar (":", 2.65pt#*scaleu, body_heightu#, body_depthu#); "Klingon double point :";
+z1=(0.3tu,-0.6tu); z2=(0.5tu,1.3tu); z3=(0,0.7tu); % corner points
+z4=(0.55tu,0.7tu); z5=(1.15tu,1.4tu); z6=(0.6tu,2tu); % corner points
+z7=(0.4tu,0); z8=(0.5tu,0.75tu); z9=(0.3tu,1tu); % help points
+z10=(0.2tu,0.1tu); z11=(0.8tu,1.05tu); z12=(0.7tu,1.45tu); % help points
+z13=(0.55tu,0.9tu); % help points
+fill flex(z1,z7,z8,z2) & flex(z2,z9,z3) & flex(z3,z10,z1) & cycle;
+fill flex(z4,z11,z5) & z5--z6 & flex(z6,z12,z13,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13);
+endchar; 
+
+beginchar ("-", body_widthu#-2.9pt#*scaleu, 6pt#*scaleu, 0pt#); "Klingon dash -";
+z1=(0.1tu, 0.4tu); z2=(0.7tu,1.2tu); z3=(0,1.3tu); % corner points
+z4=(0.1tu, 0.3tu); z5=(2.2tu,1.3tu); z6=(1.75tu,2.25tu); % corner points
+z7=(0.3tu,1.1tu); z8=(0.1tu,0.8tu); z9=(1tu,1tu); % help points
+z10=(1.8tu,1.6tu); % help points
+fill z1--z2 & flex(z2,z7,z3) & flex(z3,z8,z1) & cycle;
+fill flex(z4,z9,z5) & flex(z5,z10,z6) & z6--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+beginchar (oct"173", 1.5(body_widthu#-2.9pt#*scaleu), 6pt#*scaleu, 0pt#); "Klingon en dash -";
+z1=(0.15tu, 0.4tu); z2=(1.05tu,1.2tu); z3=(0,1.3tu); % corner points
+z4=(0.15tu, 0.3tu); z5=(3.3tu,1.3tu); z6=(2.6tu,2.25tu); % corner points
+z7=(0.45tu,1.1tu); z8=(0.15tu,0.8tu); z9=(1.5tu,1tu); % help points
+z10=(2.7tu,1.6tu); % help points
+fill z1--z2 & flex(z2,z7,z3) & flex(z3,z8,z1) & cycle;
+fill flex(z4,z9,z5) & flex(z5,z10,z6) & z6--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+beginchar (oct"174", 2(body_widthu#-2.9pt#*scaleu), 6pt#*scaleu, 0pt#); "Klingon em dash -";
+z1=(0.2tu, 0.4tu); z2=(1.4tu,1.2tu); z3=(0,1.3tu); % corner points
+z4=(0.2tu, 0.3tu); z5=(4.4tu,1.3tu); z6=(3.5tu,2.25tu); % corner points
+z7=(0.6tu,1.1tu); z8=(0.2tu,0.8tu); z9=(2tu,1tu); % help points
+z10=(3.6tu,1.6tu); % help points
+fill z1--z2 & flex(z2,z7,z3) & flex(z3,z8,z1) & cycle;
+fill flex(z4,z9,z5) & flex(z5,z10,z6) & z6--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+beginchar ("(", 2.8pt#*scaleu, body_heightu#, 0pt#); "Klingon opening brace (";
+z1=(0.4tu,1.2tu); z2=(0.4tu,2.5tu); z3=(0,1.75tu); % corner points
+z4=(0.15tu,0); z5=(1.2tu,0); z6=(0.65tu,1.7tu); % corner points
+z7=(0.65tu,1.8tu); z8=(1.2tu,3.6tu); z9=(0.15tu,3.6tu); % corner points
+z10=(0.2tu,1.6tu); z11=(0.5tu,1.75tu); z12=(0.2tu,2tu); % help points
+z13=(0.85tu,0.8tu); z14=(0.5tu,0.8tu); z15=(0.85tu,2.75tu); % help points
+z16=(0.5tu,2.75tu); % help points
+fill flex(z1,z11,z2) & flex(z2,z12,z3) & flex(z3,z10,z1) & cycle;
+fill z4--z5 & flex(z5,z13,z6) & flex(z6,z14,z4) & cycle;
+fill flex(z7,z15,z8) & z8--z9 & flex(z9,z16,z7) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar (")", 2.8pt#*scaleu, body_heightu#, 0pt#); "Klingon closing brace )";
+z1=(0,0); z2=(1.05tu,0); z3=(0.55tu,1.7tu); % corner points
+z4=(0.55tu,1.8tu); z5=(1.05tu,3.6tu); z6=(0,3.6tu); % corner points
+z7=(0.8tu,1.2tu); z8=(1.2tu,1.75tu); z9=(0.8tu,2.5tu); % corner points
+z10=(1tu,1.6tu); z11=(1tu,2tu); z12=(0.7tu,1.75tu); % help points
+z13=(0.7tu,0.8tu); z14=(0.35tu,0.8tu);  % help points
+z15=(0.7tu,2.75tu); z16=(0.35tu,2.75tu); % help points
+fill z1--z2 & flex(z2,z13,z3) & flex(z3,z14,z1) & cycle;
+fill flex(z4,z15,z5) & z5--z6 & flex(z6,z16,z4) & cycle;
+fill flex(z7,z10,z8) & flex(z8,z11,z9) & flex(z9,z12,z7) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
+endchar;
+
+beginchar (oct"042", 2.2pt#*scaleu, body_heightu#, 0pt#); "Klingon double quote";
+z1=(0.45tu,0.35tu); z2=(0.6tu,1.45tu); z3=(0.25tu,2.2tu); % corner points
+z4=(0.65tu,1.5tu); z5=(0.5tu,3.75tu); z6=(0.3tu,2.25tu); % corner points
+z7=(0.3tu,0.9tu); z8=(0.05tu,1.2tu); z9=(0.9tu,2.7tu); % help points
+z10=(0.55tu,3tu); % help points
+fill flex(z1,z7,z2) & z2--z3 & flex(z3,z8,z1) & cycle; 
+fill flex(z4,z9,z5) & flex(z5,z10,z6) & z6--z4 & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10);
+endchar;
+
+beginchar ("/", 2.75pt#*scaleu, body_heightu#, body_depthu#); "Klingon slash /";
+z1=(0,-0.7tu); z2=(0.6tu,-0.5tu); z3=(0.9tu,1.3tu); % corner points
+z4=(0.5tu,0.8tu); z5=(1.2tu,2.6tu); z6=(0.65tu,3.6tu); % corner points
+z7=(0.2tu,-0.6tu); z8=(0.5tu,-0.2tu); z9=(0.9tu,0.9tu); % corner points
+z10=(0.75tu,0.9tu); z11=(0.2tu,-0.2tu); z12=(0.8tu,1.3tu); % help points
+z13=(0.9tu,2.8tu); z14=(0.75tu,2tu); % help points
+fill flex(z1,z7,z2) & flex(z2,z8,z9,z3) & flex(z3,z10,z11,z1) & cycle;
+fill flex(z4,z12,z5) & flex(z5,z13,z6) & flex(z6,z14,z4) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+endchar;
+
+beginchar ("&", body_widthu#-3.2pt#*scaleu, body_heightu#, 0pt#); "Klingon ampersand &";
+z1=(0,0); z2=(2tu,0); z3=(1.9tu,1.2tu); z4=(0.65tu,1.35tu); % corner points
+z5=(1.1tu,0.75tu); z6=(1.85tu,1.6tu); z7=(1.2tu,2.8tu); % corner points
+z8=(0.75tu,2.8tu); z9=(0.45tu,2.45tu); z10=(0.85tu,1.6tu); z11=(1tu,2.3tu); % corner points
+z12=(1.8tu,0.4tu); z13=(1tu,0.6tu); z14=(0.3tu,0.5tu); % help points
+z15=(1.7tu,1.2tu); z16=(0.8tu,2.1tu); z17=(1.5tu,1.6tu); % help points
+fill z1--z2 & flex(z2,z12,z3) & flex(z3,z13,z4) & flex(z4,z14,z1) & cycle;
+fill flex (z5,z15,z6) & z6--z7 & z7--z8 & z8--z9 & z9--z10
+  & flex(z10,z16,z11) & flex(z11,z17,z5) & cycle;
+penlabels (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17);
+endchar;
+
+input kligs;
+end

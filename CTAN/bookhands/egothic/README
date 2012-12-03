@@ -1,0 +1,71 @@
+    The egothic and allegoth packages provide Metafont fonts based on the 
+Early Gothic manuscript book-hand used between the 11th & 12th century AD. 
+The font consists of minuscules and digits, with some appropriate 
+period punctuation marks. Both normal and bold versions are provided. 
+This is one in a series of manuscript fonts.
+
+    Access to the docmfp package is desireable but not essential.
+
+    The distribution consists of the following files:
+README (this file)
+egothic.ins
+egothic.dtx
+tryfont.tex
+allfont.tex
+
+    The distribution is provided under the terms of the LaTeX
+Project Public License (LPPL).
+
+To install the package:
+=======================
+
+o run: latex egothic.ins, which will generate:
+       egoth*.mf files
+       *.fd files
+       egothic.sty
+       allegoth.sty
+o Move the generated files to locations where LaTeX will find them.
+    For example: the egoth*.mf files to .../texmf/fonts/source/public/egothic
+                 the *.fd and *.sty files to /texmf/tex/latex/local/egothic
+
+    On a teTeX distribution you might also have to add lines like the 
+    following to texmf/fontname/special.map:
+      egoth7.mf        public    egothic
+      egoth10.mf       public    egothic
+      egoth17.mf       public    egothic
+      egothb7.mf       public    egothic
+      egothb10.mf      public    egothic
+      egothb17.mf      public    egothic
+    On a teTeX distribution remember to run texhash after moving the files.
+
+    (I use a teTeX distribution and found that if I didn't add to the special.map
+     file, then the generated tfm and pk files were put in directories corresponding
+     to some vendor's font.) 
+
+    Other LaTeX distributions might require procedures similar to those for teTeX.
+
+To typeset the documentation:
+=============================
+
+o run: latex egothic.dtx
+o if you want an index then run: makeindex -s gind.ist egothic
+o run: latex egothic.dtx
+o Print egothic.dvi for a hardcopy of the package manual 
+
+    Note that the docmfp package is normally required for LaTeXing egothic.dtx.
+The package is available from CTAN in tex-archive/macros/latex/contrib/supported.
+If you haven't got this and don't want to get it, then there are instructions
+in the first part of the .dtx file about how to edit it to avoid the use of docmfp.
+(docmfp is an extension of the doc package for describing METAFONT, or other
+non-LaTeX, code.)
+
+
+To check out your installation:
+===============================
+
+o run: latex tryfont  for a testpage of the fonts
+o run: latex allfont  for a document typeset with the fonts
+
+2002/12/30
+Peter Wilson
+peter.r.wilson@boeing.com

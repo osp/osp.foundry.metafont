@@ -1,0 +1,76 @@
+% trysqrcaps.tex    Test Square Capitals fonts
+%\documentclass[12pt]{article}
+\documentclass{article}
+\usepackage{sqrcaps}
+
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrs{}tuvwxyz}
+\newcommand{\ABCnb}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\newcommand{\abcnb}{abcdefghijklmnopqrs{}tuvwxyz}
+\newcommand{\punct}{.,;:!?`' () []}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\ligs}{\&{} ct st}
+\newcommand{\sentence}{%
+this is an example of the square capitals font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog.}
+
+\newcommand{\Sentence}{%
+This is an example of the Square Capitals font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog.}
+
+
+
+\title{Try Square Capitals Fonts}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+    This provides a short test of the characters in the Square Capitals fonts
+--- the \verb|sqrc| font family. Pen angle is 0 degrees, 5 and 4 nibs for
+normal and bold versions.
+
+
+
+\begin{center}
+The Square Capitals Huge normal font. \\ \par
+{\sqrcfamily\Huge \ABC\\ \abc\\ \punct{} \dashes\\ \figs{} \ligs{} \par }
+\end{center}
+
+\begin{center}
+The Square Capitals font in its normal size \\
+\textsqrc{\ABCnb{} \abcnb{} \punct{} \dashes{} \figs{} \ligs{} } \\
+\end{center}
+
+\begin{center}
+The bold font, the normal font, and the bold Computer Modern
+Roman, all in the normal size \\
+\textsqrc{\textbf{\abc{} \figs{} \ligs{}}} \\
+\textsqrc{\abc{} \figs{} \ligs{}} \\
+\textbf{\abc{} \figs{} \ligs{}} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\sqrcfamily\bfseries
+\Huge \abc{} \figs{} \ligs{} \par
+\tiny \abc{} \figs{} \ligs{} \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\sqrcfamily\tiny \abc{} \figs{} \ligs{} \par } 
+\end{center}
+
+
+{
+\sqrcfamily 
+\Sentence{}
+}
+    
+    This is the end of the test file.
+
+\end{document}

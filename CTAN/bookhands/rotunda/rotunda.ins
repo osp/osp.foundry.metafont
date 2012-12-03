@@ -1,0 +1,101 @@
+%%
+%% rotunda.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{rotunda.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{rotunda.drv}{t}{\from{rotunda.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{rtnd7.mf}{t}{\from{rotunda.dtx}{base7}}
+\generateFile{rtnd10.mf}{t}{\from{rotunda.dtx}{base10}}
+\generateFile{rtnd17.mf}{t}{\from{rotunda.dtx}{base17}}
+\generateFile{rtndb7.mf}{t}{\from{rotunda.dtx}{base7b}}
+\generateFile{rtndb10.mf}{t}{\from{rotunda.dtx}{base10b}}
+\generateFile{rtndb17.mf}{t}{\from{rotunda.dtx}{base17b}}
+\generateFile{rtndl.mf}{t}{\from{rotunda.dtx}{min}}
+\generateFile{rtndu.mf}{t}{\from{rotunda.dtx}{maj}}
+\generateFile{rtndtitle.mf}{t}{\from{rotunda.dtx}{mfd}}
+\generateFile{rtndpunct.mf}{t}{\from{rotunda.dtx}{punct}}
+\generateFile{rtndlig.mf}{t}{\from{rotunda.dtx}{lig}}
+\generateFile{rtnddig.mf}{t}{\from{rotunda.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1rtnd.fd}{t}{\from{rotunda.dtx}{fdot1}}
+\generateFile{t1rtnd.fd}{t}{\from{rotunda.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{rotunda.sty}{t}{\from{rotunda.dtx}{usc}}
+\generateFile{allrtnd.sty}{t}{\from{rotunda.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space rtnd7.mf}
+\Msg{* \space\space rtnd10.mf}
+\Msg{* \space\space rtnd17.mf}
+\Msg{* \space\space rtndb7.mf}
+\Msg{* \space\space rtndb10.mf}
+\Msg{* \space\space rtndb17.mf}
+\Msg{* \space\space rtndl.mf}
+\Msg{* \space\space rtndu.mf}
+\Msg{* \space\space rtndtitle.mf}
+\Msg{* \space\space rtndpunct.mf}
+\Msg{* \space\space rtndlig.mf}
+\Msg{* \space\space rtnddig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1rtnd.fd}
+\Msg{* \space\space t1rtnd.fd}
+\Msg{* \space\space rotunda.sty}
+\Msg{* \space\space allrtnd.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

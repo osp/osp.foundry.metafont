@@ -1,0 +1,18 @@
+\starttypescript [sans] [aslantregular] [name]
+	\definefontsynonym [Sans]           [a]
+	\definefontsynonym [SansItalic]     [aslant]
+%    \definefontsynonym [Sans]		[name:aregular] 	[handling=pure]
+%    \definefontsynonym [Sans-Italic]	[name:aslantregular] [handling=pure]
+\stoptypescript
+
+%\definetypeface [a] [ss] [sans] [a]
+\definetypeface [aslantregular] [ss] [sans] [aslantregular]
+
+\setupbodyfont[aslantregular, 270pt]
+\starttext
+
+\sans{ABCDEa}
+
+\italic{ABCDEa}
+
+\stoptext

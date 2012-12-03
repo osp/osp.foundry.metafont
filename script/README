@@ -1,0 +1,30 @@
+Organization:   ESAT, K.U.Leuven, Belgium
+Date sent:      Fri, 13 Jan 95 09:32:21 +0100
+From:           Peter.Vanroose@esat.kuleuven.ac.be
+To:             metafont@ens.fr
+Subject:        Re: Calligra
+Send reply to:  METAFONT Distribution List <metafont@ens.fr>
+
+One of my first (and I must admit, the only successful) tries with metafont,
+several years ago, (1987 ?) resulted in a calligraphic font.  It worked for our
+matrix printer at that time (180 dpi?)  However, I never succeeded in really
+having it produce 300 dpi or whatever.  Maybe someone wants to give it a try?
+
+MJP>> Seems OK at 300dpi
+
+It was said at that time that the output resembles my own hand writing.
+Of course, I shaped the letters after my writing, but apart from giving it
+reference points, I let Metafont do the big work of doing the roundings.
+All letters `match' each other in that they end where the next one begins.
+(There are some minor exceptions to this, but that also applies to my own
+handwriting.)
+
+The relevant files are:
+script.mf	--	contains all the essential METAFONT code (460 lines)
+script10.mf	--	for producing the 10pt font (4 lines)
+scriptb10.mf	--	for producing the bold 10pt font (4 lines)
+
+--                               Peter Vanroose
+                                 Electrotechnical Department, ESAT
+                                 K.U. Leuven, Belgium.
+                                 Peter.Vanroose@esat.kuleuven.ac.be

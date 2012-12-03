@@ -1,0 +1,101 @@
+%%
+%% tgothic.ins
+%% Copyright 1999 Peter R. Wilson
+%%
+%% This program is provided under the terms of the
+%% LaTeX Project Public License distributed from CTAN
+%% archives in directory macros/latex/base/lppl.txt.
+%%
+%% Author: Peter Wilson (CUA)
+%%         now at: peter.r.wilson@boeing.com
+%% 
+%% This file will generate fast loadable files and documentation
+%% driver files from the doc files in this package when run through
+%% LaTeX or TeX.
+%%
+%% --------------- start of docstrip commands ------------------
+%%
+\def\batchfile{tgothic.ins}
+\input docstrip.tex
+\preamble
+
+ Copyright 1999 Peter R. Wilson
+
+ This program is provided under the terms of the
+ LaTeX Project Public License distributed from CTAN
+ archives in directory macros/latex/base/lppl.txt.
+
+Author: Peter Wilson (CUA)
+        now at: peter.r.wilson@boeing.com
+
+\endpreamble
+
+\keepsilent
+
+%%% \Msg{*** Generating the driver file ***}
+%%% \generateFile{tgothic.drv}{t}{\from{tgothic.dtx}{driver}}
+
+\Msg{*** Generating the Metafont files ***}
+
+\usepostamble\empty
+\generateFile{tgoth7.mf}{t}{\from{tgothic.dtx}{base7}}
+\generateFile{tgoth10.mf}{t}{\from{tgothic.dtx}{base10}}
+\generateFile{tgoth17.mf}{t}{\from{tgothic.dtx}{base17}}
+\generateFile{tgothb7.mf}{t}{\from{tgothic.dtx}{base7b}}
+\generateFile{tgothb10.mf}{t}{\from{tgothic.dtx}{base10b}}
+\generateFile{tgothb17.mf}{t}{\from{tgothic.dtx}{base17b}}
+\generateFile{tgothl.mf}{t}{\from{tgothic.dtx}{min}}
+\generateFile{tgothu.mf}{t}{\from{tgothic.dtx}{maj}}
+\generateFile{tgothtitle.mf}{t}{\from{tgothic.dtx}{mfd}}
+\generateFile{tgothpunct.mf}{t}{\from{tgothic.dtx}{punct}}
+\generateFile{tgothlig.mf}{t}{\from{tgothic.dtx}{lig}}
+\generateFile{tgothdig.mf}{t}{\from{tgothic.dtx}{dig}}
+
+\Msg{*** Generating the Font Definition files ***}
+\usepostamble\defaultpostamble
+
+\generateFile{ot1tgoth.fd}{t}{\from{tgothic.dtx}{fdot1}}
+\generateFile{t1tgoth.fd}{t}{\from{tgothic.dtx}{fdt1}}
+
+\Msg{*** Generating the LaTeX2e package files ***}
+
+\generateFile{tgothic.sty}{t}{\from{tgothic.dtx}{usc}}
+\generateFile{alltgoth.sty}{t}{\from{tgothic.dtx}{uscall}}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the following}
+\Msg{* files into directories searched by TeX:}
+\Msg{*}
+\Msg{* Move these into the font source area:}
+\Msg{* \space\space tgoth7.mf}
+\Msg{* \space\space tgoth10.mf}
+\Msg{* \space\space tgoth17.mf}
+\Msg{* \space\space tgothb7.mf}
+\Msg{* \space\space tgothb10.mf}
+\Msg{* \space\space tgothb17.mf}
+\Msg{* \space\space tgothl.mf}
+\Msg{* \space\space tgothu.mf}
+\Msg{* \space\space tgothtitle.mf}
+\Msg{* \space\space tgothpunct.mf}
+\Msg{* \space\space tgothlig.mf}
+\Msg{* \space\space tgothdig.mf}
+\Msg{*}
+\Msg{* Move these into the LaTeX macro area:}
+\Msg{* \space\space ot1tgoth.fd}
+\Msg{* \space\space t1tgoth.fd}
+\Msg{* \space\space tgothic.sty}
+\Msg{* \space\space alltgoth.sty}
+\Msg{*}
+\Msg{*}
+\Msg{* To produce the documentation run the files ending with}
+\Msg{* `.dtx' through LaTeX.}
+\Msg{* Process any name.idx file by:}
+\Msg{* \space\space\space\space makeindex -s gind.ist name}
+\Msg{* Process any name.glo file by:}
+\Msg{* \space\space\space\space makeindex -s gglo.ist -o name.gls name.glo}
+\Msg{*}
+\Msg{* Happy TeXing}
+\Msg{***********************************************************}
+
+\endinput

@@ -1,0 +1,61 @@
+%This was written by James Kilfiger, to support the Vicentino fonts of
+%Willibald Kraml
+\ProvidesFile{ot1vc.fd}[1999/10/05 Vincentino]
+\DeclareFontFamily{OT1}{vc}{\hyphenchar\font=-1}
+\DeclareFontShape{OT1}{vc}{m}{it}{%
+<5><6><7><8><9><10> vcc10
+<10.95> vcc11
+<12>    vcc12
+<14.4>  vcc14
+<17.28> vcc17
+<20.74><24.88> vcc20}{}
+
+\DeclareFontShape{OT1}{vc}{b}{it}{%
+<5><6><7><8><9><10><10.95><12> vccb10
+<14.4><17.28><20.74><24.88> vccb14}{}
+
+\DeclareFontShape{OT1}{vc}{m}{sl}{%
+<5><6><7><8><9><10><10.95><12> vcm10
+<14.4><17.28><20.74><24.88> vcm14}{}
+
+\DeclareFontShape{OT1}{vc}{b}{sl}{%
+<5><6><7><8><9><10> vcmb10
+<10.95> vcmb11
+<12>    vcmb12
+<14.4><17.28><20.74><24.88> vcmb14}{}
+
+\DeclareFontShape{OT1}{vc}{m}{ui}{%
+<5><6><7><8><9><10><10.95><12> vct10
+<14.4><17.28><20.74><24.88> vct14}{}
+
+\DeclareFontShape{OT1}{vc}{b}{ui}{%
+<5><6><7><8><9><10><10.95><12> vctb10
+<14.4><17.28><20.74><24.88> vctb14}{}
+
+\DeclareFontShape{OT1}{vc}{m}{its}{
+<5><6><7><8><9><10><10.95><12> vcca10
+<14.4><17.28><20.74><24.88> vcca14}{}
+
+\DeclareFontShape{OT1}{vc}{b}{its}{
+<5><6><7><8><9><10><10.95><12> vccba10
+<14.4><17.28><20.74><24.88> vccba14}{}
+
+\DeclareFontShape{OT1}{vc}{m}{sls}{
+<5><6><7><8><9><10><10.95><12> vcma10
+<14.4><17.28><20.74><24.88> vcma14}{}
+
+\DeclareFontShape{OT1}{vc}{b}{sls}{
+<5><6><7><8><9><10><10.95><12> vcmba10
+<14.4><17.28><20.74><24.88> vcmba14}{}
+       
+\DeclareFontShape{OT1}{vc}{m}{uis}{
+<5><6><7><8><9><10><10.95><12> vcta10
+<14.4><17.28><20.74><24.88> vcta14}{}
+       
+\DeclareFontShape{OT1}{vc}{b}{uis}{
+<5><6><7><8><9><10><10.95><12> vctba10
+<14.4><17.28><20.74><24.88> vctba14}{}
+
+\DeclareFontShape{OT1}{vc}{bx}{it}{<->ssub * vc/b/it}{}
+\DeclareFontShape{OT1}{vc}{bx}{sl}{<->ssub * vc/b/sl}{}
+\DeclareFontShape{OT1}{vc}{bx}{ui}{<->ssub * vc/b/ui}{}

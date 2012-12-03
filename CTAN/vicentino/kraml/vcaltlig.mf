@@ -1,0 +1,90 @@
+% vcaltlig.mf ligatures for vicentino fonts
+% kraml 1992
+slant := lowerslant;
+currenttransform := identity slanted slant;
+
+
+beginchar(char11, 2sw#+1.5tw#, xh#, 0); "the st ligature";
+pickup lower_pen;
+x1=x2=.5sw+.5tw; top.y1=h; bot.y2=0;
+x3=.75tw; rt.x4=sw+tw; y3=.76h; y4=.3h;
+x5=sw+.3tw; lft.x6=.6s; y5=y3+.55th; y6=y4-3/4th;
+path trial,p;
+trial = z3{down}..tension1.1..{down}z4;
+z7 = trial intersectionpoint (z6{up}..{up}z5);
+p = z7..tension1.3..z5..z1{left}..z3{down}..tension1.1..
+z4{down}..z2{left}..z6..tension2.5..cycle;
+draw subpath if modern:(.77,6.11) else: (.75,6.23) fi of p;
+% t part
+x11=x12=w-1.26tw; rt.x13=w; y11=h+2.5th; bot.y12=0; y13=th;
+y14=y15=xh-th; lft.x14=sw+1tw; x15=x13;
+path stem;
+stem=z11{curl0}..tension7..z12..tension2..{dir40}z13;
+draw if modern: subpath(0,1.6) of fi stem;
+draw z14--z15;
+% connection
+x19=.66sw; y19=h+th;
+path conn; conn=subpath(0,1) of p & z5{up}...z19{dir79}
+      ..tension.9 ..{dir59}z11;
+if not.modern: pickup cap_serif_pen; fi
+draw if modern: subpath(1.1,2.93) else: subpath(1.15,2.8) fi of conn;
+labels(19);
+end_char;
+
+beginchar(char12, 2sw#+1.5tw#, xh#, 0); "the ct ligature";
+pickup lower_pen;
+numeric dev, axis; dev=.5s; axis=.5sw+.5tw+.5s;
+rt x1=2axis-.5s; lft x3=.5s; 
+x2-dev=x4+dev=axis; 
+y1-dev=y3+dev=.52h;
+top.y2=h; bot y4=0;
+rt.x5+.25s=rt.x6=sw+tw-.2s; y5=3/4h; y6=th;
+path p,q ; p= superellipse(z1,z2,z3,z4,0.73);
+q= z5..{left}z2 & subpath(2,6) of p & z4{right}..{dir36}z6;
+draw q;
+% t part
+x11=x12=w-1.26tw; rt.x13=w; y11=h+2.5th; bot.y12=0; y13=th;
+y14=y15=xh-th; lft.x14=sw+1tw; x15=x13;
+path stem;
+stem=z11{curl0}..tension7..z12..tension2..{dir40}z13;
+draw if modern: subpath(0,1.6) of fi stem;
+draw z14--z15;
+% connection
+x19=.72sw; y19=h+th;
+path conn; conn=z2{left}..z19{dir79}
+      ..tension.9 ..{dir59}z11;
+if not.modern: pickup cap_serif_pen; fi
+draw if modern: subpath(0.1,1.93) else: subpath(0.1,1.8) fi of conn;
+labels(19);
+end_char;
+
+beginchar(char13, 3sw#+tw#, xh#, 0); "the sp ligature";
+pickup lower_pen;
+x1=x2=.5sw+.5tw; top.y1=h; bot.y2=0;
+x3=.75tw; rt.x4=sw+tw; y3=.76h; y4=.3h;
+x5=sw+.3tw; lft.x6=.6s; y5=y3+.55th; y6=y4-3/4th;
+path trial,p;
+trial = z3{down}..tension1.1..{down}z4;
+z7 = trial intersectionpoint (z6{up}..{up}z5);
+p = z7..tension1.3..z5..z1{left}..z3{down}..tension1.1..
+z4{down}..z2{left}..z6..tension2.5..cycle;
+draw subpath if modern:(.77,6.11) else: (.75,6.23) fi of p;
+% p part
+x11=x12=w-sw-tw; y11=h+2.55th; bot.y12=-dh+1.3th;
+lft.x13=w-sw-2.25tw; y13=h-th; top.y14=h; x14=x15=w-.5sw-tw; bot.y15=0;
+rt.x14'=w-.5s; y14'=.525h;
+rt.x12'=lft.x13; bot.y12'=-dh;  
+path stem, bowl; stem = z11{dir240}..tension3.3..{dir255}z12..{dir170}z12' ;
+z16 = stem horintersection 1.25th;
+draw if modern: subpath(0,1.8) of fi stem;
+bowl=z13{dir35}...z14{right}..z14'{down}..z15{left}..{dir105}z16;
+draw if modern: subpath(0.15,4) of fi bowl;
+% connection
+x19=.66sw; y19=h+th;
+if not.modern: pickup cap_serif_pen;fi
+path conn; conn=subpath(0,1) of p & z5{up}...z19{dir79}
+      ..tension.9..{dir59}z11;
+draw if modern: subpath(1.1,2.93) else: subpath(1.15,2.8) fi of  conn;
+labels(19);
+end_char;
+

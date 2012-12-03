@@ -1,0 +1,336 @@
+\input texinfo @c -*-texinfo-*-
+
+@setfilename README.info
+@settitle  mftrace - Scalable Fonts for MetaFont
+
+
+@ignore
+
+Copyright (c) 1999--2006 by the authors
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU General Public License.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA 
+
+@end ignore
+
+@include version.texi
+
+@node Top, , , 
+@top
+
+@chapter mftrace - Scalable PostScript Fonts for MetaFont
+
+@section Introduction
+
+@code{mftrace} is a small Python program that lets you trace a @TeX{}
+bitmap font into a PFA or PFB font (A PostScript Type1 Scalable Font)
+or TTF (TrueType) font.  It is licensed under the GNU GPL.
+
+Scalable fonts offer many advantages over bitmaps, as they allow
+documents to render correctly at many printer resolutions. Moreover,
+Ghostscript can generate much better PDF, if given scalable PostScript
+fonts.   
+
+Versions prior to 1.0.5 were called `pktrace'.
+
+@section Download
+
+@itemize
+@item @uref{http://lilypond.org/download/sources/mftrace/mftrace-@mftversion{}.tar.gz}
+@item GIT at @uref{https://github.com/hanwen/mftrace}
+@end itemize
+
+
+@section Required
+
+@file{mftrace} is a thin Python wrapper around some other programs that
+do the real work: a tracing program and t1asm.  To run mftrace you need:
+@itemize @bullet
+@item A tracing program:
+      autotrace >= 0.30 (see @uref{http://autotrace.sourceforge.net}
+      or potrace (see @uref{http://potrace.sourceforge.net}).
+
+      Potrace is recommended as it runs quicker than autotrace.
+      
+@item Python--2.2 or later. See @uref{http://www.python.org/}
+@item t1utils. See @uref{http://www.lcdf.org/~eddietwo/type/}
+@item  TeX--your tex installation should include
+@itemize @bullet
+  @item  kpsewhich,
+  @item  MetaFont
+@end itemize
+@end itemize
+
+@section Recommended
+
+@itemize @bullet
+@item A recent version (040215 or newer) of
+@uref{http://fontforge.sourceforge.net,FontForge}. Some of @code{mftrace}
+functionality requires FontForge to be present on user's system. This
+includes rounding to integer, simplifying and autohinting font outlines,
+as well as generating any output formats except PFA, PFB and AFM. You
+should not request any of these features using @code{mftrace} options if
+you don't like your font to be run through FontForge (note that in this
+case you also have to explicitly specify @code{--noround} to disable 
+rounding to integer).
+
+@item Alternatively, you need GhostScript with its @file{printafm}
+utility, available somethere in your PATH. @code{mftrace} uses
+@file{printafm} to generate AFM files in case there is no need to
+process the font with FontForge.
+
+@end itemize
+
+@section Red Hat
+
+A RPM may be built by issuing
+@example
+
+        rpmbuild -tb mftrace-@var{version}.tar.gz
+
+@end example
+
+
+
+@section Debian GNU/Linux
+
+Users of Debian unstable (and Debian 3.0 when it is released) can
+install all requirements by running (as root):
+@example
+
+    apt-get install mftrace
+
+@end example
+If you wish to also install the FontForge package to simplify and
+autohint the font, then run the command
+@example
+
+    apt-get install fontforge
+
+@end example
+
+
+@section Install
+
+Install the prerequite packages. Then run
+@example
+
+    ./configure
+    make install
+
+@end example
+in the mftrace directory. Run as follows:
+@example
+
+mftrace cmr10
+
+@end example
+
+@section Invoking mftrace.
+
+Command line options:
+@table @code
+@item --formats=LIST
+ A comma-separated list of formats to generate. Choices include:  AFM, 
+ PFA, PFB, TTF and SVG. Default is to generate a PFA file. Note that 
+ @file{fontforge} (formerly called @file{pfaedit}) needs to be installed
+ in order to generate any format except PFA or PFB. For generating AFM 
+ you need either @file{fontforge} or @file{ghostscript}.
+@item -e,--encoding=@var{enc}   
+ Use encoding file @var{enc}. Encoding files used by @code{mftrace} are 
+ basically in the  GhostScript/dvips format, but you may use a special
+ @code{.notavail} glyph name in order to tell mftrace not to process
+ a specific glyph. If this option is not specified,  mftrace will try to 
+ determine the encoding file automatically, from the encoding specified 
+ in the TFM file.
+@item --glyphs=@var{list}
+  Only process glyphs in @var{list}, which is a  comma-delimited  list of
+  decimal numbers or ranges.
+@example
+  --glyphs 1-10,50,55,90-100
+@end example
+@item --gffile=@var{name}
+=  Take glyphs from file @var{name}. 
+@item --grid @var{gridsize}
+Set reciprocal grid size in em units multiplied by ratio magnification/1000. 
+For example @code{--grid 10 --magnification 1000} will round
+coordinates of control points to 1/10 of em unit. Useful simultaneously
+with @code{--noround}  option. Default @var{gridsize} value is 1, i. e. round to integer.
+@item -h,--help 
+ help on options.
+@item -k,--keep 
+ Retain all temporary files in the directory @file{mftrace.dir/}. This
+ is useful for debugging problems.
+@item --keep-trying
+ Try to continue if external programs called by mftrace fail. If METAFONT
+ crashes with overflow errors, but nevertheless outputs a GF file, try to 
+ process its output as is (useful for some buggy fonts, see below). If 
+ potrace/autotrace fails to trace a specific character, first try it with 
+ a less smoothed curve, and if that fails, skip the character.
+
+ By default mftrace outputs @file{trace-bug-FONTNAME-NUMBER.pbm} and
+stops the process with a request to file a bugreport.
+@item --magnification
+The magnification to use for the PFA file. The default is 1000. The
+larger the more precise the PFA file will be. However, when
+magnification is too large METAFONT can crash with overflow errors.
+
+Sadly, many MF fonts contain resolution checks
+@example
+  if dots_per_inch * design_size > 1500:  
+    ...
+@end example
+This check is susceptible to overflow errors.  Such code should be
+reported as a bug, and changed to
+@example
+  if dots_per_inch > (1500 / design_size):
+    ...
+@end example
+
+@item --noround 
+Don't round coordinates of control points to integer
+values. Useful simultaneously  with
+@code{--grid} option. Disabled by default.
+
+@item -o,--output-base=FILE
+ Output to FILE.pfa or FILE.pfb.
+@item --simplify
+ Pass the font through FontForge for automatic  simplification and hinting.
+@item --tfmfile=FILE   
+ Use @var{file} for the TFM file.  This file is needed to determine at
+ what resolution to run MetaFont.
+@item  -V,--verbose 
+ Be verbose: print all commands as they are invoked. This is useful
+ for debugging.
+@item -v,--version 
+ Print version number
+@item --dos-kpath
+ Try to kludge up the paths coming from MikTeX for a cygwin
+environment. If this doesn't work, specify @code{--tfmfile} and
+@code{--encoding} manually.
+@item -w,--warranty  
+show warranty and copyright
+@item --potrace
+use Potrace (default).
+@item --autotrace
+use AutoTrace.
+
+@item -D,--define=@var{symbol}=@var{value}
+Set the font info @var{symbol} to the given @var{value}. For example
+@code{-DFamilyName=Foo} sets the font family name to @code{Foo}.
+
+Mftrace tries to fill in sensible values for the FontName, FamilyName,
+FullName and Weight fields. It does so by guessing values for the CM font
+series. For other fonts, it tries to read an AFM file (which is not likely
+to exist). Suggestions for a more generic way to handle this are welcome.
+
+@end table
+
+Mftrace uses kpathsea for finding fonts, so any kpathsea variable can
+be used to fine-tune which files should be loaded.  For example, you
+can set @code{MFINPUTS} to specify which paths to search for
+@file{.mf} files.
+
+Additional options may be passed to the backend program (potrace or autotrace)
+with the @code{MFTRACE_BACKEND_OPTIONS} environment variable.
+
+
+@section Discussion
+
+Why use @code{mftrace} over
+@uref{http://textrace.sourceforge.net,textrace}?  Textrace and mftrace
+are functionally similar. However, mftrace is quicker, more cleanly
+written and can be installed using standard methods. Additionally,
+textrace requires perl, ghostscript and dvips.
+
+How about @uref{http://www.truetex.com,MetaFog}? MetaFog operates
+directly on the curves that generate the bitmap font, its outlines will
+probably be smaller and better. However, MetaFog is a proprietary
+product: its source code is not available, and it will only run on a
+limited number of platforms.
+
+How about @uref{ftp://bop.eps.gda.pl/pub/metatype1/,MetaType1}?
+MetaType1 is an approach that puts severe constraints on what may be
+done in a font program. It does not work for fonts containing overlaps
+and shaped pens.
+
+How about @uref{http://fontforge.sourceforge.net/,FontForge} itself?
+FontForge is an interactive editor, but it can be scripted. Since it
+supports bitmap tracing and @TeX{} bitmap fonts, it is possible to
+duplicate the functionality of mftrace.  However, out of the box,
+FontForge does not recognize TeX encodings.
+
+
+@section Bugs and todo
+
+@itemize
+@item Environment variables containing relative directories,
+  such as MFINPUTS or TFMINPUTS, are not handled correctly.
+
+@item Discuss fonts & copyright.
+@item Submit @file{tfm.py} to www.python.org. @file{tfm.py}  is a python
+  module to parse Tex Font Metric file.
+@end itemize 
+
+Should you encounter any bug or problem, then please send a bugreport
+to @email{hanwen@@xs4all.nl,Han-Wen Nienhuys}.
+
+@section Author
+
+@email{hanwen@@xs4all.nl,Han-Wen Nienhuys}
+
+
+@section Credits
+
+Gf2pbm, the utility to convert a MetaFont GF file to a PBM file was
+based on Paul Vojta's Xdvi. The license notice is reproduced below.
+
+Thanks to all bughunters and contributors: Andrey V. Panov, Geoffrey
+Alan Washburn, @uref{http://www.maths.qmul.ac.uk/~jdg/,Julian Gilbey}
+G@"{u}nther Spahlinger, Richard Mahoney, Stanislav Brabec, and Thomas
+Bushnell BSG.
+
+
+@quotation
+Copyright (c) 1990-1999  Paul Vojta
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+PAUL VOJTA BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+@end quotation
+
+The rest of the package mftrace  script itself is licensed under the
+@uref{http://www.gnu.org/licenses/gpl.txt,GNU General Public License}.
+
+
+
+@section See also
+
+@itemize @bullet
+@item @uref{http://partners.adobe.com/asn/developer/pdfs/tn/T1Format.pdf,Type1
+font specification} 
+@item @uref{http://partners.adobe.com/asn/developer/pdfs/tn/5015.Type1_Supp.pdf,Supplement
+to the Type1 specification}.
+@end itemize
+
+@bye
+
+

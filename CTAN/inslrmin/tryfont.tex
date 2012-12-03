@@ -1,0 +1,123 @@
+% tryfont.tex    Test Insular Miniscule fonts
+%\documentclass[12pt]{article}
+\documentclass{article}
+\usepackage{inslrmin}
+
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrstuvwxyz}
+\newcommand{\ABCnb}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
+\newcommand{\abcnb}{abcdefghijklmnopqrstuvwxyz}
+\newcommand{\punct}{.,;:!?`' \&{} () []}
+\newcommand{\figs}{0123456789}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\sentence}{%
+this is an example of the insular minuscule font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\Sentence}{%
+This is an example of the Insular Minuscule font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog:}
+
+\newcommand{\esses}{sa sb sc sd se sf sg sh si sj sk sl sm 
+                    sn so sp sq sr ss st su sv sw sx sy sz}
+
+\newcommand{\exes}{xa xb xc xd xe xf xg xh xi xj xk xl xm 
+                  xn xo xp xq xr xs xt xu xv xw xx xy xz}
+          
+\newcommand{\jays}{aj bj cj dj ej fj gj hj ij jj kj lj mj 
+                   nj oj pj qj rj sj tj uj vj wj xj yj zj}
+
+\newcommand{\dees}{ad bd cd dd ed fd gd hd id jd kd ld md 
+                   nd od pd qd rd sd td ud vd wd xd yd zd}
+
+\newcommand{\ares}{ra rb rc rd re rf rg rh ri rj rk rl rm 
+                   rn ro rp rq rr rs rt ru rv rw rx ry rz}
+
+\newcommand{\Esses}{SA SB SC SD SE SF SG SH SI SJ SK SL SM 
+                    SN SO SP SQ SR SS ST SU SV SW SX SY SZ}
+
+\newcommand{\Exes}{XA XB XC XD XE XF XG XH XI XJ XK XL XM 
+                  XN XO XP XQ XR XS XT XU XV XW XX XY XZ}
+          
+\newcommand{\Jays}{AJ BJ CJ DJ EJ FJ GJ HJ IJ JJ KJ LJ MJ 
+                   NJ OJ PJ QJ RJ SJ TJ UJ VJ WJ XJ YJ ZJ}
+
+\newcommand{\Dees}{AD BD CD DD ED FD GD HD ID JD KD LD MD 
+                   ND OD PD QD RD SD TD UD VD WD XD YD ZD}
+
+\newcommand{\Ares}{RA RB RC RD RE RF RG RH RI RJ RK RL RM 
+                   RN RO RP RQ RR RS RT RU RV RW RX RY RZ}
+
+\title{Try Insular Minuscule Fonts}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+    This provides a short test of the characters in the Insular Minuscule fonts
+--- the \verb|imin| font family. Pen angle 45 degrees, 6 and 5 nibs for
+normal and bold versions.
+
+
+
+\begin{center}
+The Insular Minuscule Huge normal font. \\ \par
+{\iminfamily\Huge \ABC\\ \abc\\ \punct{} \dashes\\ \figs\\ \par }
+\end{center}
+
+\begin{center}
+The Insular Minuscule font in its normal size \\
+\textimin{\ABCnb{} \abcnb{} \punct{} \dashes{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold minuscule font, the normal minuscule font, and the bold Computer Modern
+Roman, all in the normal size \\
+\textimin{\textbf{\abcnb{} \figs}} \\
+\textimin{\abcnb{} \figs} \\
+\textbf{\abcnb{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\iminfamily\bfseries
+\Huge \abc{} \figs \par
+\tiny \abc{} \figs \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\iminfamily\tiny \ABC{} \\ \abc\\ \figs\\ \par } 
+\end{center}
+
+\begin{center}
+    Some built-in ligatures in the normal font \\
+\textimin{``first active brown dog --- but quick \& red fox?''}
+\end{center}
+
+%\begin{center}
+%    Individual ligatures in the normal font \\
+% \textimin{\esses} \\
+% \textimin{\exes} \\
+% \textimin{\jays} \\
+% \textimin{\dees} \\
+% \textimin{\ares} \\
+% \textimin{\Esses} \\
+% \textimin{\Exes} \\
+% \textimin{\Jays} \\
+% \textimin{\Dees} \\
+% \textimin{\Ares} \\
+%\end{center}
+
+{
+\iminfamily 
+\sentence{}
+
+\Sentence{}
+}
+    
+    This is the end of the test file.
+
+\end{document}

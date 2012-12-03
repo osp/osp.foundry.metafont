@@ -1,0 +1,115 @@
+% allfont.tex    Test Humanist fonts
+% Author: Peter Wilson (CUA) now at peter.r.wilson@boeing.com
+%                            (or pandgwilson@earthlink.net) 
+% Copyright 2002, 2003 Peter R. Wilson
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.3 of this license or (at your option) any 
+% later version.
+% The latest version of the license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of
+% LaTeX version 2003/06/01 or later.
+%
+% This work has the LPPL maintenance status "author-maintained".
+%
+% This work consists of the files listed in the README file.
+%
+
+\documentclass{article}
+%\documentclass[12pt]{article}
+\usepackage{allhmin}
+
+\newcommand{\romannum}[1]{\romannumeral #1}
+\newcommand{\Romannum}[1]{\uppercase\expandafter{\romannumeral #1}}
+\newcommand{\ABC}{ABCDEFGHIJKL MNOPQRSTUVWXYZ}
+\newcommand{\abc}{abcdefghijkl mnopqrstuvwxyz}
+\newcommand{\punct}{.,;:!?`' \&{} () []}
+\newcommand{\dashes}{- -- ---}
+\newcommand{\figs}{0123456789}
+\newcommand{\sentence}{%
+this is an example of the humanist font. now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog.}
+
+\newcommand{\Sentence}{%
+This is an example of the Humanist font. Now is the time for all good
+men, and women, to come to the aid of the party while the quick brown fox
+jumps over the lazy dog.}
+
+\newcommand{\latin}{Te canit adcelebratque polus rex gazifer hymnis.
+  Trans zephyrique globum scandunt tua facta per axem.
+  Explicit secunda pars summe fratris thome de aquino ordinis fratrum 
+  predicatorium, longissima, prolixissima, \& tediosissima scribent;
+  Deo gratias, Deo gratias, et iterumm Deo gratias. }
+
+\title{Try Humanist Fonts}
+\author{}
+\date{}
+%%\pagenumbering{roman}
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{The character set}
+
+    This provides a short test of the characters in the Humanist fonts
+--- the \verb|hmin| font family.
+
+
+
+\begin{center}
+The Humanist Huge normal font. \\ \par
+{\Huge \ABC\\ \abc\\ \punct{}\dashes\\ \figs\\ \par }
+\end{center}
+
+
+\begin{center}
+The Humanist font in its normal size \\
+{\ABC{} \abc{} \figs} \\
+\end{center}
+
+\begin{center}
+The bold normal font, the normal font, and the bold Computer Modern
+Roman, all in the normal size \\
+{\textbf{\abc{} \figs}} \\
+{\abc{} \figs} \\
+\textcmr{\textbf{\abc{} \figs}} \\
+\end{center}
+
+\begin{center}
+The bold versions, in Huge and tiny sizes. \par
+\bfseries
+\Huge \abc{} \figs \par
+\tiny \abc{} \figs \par
+\end{center}
+
+\begin{center}
+The font in the tiny size \\ \par
+{\tiny \ABC{} \\ \abc\\ \figs\\ \par } 
+\end{center}
+
+\begin{center}
+    Some ligatures in the normal font \\
+{``the lazy dog --- but quick fox?'' \ae{} \AE{} ct st }
+\end{center}
+
+\section{Example texts}
+
+    First some well known English phrases in an abcedarian sentence.
+
+\Sentence{}
+
+    After this there are two Latin abecedarian sentences dating from about 
+\Romannum{790}, and another sentence from roughly the same period.
+
+\latin{}
+
+    
+\textcmss{This is the end of the test file, with this sentence being typeset
+using the Computer Modern Sans font in the point size as specified for this
+document.}
+
+\end{document}

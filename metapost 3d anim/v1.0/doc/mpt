@@ -1,0 +1,85 @@
+#!/bin/sh
+### ====================================================================
+###  @UNIX-shell-file{
+###     author               = "Ulrik Vieth",
+###     email                = "vieth@thphy.uni-duesseldorf.de",
+###     filename             = "mpt",
+###     version              = "0.05",
+###     date                 = "29 January 1996",
+###     time                 = "02:28:37 MET",
+###     codetable            = "ISO/ASCII",
+###     checksum             = "21388 85 335 2331",
+###     keywords             = "MFT, MetaPost, pretty-printing",
+###     supported            = "yes",
+###     abstract             = "",
+###     docstring            = "",
+###  }
+### ====================================================================
+#
+# Process METAPOST sources with MFT, converting them to a form
+# suitable for MFT processing using a sed script if necessary.
+#
+# This file assumes that some standard Unix utilities like
+# echo, grep, sed, and basename are available.
+#
+# The source file (file.mp) is assumed to exist and to be found
+# in the current directory.  The target file (file.mf) will be
+# overwritten if it already exists.  It is necessary to use the
+# file extension `.mf' for the target file, since newer versions
+# of MFT might produce unpredictable file names otherwise.
+#
+# Usage:
+#
+#   mpt file[.mp]
+#
+# Code:
+#
+if [ $# != 1 ]; then
+  echo "Usage: mpt file[.mp]"; exit 1
+fi
+
+# Standard Unix utilities:
+GREP=grep
+SED=sed
+
+# Standard TeXware/METAFONTware utiltities:
+MFT=mft
+
+# The SED script for preprocessing:
+MP2SED=mp2mft.sed
+#MP2SED=$TEXMF/mft/mp2mft.sed
+
+# The MFT style file (without .mft):
+MP2MFT=mp2
+
+# The source and target files:
+#
+MPFILE=`basename $1 .mp`.mp
+MFFILE=`basename $1 .mp`.mf
+
+if [ ! -f "$MPFILE" -o ! -r "$MPFILE" ]; then
+  echo "mpt: Can't read from source file \"$MPFILE\"!"; exit 1
+fi
+if [ -f "$MFFILE" -a ! -w "$MFFILE" ]; then
+  echo "mpt: Can't write to target file \"$MFFILE\"!"; exit 1
+fi
+
+# Check if preprocessing $MPFILE with sed is needed:
+#
+$GREP "\(btex\|etex\|verbatimtex\)" $MPFILE > /dev/null
+case $? in
+  0)
+    # there were matches, so convert it
+    #
+    $SED -f $MP2SED < $MPFILE > $MFFILE
+    $MFT  $MFFILE -s $MP2MFT
+    exit 0
+    ;;
+  1)
+    # there were no matches, so copy it
+    #
+    $SED $MPFILE $MFFILE
+    $MFT $MPFILE -s $MP2MFT
+    exit 0
+    ;;
+esac

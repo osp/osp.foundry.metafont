@@ -1,0 +1,86 @@
+    The sqrcaps bundle provides packages and fonts for a script based on
+the Square Capitals manuscript bookhand used from the 1st century AD.
+The script consists of capital letters and digits, with some appropriate
+period punctuation marks; both normal and bold versions are supplied.
+The bundle is one of a series for bookhand scripts.
+
+Changes in version 1.1 (2005/03/31)
+o Fonts supplied as Postscript Type1 instead of MetaFont
+
+Changes in version 1.0 (2002/12/30)
+o First public release
+
+------------------------------------------------------------------
+  Author: Peter Wilson (Herries Press) herries dot press at earthlink dot net
+  Copyright 2002--2005 Peter R. Wilson
+
+  This work may be distributed and/or modified under the
+  conditions of the Latex Project Public License, either
+  version 1.3 of this license or (at your option) any
+  later version.
+  The latest version of the license is in
+    http://www.latex-project.org/lppl.txt
+  and version 1.3 or later is part of all distributions of
+  LaTeX version 2003/06/01 or later.
+
+  This work has the LPPL maintenance status "author-maintained".
+
+  This work consists of the files:
+    README (this file)
+    sqrcaps.dtx
+    sqrcaps.ins
+    sqrcaps.pdf
+  and the derived files
+    sqrcaps.sty
+    allsqrc.sty
+    ot1sqrc10.fd
+    t1sqrc10.fd
+    sqrcaps.map
+    and possibly several sqrc*.mf files
+    
+
+------------------------------------------------------------------
+     The distribution consists of the following files:
+README (this file)
+sqrcaps.dtx
+sqrcaps.ins
+sqrcaps.pdf     (user manual)
+trysqrcaps.tex  (example usage)
+trysqrcaps.pdf
+allsqrcaps.tex  (example usage)
+allsqrcaps.pdf
+sqrc10.afm
+sqrc10.pfb
+sqrc10.tfm
+sqrc10b.afm
+sqrc10b.pfb
+sqrc10b.tfm
+
+    To install the package:
+o run: latex sqrcaps.ins, which will generate:
+       sqrcaps.sty
+       *.fd files
+       sqrcaps.map
+o Move *.sty and *.fd files to a location where LaTeX will find them
+    e.g., .../texmf-local/tex/latex/sqrcaps
+o Move *.afm, *.pfb and *.tfm files to where LaTeX looks for font information
+    e.g., .../texmf-var/fonts/afm/public/bookhands/*.afm
+          .../texmf-var/fonts/type1/public/bookhands/*.pfb
+          .../texmf-var/fonts/tfm/public/bookhands/*.tfm
+o Add the *.map information to the dvips/pdftex font maps
+o Refresh the database
+ (for more information on the above see the FAQ).
+
+o run: (pdf)latex trysqrcaps for a test of the font
+
+    To generate a second copy of the manual (which is already supplied as a 
+PDF file) access to the docmfp package is desireable but not essential:
+o run: latex sqrcaps.dtx
+o (for an index run: makeindex -s gind.ist *.idx)
+o run: latex *.dtx
+o Print *.dvi for a hardcopy of the package manual
+
+2005/03/31
+Peter Wilson
+herries dot press at earthlink dot net
+
